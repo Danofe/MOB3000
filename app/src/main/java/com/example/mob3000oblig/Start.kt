@@ -48,7 +48,7 @@ class Start {
                 ) {
                     Column(modifier = modifier
                         .padding(50.dp),
-                        verticalArrangement = Arrangement.spacedBy(60.dp),
+                        verticalArrangement = Arrangement.spacedBy(70.dp),
 
                         ) {
                         Button(onClick = { navController.navigate(Screen.Sok.ruter) },
@@ -58,7 +58,7 @@ class Start {
 
 
                             ) {
-                            Text(text = "Penis", fontSize = 40.sp
+                            Text(text = "Søk på skiltnr", fontSize = 40.sp
                             )
 
                         }
@@ -69,7 +69,7 @@ class Start {
 
 
                             ) {
-                            Text(text = "Baller", fontSize = 40.sp
+                            Text(text = "Søk på skiltnr", fontSize = 40.sp
                             )
 
                         }
@@ -78,7 +78,7 @@ class Start {
                                 containerColor = colorResource(R.color.purple_700),
                             ),
                         ) {
-                            Text(text = "Howet", fontSize = 40.sp
+                            Text(text = "Søk på skiltnr", fontSize = 40.sp
                             )
                         }
                         Button(onClick = { /*TODO*/ },
