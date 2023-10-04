@@ -23,76 +23,92 @@ import androidx.navigation.NavController
 
 class Start {
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun First(modifier: Modifier = Modifier, navController: NavController) {
-        Scaffold(topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Image(painter = painterResource(id = R.drawable.skiltskern ), contentDescription = "skiltskern")
+  @OptIn(ExperimentalMaterial3Api::class)
+  @Composable
+  fun First(modifier: Modifier = Modifier, navController: NavController) {
+    Scaffold(topBar = {
+      CenterAlignedTopAppBar(
+        title = {
+          Image(
+            painter = painterResource(id = R.drawable.skiltskern),
+            contentDescription = "skiltskern"
+          )
 
 
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = colorResource(R.color.purple_700),
-                    titleContentColor = colorResource(R.color.black),
-                ),
-            )
-        }
-        ) { it ->
-
-            Column (modifier = modifier.padding(it)) {
-
-                Box(
-                    modifier = modifier.fillMaxSize()
-                ) {
-                    Column(modifier = modifier
-                        .padding(50.dp),
-                        verticalArrangement = Arrangement.spacedBy(70.dp),
-
-                        ) {
-                        Button(onClick = { navController.navigate(Screen.Sok.ruter) },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(R.color.purple_700),
-                            ),
-
-
-                            ) {
-                            Text(text = "Søk på skiltnr", fontSize = 40.sp
-                            )
-
-                        }
-                        Button(onClick = { /*TODO*/ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(R.color.purple_700),
-                            ),
-
-
-                            ) {
-                            Text(text = "Søk på skiltnr", fontSize = 40.sp
-                            )
-
-                        }
-                        Button(onClick = { /*TODO*/ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(R.color.purple_700),
-                            ),
-                        ) {
-                            Text(text = "Søk på skiltnr", fontSize = 40.sp
-                            )
-                        }
-                        Button(onClick = { /*TODO*/ },
-                            colors = ButtonDefaults.buttonColors(
-                                containerColor = colorResource(R.color.purple_700),
-                            ),
-                        ) {
-                            Text(text = "Søk på skiltnr", fontSize = 40.sp
-                            )
-                        }
-
-                    }
-                }
-            }
-        }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+          containerColor = colorResource(R.color.purple_700),
+          titleContentColor = colorResource(R.color.black),
+        ),
+      )
     }
+    ) { it ->
+
+      Column(modifier = modifier.padding(it)) {
+
+        Box(
+          modifier = modifier.fillMaxSize()
+        ) {
+          Column(
+            modifier = modifier
+              .padding(50.dp),
+            verticalArrangement = Arrangement.spacedBy(70.dp),
+
+            ) {
+            Button(
+              onClick = { navController.navigate(Screen.Sok.ruter) },
+              colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.purple_700),
+              ),
+
+
+              ) {
+              Text(
+                text = "Søk på skiltnr",
+                fontSize = 40.sp
+              )
+
+            }
+            Button(
+              onClick = { /*TODO*/ },
+              colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.purple_700),
+              ),
+
+
+              ) {
+              Text(
+                text = "Dummy 1",
+                fontSize = 40.sp
+              )
+
+            }
+            Button(
+              onClick = { /*TODO*/ },
+              colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.purple_700),
+              ),
+            ) {
+              Text(
+                text = "Dummy 2",
+                fontSize = 40.sp
+              )
+            }
+            Button(
+              onClick = { /*TODO*/ },
+              colors = ButtonDefaults.buttonColors(
+                containerColor = colorResource(R.color.purple_700),
+              ),
+            ) {
+              Text(
+                text = "Dummy 3",
+                fontSize = 40.sp
+              )
+            }
+
+          }
+        }
+      }
+    }
+  }
 }

@@ -21,53 +21,57 @@ import androidx.compose.ui.unit.sp
 
 class sokerInfo {
 
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun SkiltInfo(modifier: Modifier = Modifier) {
-        Scaffold(topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Image(painter = painterResource(id = R.drawable.skiltskern ), contentDescription = "skiltskern")
+  @OptIn(ExperimentalMaterial3Api::class)
+  @Composable
+  fun SkiltInfo(name: String?, modifier: Modifier = Modifier) {
+    Scaffold(topBar = {
+      CenterAlignedTopAppBar(
+        title = {
+          Image(
+            painter = painterResource(id = R.drawable.skiltskern),
+            contentDescription = "skiltskern"
+          )
 
 
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = colorResource(R.color.purple_700),
-                    titleContentColor = colorResource(R.color.black),
-                ),
-            )
-        }
-        ) { it ->
-            Column(modifier = modifier.padding(it)) {
-                Box(
-                    modifier = modifier.fillMaxSize()
-                ) {
-                    Text(text = "Skiltnr ", fontSize = 40.sp, modifier = modifier
-                        .align(Alignment.TopCenter)
-                        .padding(top = 40.dp))
-
-
-
-                    Column(
-                        modifier = modifier
-                            .align(Alignment.CenterStart)
-                            .padding(40.dp),
-                        verticalArrangement = Arrangement.spacedBy(40.dp),
-                        horizontalAlignment = Alignment.Start,
-                    ) {
-
-                        Text(text = "Mål: ")
-                        Text(text = "Vekt: ")
-                        Text(text = "EU-Kontroll: ")
-                        Text(text = "Registreringsdata: ")
-                        Text(text = "Utslipp: ")
-                        Text(text = "Dekk: ")
-                        Text(text = "Felg: ")
-                        Text(text = "Etc: ")
-                    }
-                }
-            }
-        }
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+          containerColor = colorResource(R.color.purple_700),
+          titleContentColor = colorResource(R.color.black),
+        ),
+      )
     }
+    ) { it ->
+      Column(modifier = modifier.padding(it)) {
+        Box(
+          modifier = modifier.fillMaxSize()
+        ) {
+          Text(
+            text = name!!,
+            fontSize = 40.sp,
+            modifier = modifier
+                .align(Alignment.TopCenter)
+                .padding(top = 40.dp)
+          )
+          Column(
+            modifier = modifier
+                .align(Alignment.CenterStart)
+                .padding(40.dp),
+            verticalArrangement = Arrangement.spacedBy(40.dp),
+            horizontalAlignment = Alignment.Start,
+          ) {
+
+            Text(text = "Mål: ")
+            Text(text = "Vekt: ")
+            Text(text = "EU-Kontroll: ")
+            Text(text = "Registreringsdata: ")
+            Text(text = "Utslipp: ")
+            Text(text = "Dekk: ")
+            Text(text = "Felg: ")
+            Text(text = "Etc: ")
+          }
+        }
+      }
+    }
+  }
 
 }
