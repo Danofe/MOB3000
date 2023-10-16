@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 class sokerInfo {
-
+    //hei
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun SkiltInfo(modifier: Modifier = Modifier) {
