@@ -24,7 +24,7 @@ class sokerInfo {
     //Test
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun SkiltInfo(modifier: Modifier = Modifier) {
+    fun SkiltInfo(name: String?,modifier: Modifier = Modifier) {
         Scaffold(topBar = {
             CenterAlignedTopAppBar(
                 title = {
@@ -43,7 +43,7 @@ class sokerInfo {
                 Box(
                     modifier = modifier.fillMaxSize()
                 ) {
-                    Text(text = "Skiltnr ", fontSize = 40.sp, modifier = modifier
+                    Text(text = "$name", fontSize = 40.sp, modifier = modifier
                         .align(Alignment.TopCenter)
                         .padding(top = 40.dp))
 
