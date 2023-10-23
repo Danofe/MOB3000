@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "929521614501",
+    "project_id": "mob3000firebase",
+    "storage_bucket": "mob3000firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929521614501:android:9d49699adf1785f50d974c",
+        "android_client_info": {
+          "package_name": "com.example.mob3000oblig"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXKUvlUa7fnn2omffqR7jP5Z_35F1hX48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
