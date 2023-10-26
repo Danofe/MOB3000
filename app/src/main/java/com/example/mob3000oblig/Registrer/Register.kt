@@ -1,4 +1,4 @@
-package com.example.mob3000oblig
+package com.example.mob3000oblig.Registrer
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -20,18 +20,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.mob3000oblig.R
+import com.example.mob3000oblig.Screen
 
-class Login {
+class Register {
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun loginSkjerm(modifier: Modifier = Modifier, navController: NavController) {
+    fun registerSkjerm(modifier: Modifier = Modifier, navController: NavController, registerViewModel: RegisterViewModel? = viewModel()) {
 
+        val context = LocalContext.current
+        val regUiState = registerViewModel?.reguiState
         var showError by remember { mutableStateOf(false) }
+
         Scaffold(topBar = {
             CenterAlignedTopAppBar(
                 title = {
@@ -57,36 +64,33 @@ class Login {
                         verticalArrangement = Arrangement.spacedBy(50.dp),
                     ) {
                         TextField(
-                            value = "",
-                            onValueChange = {},
+                            value = regUiState?.emailReg ?: "",
+                            onValueChange = {registerViewModel?.onEmailRegChange(it)},
                             label = { Text("E-post") },
                             modifier = modifier.align(Alignment.CenterHorizontally)
                         )
                         TextField(
-                            value = "",
-                            onValueChange = {},
+                            value = regUiState?.passordReg ?: "",
+                            onValueChange = {registerViewModel?.onPassordRegChange(it)},
                             label = { Text("Passord") },
                             modifier = modifier.align(Alignment.CenterHorizontally)
                         )
+                        TextField(
+                            value = regUiState?.passordBekreftReg ?: "",
+                            onValueChange = {registerViewModel?.onPassordBekRegChange(it)},
+                            label = { Text("Bekreft Passord") },
+                            modifier = modifier.align(Alignment.CenterHorizontally)
+                        )
                         Button(
-                            onClick = { navController.navigate(Screen.Start.ruter) },
+                            onClick = { registerViewModel?.lagBruker(context) },
                             modifier = modifier.align(Alignment.CenterHorizontally)
                         ) {
-                            Text(text = "Logg inn")
+                            Text(text = "Register")
                         }
-                        Button(
-                            onClick = { navController.navigate(Screen.Register.ruter) },
-                            modifier = modifier.align(Alignment.CenterHorizontally)
-
-                        ) {
-                            Text(text = "Registrer")
-                        }
-                    }
                 }
             }
         }
     }
 
-
-
+    }
 }

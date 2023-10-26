@@ -13,7 +13,7 @@ import com.example.mob3000oblig.ui.theme.Mob3000ObligTheme
 //
 
 class MainActivity : ComponentActivity() {
-    private val apiKey = BuildConfig.apiKey
+    //private val apiKey = BuildConfig.apiKey
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
