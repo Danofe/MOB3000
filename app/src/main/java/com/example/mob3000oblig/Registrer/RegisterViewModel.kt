@@ -42,7 +42,7 @@ private val auth: Auth = Auth()
 
                 auth.lagBruker(reguiState.emailReg, reguiState.passordReg)
 
-                //uiState = uiState.copy(registrert = true)
+                reguiState = reguiState.copy(registrert = true)
 
         } catch (e: Exception) {
             reguiState = reguiState.copy(error = "Kunne ikke lage bruker")

@@ -8,6 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
 
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.mob3000oblig.DataApi.RetroInstance
 
 import com.example.mob3000oblig.ui.theme.Mob3000ObligTheme
 //
@@ -21,6 +22,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
 
 
 @Preview(showBackground = true)
