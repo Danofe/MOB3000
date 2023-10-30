@@ -7,11 +7,12 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
+import retrofit2.http.Url
 
 interface DataInterface {
 
-        @GET("kjoretoydata?kjennemerke=DN26115")
-        fun getKjoretoyDataListe(): Call<KjoretoyDataListe>
+        @GET
+        fun getKjoretoyDataListe(@Url url: String): Call<KjoretoyDataListe>
 
 
 }

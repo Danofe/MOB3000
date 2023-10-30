@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -92,9 +93,9 @@ class Start {
               )
             }
             Button(
-              onClick = { Auth.loggUt() }
+              onClick = { Auth.loggUt() },
               colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(R.color.purple_700),
+                containerColor = colorResource(R.color.purple_700)
               ),
             ) {
               Text(

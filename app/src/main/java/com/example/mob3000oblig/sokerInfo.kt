@@ -72,11 +72,17 @@ class sokerInfo {
                         verticalArrangement = Arrangement.spacedBy(40.dp),
                         horizontalAlignment = Alignment.Start,
                     ) {
-
+                        var url = "kjoretoydata?kjennemerke=$name"
                         var responseData by remember { mutableStateOf<String>("") }
                         var bilinfo by remember { mutableStateOf<String>("") }
-                        var data by remember { mutableStateOf<String>("") }
-                        api.getKjoretoyDataListe().enqueue(object : Callback<KjoretoyDataListe> {
+                        var mål by remember { mutableStateOf<String>("") }
+                        //var kontroll by remember { mutableStateOf<String>("") }
+                        var sistGodkjent by remember { mutableStateOf<String>("") }
+                        //var utslipp by remember { mutableStateOf<String>("") }
+                        //var dekk by remember { mutableStateOf<String>("") }
+                        //var felg by remember { mutableStateOf<String>("") }
+                        //var data by remember { mutableStateOf<String>("") }
+                        api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
                             override fun onResponse(
                                 call: Call<KjoretoyDataListe>,
                                 response: Response<KjoretoyDataListe>
@@ -84,11 +90,13 @@ class sokerInfo {
 
                                 if(response.isSuccessful) {
                                     var data = response.body()
-                                    var informasjon = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.understellsnummer + "\n" +
-                                                      data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.dimensjoner + "\n"
-
+                                    var informasjon = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke + "\n"
+                                    var godkjent = data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent+ "\n"
+                                    responseData = data.toString()
                                     Log.d("ResponseCheck", "Response: $data")
                                     bilinfo = informasjon
+                                    sistGodkjent = godkjent
+
                                 }
                             }
 
@@ -97,7 +105,12 @@ class sokerInfo {
                             }
                         })
 
-                        Text(text = bilinfo)
+                        Text(text = "Reg nr fra API: $bilinfo")
+                        Text(text = "Sist godkjent: $sistGodkjent")
+                        Text(text = "")
+                        Text(text = "")
+                        Text(text = "")
+                        Text(text = "")
 
                     }
                 }
