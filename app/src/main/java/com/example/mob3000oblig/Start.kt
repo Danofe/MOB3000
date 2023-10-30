@@ -26,7 +26,7 @@ class Start {
 
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun First(modifier: Modifier = Modifier, navController: NavController) {
+  fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
     Scaffold(topBar = {
       CenterAlignedTopAppBar(
         title = {
@@ -34,8 +34,6 @@ class Start {
             painter = painterResource(id = R.drawable.skiltskern),
             contentDescription = "skiltskern"
           )
-
-
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
           containerColor = colorResource(R.color.purple_700),
@@ -44,9 +42,7 @@ class Start {
       )
     }
     ) { it ->
-
       Column(modifier = modifier.padding(it)) {
-
         Box(
           modifier = modifier.fillMaxSize()
         ) {
@@ -61,28 +57,28 @@ class Start {
               colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.purple_700),
               ),
-
-
               ) {
               Text(
                 text = "Søk på skiltnr",
                 fontSize = 40.sp
               )
-
             }
             Button(
-              onClick = { /*TODO*/ },
+              onClick = {
+                if (Auth.innLogget() == true) {
+                  navController.navigate(Screen.Sok.ruter)
+                } else {
+                  navController.navigate(Screen.Login.ruter)
+                }
+              },
               colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.purple_700),
               ),
-
-
               ) {
               Text(
                 text = "Dummy 1",
                 fontSize = 40.sp
               )
-
             }
             Button(
               onClick = { /*TODO*/ },
@@ -96,17 +92,16 @@ class Start {
               )
             }
             Button(
-              onClick = { },
+              onClick = { Auth.loggUt() }
               colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.purple_700),
               ),
             ) {
               Text(
-                text = "Dummy 3",
+                text = "Logg ut",
                 fontSize = 40.sp
               )
             }
-
           }
         }
       }

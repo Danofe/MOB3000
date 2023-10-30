@@ -7,6 +7,8 @@ import androidx.compose.runtime.setValue
 import com.example.mob3000oblig.Auth
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
+import com.example.mob3000oblig.Screen
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -50,13 +52,14 @@ class LoginViewModel(
         uiState.email.isNotBlank() &&
         uiState.passord.isNotBlank()
 
-    fun loginBruker(context: Context) = viewModelScope.launch {
+    fun loginBruker(context: Context, navController: NavController) = viewModelScope.launch {
         try {
             if (!validerLogin()) {
                 error("Fyll inn alle feltene")
             }
             auth.login(uiState.email, uiState.passord)
             uiState = uiState.copy(loggetInn = true)
+            navController.navigate(Screen.Start.ruter)
 
         } catch (e: Exception) {
             uiState = uiState.copy(error = "Kunne ikke logge inn")
