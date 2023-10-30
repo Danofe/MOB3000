@@ -20,7 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.mob3000oblig.DataApi.RetroInstance
+
 
 class Start {
 
@@ -92,7 +92,7 @@ class Start {
               )
             }
             Button(
-              onClick = { Auth.loggUt() },
+              onClick = { Auth.loggUt() }
               colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.purple_700),
               ),
