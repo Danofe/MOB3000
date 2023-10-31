@@ -29,7 +29,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import java.util.regex.Pattern
 
-class sokReg {
+class SokReg {
   fun isValidLicenseNumber(licenseNumberStr: String?) =
     Pattern
       .compile(

@@ -1,5 +1,6 @@
 package com.example.mob3000oblig.DataApi
 
+import com.example.mob3000oblig.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -8,7 +9,7 @@ class Interceptor : Interceptor {
         val request = chain.request()
             .newBuilder()
             .addHeader("Content-Type", "application/json")
-            .addHeader("SVV-Authorization", "d4d24e5f-6509-4169-94ec-ad28ef0ba30f")
+            .addHeader("SVV-Authorization", BuildConfig.API_KEY)
             .build()
         return chain.proceed(request)
     }

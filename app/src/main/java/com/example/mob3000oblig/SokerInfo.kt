@@ -31,7 +31,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class sokerInfo {
+class SokerInfo {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -63,6 +63,7 @@ class sokerInfo {
                         verticalArrangement = Arrangement.spacedBy(40.dp),
                         horizontalAlignment = Alignment.Start,
                     ) {
+                        val error = "Ikke spesifisert"
                         var url = "kjoretoydata?kjennemerke=$name"
                         var responseData by remember { mutableStateOf<String>("") }
                         var bilinfo by remember { mutableStateOf<String>("") }
@@ -81,14 +82,14 @@ class sokerInfo {
                             ) {
                                 if(response.isSuccessful) {
                                     var data = response.body()
-                                    bilinfo = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke.toString()
-                                    sistGodkjent = data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent.toString()
-                                    forsteReg = data?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato.toString()
-                                    beskrivelse = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse.toString()
-                                    sitteplasser = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt.toString()
-                                    girinfo = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse.toString()
-                                    merke = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.getOrNull(0)?.merke.toString()
-                                    farge = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.getOrNull(0)?.kodeNavn.toString()
+                                    bilinfo = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke ?: error
+                                    sistGodkjent = data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent ?: error
+                                    forsteReg = data?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato ?: error
+                                    beskrivelse = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse ?: error
+                                    sitteplasser = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt.toString() ?: error
+                                    girinfo = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse ?: error
+                                    merke = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.getOrNull(0)?.merke ?: error
+                                    farge = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.getOrNull(0)?.kodeNavn ?: error
                                     responseData = data.toString()
                                     Log.d("ResponseCheck", "Response: $data")
                                 }
