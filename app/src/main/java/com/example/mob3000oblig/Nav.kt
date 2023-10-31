@@ -31,7 +31,7 @@ fun Nav() {
     }
 
     composable(route = Screen.Sok.ruter) {
-      sokReg().Sok(navController = navController)
+      SokReg().Sok(navController = navController)
 
     }
 
@@ -42,7 +42,7 @@ fun Nav() {
                  }
                )
     ) { search ->
-      sokerInfo().SkiltInfo(name = search.arguments?.getString("name"))
+      SokerInfo().SkiltInfo(name = search.arguments?.getString("name"))
     }
 
   }

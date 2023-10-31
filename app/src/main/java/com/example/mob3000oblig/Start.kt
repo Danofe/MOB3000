@@ -66,7 +66,7 @@ class Start {
             }
             Button(
               onClick = {
-                if (Auth.innLogget() == true) {
+                if (Auth.innLogget()) {
                   navController.navigate(Screen.Sok.ruter)
                 } else {
                   navController.navigate(Screen.Login.ruter)
