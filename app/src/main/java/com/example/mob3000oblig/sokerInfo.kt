@@ -75,13 +75,9 @@ class sokerInfo {
                         var url = "kjoretoydata?kjennemerke=$name"
                         var responseData by remember { mutableStateOf<String>("") }
                         var bilinfo by remember { mutableStateOf<String>("") }
-                        var mål by remember { mutableStateOf<String>("") }
-                        //var kontroll by remember { mutableStateOf<String>("") }
                         var sistGodkjent by remember { mutableStateOf<String>("") }
-                        //var utslipp by remember { mutableStateOf<String>("") }
-                        //var dekk by remember { mutableStateOf<String>("") }
-                        //var felg by remember { mutableStateOf<String>("") }
-                        //var data by remember { mutableStateOf<String>("") }
+                        var forsteReg by remember { mutableStateOf<String>("") }
+                        var beskrivelse by remember { mutableStateOf<String>("") }
                         api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
                             override fun onResponse(
                                 call: Call<KjoretoyDataListe>,
@@ -92,10 +88,14 @@ class sokerInfo {
                                     var data = response.body()
                                     var informasjon = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke + "\n"
                                     var godkjent = data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent+ "\n"
+                                    var regDato = data?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato.toString()
+                                    var besk = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse.toString()+ "\n"
                                     responseData = data.toString()
                                     Log.d("ResponseCheck", "Response: $data")
                                     bilinfo = informasjon
                                     sistGodkjent = godkjent
+                                    forsteReg = regDato
+                                    beskrivelse = besk
 
                                 }
                             }
@@ -107,11 +107,8 @@ class sokerInfo {
 
                         Text(text = "Reg nr fra API: $bilinfo")
                         Text(text = "Sist godkjent: $sistGodkjent")
-                        Text(text = "")
-                        Text(text = "")
-                        Text(text = "")
-                        Text(text = "")
-
+                        Text(text = "Dato registrert i Norge: $forsteReg")
+                        Text(text = "Beskrivelse: $beskrivelse")
                     }
                 }
             }
