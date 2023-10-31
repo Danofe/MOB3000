@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 
 import com.example.mob3000oblig.DataApi.api
 import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
+import com.example.mob3000oblig.DataModeller.Merke
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -78,6 +79,10 @@ class sokerInfo {
                         var sistGodkjent by remember { mutableStateOf<String>("") }
                         var forsteReg by remember { mutableStateOf<String>("") }
                         var beskrivelse by remember { mutableStateOf<String>("") }
+                        var sitteplassinfo by remember { mutableStateOf<String>("") }
+                        var girinfo by remember { mutableStateOf<String>("") }
+                        var merkeinfo by remember { mutableStateOf<String>("") }
+
                         api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
                             override fun onResponse(
                                 call: Call<KjoretoyDataListe>,
@@ -90,13 +95,18 @@ class sokerInfo {
                                     var godkjent = data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent+ "\n"
                                     var regDato = data?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato.toString()
                                     var besk = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse.toString()+ "\n"
+                                    var sitteplass = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt
+                                    var gir = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse
+                                    var merkeListe = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke
                                     responseData = data.toString()
                                     Log.d("ResponseCheck", "Response: $data")
                                     bilinfo = informasjon
                                     sistGodkjent = godkjent
                                     forsteReg = regDato
                                     beskrivelse = besk
-
+                                    sitteplassinfo = sitteplass.toString()
+                                    girinfo = gir.toString()
+                                    merkeinfo = merkeListe?.get(0)?.merke.toString()
                                 }
                             }
 
@@ -106,9 +116,12 @@ class sokerInfo {
                         })
 
                         Text(text = "Reg nr fra API: $bilinfo")
-                        Text(text = "Sist godkjent: $sistGodkjent")
+                        Text(text = "Sist EU-godkjenning: $sistGodkjent")
                         Text(text = "Dato registrert i Norge: $forsteReg")
                         Text(text = "Beskrivelse: $beskrivelse")
+                        Text(text = "Sitteplasser: $sitteplassinfo ")
+                        Text(text = "Girkassetype: $girinfo")
+                        Text(text = "Merke: $merkeinfo")
                     }
                 }
             }
