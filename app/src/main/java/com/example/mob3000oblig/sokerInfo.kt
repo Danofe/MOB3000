@@ -26,7 +26,6 @@ import androidx.compose.ui.unit.sp
 
 import com.example.mob3000oblig.DataApi.api
 import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
-import com.example.mob3000oblig.DataModeller.Merke
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -72,7 +71,7 @@ class sokerInfo {
                         var beskrivelse by remember { mutableStateOf<String>("") }
                         var sitteplasser by remember { mutableStateOf<String>("") }
                         var girinfo by remember { mutableStateOf<String>("") }
-                        var merkeinfo by remember { mutableStateOf<String>("") }
+                        var merke by remember { mutableStateOf<String>("") }
                         var farge by remember { mutableStateOf<String>("") }
 
                         api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
@@ -88,8 +87,8 @@ class sokerInfo {
                                     beskrivelse = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse.toString()
                                     sitteplasser = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt.toString()
                                     girinfo = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse.toString()
-                                    merkeinfo = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.get(0)?.merke.toString()
-                                    farge = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.get(0)?.kodeNavn.toString()
+                                    merke = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.getOrNull(0)?.merke.toString()
+                                    farge = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.getOrNull(0)?.kodeNavn.toString()
                                     responseData = data.toString()
                                     Log.d("ResponseCheck", "Response: $data")
                                 }
@@ -99,7 +98,7 @@ class sokerInfo {
                             }
                         })
                         Text(text = "RegNr fra API:         $bilinfo")
-                        Text(text = "Merke:                 $merkeinfo")
+                        Text(text = "Merke:                 $merke")
                         Text(text = "Beskrivelse:           $beskrivelse")
                         Text(text = "Farge:                 $farge")
                         Text(text = "Girkassetype:          $girinfo")
