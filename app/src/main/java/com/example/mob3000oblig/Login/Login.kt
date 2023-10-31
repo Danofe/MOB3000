@@ -42,7 +42,7 @@ class Login {
         val loginUiState = loginViewModel?.uiState
         val context = LocalContext.current
         val error = loginUiState?.error != null
-       
+
         Scaffold(topBar = {
             CenterAlignedTopAppBar(
                 title = {

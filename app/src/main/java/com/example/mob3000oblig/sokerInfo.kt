@@ -34,21 +34,14 @@ import retrofit2.Response
 
 class sokerInfo {
 
-    //Test
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-
-
     fun SkiltInfo(name: String?,modifier: Modifier = Modifier) {
-
-
 
         Scaffold(topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Image(painter = painterResource(id = R.drawable.skiltskern ), contentDescription = "skiltskern")
-
-
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = colorResource(R.color.purple_700),
@@ -64,8 +57,6 @@ class sokerInfo {
                     Text(text = "$name", fontSize = 40.sp, modifier = modifier
                         .align(Alignment.TopCenter)
                         .padding(top = 40.dp))
-
-
                     Column(
                         modifier = modifier
                             .align(Alignment.CenterStart)
@@ -79,53 +70,45 @@ class sokerInfo {
                         var sistGodkjent by remember { mutableStateOf<String>("") }
                         var forsteReg by remember { mutableStateOf<String>("") }
                         var beskrivelse by remember { mutableStateOf<String>("") }
-                        var sitteplassinfo by remember { mutableStateOf<String>("") }
+                        var sitteplasser by remember { mutableStateOf<String>("") }
                         var girinfo by remember { mutableStateOf<String>("") }
                         var merkeinfo by remember { mutableStateOf<String>("") }
+                        var farge by remember { mutableStateOf<String>("") }
 
                         api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
                             override fun onResponse(
                                 call: Call<KjoretoyDataListe>,
                                 response: Response<KjoretoyDataListe>
                             ) {
-
                                 if(response.isSuccessful) {
                                     var data = response.body()
-                                    var informasjon = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke + "\n"
-                                    var godkjent = data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent+ "\n"
-                                    var regDato = data?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato.toString()
-                                    var besk = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse.toString()+ "\n"
-                                    var sitteplass = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt
-                                    var gir = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse
-                                    var merkeListe = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke
+                                    bilinfo = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke.toString()
+                                    sistGodkjent = data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent.toString()
+                                    forsteReg = data?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato.toString()
+                                    beskrivelse = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse.toString()
+                                    sitteplasser = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt.toString()
+                                    girinfo = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse.toString()
+                                    merkeinfo = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.get(0)?.merke.toString()
+                                    farge = data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.get(0)?.kodeNavn.toString()
                                     responseData = data.toString()
                                     Log.d("ResponseCheck", "Response: $data")
-                                    bilinfo = informasjon
-                                    sistGodkjent = godkjent
-                                    forsteReg = regDato
-                                    beskrivelse = besk
-                                    sitteplassinfo = sitteplass.toString()
-                                    girinfo = gir.toString()
-                                    merkeinfo = merkeListe?.get(0)?.merke.toString()
                                 }
                             }
-
                             override fun onFailure(call: Call<KjoretoyDataListe>, t: Throwable) {
                                 Log.i("ResponseCheck", "Response: ${t.message}")
                             }
                         })
-
-                        Text(text = "Reg nr fra API: $bilinfo")
-                        Text(text = "Sist EU-godkjenning: $sistGodkjent")
-                        Text(text = "Dato registrert i Norge: $forsteReg")
-                        Text(text = "Beskrivelse: $beskrivelse")
-                        Text(text = "Sitteplasser: $sitteplassinfo ")
-                        Text(text = "Girkassetype: $girinfo")
-                        Text(text = "Merke: $merkeinfo")
+                        Text(text = "RegNr fra API:         $bilinfo")
+                        Text(text = "Merke:                 $merkeinfo")
+                        Text(text = "Beskrivelse:           $beskrivelse")
+                        Text(text = "Farge:                 $farge")
+                        Text(text = "Girkassetype:          $girinfo")
+                        Text(text = "Sitteplasser:          $sitteplasser")
+                        Text(text = "Sist EU-godkjenning:   $sistGodkjent")
+                        Text(text = "Registrert i Norge:    $forsteReg")
                     }
                 }
             }
         }
     }
-
 }
