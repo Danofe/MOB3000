@@ -36,6 +36,68 @@ class SokerInfo {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun SkiltInfo(name: String?, modifier: Modifier = Modifier) {
+    val error = "Ikke oppgitt"
+    val url = "kjoretoydata?kjennemerke=$name"
+    var responseData by remember { mutableStateOf("") }
+    var bilinfo by remember { mutableStateOf("") }
+    var sistGodkjent by remember { mutableStateOf("") }
+    var forsteReg by remember { mutableStateOf("") }
+    var beskrivelse by remember { mutableStateOf("") }
+    var sitteplasser by remember { mutableStateOf("") }
+    var girinfo by remember { mutableStateOf("") }
+    var merke by remember { mutableStateOf("") }
+    var farge by remember { mutableStateOf("") }
+    var drivstoffinfo by remember { mutableStateOf("") }
+
+    api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
+      override fun onResponse(
+        call: Call<KjoretoyDataListe>,
+        response: Response<KjoretoyDataListe>
+      ) {
+        if (response.isSuccessful) {
+          val data = response.body()
+          bilinfo = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke ?: error
+          sistGodkjent =
+            data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent
+              ?: error
+          forsteReg =
+            data?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato
+              ?: error
+          beskrivelse =
+            data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse
+              ?: error
+          sitteplasser =
+            data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt.toString()
+          if (sitteplasser == "0") {
+            sitteplasser = error
+          }
+          girinfo =
+            data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse
+              ?: error
+          merke =
+            data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.get(0)?.merke ?: error
+          farge =
+            data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.getOrNull(0)?.kodeNavn
+              ?: error
+          drivstoffinfo =
+            data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.getOrNull(0)?.drivstoff?.getOrNull(0)?.drivstoffKode?.kodeBeskrivelse
+              ?: error
+
+          responseData = data.toString()
+          Log.d(
+            "ResponseCheck",
+            "Response: $data"
+          )
+        }
+      }
+
+      override fun onFailure(call: Call<KjoretoyDataListe>, t: Throwable) {
+        Log.i(
+          "ResponseCheck",
+          "Response: ${t.message}"
+        )
+      }
+    })
     Scaffold(topBar = {
       CenterAlignedTopAppBar(
         title = {
@@ -69,68 +131,7 @@ class SokerInfo {
             verticalArrangement = Arrangement.spacedBy(40.dp),
             horizontalAlignment = Alignment.Start,
           ) {
-            val error = "Ikke oppgitt"
-            val url = "kjoretoydata?kjennemerke=$name"
-            var responseData by remember { mutableStateOf("") }
-            var bilinfo by remember { mutableStateOf("") }
-            var sistGodkjent by remember { mutableStateOf("") }
-            var forsteReg by remember { mutableStateOf("") }
-            var beskrivelse by remember { mutableStateOf("") }
-            var sitteplasser by remember { mutableStateOf("") }
-            var girinfo by remember { mutableStateOf("") }
-            var merke by remember { mutableStateOf("") }
-            var farge by remember { mutableStateOf("") }
-            var drivstoffinfo by remember { mutableStateOf("") }
 
-            api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
-              override fun onResponse(
-                call: Call<KjoretoyDataListe>,
-                response: Response<KjoretoyDataListe>
-              ) {
-                if (response.isSuccessful) {
-                  val data = response.body()
-                  bilinfo = data?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke ?: error
-                  sistGodkjent =
-                    data?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent
-                      ?: error
-                  forsteReg =
-                    data?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato
-                      ?: error
-                  beskrivelse =
-                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse
-                      ?: error
-                  sitteplasser =
-                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt.toString()
-                  if (sitteplasser == "0") {
-                    sitteplasser = error
-                  }
-                  girinfo =
-                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse
-                      ?: error
-                  merke =
-                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.get(0)?.merke ?: error
-                  farge =
-                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.getOrNull(0)?.kodeNavn
-                      ?: error
-                  drivstoffinfo =
-                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.getOrNull(0)?.drivstoff?.getOrNull(0)?.drivstoffKode?.kodeBeskrivelse
-                      ?: error
-
-                  responseData = data.toString()
-                  Log.d(
-                    "ResponseCheck",
-                    "Response: $data"
-                  )
-                }
-              }
-
-              override fun onFailure(call: Call<KjoretoyDataListe>, t: Throwable) {
-                Log.i(
-                  "ResponseCheck",
-                  "Response: ${t.message}"
-                )
-              }
-            })
             if (merke != error) {
               Row {
                 Column {
