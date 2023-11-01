@@ -80,6 +80,7 @@ class SokerInfo {
             var girinfo by remember { mutableStateOf("") }
             var merke by remember { mutableStateOf("") }
             var farge by remember { mutableStateOf("") }
+            var drivstoff by remember { mutableStateOf("") }
 
             api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
               override fun onResponse(
@@ -152,7 +153,7 @@ class SokerInfo {
                 verticalArrangement = Arrangement.Center,
                 modifier = modifier.fillMaxSize()
               ) {
-              Text(text = "Skiltnummeret eksisterer ikke!", fontSize = 20.sp, textAlign = TextAlign.Center)
+              Text(text = "Ingen kjøretøy på dette skiltnummeret.", fontSize = 20.sp, textAlign = TextAlign.Center)
               }
             }
           }

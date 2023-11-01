@@ -103,7 +103,7 @@ class Login {
                         }
                         LaunchedEffect(key1 = loginViewModel?.loggetInn) {
                             if (loginViewModel?.loggetInn == true) {
-                               navController.navigate(Screen.Start.ruter)
+                               navController.navigate(Screen.Sok.ruter)
                             }
                         }
                         //Text(text = "eller", modifier = modifier.align(Alignment.CenterHorizontally))

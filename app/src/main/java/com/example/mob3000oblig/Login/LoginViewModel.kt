@@ -59,7 +59,7 @@ class LoginViewModel(
             }
             auth.login(uiState.email, uiState.passord)
             uiState = uiState.copy(loggetInn = true)
-            navController.navigate(Screen.Start.ruter)
+            navController.navigate(Screen.Sok.ruter)
 
         } catch (e: Exception) {
             uiState = uiState.copy(error = "Kunne ikke logge inn")
