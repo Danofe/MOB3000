@@ -9,7 +9,6 @@ import androidx.navigation.navArgument
 import com.example.mob3000oblig.Login.Login
 import com.example.mob3000oblig.Registrer.Register
 
-
 @Composable
 fun Nav() {
   val navController = rememberNavController()
@@ -32,7 +31,6 @@ fun Nav() {
 
     composable(route = Screen.Sok.ruter) {
       SokReg().Sok(navController = navController)
-
     }
 
     composable(route = Screen.Info.ruter + "/{name}",
@@ -44,7 +42,5 @@ fun Nav() {
     ) { search ->
       SokerInfo().SkiltInfo(name = search.arguments?.getString("name"))
     }
-
   }
-
 }

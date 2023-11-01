@@ -21,9 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
-
 class Start {
-
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
@@ -57,7 +55,7 @@ class Start {
               colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.purple_700),
               ),
-              ) {
+            ) {
               Text(
                 text = "Søk på skiltnr",
                 fontSize = 40.sp
@@ -74,7 +72,7 @@ class Start {
               colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.purple_700),
               ),
-              ) {
+            ) {
               Text(
                 text = "Logg inn/Søk",
                 fontSize = 40.sp
