@@ -69,7 +69,7 @@ class SokerInfo {
             verticalArrangement = Arrangement.spacedBy(40.dp),
             horizontalAlignment = Alignment.Start,
           ) {
-            val error = "Ikke spesifisert"
+            val error = "Ikke oppgitt"
             val url = "kjoretoydata?kjennemerke=$name"
             var responseData by remember { mutableStateOf("") }
             var bilinfo by remember { mutableStateOf("") }
@@ -101,7 +101,9 @@ class SokerInfo {
                       ?: error
                   sitteplasser =
                     data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.sitteplasserTotalt.toString()
-                      ?: error
+                  if (sitteplasser == "0") {
+                    sitteplasser = error
+                  }
                   girinfo =
                     data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse
                       ?: error
@@ -111,7 +113,9 @@ class SokerInfo {
                     data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.getOrNull(0)?.kodeNavn
                       ?: error
                   drivstoffinfo =
-                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.get(0)?.drivstoff?.get(0)?.drivstoffKode?.kodeBeskrivelse.toString()
+                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.getOrNull(0)?.drivstoff?.getOrNull(0)?.drivstoffKode?.kodeBeskrivelse
+                      ?: error
+
                   responseData = data.toString()
                   Log.d(
                     "ResponseCheck",
@@ -158,7 +162,7 @@ class SokerInfo {
                 verticalArrangement = Arrangement.Center,
                 modifier = modifier.fillMaxSize()
               ) {
-              Text(text = "Ingen kjøretøy på dette skiltnummeret.", fontSize = 20.sp, textAlign = TextAlign.Center)
+              Text(text = "Fant ingen kjøretøy med dette skiltnummeret.", fontSize = 20.sp, textAlign = TextAlign.Center)
               }
             }
           }

@@ -18,7 +18,7 @@ class LoginViewModel(
     val currentUser = auth.currentUser
 
     val loggetInn: Boolean
-        get() = auth.innLogget()
+        get() = auth.innlogget()
 
     var uiState by mutableStateOf(LoginUiState())
         private set
@@ -47,7 +47,6 @@ class LoginViewModel(
         uiState = uiState.copy(error = error)
     }
 
-
     private fun validerLogin() =
         uiState.email.isNotBlank() &&
         uiState.passord.isNotBlank()
@@ -57,9 +56,14 @@ class LoginViewModel(
             if (!validerLogin()) {
                 error("Fyll inn alle feltene")
             }
-            auth.login(uiState.email, uiState.passord)
-            uiState = uiState.copy(loggetInn = true)
-            navController.navigate(Screen.Sok.ruter)
+            val loginResult = auth.login(uiState.email, uiState.passord)
+
+            if (!loginResult) {
+                error("Feil brukernavn eller passord")
+            } else {
+                uiState = uiState.copy(loggetInn = true)
+                navController.navigate(Screen.Start.ruter)
+            }
 
         } catch (e: Exception) {
             uiState = uiState.copy(error = "Kunne ikke logge inn")
