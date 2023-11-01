@@ -77,7 +77,7 @@ class Start {
               ),
               ) {
               Text(
-                text = "Dummy 1",
+                text = "Logg inn/Søk",
                 fontSize = 40.sp
               )
             }
