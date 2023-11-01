@@ -9,7 +9,7 @@ import kotlinx.coroutines.tasks.await
 class Auth {
   val currentUser: FirebaseUser? = Firebase.auth.currentUser
 
-  fun innLogget(): Boolean {
+  fun innlogget(): Boolean {
     return currentUser != null
   }
 

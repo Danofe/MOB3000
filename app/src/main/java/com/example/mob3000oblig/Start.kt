@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialogDefaults.containerColor
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -66,7 +65,7 @@ class Start {
             }
             Button(
               onClick = {
-                if (Auth.innLogget()) {
+                if (Auth.innlogget()) {
                   navController.navigate(Screen.Sok.ruter)
                 } else {
                   navController.navigate(Screen.Login.ruter)

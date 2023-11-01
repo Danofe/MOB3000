@@ -31,10 +31,12 @@ import java.util.regex.Pattern
 
 class SokReg {
   fun isValidLicenseNumber(licenseNumberStr: String?) =
-    Pattern
-      .compile(
-        "^[A-Z]{2}\\d{5}\$"
-      ).matcher(licenseNumberStr).find()
+    licenseNumberStr?.let {
+      Pattern
+        .compile(
+          "^(?![\\s]{2})(?=.{2,7}\$)([A-Z]\\s|[A-Z\\d\\s]{2,})+\$"
+        ).matcher(it).find()
+    }
 
   // hentet fra https://stackoverflow.com/questions/65641875/jetpack-compose-textfield-inputfilter-to-have-only-currency-regex-inputs
   @OptIn(ExperimentalMaterial3Api::class)
@@ -80,7 +82,7 @@ class SokReg {
               value = licenseNumberQuery,
               onValueChange = {
                 licenseNumberQuery = it
-                showError = !isValidLicenseNumber(it)
+                showError = !isValidLicenseNumber(it)!!
               },
               isError = showError,
               placeholder = { Text(text = "Skriv skiltnr her:") }
