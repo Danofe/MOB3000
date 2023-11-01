@@ -80,6 +80,7 @@ class SokerInfo {
             var girinfo by remember { mutableStateOf("") }
             var merke by remember { mutableStateOf("") }
             var farge by remember { mutableStateOf("") }
+            var drivstoffinfo by remember { mutableStateOf("") }
 
             api.getKjoretoyDataListe(url).enqueue(object : Callback<KjoretoyDataListe> {
               override fun onResponse(
@@ -109,6 +110,8 @@ class SokerInfo {
                   farge =
                     data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.getOrNull(0)?.kodeNavn
                       ?: error
+                  drivstoffinfo =
+                    data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.get(0)?.drivstoff?.get(0)?.drivstoffKode?.kodeBeskrivelse.toString()
                   responseData = data.toString()
                   Log.d(
                     "ResponseCheck",
@@ -131,6 +134,7 @@ class SokerInfo {
                   Text(text = "Beskrivelse")
                   Text(text = "Farge")
                   Text(text = "Girkassetype")
+                  Text(text = "Drivstoff")
                   Text(text = "Sitteplasser")
                   Text(text = "Sist EU-godkjenning")
                   Text(text = "Registrert i Norge")
@@ -141,9 +145,11 @@ class SokerInfo {
                   Text(beskrivelse)
                   Text(farge)
                   Text(girinfo)
+                  Text(drivstoffinfo)
                   Text(sitteplasser)
                   Text(sistGodkjent)
                   Text(forsteReg)
+
                 }
               }
             } else {
