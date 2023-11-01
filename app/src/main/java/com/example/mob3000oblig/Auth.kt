@@ -5,7 +5,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
-
 class Auth {
   val currentUser: FirebaseUser? = Firebase.auth.currentUser
 
@@ -44,6 +43,4 @@ class Auth {
       false
     }
   }
-
-
 }

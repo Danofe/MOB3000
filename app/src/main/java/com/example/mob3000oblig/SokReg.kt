@@ -42,7 +42,6 @@ class SokReg {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun Sok(modifier: Modifier = Modifier, navController: NavController) {
-
     var licenseNumberQuery by remember { mutableStateOf("") }
     var showError by remember { mutableStateOf(false) }
     Scaffold(topBar = {

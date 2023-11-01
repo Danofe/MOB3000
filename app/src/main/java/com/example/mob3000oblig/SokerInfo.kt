@@ -32,6 +32,7 @@ import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 class SokerInfo {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
@@ -75,7 +76,8 @@ class SokerInfo {
             data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse
               ?: error
           merke =
-            data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.get(0)?.merke ?: error
+            data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.get(0)?.merke
+              ?: error
           farge =
             data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.getOrNull(0)?.kodeNavn
               ?: error
@@ -132,17 +134,17 @@ class SokerInfo {
             horizontalAlignment = Alignment.Start,
           ) {
 
-            if (merke != error) {
+            if (bilinfo != error) {
               Row {
                 Column {
-                  Text(text = "Merke")
-                  Text(text = "Beskrivelse")
-                  Text(text = "Farge")
-                  Text(text = "Girkassetype")
-                  Text(text = "Drivstoff")
-                  Text(text = "Sitteplasser")
-                  Text(text = "Sist EU-godkjenning")
-                  Text(text = "Registrert i Norge")
+                  Text("Merke")
+                  Text("Beskrivelse")
+                  Text("Farge")
+                  Text("Girkassetype")
+                  Text("Drivstoff")
+                  Text("Sitteplasser")
+                  Text("Sist EU-godkjenning")
+                  Text("Registrert i Norge")
                 }
                 Spacer(modifier = modifier.width(20.dp))
                 Column {
@@ -163,7 +165,11 @@ class SokerInfo {
                 verticalArrangement = Arrangement.Center,
                 modifier = modifier.fillMaxSize()
               ) {
-              Text(text = "Fant ingen kjøretøy med dette skiltnummeret.", fontSize = 20.sp, textAlign = TextAlign.Center)
+                Text(
+                  text = "Fant ingen kjøretøy med dette skiltnummeret.",
+                  fontSize = 20.sp,
+                  textAlign = TextAlign.Center
+                )
               }
             }
           }
