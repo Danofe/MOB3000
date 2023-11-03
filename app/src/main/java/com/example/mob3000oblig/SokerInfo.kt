@@ -127,18 +127,18 @@ class SokerInfo {
                       ?: error
                   maksHastighet =
                     data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.maksimumHastighet?.getOrNull(0).toString()
-                      if (maksHastighet == "0") {
-                        maksHastighet = error
-                      }
+                  if (maksHastighet == "0") {
+                    maksHastighet = error
+                  }
                   hk =
                     data?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.getOrNull(0)?.drivstoff?.get(0)?.maksNettoEffekt?.toInt().toString()
-                      if (hk == "0") {
-                        hk = error
-                        // Henter kun ut kW, så må konvertere til hk
-                      } else {
-                        var a = hk.toInt()
-                        hk = (a * 1.34102209).roundToInt().toString()
-                      }
+                  if (hk == "0") {
+                    hk = error
+                    // Henter kun ut kW, så må konvertere til hk
+                  } else {
+                    var a = hk.toInt()
+                    hk = (a * 1.34102209).roundToInt().toString()
+                  }
 
                   responseData = data.toString()
                   Log.d(
