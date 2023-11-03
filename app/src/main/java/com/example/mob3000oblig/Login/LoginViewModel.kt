@@ -87,7 +87,5 @@ class LoginViewModel(
       var loader: Boolean = false,
       var loggetInn: Boolean = false,
       )
-}
-}
 
 
