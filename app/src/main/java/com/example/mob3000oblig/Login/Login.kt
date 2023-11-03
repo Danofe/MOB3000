@@ -32,12 +32,17 @@ import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Screen
 
 class Login {
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun loginSkjerm(modifier: Modifier = Modifier, navController: NavController, loginViewModel: LoginViewModel? = viewModel()) {
-        val loginUiState = loginViewModel?.uiState
-        val context = LocalContext.current
-        val error = loginUiState?.error != null
+  @OptIn(ExperimentalMaterial3Api::class)
+  @Composable
+  fun loginSkjerm(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    loginViewModel: LoginViewModel? = viewModel()
+  ) {
+    val loginUiState = loginViewModel?.uiState
+    val context = LocalContext.current
+    val error = loginUiState?.error != null
+
 
         Scaffold(topBar = {
             CenterAlignedTopAppBar(
@@ -68,56 +73,67 @@ class Login {
                             Text(text = "Feil brukernavn eller passord")
                         }
 
-                        TextField(
-                            value = loginUiState?.email?: "",
-                            onValueChange = { loginViewModel?.onEmailChange(it) },
-                            label = { Text("Email") },
-                            modifier = modifier.align(Alignment.CenterHorizontally),
-                            enabled = true,
+            TextField(
+              value = loginUiState?.email ?: "",
+              onValueChange = { loginViewModel?.onEmailChange(it) },
+              label = { Text("Email") },
+              modifier = modifier.align(Alignment.CenterHorizontally),
+              enabled = true,
 
-                            leadingIcon = {
-                                Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = "Lock")
-                            }
+              leadingIcon = {
+                Icon(
+                  imageVector = Icons.Filled.AccountCircle,
+                  contentDescription = "Lock"
+                )
+              }
 
-                        )
-                        TextField(
-                            value = loginUiState?.passord?: "",
-                            onValueChange = { loginViewModel?.onPassordChange(it) },
-                            label = { Text("Passord") },
-                            modifier = modifier.align(Alignment.CenterHorizontally),
-                            visualTransformation = PasswordVisualTransformation(),
-                            leadingIcon = {
-                                Icon(imageVector = Icons.Filled.Lock, contentDescription = "Lock")
-                            }
-                        )
-                        Button(
-                            onClick = { loginViewModel?.loginBruker(context, navController) },
-                            modifier = modifier.align(Alignment.CenterHorizontally),
+            )
+            TextField(
+              value = loginUiState?.passord ?: "",
+              onValueChange = { loginViewModel?.onPassordChange(it) },
+              label = { Text("Passord") },
+              modifier = modifier.align(Alignment.CenterHorizontally),
+              visualTransformation = PasswordVisualTransformation(),
+              leadingIcon = {
+                Icon(
+                  imageVector = Icons.Filled.Lock,
+                  contentDescription = "Lock"
+                )
+              }
+            )
+            Button(
+              onClick = {
+                loginViewModel?.loginBruker(
+                  context,
+                  navController
+                )
+              },
+              modifier = modifier.align(Alignment.CenterHorizontally),
 
-                        ) {
-                            Text(text = "Logg inn")
-                        }
-                        LaunchedEffect(key1 = loginViewModel?.loggetInn) {
-                            if (loginViewModel?.loggetInn == true) {
-                               navController.navigate(Screen.Sok.ruter)
-                            }
-                        }
-                        //Text(text = "eller", modifier = modifier.align(Alignment.CenterHorizontally))
-                        Button(
-                            onClick = { navController.navigate(Screen.Register.ruter) },
-                            modifier = modifier.align(Alignment.CenterHorizontally),
-                        ) {
-                        Text(text = "Registrer ny bruker")
-                        }
-                        Button(
-                            onClick = { navController.navigate(Screen.Start.ruter) },
-                            modifier = modifier.align(Alignment.CenterHorizontally),
-                            ) {
-                            Text(text = "Avbryt")
-                        }
-                    }
-                }
+              ) {
+              Text(text = "Logg inn")
             }
+            LaunchedEffect(key1 = loginViewModel?.loggetInn) {
+              if (loginViewModel?.loggetInn == true) {
+                navController.navigate(Screen.Sok.ruter)
+              }
+            }
+            //Text(text = "eller", modifier = modifier.align(Alignment.CenterHorizontally))
+            Button(
+              onClick = { navController.navigate(Screen.Register.ruter) },
+              modifier = modifier.align(Alignment.CenterHorizontally),
+            ) {
+              Text(text = "Registrer ny bruker")
+            }
+            Button(
+              onClick = { navController.navigate(Screen.Start.ruter) },
+              modifier = modifier.align(Alignment.CenterHorizontally),
+            ) {
+              Text(text = "Avbryt")
+            }
+          }
         }
+      }
     }
+  }
 }
