@@ -79,19 +79,14 @@ class LoginViewModel(
             System.out.println(LoginUiState().error)
         }
     }
-
-
-
 }
-
-
     data class LoginUiState(
         var email: String = "",
         var passord: String = "",
         var error: String? = null,
         var loader: Boolean = false,
         var loggetInn: Boolean = false,
-    )
+        )
 
 
 

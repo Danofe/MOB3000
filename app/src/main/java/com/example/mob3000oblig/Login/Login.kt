@@ -19,10 +19,6 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -67,7 +63,7 @@ class Login {
                             .padding(50.dp),
                         verticalArrangement = Arrangement.spacedBy(50.dp),
                     ) {
-                        Text(text = "Logg inn eller registrer ny bruker for å benytte denne funksjonen.");
+                        Text(text = "Logg inn eller registrer ny bruker for å benytte denne funksjonen.")
                         if (error) {
                             Text(text = "Feil brukernavn eller passord")
                         }
