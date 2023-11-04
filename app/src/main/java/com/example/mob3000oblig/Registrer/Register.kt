@@ -87,7 +87,7 @@ class Register {
               onClick = { registerViewModel?.lagBruker(context) },
               modifier = modifier.align(Alignment.CenterHorizontally)
             ) {
-              Text(text = "Register")
+              Text(text = "Registrer")
             }
           }
         }

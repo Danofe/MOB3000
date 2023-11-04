@@ -10,8 +10,9 @@ class Firestore {
     fun leggInnFavoritt(name: String?, merke: String, type: String, farge: String,
                         girinfo: String, dristoffinfo: String, sitteplasser: String,
                         maksHastighet: String, hk: String, sistgodkjent: String, forstereg: String) {
+
         val brukerID = Firebase.auth.currentUser?.uid.toString()
-        // lager nytt objekt av bil
+
         val bil = hashMapOf(
             "brukerID" to brukerID,
             "skilt" to name,
@@ -26,14 +27,26 @@ class Firestore {
             "sistgodkjent" to sistgodkjent,
             "forstereg" to forstereg
         )
-        // legger til bilen i collectionen "favoritter"
         db.collection("favoritter")
-            .add(bil)
+            .whereEqualTo("brukerID", brukerID)
+            .whereEqualTo("skilt", name)
+            .get()
             .addOnSuccessListener { documentReference ->
-                Log.d( "Databasesjekk","Dokument lagt til med ID: ${documentReference.id}")
+                if (documentReference.isEmpty) {
+                    db.collection("favoritter")
+                        .add(bil)
+                        .addOnSuccessListener { documentReference ->
+                            Log.d("Suksess", "bil lagt til i favoritter")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w("Feil", "Fikk ikke lagt til bil", e)
+                        }
+                } else {
+                    Log.d("Feil", "Bil finnes allerede")
+                }
             }
             .addOnFailureListener { e ->
-                Log.d("Databasesjekk","Feil ved lagring av dokument", e)
+                Log.w("Feil", "Fikk ikke lagt til bil", e)
             }
     }
 }
