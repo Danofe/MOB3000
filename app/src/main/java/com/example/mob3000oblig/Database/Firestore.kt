@@ -27,6 +27,7 @@ class Firestore {
             "sistgodkjent" to sistgodkjent,
             "forstereg" to forstereg
         )
+
         db.collection("favoritter")
             .whereEqualTo("brukerID", brukerID)
             .whereEqualTo("skilt", name)

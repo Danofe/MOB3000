@@ -6,6 +6,7 @@ sealed class Screen(val ruter: String) {
   object Start : Screen("Start")
   object Sok : Screen("Sok")
   object Info : Screen("Info")
+  object Favoritter : Screen("Favoritter")
 
   fun withArgs(vararg args: String): String {
     return buildString {
