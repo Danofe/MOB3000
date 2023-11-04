@@ -42,5 +42,9 @@ fun Nav() {
     ) { search ->
       SokerInfo().SkiltInfo(name = search.arguments?.getString("name"))
     }
+
+    composable(route = Screen.Favoritter.ruter) {
+      Favoritter().favoritterSkjerm(navController = navController)
+    }
   }
 }

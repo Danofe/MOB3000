@@ -139,7 +139,6 @@ class SokerInfo {
                     var a = hk.toInt()
                     hk = (a * 1.34102209).roundToInt().toString()
                   }
-
                   responseData = data.toString()
                   Log.d(
                     "ResponseCheck",

@@ -79,13 +79,13 @@ class Start {
               )
             }
             Button(
-              onClick = { /*TODO*/ },
+              onClick = { navController.navigate(Screen.Favoritter.ruter) },
               colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(R.color.purple_700),
               ),
             ) {
               Text(
-                text = "Dummy 2",
+                text = "Favoritter",
                 fontSize = 40.sp
               )
             }
