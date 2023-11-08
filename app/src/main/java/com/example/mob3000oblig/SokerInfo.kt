@@ -39,7 +39,6 @@ import kotlin.math.roundToInt
 class SokerInfo {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-
   fun SkiltInfo(name: String?, modifier: Modifier = Modifier,  Auth: Auth = Auth(), Firestore: Firestore = Firestore()) {
  
     Scaffold(topBar = {
@@ -75,7 +74,6 @@ class SokerInfo {
             verticalArrangement = Arrangement.spacedBy(40.dp),
             horizontalAlignment = Alignment.Start,
           ) {
-
             val error = "Ikke oppgitt"
             val url = "kjoretoydata?kjennemerke=$name"
             var responseData by remember { mutableStateOf("") }
