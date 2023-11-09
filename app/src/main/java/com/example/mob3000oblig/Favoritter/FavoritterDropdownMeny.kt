@@ -87,85 +87,90 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(), modifi
     }
     val index = favorittliste?.indexOf(valgtFavoritt)
     kjoretoy = viewModel?.allefavoritter?.value?.getOrNull(index!!).toString()
-    var hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
-    var maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        Row(
-            modifier = modifier,
+    val hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
+    val maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
 
+    if (index != -1) {
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
         ) {
-            Column(
+            Row(
+                modifier = modifier,
 
-            ) {
-                Text(text = "Merke:")
-                Text(text = "Type:")
-                Text(text = "Farge:")
-                Text(text = "Girkassetype:")
-                Text(text = "Drivstoff:")
-                Text(text = "Sitteplasser:")
-                Text(text = "Maks hastighet:")
-                Text(text = "Hestekrefter:")
-                Text(text = "Sist EU-godkjenning:")
-                Text(text = "Registrert i Norge:")
-            }
+                ) {
+                Column(
 
-            Spacer(modifier = modifier.width(30.dp))
-            Column {
-                Text(
-                    kjoretoy.substringAfter("merke=")
-                        .substringBefore(","),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    kjoretoy.substringAfter("type=")
-                        .substringBefore(","),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    kjoretoy.substringAfter("farge=")
-                        .substringBefore(","),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    kjoretoy.substringAfter("girinfo=")
-                        .substringBefore(","),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    kjoretoy.substringAfter("drivstoffinfo=")
-                        .substringBefore(","),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    kjoretoy.substringAfter("sitteplasser=")
-                        .substringBefore(","),
-                    fontWeight = FontWeight.Bold
-                )
-                if (maksHastighet != "Ikke oppgitt") {
-                    Text("$maksHastighet km/t", fontWeight = FontWeight.Bold)
-                } else {
-                    Text(maksHastighet, fontWeight = FontWeight.Bold)
+                ) {
+                    Text(text = "Merke:")
+                    Text(text = "Type:")
+                    Text(text = "Farge:")
+                    Text(text = "Girkassetype:")
+                    Text(text = "Drivstoff:")
+                    Text(text = "Sitteplasser:")
+                    Text(text = "Maks hastighet:")
+                    Text(text = "Hestekrefter:")
+                    Text(text = "Sist EU-godkjenning:")
+                    Text(text = "Registrert i Norge:")
                 }
-                if (hestekrefter != "Ikke oppgitt") {
-                    Text("≈$hestekrefter hk", fontWeight = FontWeight.Bold)
-                } else {
-                    Text(hestekrefter, fontWeight = FontWeight.Bold)
+
+                Spacer(modifier = modifier.width(30.dp))
+                Column {
+                    Text(
+                        kjoretoy.substringAfter("merke=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("type=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("farge=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("girinfo=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("drivstoffinfo=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("sitteplasser=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    if (maksHastighet != "Ikke oppgitt") {
+                        Text("$maksHastighet km/t", fontWeight = FontWeight.Bold)
+                    } else {
+                        Text(maksHastighet, fontWeight = FontWeight.Bold)
+                    }
+                    if (hestekrefter != "Ikke oppgitt") {
+                        Text("≈$hestekrefter hk", fontWeight = FontWeight.Bold)
+                    } else {
+                        Text(hestekrefter, fontWeight = FontWeight.Bold)
+                    }
+                    Text(
+                        kjoretoy.substringAfter("sistgodkjent=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("forstereg=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
                 }
-                Text(
-                    kjoretoy.substringAfter("sistgodkjent=")
-                        .substringBefore(","),
-                    fontWeight = FontWeight.Bold
-                )
-                Text(
-                    kjoretoy.substringAfter("forstereg=")
-                        .substringBefore(","),
-                    fontWeight = FontWeight.Bold
-                )
             }
         }
+    } else {
+
     }
 }
 

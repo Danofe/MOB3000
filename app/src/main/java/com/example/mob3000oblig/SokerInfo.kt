@@ -28,23 +28,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModelProvider
 import com.example.mob3000oblig.DataApi.APIViewModel
-import com.example.mob3000oblig.DataApi.api
 import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
 import com.example.mob3000oblig.Database.Firestore
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import kotlin.math.roundToInt
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mob3000oblig.DataApi.apiService
-import com.example.mob3000oblig.Login.LoginViewModel
-import kotlinx.coroutines.launch
-
 
 class SokerInfo {
   @OptIn(ExperimentalMaterial3Api::class)
