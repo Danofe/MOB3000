@@ -14,8 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.mob3000oblig.Auth
 import com.example.mob3000oblig.R
 
 class Favoritter {
@@ -23,11 +26,8 @@ class Favoritter {
     @Composable
     fun favoritterSkjerm(
         modifier: Modifier = Modifier,
-        viewModel: FavoritterViewModel? = viewModel(),
         navController: NavController
     ) {
-        val brukerID = viewModel?.brukerID
-
         Scaffold(topBar = {
             CenterAlignedTopAppBar(
                 title = {
@@ -47,8 +47,12 @@ class Favoritter {
                 Box(
                     modifier = modifier.fillMaxSize()
                 ) {
-                    if (brukerID.toString() == "null") {
-                        Text(text = "Du må logge inn for å se dine favoritter")
+                    if (Auth().currentUser == null) {
+                        Text(text = "Du må logge inn for å se dine favoritter",
+                            fontSize = 20.sp,
+                            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                            modifier = modifier.padding(20.dp)
+                            )
                     } else {
                         FavoritterDropdownMeny()
                     }
