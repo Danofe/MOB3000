@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.mob3000oblig.Favoritter.Favoritter
 import com.example.mob3000oblig.Login.Login
 import com.example.mob3000oblig.Registrer.Register
 
