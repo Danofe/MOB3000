@@ -40,11 +40,16 @@ fun Nav() {
                  }
                )
     ) { search ->
-      SokerInfo().SkiltInfo(name = search.arguments?.getString("name"))
+      SokerInfo().SkiltInfo(name = search.arguments?.getString("name"), navController = navController)
+
     }
+
+
 
     composable(route = Screen.Favoritter.ruter) {
       Favoritter().favoritterSkjerm(navController = navController)
     }
   }
 }
+
+

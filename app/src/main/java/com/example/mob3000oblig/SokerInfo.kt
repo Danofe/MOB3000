@@ -28,6 +28,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.mob3000oblig.DataApi.api
 import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
 import com.example.mob3000oblig.Database.Firestore
@@ -39,7 +42,8 @@ import kotlin.math.roundToInt
 class SokerInfo {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun SkiltInfo(name: String?, modifier: Modifier = Modifier,  Auth: Auth = Auth(), Firestore: Firestore = Firestore()) {
+  fun SkiltInfo(name: String?, modifier: Modifier = Modifier, Auth: Auth = Auth(), Firestore: Firestore = Firestore(), navController: NavController,
+  ) {
  
     Scaffold(topBar = {
       CenterAlignedTopAppBar(
@@ -187,11 +191,21 @@ class SokerInfo {
                   Text(forsteReg)
                 }
               }
+              Row {
+                Spacer(modifier = modifier.width(20.dp))
+              Button(
+                onClick = {navController.navigate(Screen.Sok.ruter)}
+
+              ) {
+                Text("Tilbake")
+              }
+                Spacer(modifier = modifier.width(20.dp))
               Button(
                 onClick = { Firestore.leggInnFavoritt(name, merke, type, farge, girinfo, drivstoffinfo, sitteplasser, maksHastighet, hk, sistGodkjent, forsteReg) },
                 enabled = (Auth.innlogget())
               ) {
                 Text("Legg til i favoritter")
+              }
               }
             } else {
               Column(
@@ -206,6 +220,9 @@ class SokerInfo {
                 )
               }
             }
+
+
+
           }
         }
       }
