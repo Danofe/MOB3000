@@ -1,20 +1,17 @@
-package com.example.mob3000oblig
+package com.example.mob3000oblig.Favoritter
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.mob3000oblig.Database.Firestore
-import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateOf
-import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.toObject
 
 import com.google.firebase.ktx.Firebase
 
 class FavoritterViewModel : ViewModel() {
-    val favoritter = mutableStateOf<List<String>>(emptyList())
+    val allefavoritter = mutableStateOf<List<String>>(emptyList())
+    val favoritterSkilt = mutableStateOf<List<String>>(emptyList())
     val brukerID = Firebase.auth.currentUser?.uid.toString()
 
     init {
@@ -22,16 +19,20 @@ class FavoritterViewModel : ViewModel() {
     }
     private fun hentFavoritter() {
         val db = Firebase.firestore
-
         db.collection("favoritter")
             .whereEqualTo("brukerID", brukerID)
             .get()
             .addOnSuccessListener { result ->
-                val favoritterListe = mutableListOf<String>()
+                val favoritterliste = mutableListOf<String>()
+                val dataliste = mutableListOf<String>()
                 for (document in result) {
-                    favoritterListe.add(document.data["skilt"].toString())
+                    favoritterliste.add(document.data["skilt"].toString())
+                    dataliste.add(document.data.toString())
                 }
-                favoritter.value = favoritterListe
+                favoritterSkilt.value = favoritterliste
+                allefavoritter.value = dataliste
+                Log.d("allefavoritterSize", allefavoritter.value.size.toString())
+                Log.d("bil nr 1", allefavoritter.value[0])
             }
             .addOnFailureListener { exception ->
                 Log.w("Feil", "Error getting documents: ", exception)

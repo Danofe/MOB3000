@@ -1,29 +1,22 @@
-package com.example.mob3000oblig
+package com.example.mob3000oblig.Favoritter
 
-import android.util.Log
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.mob3000oblig.Login.LoginViewModel
+import com.example.mob3000oblig.R
 
 class Favoritter {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -58,7 +51,6 @@ class Favoritter {
                         Text(text = "Du må logge inn for å se dine favoritter")
                     } else {
                         FavoritterDropdownMeny()
-                        Log.d("BrukerID", brukerID.toString())
                     }
                 }
             }

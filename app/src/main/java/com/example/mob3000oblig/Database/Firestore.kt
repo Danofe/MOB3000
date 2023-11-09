@@ -8,7 +8,7 @@ class Firestore {
 
     val db = Firebase.firestore
     fun leggInnFavoritt(name: String?, merke: String, type: String, farge: String,
-                        girinfo: String, dristoffinfo: String, sitteplasser: String,
+                        girinfo: String, drivstoffinfo: String, sitteplasser: String,
                         maksHastighet: String, hk: String, sistgodkjent: String, forstereg: String) {
 
         val brukerID = Firebase.auth.currentUser?.uid.toString()
@@ -20,7 +20,7 @@ class Firestore {
             "type" to type,
             "farge" to farge,
             "girinfo" to girinfo,
-            "dristoffinfo" to dristoffinfo,
+            "drivstoffinfo" to drivstoffinfo,
             "sitteplasser" to sitteplasser,
             "maksHastighet" to maksHastighet,
             "hestekrefter" to hk,
