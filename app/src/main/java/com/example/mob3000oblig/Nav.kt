@@ -1,17 +1,22 @@
 package com.example.mob3000oblig
 
+import android.app.Application
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.mob3000oblig.DataApi.APIViewModel
 import com.example.mob3000oblig.Login.Login
 import com.example.mob3000oblig.Registrer.Register
+import androidx.lifecycle.ViewModelProvider
 
 @Composable
 fun Nav() {
+
   val navController = rememberNavController()
+  val viewModel: APIViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(Application()).create(APIViewModel::class.java)
   NavHost(
     navController = navController,
     startDestination = Screen.Start.ruter
@@ -40,7 +45,7 @@ fun Nav() {
                  }
                )
     ) { search ->
-      SokerInfo().SkiltInfo(name = search.arguments?.getString("name"))
+      SokerInfo().SkiltInfo(viewModel = viewModel,name = search.arguments?.getString("name"))
     }
 
     composable(route = Screen.Favoritter.ruter) {
