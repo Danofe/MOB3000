@@ -90,7 +90,9 @@ class SokReg {
               Text("Skriv inn gyldig skiltnummer!")
             }
             Button(
-              onClick = { navController.navigate(Screen.Info.withArgs(licenseNumberQuery)) },
+              onClick = {
+
+                navController.navigate(Screen.Info.withArgs(licenseNumberQuery)) },
               enabled = !licenseNumberQuery.isEmpty() && !showError
             ) {
               Text("Hent info")

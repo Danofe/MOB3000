@@ -3,6 +3,7 @@ package com.example.mob3000oblig.DataApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 
 private val client = OkHttpClient.Builder().apply {
   addInterceptor(Interceptor())
@@ -15,4 +16,5 @@ val api = Retrofit.Builder()
   .client(client)
   .addConverterFactory(GsonConverterFactory.create())
   .build()
-  .create(DataInterface::class.java)
+
+  val apiService = api.create(DataInterface::class.java)
