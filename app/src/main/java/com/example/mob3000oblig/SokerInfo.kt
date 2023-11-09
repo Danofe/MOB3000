@@ -65,7 +65,7 @@ class SokerInfo {
       try {
         val info = viewModel.hentBilInfo(url)
         bilInfo = info
-        Log.e("Oscar", "Info: $info")
+        Log.e("YoOscar", "Info: $info")
       } catch (e: Exception) {
         Log.e("Oscar", "Error: ${e.message}")
       }
