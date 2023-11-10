@@ -1,7 +1,8 @@
 package com.example.mob3000oblig.Favoritter
 
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +14,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,30 +24,31 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.internal.illegalDecoyCallException
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.CenterStart
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.HorizontalAlignmentLine
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.mob3000oblig.Screen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(), modifier: Modifier = Modifier) {
-
+fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
+                           modifier: Modifier = Modifier,
+                           navController: NavController) {
     var utvidet by remember { mutableStateOf(false) }
-    var favorittliste = viewModel?.favoritterSkilt?.value
+    val favorittliste = viewModel?.favoritterSkilt?.value
     var valgtFavoritt by remember { mutableStateOf("") }
     var kjoretoy by remember { mutableStateOf("") }
+    val slettemelding = remember { mutableStateOf(false) }
 
     var textFieldSize by remember { mutableStateOf(0) }
 
@@ -53,7 +57,6 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(), modifi
     } else {
         Icons.Filled.KeyboardArrowDown
     }
-
     Column(modifier = Modifier.padding(20.dp)) {
         OutlinedTextField(value = valgtFavoritt,
             onValueChange = { valgtFavoritt = it },
@@ -76,7 +79,6 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(), modifi
                 .width(with(LocalDensity.current) { textFieldSize.toDp() })
                 .fillMaxWidth()
         ) {
-
             for (i in favorittliste!!) {
                 DropdownMenuItem(text = { Text(text = i) }, onClick = {
                     valgtFavoritt = i
@@ -97,7 +99,6 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(), modifi
         ) {
             Row(
                 modifier = modifier,
-
                 ) {
                 Column(
 
@@ -168,9 +169,51 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(), modifi
                     )
                 }
             }
+            Button(
+                onClick = {
+                    slettemelding.value = true
+                },
+                modifier = modifier.align(Alignment.BottomCenter)
+                    .padding(20.dp)
+            ) {
+                Text("Slett favoritt")
+            }
+            if (slettemelding.value) {
+                AlertDialog(
+                    onDismissRequest = {
+                        slettemelding.value = false
+                    },
+                    title = {
+                        Text("Slette favoritt?")
+                    },
+                    text = {
+                        Text("$valgtFavoritt vil for alltid bli slettet fra dine favoritter")
+                    },
+                    confirmButton = {
+                        Button(
+                            onClick = {
+                                slettemelding.value = false
+                                viewModel?.slettFavoritt(valgtFavoritt)
+                                navController.navigate(Screen.Favoritter.ruter)
+                            }
+                        ) {
+                            Text("Slett")
+                        }
+                    },
+                    dismissButton = {
+                        Button(
+                            onClick = {
+                                slettemelding.value = false
+                            }
+                        ) {
+                            Text("Avbryt")
+                        }
+                    }
+                )
+            }
         }
     } else {
-
+        /* TODO */
     }
 }
 
