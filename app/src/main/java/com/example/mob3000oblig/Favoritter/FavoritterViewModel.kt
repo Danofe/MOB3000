@@ -31,7 +31,22 @@ class FavoritterViewModel : ViewModel() {
                 allefavoritter.value = dataliste
             }
             .addOnFailureListener { exception ->
-                Log.w("Feil", "Error getting documents: ", exception)
+                Log.w("Feil", "Fikk ikke tilgang til dokumenter: ", exception)
+            }
+    }
+    fun slettFavoritt(valgtFavoritt: String) {
+        val db = Firebase.firestore
+        db.collection("favoritter")
+            .whereEqualTo("brukerID", brukerID)
+            .whereEqualTo("skilt", valgtFavoritt)
+            .get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    db.collection("favoritter").document(document.id).delete()
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("Feil", "Fikk ikke tilgang til dokumenter: ", exception)
             }
     }
 }

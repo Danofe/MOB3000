@@ -139,6 +139,8 @@ class SokerInfo {
                 var a = hk.toInt()
                 hk = (a * 1.34102209).roundToInt().toString()
               }
+              // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
+              var lagtInn by remember {mutableStateOf(false)}
               if (merke != error) {
                 Row {
                   Column {
@@ -190,8 +192,9 @@ class SokerInfo {
                       sistGodkjent,
                       forsteReg
                     )
+                    lagtInn = true
                   },
-                  enabled = (Auth.innlogget())
+                  enabled = (Auth.innlogget() && !lagtInn)
                 ) {
                   Text("Legg til i favoritter")
                 }

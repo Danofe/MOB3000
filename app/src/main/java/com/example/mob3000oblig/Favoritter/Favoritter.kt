@@ -54,7 +54,7 @@ class Favoritter {
                             modifier = modifier.padding(20.dp)
                             )
                     } else {
-                        FavoritterDropdownMeny()
+                        FavoritterDropdownMeny(viewModel = viewModel(), navController = navController)
                     }
                 }
             }
