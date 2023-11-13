@@ -7,9 +7,12 @@ import com.google.firebase.auth.ktx.auth
 class Firestore {
 
     val db = Firebase.firestore
-    fun leggInnFavoritt(name: String?, merke: String, type: String, farge: String,
-                        girinfo: String, drivstoffinfo: String, sitteplasser: String,
-                        maksHastighet: String, hk: String, sistgodkjent: String, forstereg: String) {
+    fun leggInnFavoritt(name: String?, merke: String, antSeter: String,
+                        farge: String, type: String, toppHastighet: String, drivstoff: String, girtyp: String,
+                        hoyde: String, bredde: String, lengde: String, vekt: String, hybrid: String,
+                        sistgodkjent: String, nesteEU: String, forsteReg: String, antdorer: String,
+                        handelsbetegnelse: String
+    ) {
 
         val brukerID = Firebase.auth.currentUser?.uid.toString()
 
@@ -19,13 +22,21 @@ class Firestore {
             "merke" to merke,
             "type" to type,
             "farge" to farge,
-            "girinfo" to girinfo,
-            "drivstoffinfo" to drivstoffinfo,
-            "sitteplasser" to sitteplasser,
-            "maksHastighet" to maksHastighet,
-            "hestekrefter" to hk,
+            "girinfo" to girtyp,
+            "drivstoffinfo" to drivstoff,
+            "sitteplasser" to antSeter,
+            "maksHastighet" to toppHastighet,
+            //"hestekrefter" to hk,
             "sistgodkjent" to sistgodkjent,
-            "forstereg" to forstereg
+            "forstereg" to forsteReg,
+            "hoyde" to hoyde,
+            "bredde" to bredde,
+            "lengde" to lengde,
+            "vekt" to vekt,
+            "hybrid" to hybrid,
+            "nesteEU" to nesteEU,
+            "antDorer" to antdorer,
+            "serie" to handelsbetegnelse
         )
 
         db.collection("favoritter")

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,6 +34,8 @@ import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
 import com.example.mob3000oblig.Database.Firestore
 import kotlin.math.roundToInt
 import androidx.compose.runtime.LaunchedEffect
+import com.example.mob3000oblig.DataApi.bilInfoVariabler
+
 
 class SokerInfo {
   @OptIn(ExperimentalMaterial3Api::class)
@@ -92,37 +95,12 @@ class SokerInfo {
               verticalArrangement = Arrangement.spacedBy(40.dp),
               horizontalAlignment = Alignment.Start,
             ) {
-
+              val verdi = bilInfoVariabler(bilInfo)
+              var visMerKnapp by remember { mutableStateOf(false) }
+              var visMerKnappText by remember {mutableStateOf("Vis mer")}
               val error = "Ikke oppgitt"
-              var merke by remember { mutableStateOf("") }
-              var type by remember { mutableStateOf("") }
-              var bilInf by remember { mutableStateOf("") }
-              var sistGodkjent by remember { mutableStateOf("") }
-              var forsteReg by remember { mutableStateOf("") }
-              var sitteplasser by remember { mutableStateOf("") }
-              var girinfo by remember { mutableStateOf("") }
-              var farge by remember { mutableStateOf("") }
-              var drivstoffinfo by remember { mutableStateOf("") }
               var maksHastighet by remember { mutableStateOf("") }
               var hk by remember { mutableStateOf("") }
-              merke = bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.
-                      get(0)?.merke ?: error
-              type = bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse
-                ?: error
-              bilInf = bilInfo?.kjoretoydataListe?.get(0)?.kjoretoyId?.kjennemerke ?: error
-              farge = bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.karosseriOgLasteplan?.rFarge?.
-                                getOrNull(0)?.kodeNavn ?: error
-              sitteplasser = bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.persontall?.
-                              sitteplasserTotalt.toString()
-              if (sitteplasser == "0") {
-                sitteplasser = error
-              }
-              sistGodkjent = bilInfo?.kjoretoydataListe?.get(0)?.periodiskKjoretoyKontroll?.sistGodkjent ?: error
-              forsteReg = bilInfo?.kjoretoydataListe?.get(0)?.forstegangsregistrering?.registrertForstegangNorgeDato ?: error
-              drivstoffinfo = bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.
-                              getOrNull(0)?.drivstoff?.getOrNull(0)?.drivstoffKode?.kodeBeskrivelse ?: error
-              girinfo = bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.girkassetype?.kodeBeskrivelse
-                ?: error
 
               // SJEKKER KUN DEN ÈNE MOTOREN, MÅ ENDRES SENERE
               maksHastighet =
@@ -141,56 +119,87 @@ class SokerInfo {
               }
               // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
               var lagtInn by remember {mutableStateOf(false)}
-              if (merke != error) {
+              if (verdi.merke != error) {
                 Row {
-                  Column {
-                    Text(text = "Merke")
-                    Text(text = "Type")
-                    Text(text = "Farge")
-                    Text(text = "Girkassetype")
-                    Text(text = "Drivstoff")
-                    Text(text = "Sitteplasser")
-                    Text(text = "Maks hastighet")
-                    Text(text = "Hestekrefter")
-                    Text(text = "Sist EU-godkjenning")
-                    Text(text = "Registrert i Norge")
+                  LazyColumn {
+                    items(1) {index ->
+                      Text(text = "Merke")
+                      Text(text = "Serie")
+                      Text(text = "Type")
+                      Text(text = "Farge")
+                      Text(text = "Girkassetype")
+                      Text(text = "Drivstoff")
+                      Text(text = "Hybrid")
+                      Text(text = "Maks hastighet")
+                      Text(text = "Forste registrering")
+                      if(visMerKnapp) {
+                        Text(text = "Sitteplasser")
+                        Text(text = "Antall dører:")
+                        Text(text = "Høyde")
+                        Text(text = "Bredde")
+                        Text(text = "Lengde")
+                        Text(text = "Egenvekt")
+                        Text(text = "Sist godkjent:")
+                        Text(text = "Neste EU kontroll:")
+                      }
+                    }
                   }
                   Spacer(modifier = modifier.width(20.dp))
                   Column {
-                    Text(merke)
-                    Text(type)
-                    Text(farge)
-                    Text(girinfo)
-                    Text(drivstoffinfo)
-                    Text(sitteplasser)
-                    if (maksHastighet != error) {
-                      Text("$maksHastighet km/t")
+                    Text(verdi.merke)
+                    Text(verdi.handelsbetegnelse)
+                    Text(verdi.type)
+                    Text(verdi.farge)
+                    Text(verdi.girtyp)
+                    Text(verdi.drivstoff)
+
+                    Text(verdi.hybrid)
+                    if (verdi.toppHastighet!=error) {
+                      Text("${verdi.toppHastighet} km/t")
                     } else {
-                      Text(maksHastighet)
+                      Text(verdi.toppHastighet)
                     }
-                    if (hk != error) {
+                    Text(verdi.forsteReg)
+                    /*if (hk != error) {
                       Text("≈$hk")
                     } else {
                       Text(hk)
+                    } */
+                    if(visMerKnapp) {
+                        Text(verdi.antSeter)
+                        Text(verdi.antdorer)
+                        if(verdi.hoyde!=error) {
+                            Text("${verdi.hoyde} cm")
+                        } else {
+                            Text(verdi.hoyde)
+                        }
+                        if(verdi.bredde!=error) {
+                            Text("${verdi.bredde} cm")
+                        } else {
+                            Text(verdi.bredde)
+                        }
+                        if(verdi.lengde!=error) {
+                            Text("${verdi.lengde} cm")
+                        } else {
+                            Text(verdi.lengde)
+                        }
+                        if(verdi.vekt!=error) {
+                            Text("${verdi.vekt} kg")
+                        } else {
+                            Text(verdi.vekt)
+                        }
+                        Text(verdi.sistgodkjent)
+                        Text(verdi.nesteEU)
                     }
-                    Text(sistGodkjent)
-                    Text(forsteReg)
                   }
                 }
                 Button(
                   onClick = {
                     Firestore.leggInnFavoritt(
-                      name,
-                      merke,
-                      type,
-                      farge,
-                      girinfo,
-                      drivstoffinfo,
-                      sitteplasser,
-                      maksHastighet,
-                      hk,
-                      sistGodkjent,
-                      forsteReg
+                      name, verdi.merke,verdi.antSeter,verdi.farge,verdi.type,verdi.toppHastighet,
+                      verdi.drivstoff,verdi.girtyp,verdi.lengde,verdi.hoyde,verdi.bredde,verdi.vekt,
+                      verdi.hybrid,verdi.sistgodkjent,verdi.nesteEU,verdi.forsteReg,verdi.antdorer,
+                      verdi.handelsbetegnelse
                     )
                     lagtInn = true
                   },
@@ -198,6 +207,14 @@ class SokerInfo {
                 ) {
                   Text("Legg til i favoritter")
                 }
+              Button(
+                onClick = { visMerKnapp = !visMerKnapp
+                            visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer" },
+              )
+                {
+                    Text(visMerKnappText)
+                }
+
               } else {
                 Column(
                   horizontalAlignment = Alignment.CenterHorizontally,
