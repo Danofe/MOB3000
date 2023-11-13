@@ -12,6 +12,7 @@ import com.example.mob3000oblig.Favoritter.Favoritter
 import com.example.mob3000oblig.Login.Login
 import com.example.mob3000oblig.Registrer.Register
 import androidx.lifecycle.ViewModelProvider
+import com.example.mob3000oblig.Settings.settings
 
 @Composable
 fun Nav() {
@@ -20,7 +21,7 @@ fun Nav() {
   val viewModel: APIViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(Application()).create(APIViewModel::class.java)
   NavHost(
     navController = navController,
-    startDestination = Screen.Start.ruter
+    startDestination = Screen.Settings.ruter
   ) {
 
     composable(route = Screen.Login.ruter) {
@@ -37,6 +38,10 @@ fun Nav() {
 
     composable(route = Screen.Sok.ruter) {
       SokReg().Sok(navController = navController)
+    }
+
+    composable(route = Screen.Settings.ruter) {
+       settings().SettingsPage(navController = navController)
     }
 
     composable(route = Screen.Info.ruter + "/{name}",

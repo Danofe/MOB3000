@@ -11,7 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -29,8 +31,6 @@ class AppNavigation {
     fun BottomNav() {
         val navController : NavHostController = rememberNavController()
 
-        Scaffold (
-         bottomBar = {
             NavigationBar {
                 val navBackStackEntry : NavBackStackEntry? by navController.currentBackStackEntryAsState()
                 val currentDestination: NavDestination? = navBackStackEntry?.destination
@@ -63,12 +63,12 @@ class AppNavigation {
 
             }
          }
-        ) {paddingValues: PaddingValues ->
-            NavHost(
+    /*fun navGraph(navController: NavController){
+        NavHost(
                 navController = navController,
                 startDestination = Screen.Start.ruter,
                 modifier = Modifier
-                    .padding(paddingValues)
+                    .padding(16.dp)
             ) {
                 composable(route = Screen.Start.ruter){
                     Start()
@@ -80,7 +80,6 @@ class AppNavigation {
                     Start()
                 }
             }
-        }
+        }*/
 
     }
-}

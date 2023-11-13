@@ -18,8 +18,12 @@ class Auth {
     Firebase.auth.signOut()
   }
 
-  fun hentBrukerId(): String {
-    return currentUser?.uid.toString()
+  fun hentBrukerEmail(): String {
+    return currentUser?.email.toString()
+  }
+
+  fun byttPassord(passord: String) {
+    currentUser?.updatePassword(passord)
   }
 
   suspend fun lagBruker(email: String, passord: String): Boolean {
