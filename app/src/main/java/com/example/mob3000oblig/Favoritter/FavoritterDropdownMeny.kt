@@ -194,7 +194,7 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                             onClick = {
                                 slettemelding.value = false
                                 viewModel?.slettFavoritt(valgtFavoritt)
-                                navController.navigate(Screen.Favoritter.ruter)
+                                valgtFavoritt = ""
                             }
                         ) {
                             Text("Slett")

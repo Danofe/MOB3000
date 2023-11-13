@@ -43,6 +43,7 @@ class FavoritterViewModel : ViewModel() {
             .addOnSuccessListener { result ->
                 for (document in result) {
                     db.collection("favoritter").document(document.id).delete()
+                    favoritterSkilt.value = favoritterSkilt.value.filter { it != valgtFavoritt }
                 }
             }
             .addOnFailureListener { exception ->
