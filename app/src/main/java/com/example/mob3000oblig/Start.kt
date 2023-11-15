@@ -50,9 +50,6 @@ import java.util.regex.Pattern
 
 class Start {
 
-  enum class ScreenRotation(val degrees: Float) {
-    VENSTRE_90(-90f), HOYRE_90(90f), NORMAL(0f)
-  }
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
@@ -203,7 +200,6 @@ class Start {
         }
 
       }
-
 
 
 

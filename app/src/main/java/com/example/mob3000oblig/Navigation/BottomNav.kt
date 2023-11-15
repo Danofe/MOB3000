@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.example.mob3000oblig.BottomNav
+package com.example.mob3000oblig.Navigation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
@@ -12,28 +12,29 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.mob3000oblig.Screen
 
-data class BottonNavigationItem(
+data class BottomNavigationItem(
     val label: String,
     val icon: ImageVector,
-    val route: String
+    val route: String,
 
 )
 
-  val listOfBottonNavigationItem : List<BottonNavigationItem> = listOf(
-      BottonNavigationItem(
+  val listOfBottonNavigationItem : List<BottomNavigationItem> = listOf(
+      BottomNavigationItem(
           label = "Hjem",
           icon = Icons.Filled.Home,
-          route = Screen.Start.ruter
+          route = Screen.Start.ruter,
+
       ),
-      BottonNavigationItem(
+      BottomNavigationItem(
           label = "Søk",
           icon = Icons.Filled.Search,
           route = Screen.Start.ruter
       ),
-      BottonNavigationItem(
+      BottomNavigationItem(
           label = "Profil",
           icon = Icons.Filled.Face,
-          route = Screen.Start.ruter
+          route = Screen.Settings.ruter
       ),
 
 

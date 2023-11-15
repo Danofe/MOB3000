@@ -8,7 +8,7 @@ sealed class Screen(val ruter: String) {
   object Info : Screen("Info")
   object Favoritter : Screen("Favoritter")
   object  Sammenlign : Screen ("Sammenlign")
-    object  Settings : Screen ("Settings")
+  object  Settings : Screen ("Settings")
   object  Kamera : Screen ("Kamera")
 
   fun withArgs(vararg args: String): String {
