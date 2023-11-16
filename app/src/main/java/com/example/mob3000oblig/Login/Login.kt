@@ -1,5 +1,6 @@
 package com.example.mob3000oblig.Login
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,35 +43,34 @@ class Login {
     val loginUiState = loginViewModel?.uiState
     val context = LocalContext.current
     val error = loginUiState?.error != null
-
-        Scaffold(topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Image(
-                        painter = painterResource(id = R.drawable.skiltskern),
-                        contentDescription = "skiltskern"
-                    )
-                },
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = colorResource(R.color.purple_700),
-                    titleContentColor = colorResource(R.color.black),
-                ),
-            )
-        }
-        ) { it ->
-            Column(modifier = modifier.padding(it)) {
-                Box(
-                    modifier = modifier.fillMaxSize()
-                ) {
-                    Column(
-                        modifier = modifier
-                            .padding(50.dp),
-                        verticalArrangement = Arrangement.spacedBy(50.dp),
-                    ) {
-                        Text(text = "Logg inn eller registrer ny bruker for å benytte denne funksjonen.")
-                        if (error) {
-                            Text(text = "Feil brukernavn eller passord")
-                        }
+    Scaffold(topBar = {
+      CenterAlignedTopAppBar(
+        title = {
+          Image(
+            painter = painterResource(id = R.drawable.skiltskern),
+            contentDescription = "skiltskern"
+          )
+        },
+        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+          containerColor = colorResource(R.color.purple_700),
+          titleContentColor = colorResource(R.color.black),
+        ),
+      )
+    }
+    ) { it ->
+      Column(modifier = modifier.padding(it)) {
+        Box(
+          modifier = modifier.fillMaxSize()
+        ) {
+          Column(
+            modifier = modifier
+              .padding(50.dp),
+            verticalArrangement = Arrangement.spacedBy(50.dp),
+          ) {
+            Text(text = "Logg inn eller registrer ny bruker for å benytte denne funksjonen.")
+            if (error) {
+              Text(text = "Feil brukernavn eller passord")
+            }
 
             TextField(
               value = loginUiState?.email ?: "",
