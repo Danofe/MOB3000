@@ -1,5 +1,6 @@
 package com.example.mob3000oblig.Favoritter
 
+import android.util.Log
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.clickable
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
@@ -43,7 +45,8 @@ import com.example.mob3000oblig.Screen
 @Composable
 fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                            modifier: Modifier = Modifier,
-                           navController: NavController) {
+                           navController: NavController)
+{
     var utvidet by remember { mutableStateOf(false) }
     val favorittliste = viewModel?.favoritterSkilt?.value
     var valgtFavoritt by remember { mutableStateOf("") }
@@ -100,25 +103,36 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
             Row(
                 modifier = modifier,
                 ) {
-                Column(
-
-                ) {
-                    Text(text = "Merke:")
-                    Text(text = "Type:")
-                    Text(text = "Farge:")
-                    Text(text = "Girkassetype:")
-                    Text(text = "Drivstoff:")
-                    Text(text = "Sitteplasser:")
-                    Text(text = "Maks hastighet:")
-                    Text(text = "Hestekrefter:")
-                    Text(text = "Sist EU-godkjenning:")
-                    Text(text = "Registrert i Norge:")
+                Column {
+                    Text(text = "Merke")
+                    Text(text = "Serie")
+                    Text(text = "Type")
+                    Text(text = "Farge")
+                    Text(text = "Girkassetype")
+                    Text(text = "Drivstoff")
+                    Text(text = "Hybrid")
+                    Text(text = "Hestekrefter")
+                    Text(text = "Maks hastighet")
+                    Text(text = "Forste registrering")
+                    Text(text = "Sitteplasser")
+                    Text(text = "Antall dører:")
+                    Text(text = "Høyde")
+                    Text(text = "Bredde")
+                    Text(text = "Lengde")
+                    Text(text = "Egenvekt")
+                    Text(text = "Sist godkjent:")
+                    Text(text = "Neste EU kontroll:")
                 }
 
                 Spacer(modifier = modifier.width(30.dp))
                 Column {
                     Text(
                         kjoretoy.substringAfter("merke=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("serie=")
                             .substringBefore(","),
                         fontWeight = FontWeight.Bold
                     )
@@ -143,27 +157,62 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        kjoretoy.substringAfter("sitteplasser=")
+                        kjoretoy.substringAfter("hybrid=")
                             .substringBefore(","),
                         fontWeight = FontWeight.Bold
                     )
-                    if (maksHastighet != "Ikke oppgitt") {
-                        Text("$maksHastighet km/t", fontWeight = FontWeight.Bold)
-                    } else {
-                        Text(maksHastighet, fontWeight = FontWeight.Bold)
-                    }
                     if (hestekrefter != "Ikke oppgitt") {
                         Text("≈$hestekrefter hk", fontWeight = FontWeight.Bold)
                     } else {
                         Text(hestekrefter, fontWeight = FontWeight.Bold)
                     }
+                    if (maksHastighet != "Ikke oppgitt") {
+                        Text("$maksHastighet km/t", fontWeight = FontWeight.Bold)
+                    } else {
+                        Text(maksHastighet, fontWeight = FontWeight.Bold)
+                    }
+                    Text(
+                        kjoretoy.substringAfter("forstereg=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("sitteplasser=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("antDorer=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("hoyde=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("bredde=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("lengde=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
+                    Text(
+                        kjoretoy.substringAfter("vekt=")
+                            .substringBefore(","),
+                        fontWeight = FontWeight.Bold
+                    )
                     Text(
                         kjoretoy.substringAfter("sistgodkjent=")
                             .substringBefore(","),
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        kjoretoy.substringAfter("forstereg=")
+                        kjoretoy.substringAfter("nesteEU=")
                             .substringBefore(","),
                         fontWeight = FontWeight.Bold
                     )
@@ -172,9 +221,11 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
             Button(
                 onClick = {
                     slettemelding.value = true
+                    Log.d("kjoreinfo", "valgtFavoritt: $kjoretoy")
                 },
                 modifier = modifier.align(Alignment.BottomCenter)
                     .padding(20.dp)
+                    .offset(y = (-80).dp)
             ) {
                 Text("Slett favoritt")
             }
@@ -187,7 +238,7 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                         Text("Slette favoritt?")
                     },
                     text = {
-                        Text("$valgtFavoritt vil for alltid bli slettet fra dine favoritter")
+                        Text("$valgtFavoritt vil for alltid bli slettet fra dine favoritter.")
                     },
                     confirmButton = {
                         Button(

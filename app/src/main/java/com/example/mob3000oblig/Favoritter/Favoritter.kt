@@ -102,7 +102,6 @@ class Favoritter {
                             color = colorResource(id = R.color.TEXTLIGHT)
                                 )
                             }
-
                         }
                     }
                     } else {
