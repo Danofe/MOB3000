@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
@@ -72,25 +73,17 @@ class SokerInfo {
       }
     }
 
-    Scaffold(topBar = {
-      CenterAlignedTopAppBar(
-        title = {
-          Image(
-            painter = painterResource(id = R.drawable.skiltskern),
-            contentDescription = "skiltskern"
-          )
-        },
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-          containerColor = colorResource(R.color.purple_700),
-          titleContentColor = colorResource(R.color.black),
-        ),
-      )
-    }
-    ) { it ->
-      Column(modifier = modifier.padding(it)) {
+
+      Column(
+        modifier = modifier
+          .padding(8.dp)
+          .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
+        verticalArrangement = Arrangement.Center ) {
         Box(
-          modifier = modifier.fillMaxSize()
+          modifier = modifier.fillMaxSize() ,
         ) {
+
           Text(
             text = "${name?.uppercase()}",
             fontSize = 40.sp,
@@ -236,6 +229,12 @@ class SokerInfo {
                 verticalArrangement = Arrangement.Center,
                 modifier = modifier.fillMaxSize()
               ) {
+                Image(
+                  painter = painterResource(id = R.drawable.skiltskern),
+                  contentDescription = "skiltskern",
+                  modifier = Modifier.size(200.dp)
+                )
+
                 Text(
                   text = "Fant ingen kjøretøy med dette skiltnummeret.",
                   fontSize = 20.sp,
@@ -248,4 +247,3 @@ class SokerInfo {
       }
     }
   }
-}

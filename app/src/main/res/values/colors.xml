@@ -12,4 +12,5 @@
     <color name="PRIMARY_LIGHTOGDARK">#fff102</color>
     <color name="LIGHT_BACKGROUND">#e3e3e3</color>
     <color name="DARK_BACKGROUND">#484452</color>
+    <color name="LIGHT_BACKGROUNDD">#F4F3F2</color>
 </resources>
