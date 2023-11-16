@@ -1,6 +1,7 @@
 package com.example.mob3000oblig.Login
 
 import android.content.Context
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -63,6 +64,7 @@ class LoginViewModel(
               } else {
                   uiState = uiState.copy(loggetInn = true)
                   navController.navigate(Screen.Start.ruter)
+                  Toast.makeText(context,"Logget inn", Toast.LENGTH_SHORT).show()
               }
 
           } catch (e: Exception) {
@@ -87,5 +89,3 @@ class LoginViewModel(
       var loader: Boolean = false,
       var loggetInn: Boolean = false,
       )
-
-

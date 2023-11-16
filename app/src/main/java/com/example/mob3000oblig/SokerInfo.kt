@@ -1,6 +1,7 @@
 package com.example.mob3000oblig
 
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -25,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -52,6 +54,7 @@ class SokerInfo {
     url = "kjoretoydata?kjennemerke=$name"
     var bilInfo by remember { mutableStateOf<KjoretoyDataListe?>(null) }
     //val scope = rememberCoroutineScope()
+    val context = LocalContext.current
     LaunchedEffect(url) {
       try {
         val info = viewModel.hentBilInfo(url)
@@ -224,6 +227,11 @@ class SokerInfo {
                     verdi.handelsbetegnelse
                   )
                   lagtInn = true
+                  Toast.makeText(
+                    context,
+                    "$name er lagt til som favoritt",
+                    Toast.LENGTH_SHORT
+                  ).show()
                 },
                 enabled = (Auth.innlogget() && !lagtInn)
               ) {
