@@ -18,6 +18,10 @@ class Auth {
     Firebase.auth.signOut()
   }
 
+  fun slettBruker() {
+    currentUser?.delete()
+  }
+
   fun hentBrukerEmail(): String {
     return currentUser?.email.toString()
   }
