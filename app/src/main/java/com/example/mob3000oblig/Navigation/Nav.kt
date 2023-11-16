@@ -10,21 +10,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
-import com.example.mob3000oblig.DataApi.APIViewModel
-import com.example.mob3000oblig.Favoritter.Favoritter
-import com.example.mob3000oblig.Login.Login
-import com.example.mob3000oblig.Registrer.Register
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.example.mob3000oblig.DataApi.APIViewModel
+import com.example.mob3000oblig.Favoritter.Favoritter
+import com.example.mob3000oblig.Kamera.Kamera
+import com.example.mob3000oblig.Login.Login
+import com.example.mob3000oblig.Registrer.Register
 import com.example.mob3000oblig.Screen
 import com.example.mob3000oblig.Settings.settings
 import com.example.mob3000oblig.SokReg
@@ -42,7 +43,6 @@ fun Nav() {
 
   Scaffold(
     bottomBar = {
-
       NavigationBar {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
         val currentDestination: NavDestination? = navBackStackEntry?.destination
@@ -106,14 +106,21 @@ fun Nav() {
         settings().SettingsPage(navController = navController)
       }
 
+      composable(route = Screen.Kamera.ruter) {
+        Kamera().HovedSkjerm(navController = navController)
+      }
+
       composable(route = Screen.Info.ruter + "/{name}",
-        arguments = listOf(
-          navArgument("name") {
-            type = NavType.StringType
-          }
-        )
+                 arguments = listOf(
+                   navArgument("name") {
+                     type = NavType.StringType
+                   }
+                 )
       ) { search ->
-        SokerInfo().SkiltInfo(viewModel = viewModel, name = search.arguments?.getString("name"))
+        SokerInfo().SkiltInfo(
+          viewModel = viewModel,
+          name = search.arguments?.getString("name")
+        )
       }
 
       composable(route = Screen.Favoritter.ruter) {
