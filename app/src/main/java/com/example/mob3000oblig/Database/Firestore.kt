@@ -7,9 +7,9 @@ import com.google.firebase.auth.ktx.auth
 class Firestore {
 
     val db = Firebase.firestore
-    fun leggInnFavoritt(name: String?, merke: String, antSeter: String,
+    fun leggInnFavoritt(name: String?, merke: String, hk: String, antSeter: String,
                         farge: String, type: String, toppHastighet: String, drivstoff: String, girtyp: String,
-                        hoyde: String, bredde: String, lengde: String, vekt: String, hybrid: String,
+                        lengde: String, hoyde: String, bredde: String, vekt: String, hybrid: String,
                         sistgodkjent: String, nesteEU: String, forsteReg: String, antdorer: String,
                         handelsbetegnelse: String
     ) {
@@ -26,7 +26,7 @@ class Firestore {
             "drivstoffinfo" to drivstoff,
             "sitteplasser" to antSeter,
             "maksHastighet" to toppHastighet,
-            //"hestekrefter" to hk,
+            "hestekrefter" to hk,
             "sistgodkjent" to sistgodkjent,
             "forstereg" to forsteReg,
             "hoyde" to hoyde,

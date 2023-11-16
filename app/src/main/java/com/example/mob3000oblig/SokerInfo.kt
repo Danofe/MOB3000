@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mob3000oblig.DataApi.APIViewModel
@@ -91,7 +92,7 @@ class SokerInfo {
           modifier = modifier.fillMaxSize()
         ) {
           Text(
-            text = "$name",
+            text = "${name?.uppercase()}",
             fontSize = 40.sp,
             modifier = modifier
               .align(Alignment.TopCenter)
@@ -108,26 +109,7 @@ class SokerInfo {
             var visMerKnapp by remember { mutableStateOf(false) }
             var visMerKnappText by remember { mutableStateOf("Vis mer") }
             val error = "Ikke oppgitt"
-            var maksHastighet by remember { mutableStateOf("") }
-            var hk by remember { mutableStateOf("") }
 
-            // SJEKKER KUN DEN ÈNE MOTOREN, MÅ ENDRES SENERE
-            maksHastighet =
-              bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.maksimumHastighet?.getOrNull(0)
-                .toString()
-            if (maksHastighet == "null") {
-              maksHastighet = error
-            }
-            hk =
-              bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.getOrNull(0)?.drivstoff?.getOrNull(0)?.maksNettoEffekt?.toInt()
-                .toString()
-            if (hk == "null") {
-              hk = error
-              // Henter kun ut kW, så må konvertere til hk
-            } else {
-              var a = hk.toInt()
-              hk = (a * 1.34102209).roundToInt().toString()
-            }
             // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
             var lagtInn by remember { mutableStateOf(false) }
             if (verdi.merke != error) {
@@ -141,6 +123,7 @@ class SokerInfo {
                     Text(text = "Girkassetype")
                     Text(text = "Drivstoff")
                     Text(text = "Hybrid")
+                    Text(text = "Hestekrefter")
                     Text(text = "Maks hastighet")
                     Text(text = "Forste registrering")
                     if (visMerKnapp) {
@@ -163,19 +146,18 @@ class SokerInfo {
                   Text(verdi.farge)
                   Text(verdi.girtyp)
                   Text(verdi.drivstoff)
-
                   Text(verdi.hybrid)
+                  if (verdi.hk != error) {
+                    Text("${verdi.hk} hk")
+                  } else {
+                    Text(verdi.hk)
+                  }
                   if (verdi.toppHastighet != error) {
                     Text("${verdi.toppHastighet} km/t")
                   } else {
                     Text(verdi.toppHastighet)
                   }
                   Text(verdi.forsteReg)
-                  /*if (hk != error) {
-                    Text("≈$hk")
-                  } else {
-                    Text(hk)
-                  } */
                   if (visMerKnapp) {
                     Text(verdi.antSeter)
                     Text(verdi.antdorer)
@@ -209,6 +191,7 @@ class SokerInfo {
                   Firestore.leggInnFavoritt(
                     name,
                     verdi.merke,
+                    verdi.hk,
                     verdi.antSeter,
                     verdi.farge,
                     verdi.type,

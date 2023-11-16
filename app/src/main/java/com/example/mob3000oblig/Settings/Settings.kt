@@ -78,8 +78,6 @@ class settings {
       }
     }
   }
-
-
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun ProfilCard() {
@@ -119,7 +117,6 @@ class settings {
               .fillMaxWidth()
               .padding(8.dp)
           )
-
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
                  onClick = { Auth().byttPassord(passord)
                    Toast.makeText(
@@ -145,8 +142,6 @@ class settings {
       }
     }
   }
-
-
   @Composable
   fun Settings() {
     Card(
@@ -210,14 +205,16 @@ class settings {
             Modifier.padding(2.dp)
           ) {
             Button(onClick = {/*TODO: darkmode */ }) {
-              Text(text = "DarkMode")
+              Text(text = "Darkmode",
+                fontSize = 12.sp)
             }
           }
           Box(
             Modifier.padding(2.dp)
           ) {
             Button(onClick = { /*TODO: lightmode */ }) {
-              Text(text = "LightMode")
+              Text(text = "Lightmode",
+                fontSize = 12.sp)
             }
           }
         }

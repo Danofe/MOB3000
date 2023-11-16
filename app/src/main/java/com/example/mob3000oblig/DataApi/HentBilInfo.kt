@@ -2,6 +2,7 @@ package com.example.mob3000oblig.DataApi
 
 import android.util.Log
 import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
+import kotlin.math.roundToInt
 
 data class HentBilInfo(
     val merke: String,
@@ -16,6 +17,7 @@ data class HentBilInfo(
     val bredde: String,
     val vekt: String,
     val hybrid: String,
+    val hk: String,
     val sistgodkjent: String,
     val nesteEU: String,
     val forsteReg: String,
@@ -83,6 +85,16 @@ fun bilInfoVariabler (bilInfo: KjoretoyDataListe?): HentBilInfo {
     if(handelsbetegnelse == "-") {
         handelsbetegnelse = error
     }
+   var hk =
+        bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.motorOgDrivverk?.motor?.getOrNull(0)?.drivstoff?.getOrNull(0)?.maksNettoEffekt?.toInt()
+            .toString()
+    if (hk == "null") {
+        hk = error
+        // Henter kun ut kW, så må konvertere til hk
+    } else {
+        var a = hk.toInt()
+        hk = (a * 1.34102209).roundToInt().toString()
+    }
 
-    return HentBilInfo(merke, antSeter, farge, type, toppHastighet, drivstoff, girtyp, lengde, hoyde, bredde, vekt, hybrid, sistgodkjent, nesteEU, forsteReg, antdorer, handelsbetegnelse)
+    return HentBilInfo(merke, antSeter, farge, type, toppHastighet, drivstoff, girtyp, lengde, hoyde, bredde, vekt, hybrid, hk, sistgodkjent, nesteEU, forsteReg, antdorer, handelsbetegnelse)
 }
