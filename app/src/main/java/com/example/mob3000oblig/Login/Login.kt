@@ -2,6 +2,7 @@ package com.example.mob3000oblig.Login
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,6 +59,7 @@ class Login {
         Box(
           modifier = modifier.fillMaxSize()
           .verticalScroll(rememberScrollState())
+            .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
         ) {
           Column(
             modifier = modifier

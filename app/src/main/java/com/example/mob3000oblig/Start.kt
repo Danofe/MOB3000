@@ -51,7 +51,7 @@ class Start {
         modifier = modifier
           .fillMaxSize()
           .verticalScroll(rememberScrollState())
-          .background(colorResource(id = R.color.LIGHT_BACKGROUND))
+          .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
       ) {
         //Hoved-kolonnen
         Column(

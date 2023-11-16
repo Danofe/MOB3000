@@ -27,10 +27,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth
+import com.example.mob3000oblig.R
 
 
 class settings {
@@ -48,8 +50,8 @@ class settings {
           .clickable { utvidet = !utvidet }
           .fillMaxWidth()
           .padding(16.dp)
-
           .align(Alignment.CenterHorizontally)
+
 
       ) {
         Box(
@@ -307,6 +309,7 @@ class settings {
         .background(color = androidx.compose.ui.graphics.Color.White)
         .padding(16.dp)
         .verticalScroll(rememberScrollState())
+
     ) {
       Profil()
       Settings()

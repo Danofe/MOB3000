@@ -28,7 +28,6 @@ import com.example.mob3000oblig.Login.Login
 import com.example.mob3000oblig.Registrer.Register
 import com.example.mob3000oblig.Screen
 import com.example.mob3000oblig.Settings.settings
-import com.example.mob3000oblig.SokReg
 import com.example.mob3000oblig.SokerInfo
 import com.example.mob3000oblig.Start
 
@@ -97,9 +96,6 @@ fun Nav() {
         Start().First(navController = navController)
       }
 
-      composable(route = Screen.Sok.ruter) {
-        SokReg().Sok(navController = navController)
-      }
 
       composable(route = Screen.Settings.ruter) {
         settings().SettingsPage(navController = navController)

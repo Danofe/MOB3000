@@ -1,6 +1,7 @@
 package com.example.mob3000oblig.Favoritter
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -52,7 +53,8 @@ class Favoritter {
 
         ) {
             Box(
-                modifier = modifier.fillMaxSize(),
+                modifier = modifier.fillMaxSize()
+                .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
 
             ) {
                 if (Auth().currentUser == null) {
