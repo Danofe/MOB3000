@@ -43,11 +43,7 @@ class Start {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
-    val containerColor = Color(
-      0xFF,
-      0xF1,
-      0x02
-    )
+    val containerColor = colorResource(id = R.color.PRIMARY_LIGHTOGDARK)
     val config = LocalConfiguration.current
 
     Column(modifier = modifier.fillMaxSize()) {

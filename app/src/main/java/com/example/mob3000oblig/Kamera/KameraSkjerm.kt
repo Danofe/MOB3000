@@ -53,7 +53,7 @@ private fun KameraInnhold(navController: NavController) {
   val context = LocalContext.current
   val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
   val cameraController: LifecycleCameraController = remember { LifecycleCameraController(context) }
-  var detectedText: String by remember { mutableStateOf("Ingen bilskilt funnet...") }
+  var detectedText: String by remember { mutableStateOf("Finner ingen bilskilt") }
 
   fun onTextUpdated(updatedText: String) {
     detectedText = updatedText
