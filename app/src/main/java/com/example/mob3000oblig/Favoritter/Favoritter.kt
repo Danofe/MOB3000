@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -38,31 +40,29 @@ import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Screen
 
 class Favoritter {
-    val containerColor = Color(0xFF, 0xF1, 0x02)
+
     @Composable
     fun favoritterSkjerm(
         modifier: Modifier = Modifier,
         navController: NavController
     ) {
 
-        Column(
-            modifier = modifier
-                .verticalScroll(rememberScrollState())
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
+        Column(modifier = modifier
 
         ) {
             Box(
-                modifier = modifier.fillMaxSize()
-                .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
-
+                modifier = Modifier.fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
             ) {
                 if (Auth().currentUser == null) {
                     Column(
                         modifier = modifier
                             .padding(8.dp)
                             .fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
+
+
+                        horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center //
                     ) {
                         //Logo
@@ -72,32 +72,31 @@ class Favoritter {
                             modifier = Modifier.size(200.dp)
                         )
                         Text(
-                            text = "Du må logge inn for å se dine favoritter",
+                            text = stringResource(R.string.login_melding_favoritter),
                             fontSize = 20.sp,
                             textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                             modifier = modifier.padding(20.dp)
                         )
                         Row {
                         Button(
-                            colors = ButtonDefaults.buttonColors(containerColor),
+                            colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
                             onClick = { navController.navigate(Screen.Register.ruter) }) {
 
                         Text(
-                             text = "Registrer",
+                             text = stringResource(R.string.registrer),
                              fontSize = 20.sp,
                              color = colorResource(id = R.color.TEXTLIGHT)
                             )
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Button(
-                            colors = ButtonDefaults.buttonColors(containerColor),
+                            colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
                             onClick = { navController.navigate(Screen.Login.ruter) }
 
                         ) {
 
-
                         Text(
-                            text = "Logg inn",
+                            text = stringResource(R.string.logg_inn),
                             fontSize = 20.sp,
                             color = colorResource(id = R.color.TEXTLIGHT)
                                 )

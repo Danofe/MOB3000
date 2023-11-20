@@ -56,7 +56,7 @@ class Start {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
-    val containerColor = colorResource(id = R.color.PRIMARY_LIGHTOGDARK)
+    val containerColor = colorResource(R.color.PRIMARY_LIGHTOGDARK)
     val config = LocalConfiguration.current
 
     Column(modifier = modifier.fillMaxSize()) {
@@ -116,7 +116,7 @@ class Start {
               Text("Skriv inn gyldig skiltnummer!")
             }
             Button(
-              colors = ButtonDefaults.buttonColors(containerColor),
+              colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
               onClick = {
                 navController.navigate(Screen.Info.withArgs(licenseNumberQuery))
               },
@@ -134,7 +134,7 @@ class Start {
           //Sammenlign-knapp
           Button(
             onClick = { navController.navigate(Screen.Sammenlign.ruter) },
-            colors = ButtonDefaults.buttonColors(containerColor),
+            colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
           ) {
             Icon(
               imageVector = Icons.Filled.List,
@@ -158,9 +158,7 @@ class Start {
             //Kamera-knapp
             Button(
               onClick = { navController.navigate(Screen.Kamera.ruter) },
-              colors = ButtonDefaults.buttonColors(
-                containerColor
-              ),
+              colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
             ) {
               Icon(
                 imageVector = Icons.Filled.Search,
@@ -179,9 +177,7 @@ class Start {
             //Favoritter-knapp
             Button(
               onClick = { navController.navigate(Screen.Favoritter.ruter) },
-              colors = ButtonDefaults.buttonColors(
-                containerColor
-              ),
+              colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK))
             ) {
               Icon(
                 imageVector = Icons.Filled.Star,

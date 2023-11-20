@@ -41,6 +41,7 @@ fun Nav() {
     .create(APIViewModel::class.java)
 
   Scaffold(
+
     bottomBar = {
       NavigationBar {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()

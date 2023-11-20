@@ -1,5 +1,6 @@
 package com.example.mob3000oblig.Login
 
+import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -43,6 +44,7 @@ import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Screen
 
 class Login {
+  @SuppressLint("SuspiciousIndentation")
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun loginSkjerm(
@@ -55,7 +57,7 @@ class Login {
     val error = loginUiState?.error != null
     val containerColor = colorResource(id = R.color.PRIMARY_LIGHTOGDARK)
 
-      Column(modifier = modifier.padding()) {
+      Column(modifier = modifier) {
         Box(
           modifier = modifier.fillMaxSize()
           .verticalScroll(rememberScrollState())
