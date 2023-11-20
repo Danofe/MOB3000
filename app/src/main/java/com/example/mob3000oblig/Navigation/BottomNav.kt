@@ -29,7 +29,7 @@ data class BottomNavigationItem(
       BottomNavigationItem(
           label = "Søk",
           icon = Icons.Filled.Search,
-          route = Screen.Start.ruter
+          route = Screen.Kamera.ruter
       ),
       BottomNavigationItem(
           label = "Profil",

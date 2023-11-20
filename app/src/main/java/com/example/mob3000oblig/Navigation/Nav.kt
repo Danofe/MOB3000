@@ -96,7 +96,6 @@ fun Nav() {
         Start().First(navController = navController)
       }
 
-
       composable(route = Screen.Settings.ruter) {
         settings().SettingsPage(navController = navController)
       }

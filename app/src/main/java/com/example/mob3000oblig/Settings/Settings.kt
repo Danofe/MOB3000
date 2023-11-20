@@ -4,12 +4,17 @@ import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -17,6 +22,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,17 +33,45 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth
-import com.example.mob3000oblig.R
+import com.example.mob3000oblig.Screen
 
 
 class settings {
   @Composable
-  fun Profil() {
+  fun Profil(navController: NavController) {
+    if (!Auth().innlogget()) {
+        Card(modifier = Modifier.padding(32.dp)) {
+          Row(
+            Modifier
+              .fillMaxWidth(),
+              horizontalArrangement = Arrangement.Center
+            ){
+            Box(
+              Modifier
+                .padding(8.dp)
+
+            ) {
+              Button(onClick = { navController.navigate(Screen.Login.ruter) }) {
+                Text(text = "Login", fontSize = 12.sp)
+              }
+            }
+            Spacer(modifier = Modifier.padding(8.dp))
+            Box(
+              Modifier
+                .padding(8.dp)
+
+            ) {
+              Button(onClick = { navController.navigate(Screen.Register.ruter) }) {
+                Text(text = "Registrer", fontSize = 12.sp)
+              }
+            }
+          }
+        }
+    } else {
     Card(
       modifier = Modifier.padding(32.dp)
     ) {
@@ -59,7 +93,7 @@ class settings {
 
         ) {
           Text(
-            text = "Profile",
+            text = "Profil",
             fontSize = 20.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
           )
@@ -82,8 +116,7 @@ class settings {
       }
     }
   }
-
-
+    }
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun ProfilCard() {
@@ -123,7 +156,6 @@ class settings {
               .fillMaxWidth()
               .padding(8.dp)
           )
-
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
                  onClick = { Auth().byttPassord(passord)
                    Toast.makeText(
@@ -162,8 +194,6 @@ class settings {
       }
     }
   }
-
-
   @Composable
   fun Settings() {
     Card(
@@ -188,7 +218,7 @@ class settings {
 
         ) {
           Text(
-            text = "Settings",
+            text = "Instillinger",
             fontSize = 20.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
           )
@@ -227,14 +257,16 @@ class settings {
             Modifier.padding(2.dp)
           ) {
             Button(onClick = {/*TODO: darkmode */ }) {
-              Text(text = "DarkMode")
+              Text(text = "Darkmode",
+                fontSize = 12.sp)
             }
           }
           Box(
             Modifier.padding(2.dp)
           ) {
             Button(onClick = { /*TODO: lightmode */ }) {
-              Text(text = "LightMode")
+              Text(text = "Lightmode",
+                fontSize = 12.sp)
             }
           }
         }
@@ -309,9 +341,8 @@ class settings {
         .background(color = androidx.compose.ui.graphics.Color.White)
         .padding(16.dp)
         .verticalScroll(rememberScrollState())
-
     ) {
-      Profil()
+      Profil(navController)
       Settings()
       Terms()
     }
