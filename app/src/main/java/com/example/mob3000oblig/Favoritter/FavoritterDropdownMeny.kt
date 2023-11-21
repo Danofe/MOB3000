@@ -25,6 +25,7 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -57,8 +58,7 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
     var kjoretoy by remember { mutableStateOf("") }
     val slettemelding = remember { mutableStateOf(false) }
 
-    var textFieldSize by remember { mutableStateOf(0) }
-
+  var textFieldSize by remember { mutableStateOf(0) }
     val ikon = if (utvidet) {
         Icons.Filled.KeyboardArrowUp
     } else {
@@ -144,100 +144,139 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                     Text(text = "Neste EU kontroll:")
                 }
 
-                Spacer(modifier = modifier.width(30.dp))
-                Column {
-                    Text(
-                        kjoretoy.substringAfter("merke=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("serie=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("type=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("farge=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("girinfo=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("drivstoffinfo=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("hybrid=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    if (hestekrefter != "Ikke oppgitt") {
-                        Text("≈$hestekrefter hk", fontWeight = FontWeight.Bold)
-                    } else {
-                        Text(hestekrefter, fontWeight = FontWeight.Bold)
-                    }
-                    if (maksHastighet != "Ikke oppgitt") {
-                        Text("$maksHastighet km/t", fontWeight = FontWeight.Bold)
-                    } else {
-                        Text(maksHastighet, fontWeight = FontWeight.Bold)
-                    }
-                    Text(
-                        kjoretoy.substringAfter("forstereg=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("sitteplasser=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("antDorer=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("hoyde=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("bredde=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("lengde=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("vekt=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("sistgodkjent=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                    Text(
-                        kjoretoy.substringAfter("nesteEU=")
-                            .substringBefore(","),
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
+        Spacer(modifier = modifier.width(30.dp))
+        Column {
+          Text(
+            kjoretoy.substringAfter("merke=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("serie=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("type=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("farge=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("girinfo=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("drivstoffinfo=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("hybrid=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          if (hestekrefter != "Ikke oppgitt") {
+            Text(
+              "≈$hestekrefter hk",
+              fontWeight = FontWeight.Bold
+            )
+          } else {
+            Text(
+              hestekrefter,
+              fontWeight = FontWeight.Bold
+            )
+          }
+          if (maksHastighet != "Ikke oppgitt") {
+            Text(
+              "$maksHastighet km/t",
+              fontWeight = FontWeight.Bold
+            )
+          } else {
+            Text(
+              maksHastighet,
+              fontWeight = FontWeight.Bold
+            )
+          }
+          Text(
+            kjoretoy.substringAfter("forstereg=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("sitteplasser=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("antDorer=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("hoyde=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("bredde=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("lengde=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("vekt=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("sistgodkjent=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+          Text(
+            kjoretoy.substringAfter("nesteEU=")
+              .substringBefore(","),
+            fontWeight = FontWeight.Bold
+          )
+        }
+      }
+      Button(
+        onClick = {
+          slettemelding.value = true
+          Log.d(
+            "kjoreinfo",
+            "valgtFavoritt: $kjoretoy"
+          )
+        },
+        modifier = modifier
+            .align(Alignment.BottomCenter)
+            .padding(20.dp)
+            .offset(y = (-80).dp)
+      ) {
+        Text(text = "Slett favoritt", color = MaterialTheme.colorScheme.onSurface)
+      }
+      if (slettemelding.value) {
+        AlertDialog(
+          onDismissRequest = {
+            slettemelding.value = false
+          },
+          title = {
+            Text("Slette favoritt?", color = MaterialTheme.colorScheme.onBackground)
+          },
+          text = {
+            Text("$valgtFavoritt vil for alltid bli slettet fra dine favoritter.", color = MaterialTheme.colorScheme.onBackground)
+          },
+          confirmButton = {
             Button(
                 colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
                 onClick = {
@@ -249,38 +288,14 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                 Text("Slett favoritt",
                     color = colorResource(R.color.TEXTLIGHT))
             }
-            if (slettemelding.value) {
-                AlertDialog(
-                    onDismissRequest = {
-                        slettemelding.value = false
-                    },
-                    title = {
-                        Text("Slette favoritt?")
-                    },
-                    text = {
-                        Text("$valgtFavoritt vil for alltid bli slettet fra dine favoritter.")
-                    },
-                    confirmButton = {
-                        Button(
-                            onClick = {
-                                slettemelding.value = false
-                                viewModel?.slettFavoritt(valgtFavoritt)
-                                valgtFavoritt = ""
-                            }
-                        ) {
-                            Text("Slett")
-                        }
-                    },
-                    dismissButton = {
-                        Button(
-                            onClick = {
-                                slettemelding.value = false
-                            }
-                        ) {
-                            Text("Avbryt")
-                        }
-                    }
-                )
+          },
+          dismissButton = {
+            Button(
+              onClick = {
+                slettemelding.value = false
+              }
+            ) {
+              Text("Avbryt", color = MaterialTheme.colorScheme.onSurface)
             }
 
         } else if (favorittliste.isEmpty()){

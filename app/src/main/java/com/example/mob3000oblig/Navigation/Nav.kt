@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Application
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -60,13 +61,15 @@ fun Nav() {
             icon = {
               Icon(
                 imageVector = bottonNavigationItem.icon,
-                contentDescription = null
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onBackground
               )
             },
 
             label = {
               Text(
-                text = bottonNavigationItem.label
+                text = bottonNavigationItem.label,
+                color = MaterialTheme.colorScheme.onBackground
               )
             }
           )
@@ -114,7 +117,7 @@ fun Nav() {
       }
 
       composable(route = Screen.Favoritter.ruter) {
-        Favoritter().favoritterSkjerm(navController = navController)
+        Favoritter().FavoritterSkjerm(navController = navController)
       }
     }
   }
