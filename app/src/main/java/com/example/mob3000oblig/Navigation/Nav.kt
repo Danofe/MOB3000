@@ -35,13 +35,10 @@ import com.example.mob3000oblig.Start
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Nav() {
-
   val navController = rememberNavController()
   val viewModel: APIViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
     .create(APIViewModel::class.java)
-
   Scaffold(
-
     bottomBar = {
       NavigationBar {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
@@ -75,10 +72,8 @@ fun Nav() {
           )
         }
       }
-
     }
   ) {
-
 
     NavHost(
       navController = navController,
@@ -86,7 +81,7 @@ fun Nav() {
     ) {
 
       composable(route = Screen.Login.ruter) {
-        Login().loginSkjerm(navController = navController)
+        Login().LoginSkjerm(navController = navController)
       }
 
       composable(route = Screen.Register.ruter) {
@@ -122,7 +117,5 @@ fun Nav() {
         Favoritter().favoritterSkjerm(navController = navController)
       }
     }
-
   }
-
 }

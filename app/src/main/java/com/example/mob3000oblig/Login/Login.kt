@@ -1,9 +1,7 @@
 package com.example.mob3000oblig.Login
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,13 +17,11 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -47,7 +43,7 @@ class Login {
   @SuppressLint("SuspiciousIndentation")
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun loginSkjerm(
+  fun LoginSkjerm(
     modifier: Modifier = Modifier,
     navController: NavController,
     loginViewModel: LoginViewModel? = viewModel()
@@ -55,108 +51,119 @@ class Login {
     val loginUiState = loginViewModel?.uiState
     val context = LocalContext.current
     val error = loginUiState?.error != null
-    val containerColor = colorResource(id = R.color.PRIMARY_LIGHTOGDARK)
 
-      Column(modifier = modifier) {
-        Box(
-          modifier = modifier.fillMaxSize()
+    Column(modifier = modifier) {
+      Box(
+        modifier = modifier
+          .fillMaxSize()
           .verticalScroll(rememberScrollState())
-            .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
+      ) {
+        Column(
+          modifier = modifier
+            .padding(8.dp),
+          verticalArrangement = Arrangement.spacedBy(16.dp),
+          horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
+
         ) {
-          Column(
-            modifier = modifier
-              .padding(8.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
+          Image(
+            painter = painterResource(id = R.drawable.skiltskern),
+            contentDescription = "skiltskern",
+            modifier = Modifier.size(200.dp)
+          )
 
-          ) {
-            Image(
-              painter = painterResource(id = R.drawable.skiltskern),
-              contentDescription = "skiltskern",
-              modifier = Modifier.size(200.dp)
+          Text(
+            text = "Logg inn eller registrer ny bruker for å benytte denne funksjonen.",
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onBackground,
+          )
+
+          if (error) {
+            Text(
+              text = "Feil brukernavn eller passord",
+              color = MaterialTheme.colorScheme.onBackground,
             )
+          }
 
-            Text(text = "Logg inn eller registrer ny bruker for å benytte denne funksjonen.",
-              textAlign = TextAlign.Center)
+          TextField(
+            value = loginUiState?.email ?: "",
+            onValueChange = { loginViewModel?.onEmailChange(it) },
+            label = { Text("Email") },
+            modifier = modifier.align(Alignment.CenterHorizontally),
+            enabled = true,
 
-            if (error) {
-              Text(text = "Feil brukernavn eller passord")
+            leadingIcon = {
+              Icon(
+                imageVector = Icons.Filled.AccountCircle,
+                contentDescription = "Lock",
+                tint = MaterialTheme.colorScheme.onBackground,
+              )
+            }
+          )
+          TextField(
+            value = loginUiState?.passord ?: "",
+            onValueChange = { loginViewModel?.onPassordChange(it) },
+            label = { Text("Passord") },
+            modifier = modifier.align(Alignment.CenterHorizontally),
+            visualTransformation = PasswordVisualTransformation(),
+            leadingIcon = {
+              Icon(
+                imageVector = Icons.Filled.Lock,
+                contentDescription = "Lock",
+                tint = MaterialTheme.colorScheme.onBackground,
+              )
+            }
+          )
+          Row {
+            Button(
+              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+              onClick = {
+                loginViewModel?.loginBruker(
+                  context,
+                  navController
+                )
+              }) {
+              Text(
+                text = "Logg inn",
+                color = Color.Black,
+                fontSize = 20.sp,
+              )
+            }
+            LaunchedEffect(key1 = loginViewModel?.loggetInn) {
+              if (loginViewModel?.loggetInn == true) {
+                navController.navigate(Screen.Sok.ruter)
+              }
             }
 
-            TextField(
-              value = loginUiState?.email ?: "",
-              onValueChange = { loginViewModel?.onEmailChange(it) },
-              label = { Text("Email") },
-              modifier = modifier.align(Alignment.CenterHorizontally),
-              enabled = true,
-
-              leadingIcon = {
-                Icon(
-                  imageVector = Icons.Filled.AccountCircle,
-                  contentDescription = "Lock"
-                )
-              }
-            )
-            TextField(
-              value = loginUiState?.passord ?: "",
-              onValueChange = { loginViewModel?.onPassordChange(it) },
-              label = { Text("Passord") },
-              modifier = modifier.align(Alignment.CenterHorizontally),
-              visualTransformation = PasswordVisualTransformation(),
-              leadingIcon = {
-                Icon(
-                  imageVector = Icons.Filled.Lock,
-                  contentDescription = "Lock"
-                )
-              }
-            )
-            Row {
-              Button(
-                colors = ButtonDefaults.buttonColors(containerColor),
-                onClick = {
-                  loginViewModel?.loginBruker(
-                    context,
-                    navController
-                  )
-                },
-
-
-                ) {
-                Text(text = "Logg inn",
-                  color = colorResource(id = R.color.TEXTLIGHT),
-                  fontSize = 20.sp,)
-              }
-              LaunchedEffect(key1 = loginViewModel?.loggetInn) {
-                if (loginViewModel?.loggetInn == true) {
-                  navController.navigate(Screen.Sok.ruter)
-                }
-              }
-
-              Spacer(modifier = Modifier.padding(8.dp))
-              //Text(text = "eller", modifier = modifier.align(Alignment.CenterHorizontally))
-              Button(
-                colors = ButtonDefaults.buttonColors(containerColor),
-                onClick = { navController.navigate(Screen.Register.ruter) },
+            Spacer(modifier = Modifier.padding(8.dp))
+            //Text(text = "eller", modifier = modifier.align(Alignment.CenterHorizontally))
+            Button(
+              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+              onClick = { navController.navigate(Screen.Register.ruter) },
 
               ) {
-                Text(text = "Registrer",
-                  color = colorResource(id = R.color.TEXTLIGHT),
-                  fontSize = 20.sp,)
-
-              }
-            }
-
-            Button(
-              onClick = { navController.navigate(Screen.Start.ruter) },
-              colors = ButtonDefaults.buttonColors(Color.LightGray),
-              modifier = modifier.align(Alignment.CenterHorizontally),
-            ) {
-              Text(text = "Avbryt",
+              Text(
+                text = "Registrer",
                 color = Color.Black,
-                fontSize = 20.sp,)
+                fontSize = 20.sp,
+              )
+
             }
+          }
+
+          Button(
+            onClick = { navController.navigate(Screen.Start.ruter) },
+            // TODO: Endre farge i dark og light
+            colors = ButtonDefaults.buttonColors(Color.LightGray),
+            modifier = modifier.align(Alignment.CenterHorizontally),
+          ) {
+            Text(
+              text = "Avbryt",
+              color = Color.Black,
+              fontSize = 20.sp,
+            )
           }
         }
       }
     }
   }
+}

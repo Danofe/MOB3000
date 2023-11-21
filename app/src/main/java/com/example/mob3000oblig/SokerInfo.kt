@@ -14,11 +14,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -28,23 +25,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.toUpperCase
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mob3000oblig.DataApi.APIViewModel
 import com.example.mob3000oblig.DataApi.bilInfoVariabler
 import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
 import com.example.mob3000oblig.Database.Firestore
-import kotlin.math.roundToInt
 
 
 class SokerInfo {
-  @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-
   fun SkiltInfo(
     viewModel: APIViewModel,
     name: String?,
@@ -74,176 +66,305 @@ class SokerInfo {
     }
 
 
-      Column(
-        modifier = modifier
-          .padding(8.dp)
-          .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-        verticalArrangement = Arrangement.Center ) {
-        Box(
-          modifier = modifier.fillMaxSize() ,
+    Column(
+      modifier = modifier
+        .padding(8.dp)
+        .fillMaxSize(),
+      horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
+      verticalArrangement = Arrangement.Center
+    ) {
+      Box(
+        modifier = modifier.fillMaxSize(),
+      ) {
+
+        Text(
+          text = "${name?.uppercase()}",
+          fontSize = 40.sp,
+          color = MaterialTheme.colorScheme.onBackground,
+          modifier = modifier
+            .align(Alignment.TopCenter)
+            .padding(top = 40.dp)
+        )
+        Column(
+          modifier = modifier
+            .align(Alignment.CenterStart)
+            .padding(40.dp),
+          verticalArrangement = Arrangement.spacedBy(40.dp),
+          horizontalAlignment = Alignment.Start,
         ) {
+          val verdi = bilInfoVariabler(bilInfo)
+          var visMerKnapp by remember { mutableStateOf(false) }
+          var visMerKnappText by remember { mutableStateOf("Vis mer") }
+          val error = "Ikke oppgitt"
 
-          Text(
-            text = "${name?.uppercase()}",
-            fontSize = 40.sp,
-            modifier = modifier
-              .align(Alignment.TopCenter)
-              .padding(top = 40.dp)
-          )
-          Column(
-            modifier = modifier
-              .align(Alignment.CenterStart)
-              .padding(40.dp),
-            verticalArrangement = Arrangement.spacedBy(40.dp),
-            horizontalAlignment = Alignment.Start,
-          ) {
-            val verdi = bilInfoVariabler(bilInfo)
-            var visMerKnapp by remember { mutableStateOf(false) }
-            var visMerKnappText by remember { mutableStateOf("Vis mer") }
-            val error = "Ikke oppgitt"
-
-            // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
-            var lagtInn by remember { mutableStateOf(false) }
-            if (verdi.merke != error) {
-              Row {
-                LazyColumn {
-                  items(1) { index ->
-                    Text(text = "Merke")
-                    Text(text = "Serie")
-                    Text(text = "Type")
-                    Text(text = "Farge")
-                    Text(text = "Girkassetype")
-                    Text(text = "Drivstoff")
-                    Text(text = "Hybrid")
-                    Text(text = "Hestekrefter")
-                    Text(text = "Maks hastighet")
-                    Text(text = "Forste registrering")
-                    if (visMerKnapp) {
-                      Text(text = "Sitteplasser")
-                      Text(text = "Antall dører:")
-                      Text(text = "Høyde")
-                      Text(text = "Bredde")
-                      Text(text = "Lengde")
-                      Text(text = "Egenvekt")
-                      Text(text = "Sist godkjent:")
-                      Text(text = "Neste EU kontroll:")
-                    }
-                  }
-                }
-                Spacer(modifier = modifier.width(20.dp))
-                Column {
-                  Text(verdi.merke)
-                  Text(verdi.handelsbetegnelse)
-                  Text(verdi.type)
-                  Text(verdi.farge)
-                  Text(verdi.girtyp)
-                  Text(verdi.drivstoff)
-                  Text(verdi.hybrid)
-                  if (verdi.hk != error) {
-                    Text("${verdi.hk} hk")
-                  } else {
-                    Text(verdi.hk)
-                  }
-                  if (verdi.toppHastighet != error) {
-                    Text("${verdi.toppHastighet} km/t")
-                  } else {
-                    Text(verdi.toppHastighet)
-                  }
-                  Text(verdi.forsteReg)
-                  if (visMerKnapp) {
-                    Text(verdi.antSeter)
-                    Text(verdi.antdorer)
-                    if (verdi.hoyde != error) {
-                      Text("${verdi.hoyde} cm")
-                    } else {
-                      Text(verdi.hoyde)
-                    }
-                    if (verdi.bredde != error) {
-                      Text("${verdi.bredde} cm")
-                    } else {
-                      Text(verdi.bredde)
-                    }
-                    if (verdi.lengde != error) {
-                      Text("${verdi.lengde} cm")
-                    } else {
-                      Text(verdi.lengde)
-                    }
-                    if (verdi.vekt != error) {
-                      Text("${verdi.vekt} kg")
-                    } else {
-                      Text(verdi.vekt)
-                    }
-                    Text(verdi.sistgodkjent)
-                    Text(verdi.nesteEU)
-                  }
-                }
-              }
-              Button(
-                onClick = {
-                  Firestore.leggInnFavoritt(
-                    name,
-                    verdi.merke,
-                    verdi.hk,
-                    verdi.antSeter,
-                    verdi.farge,
-                    verdi.type,
-                    verdi.toppHastighet,
-                    verdi.drivstoff,
-                    verdi.girtyp,
-                    verdi.lengde,
-                    verdi.hoyde,
-                    verdi.bredde,
-                    verdi.vekt,
-                    verdi.hybrid,
-                    verdi.sistgodkjent,
-                    verdi.nesteEU,
-                    verdi.forsteReg,
-                    verdi.antdorer,
-                    verdi.handelsbetegnelse
+          // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
+          var lagtInn by remember { mutableStateOf(false) }
+          if (verdi.merke != error) {
+            Row {
+              LazyColumn {
+                items(1) { index ->
+                  Text(
+                    text = "Merke",
+                    color = MaterialTheme.colorScheme.onBackground,
                   )
-                  lagtInn = true
-                  Toast.makeText(
-                    context,
-                    "$name er lagt til som favoritt",
-                    Toast.LENGTH_SHORT
-                  ).show()
-                },
-                enabled = (Auth.innlogget() && !lagtInn)
-              ) {
-                Text("Legg til i favoritter")
+                  Text(
+                    text = "Serie",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = "Type",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = "Farge",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = "Girkassetype",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = "Drivstoff",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = "Hybrid",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = "Hestekrefter",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = "Maks hastighet",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = "Forste registrering",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  if (visMerKnapp) {
+                    Text(
+                      text = "Sitteplasser",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                      text = "Antall dører:",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                      text = "Høyde",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                      text = "Bredde",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                      text = "Lengde",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                      text = "Egenvekt",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                      text = "Sist godkjent:",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                    Text(
+                      text = "Neste EU kontroll:",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  }
+                }
               }
-              Button(
-                onClick = {
-                  visMerKnapp = !visMerKnapp
-                  visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
-                },
-              )
-              {
-                Text(visMerKnappText)
-              }
-
-            } else {
-              Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = modifier.fillMaxSize()
-              ) {
-                Image(
-                  painter = painterResource(id = R.drawable.skiltskern),
-                  contentDescription = "skiltskern",
-                  modifier = Modifier.size(200.dp)
-                )
-
+              Spacer(modifier = modifier.width(20.dp))
+              Column {
                 Text(
-                  text = "Fant ingen kjøretøy med dette skiltnummeret.",
-                  fontSize = 20.sp,
-                  textAlign = TextAlign.Center
+                  text = verdi.merke,
+                  color = MaterialTheme.colorScheme.onBackground,
                 )
+                Text(
+                  text = verdi.handelsbetegnelse,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                  text = verdi.type,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                  text = verdi.farge,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                  text = verdi.girtyp,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                  text = verdi.drivstoff,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                  text = verdi.hybrid,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                if (verdi.hk != error) {
+                  Text(
+                    text = "${verdi.hk} hk",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                } else {
+                  Text(
+                    text = verdi.hk,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                }
+                if (verdi.toppHastighet != error) {
+                  Text(
+                    text = "${verdi.toppHastighet} km/t",
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                } else {
+                  Text(
+                    text = verdi.toppHastighet,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                }
+                Text(
+                  text = verdi.forsteReg,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                if (visMerKnapp) {
+                  Text(
+                    text = verdi.antSeter,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = verdi.antdorer,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  if (verdi.hoyde != error) {
+                    Text(
+                      text = "${verdi.hoyde} cm",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  } else {
+                    Text(
+                      text = verdi.hoyde,
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  }
+                  if (verdi.bredde != error) {
+                    Text(
+                      text = "${verdi.bredde} cm",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  } else {
+                    Text(
+                      text = verdi.bredde,
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  }
+                  if (verdi.lengde != error) {
+                    Text(
+                      text = "${verdi.lengde} cm",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  } else {
+                    Text(
+                      text = verdi.lengde,
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  }
+                  if (verdi.vekt != error) {
+                    Text(
+                      text = "${verdi.vekt} kg",
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  } else {
+                    Text(
+                      text = verdi.vekt,
+                      color = MaterialTheme.colorScheme.onBackground,
+                    )
+                  }
+                  Text(
+                    text = verdi.sistgodkjent,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                  Text(
+                    text = verdi.nesteEU,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                }
               }
+            }
+            Button(
+              onClick = {
+                Firestore.leggInnFavoritt(
+                  name,
+                  verdi.merke,
+                  verdi.hk,
+                  verdi.antSeter,
+                  verdi.farge,
+                  verdi.type,
+                  verdi.toppHastighet,
+                  verdi.drivstoff,
+                  verdi.girtyp,
+                  verdi.lengde,
+                  verdi.hoyde,
+                  verdi.bredde,
+                  verdi.vekt,
+                  verdi.hybrid,
+                  verdi.sistgodkjent,
+                  verdi.nesteEU,
+                  verdi.forsteReg,
+                  verdi.antdorer,
+                  verdi.handelsbetegnelse
+                )
+                lagtInn = true
+                Toast.makeText(
+                  context,
+                  "$name er lagt til som favoritt",
+                  Toast.LENGTH_SHORT
+                ).show()
+              },
+              enabled = (Auth.innlogget() && !lagtInn)
+            ) {
+              Text("Legg til i favoritter")
+            }
+            Button(
+              onClick = {
+                visMerKnapp = !visMerKnapp
+                visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
+              },
+            )
+            {
+              Text(visMerKnappText)
+            }
+
+          } else {
+            Column(
+              horizontalAlignment = Alignment.CenterHorizontally,
+              verticalArrangement = Arrangement.Center,
+              modifier = modifier.fillMaxSize()
+            ) {
+              Image(
+                painter = painterResource(id = R.drawable.skiltskern),
+                contentDescription = "skiltskern",
+                modifier = Modifier.size(200.dp)
+              )
+
+              Text(
+                text = "Fant ingen kjøretøy med dette skiltnummeret.",
+                fontSize = 20.sp,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onBackground,
+                )
             }
           }
         }
       }
     }
   }
+}

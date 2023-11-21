@@ -13,40 +13,26 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.mob3000oblig.Screen
 
 data class BottomNavigationItem(
-    val label: String,
-    val icon: ImageVector,
-    val route: String,
-
+  val label: String,
+  val icon: ImageVector,
+  val route: String,
 )
 
-  val listOfBottonNavigationItem : List<BottomNavigationItem> = listOf(
-      BottomNavigationItem(
-          label = "Hjem",
-          icon = Icons.Filled.Home,
-          route = Screen.Start.ruter,
+val listOfBottonNavigationItem: List<BottomNavigationItem> = listOf(
+  BottomNavigationItem(
+    label = "Hjem",
+    icon = Icons.Filled.Home,
+    route = Screen.Start.ruter,
 
-      ),
-      BottomNavigationItem(
-          label = "Søk",
-          icon = Icons.Filled.Search,
-          route = Screen.Kamera.ruter
-      ),
-      BottomNavigationItem(
-          label = "Profil",
-          icon = Icons.Filled.Face,
-          route = Screen.Settings.ruter
-      ),
-
-
-
-      )
-
-
-
-
-
-
-
-
-
-
+    ),
+  BottomNavigationItem(
+    label = "Søk",
+    icon = Icons.Filled.Search,
+    route = Screen.Kamera.ruter
+  ),
+  BottomNavigationItem(
+    label = "Profil",
+    icon = Icons.Filled.Face,
+    route = Screen.Settings.ruter
+  )
+)
