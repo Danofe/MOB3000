@@ -1,7 +1,6 @@
 package com.example.mob3000oblig.Registrer
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +18,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,30 +71,57 @@ class Register {
           TextField(
             value = regUiState?.emailReg ?: "",
             onValueChange = { registerViewModel?.onEmailRegChange(it) },
-            label = { Text("E-post") },
-            modifier = modifier.align(Alignment.CenterHorizontally)
+            label = {
+              Text(
+                text = "E-post",
+                color = MaterialTheme.colorScheme.onBackground
+              )
+            },
+            modifier = modifier.align(Alignment.CenterHorizontally),
+            colors = TextFieldDefaults.textFieldColors(
+              MaterialTheme.colorScheme.onBackground,
+              cursorColor = MaterialTheme.colorScheme.onBackground
+            )
           )
           TextField(
             value = regUiState?.passordReg ?: "",
             onValueChange = { registerViewModel?.onPassordRegChange(it) },
-            label = { Text("Passord") },
-            modifier = modifier.align(Alignment.CenterHorizontally)
+            label = {
+              Text(
+                "Passord",
+                color = MaterialTheme.colorScheme.onBackground
+              )
+            },
+            modifier = modifier.align(Alignment.CenterHorizontally),
+            colors = TextFieldDefaults.textFieldColors(
+              MaterialTheme.colorScheme.onBackground,
+              cursorColor = MaterialTheme.colorScheme.onBackground
+            )
           )
           TextField(
             value = regUiState?.passordBekreftReg ?: "",
             onValueChange = { registerViewModel?.onPassordBekRegChange(it) },
-            label = { Text("Bekreft Passord") },
-            modifier = modifier.align(Alignment.CenterHorizontally)
+            label = {
+              Text(
+                "Bekreft Passord",
+                color = MaterialTheme.colorScheme.onBackground
+              )
+            },
+            modifier = modifier.align(Alignment.CenterHorizontally),
+            colors = TextFieldDefaults.textFieldColors(
+              MaterialTheme.colorScheme.onBackground,
+              cursorColor = MaterialTheme.colorScheme.onBackground
+            )
           )
           Row {
             Button(
               onClick = { navController.navigate(Screen.Start.ruter) },
               // TODO: Endre farge i dark og light
               colors = ButtonDefaults.buttonColors(Color.LightGray),
-              ) {
+            ) {
               Text(
                 text = "Avbryt",
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 20.sp,
               )
             }
@@ -107,7 +133,7 @@ class Register {
               ) {
               Text(
                 text = "Registrer",
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 20.sp,
               )
             }

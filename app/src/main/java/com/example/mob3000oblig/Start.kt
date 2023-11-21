@@ -21,6 +21,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -98,6 +99,10 @@ class Start {
               },
               isError = showError,
               placeholder = { Text(text = "Skriv skiltnr her:") },
+              colors = TextFieldDefaults.textFieldColors(
+                MaterialTheme.colorScheme.onBackground,
+                cursorColor = MaterialTheme.colorScheme.onBackground
+              ),
             )
             if (showError) {
               Text("Skriv inn gyldig skiltnummer!")
