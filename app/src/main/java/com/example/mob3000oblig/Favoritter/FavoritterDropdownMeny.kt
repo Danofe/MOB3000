@@ -3,7 +3,9 @@ package com.example.mob3000oblig.Favoritter
 import android.util.Log
 import androidx.compose.animation.expandVertically
 import androidx.compose.animation.slideInVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +20,7 @@ import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,11 +36,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Screen
 
 
@@ -45,8 +50,7 @@ import com.example.mob3000oblig.Screen
 @Composable
 fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                            modifier: Modifier = Modifier,
-                           navController: NavController)
-{
+                           navController: NavController) {
     var utvidet by remember { mutableStateOf(false) }
     val favorittliste = viewModel?.favoritterSkilt?.value
     var valgtFavoritt by remember { mutableStateOf("") }
@@ -60,50 +64,66 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
     } else {
         Icons.Filled.KeyboardArrowDown
     }
-    Column(modifier = Modifier.padding(20.dp)) {
-        OutlinedTextField(value = valgtFavoritt,
-            onValueChange = { valgtFavoritt = it },
-            readOnly = true,
-            textStyle = androidx.compose.ui.text.TextStyle(fontSize = 30.sp, fontWeight = FontWeight.Bold),
-            modifier = Modifier
-                .fillMaxWidth()
-                .onGloballyPositioned { coordinates ->
-                    textFieldSize = coordinates.size.width
-                },
-            label = { Text("Velg skiltnr") },
-            trailingIcon = {
-                Icon(ikon, "", Modifier.clickable { utvidet = !utvidet })
-            }
-        )
-        DropdownMenu(
-            expanded = utvidet,
-            onDismissRequest = { utvidet = false },
-            modifier = Modifier
-                .width(with(LocalDensity.current) { textFieldSize.toDp() })
-                .fillMaxWidth()
-        ) {
-            for (i in favorittliste!!) {
-                DropdownMenuItem(text = { Text(text = i) }, onClick = {
-                    valgtFavoritt = i
-                    utvidet = false
-                })
-            }
-        }
-    }
-    val index = favorittliste?.indexOf(valgtFavoritt)
-    kjoretoy = viewModel?.allefavoritter?.value?.getOrNull(index!!).toString()
-    val hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
-    val maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
+    Column(
+        modifier = Modifier
+            .fillMaxSize().padding(24.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(84.dp) //
+    ) {
 
-    if (index != -1) {
         Box(
-            modifier = modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize()
+            .background(colorResource(R.color.LIGHT_BACKGROUNDD)),
             contentAlignment = Alignment.Center
         ) {
+
+            OutlinedTextField(
+                value = valgtFavoritt,
+                onValueChange = { valgtFavoritt = it },
+                readOnly = true,
+                textStyle = androidx.compose.ui.text.TextStyle(
+                    fontSize = 30.sp,
+                    fontWeight = FontWeight.Bold
+                ),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .onGloballyPositioned { coordinates ->
+                        textFieldSize = coordinates.size.width
+                    },
+
+                label = { Text("Velg skiltnr") },
+
+                trailingIcon = {
+                    Icon(ikon, "", Modifier.clickable { utvidet = !utvidet })
+                },
+            )
+            DropdownMenu(
+                expanded = utvidet,
+                onDismissRequest = { utvidet = false },
+                modifier = Modifier
+                    .width(with(LocalDensity.current) { textFieldSize.toDp() })
+                    .fillMaxWidth()
+            ) {
+                for (i in favorittliste!!) {
+                    DropdownMenuItem(text = { Text(text = i) }, onClick = {
+                        valgtFavoritt = i
+                        utvidet = false
+                    })
+                }
+            }
+        }
+        val index = favorittliste?.indexOf(valgtFavoritt)
+        kjoretoy = viewModel?.allefavoritter?.value?.getOrNull(index!!).toString()
+        val hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
+        val maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
+
+        if (index != -1) {
+
+
             Row(
                 modifier = modifier,
-                ) {
-                Column {
+            ) {
+                Column() {
                     Text(text = "Merke")
                     Text(text = "Serie")
                     Text(text = "Type")
@@ -219,15 +239,15 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                 }
             }
             Button(
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
                 onClick = {
                     slettemelding.value = true
                     Log.d("kjoreinfo", "valgtFavoritt: $kjoretoy")
                 },
-                modifier = modifier.align(Alignment.BottomCenter)
-                    .padding(20.dp)
-                    .offset(y = (-80).dp)
+
             ) {
-                Text("Slett favoritt")
+                Text("Slett favoritt",
+                    color = colorResource(R.color.TEXTLIGHT))
             }
             if (slettemelding.value) {
                 AlertDialog(
@@ -262,10 +282,12 @@ fun FavoritterDropdownMeny(viewModel: FavoritterViewModel? = viewModel(),
                     }
                 )
             }
+
+        } else if (favorittliste.isEmpty()){
+            Text("Du har ingen favoritter. Legg til favoritter.")
+        } else {
+            Text("Velg favoritt.")
         }
-    } else {
-        /* TODO */
     }
 }
-
 
