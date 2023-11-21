@@ -15,12 +15,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,71 +51,72 @@ class Register {
     var showError by remember { mutableStateOf(false) }
 
 
-      Column(modifier = modifier.padding()) {
-        Box(
+    Column(modifier = modifier.padding()) {
+      Box(
+        modifier = modifier
+          .fillMaxSize()
+          .verticalScroll(rememberScrollState())
+      ) {
+        Column(
           modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
-        ) {
-          Column(
-            modifier = modifier
             .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-          ) {
-            Image(
-              painter = painterResource(id = R.drawable.skiltskern),
-              contentDescription = "skiltskern",
-              modifier = Modifier.size(200.dp)
-            )
+          horizontalAlignment = Alignment.CenterHorizontally,
+          verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+          Image(
+            painter = painterResource(id = R.drawable.skiltskern),
+            contentDescription = "skiltskern",
+            modifier = Modifier.size(200.dp)
+          )
 
-            TextField(
-              value = regUiState?.emailReg ?: "",
-              onValueChange = { registerViewModel?.onEmailRegChange(it) },
-              label = { Text("E-post") },
-              modifier = modifier.align(Alignment.CenterHorizontally)
-            )
-            TextField(
-              value = regUiState?.passordReg ?: "",
-              onValueChange = { registerViewModel?.onPassordRegChange(it) },
-              label = { Text("Passord") },
-              modifier = modifier.align(Alignment.CenterHorizontally)
-            )
-            TextField(
-              value = regUiState?.passordBekreftReg ?: "",
-              onValueChange = { registerViewModel?.onPassordBekRegChange(it) },
-              label = { Text("Bekreft Passord") },
-              modifier = modifier.align(Alignment.CenterHorizontally)
-            )
-            Row {
-
-              Button(
-                onClick = { navController.navigate(Screen.Start.ruter) },
-                colors = ButtonDefaults.buttonColors(Color.LightGray),
-
-                ) {
-                Text(text = "Avbryt",
-                  color = Color.Black,
-                  fontSize = 20.sp,)
-              }
-              Spacer(modifier = Modifier.width(8.dp))
-              
-              Button(
-                onClick = { registerViewModel?.lagBruker(context) },
-                colors = ButtonDefaults.buttonColors(colorResource(id = R.color.PRIMARY_LIGHTOGDARK)),
+          TextField(
+            value = regUiState?.emailReg ?: "",
+            onValueChange = { registerViewModel?.onEmailRegChange(it) },
+            label = { Text("E-post") },
+            modifier = modifier.align(Alignment.CenterHorizontally)
+          )
+          TextField(
+            value = regUiState?.passordReg ?: "",
+            onValueChange = { registerViewModel?.onPassordRegChange(it) },
+            label = { Text("Passord") },
+            modifier = modifier.align(Alignment.CenterHorizontally)
+          )
+          TextField(
+            value = regUiState?.passordBekreftReg ?: "",
+            onValueChange = { registerViewModel?.onPassordBekRegChange(it) },
+            label = { Text("Bekreft Passord") },
+            modifier = modifier.align(Alignment.CenterHorizontally)
+          )
+          Row {
+            Button(
+              onClick = { navController.navigate(Screen.Start.ruter) },
+              // TODO: Endre farge i dark og light
+              colors = ButtonDefaults.buttonColors(Color.LightGray),
+              ) {
+              Text(
+                text = "Avbryt",
+                color = Color.Black,
+                fontSize = 20.sp,
+              )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Button(
+              onClick = { registerViewModel?.lagBruker(context) },
+              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
 
               ) {
-                Text(text = "Registrer",
-                  color = colorResource(id = R.color.TEXTLIGHT),
-                  fontSize = 20.sp,)
-              }
-
-
+              Text(
+                text = "Registrer",
+                color = Color.Black,
+                fontSize = 20.sp,
+              )
             }
 
+
           }
+
         }
       }
     }
   }
+}

@@ -2,27 +2,23 @@ package com.example.mob3000oblig.Settings
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.windowInsetsBottomHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,79 +40,82 @@ class settings {
   @Composable
   fun Profil(navController: NavController) {
     if (!Auth().innlogget()) {
-        Card(modifier = Modifier.padding(32.dp)) {
-          Row(
+      Card(modifier = Modifier.padding(32.dp)) {
+        Row(
+          Modifier
+            .fillMaxWidth(),
+          horizontalArrangement = Arrangement.Center
+        ) {
+          Box(
             Modifier
-              .fillMaxWidth(),
-              horizontalArrangement = Arrangement.Center
-            ){
-            Box(
-              Modifier
-                .padding(8.dp)
-
-            ) {
-              Button(onClick = { navController.navigate(Screen.Login.ruter) }) {
-                Text(text = "Login", fontSize = 12.sp)
-              }
+              .padding(8.dp)
+          ) {
+            Button(onClick = { navController.navigate(Screen.Login.ruter) }) {
+              Text(
+                text = "Login",
+                color = Color.Black,
+                fontSize = 12.sp
+              )
             }
-            Spacer(modifier = Modifier.padding(8.dp))
-            Box(
-              Modifier
-                .padding(8.dp)
-
-            ) {
-              Button(onClick = { navController.navigate(Screen.Register.ruter) }) {
-                Text(text = "Registrer", fontSize = 12.sp)
-              }
+          }
+          Spacer(modifier = Modifier.padding(8.dp))
+          Box(
+            Modifier
+              .padding(8.dp)
+          ) {
+            Button(onClick = { navController.navigate(Screen.Register.ruter) }) {
+              Text(
+                text = "Registrer",
+                color = Color.Black,
+                fontSize = 12.sp
+              )
             }
           }
         }
-    } else {
-    Card(
-      modifier = Modifier.padding(32.dp)
-    ) {
-      var utvidet by remember {
-        mutableStateOf(false)
       }
-
-      Column(
-        Modifier
-          .clickable { utvidet = !utvidet }
-          .fillMaxWidth()
-          .padding(16.dp)
-          .align(Alignment.CenterHorizontally)
-
-
+    } else {
+      Card(
+        modifier = Modifier.padding(32.dp)
       ) {
-        Box(
-          modifier = Modifier.align(Alignment.CenterHorizontally)
-
-        ) {
-          Text(
-            text = "Profil",
-            fontSize = 20.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
-          )
+        var utvidet by remember {
+          mutableStateOf(false)
         }
-        AnimatedVisibility(
-          visible = utvidet,
-          modifier = Modifier
+        Column(
+          Modifier
+            .clickable { utvidet = !utvidet }
             .fillMaxWidth()
             .padding(16.dp)
             .align(Alignment.CenterHorizontally)
         ) {
-          Card(
+          Box(
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+          ) {
+            Text(
+              text = "Profil",
+              fontSize = 20.sp,
+              fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            )
+          }
+          AnimatedVisibility(
+            visible = utvidet,
             modifier = Modifier
-
+              .fillMaxWidth()
+              .padding(16.dp)
               .align(Alignment.CenterHorizontally)
           ) {
-            ProfilCard()
+            Card(
+              modifier = Modifier
+
+                .align(Alignment.CenterHorizontally)
+            ) {
+              ProfilCard()
+            }
           }
         }
       }
     }
   }
-    }
+
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun ProfilCard() {
@@ -157,7 +156,8 @@ class settings {
               .padding(8.dp)
           )
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                 onClick = { Auth().byttPassord(passord)
+                 onClick = {
+                   Auth().byttPassord(passord)
                    Toast.makeText(
                      context,
                      "Passord endret",
@@ -179,27 +179,26 @@ class settings {
             Text(text = "Logg ut")
           }
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-            colors = ButtonDefaults.buttonColors(Color.Red),
-            onClick = {
-              Auth().slettBruker()
-              Toast.makeText(
-                context,
-                "Du har slettet brukeren",
-                Toast.LENGTH_SHORT
-              ).show()
-            }) {
+                 colors = ButtonDefaults.buttonColors(Color.Red),
+                 onClick = {
+                   Auth().slettBruker()
+                   Toast.makeText(
+                     context,
+                     "Du har slettet brukeren",
+                     Toast.LENGTH_SHORT
+                   ).show()
+                 }) {
             Text(text = "Slett bruker")
           }
         }
       }
     }
   }
+
   @Composable
   fun Settings() {
     Card(
       modifier = Modifier.padding(32.dp)
-
-
     ) {
       var utvidet by remember {
         mutableStateOf(false)
@@ -242,6 +241,7 @@ class settings {
     }
   }
 
+
   @Composable
   fun SettingCard() {
     Card() {
@@ -257,16 +257,22 @@ class settings {
             Modifier.padding(2.dp)
           ) {
             Button(onClick = {/*TODO: darkmode */ }) {
-              Text(text = "Darkmode",
-                fontSize = 12.sp)
+              Text(
+                text = "Darkmode",
+                color = Color.Black,
+                fontSize = 12.sp
+              )
             }
           }
           Box(
             Modifier.padding(2.dp)
           ) {
             Button(onClick = { /*TODO: lightmode */ }) {
-              Text(text = "Lightmode",
-                fontSize = 12.sp)
+              Text(
+                text = "Lightmode",
+                color = Color.Black,
+                fontSize = 12.sp
+              )
             }
           }
         }
@@ -278,7 +284,6 @@ class settings {
   fun Terms() {
     Card(
       modifier = Modifier.padding(32.dp)
-
     ) {
       var utvidet by remember {
         mutableStateOf(false)
@@ -338,7 +343,6 @@ class settings {
     Column(
       Modifier
         .fillMaxSize()
-        .background(color = androidx.compose.ui.graphics.Color.White)
         .padding(16.dp)
         .verticalScroll(rememberScrollState())
     ) {

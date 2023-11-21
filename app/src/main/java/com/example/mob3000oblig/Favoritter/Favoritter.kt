@@ -7,27 +7,19 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -41,76 +33,75 @@ import com.example.mob3000oblig.Screen
 
 class Favoritter {
 
-    @Composable
-    fun favoritterSkjerm(
-        modifier: Modifier = Modifier,
-        navController: NavController
+  @Composable
+  fun favoritterSkjerm(
+    modifier: Modifier = Modifier,
+    navController: NavController
+  ) {
+    Column(
+      modifier = modifier
     ) {
-
-        Column(modifier = modifier
-
-        ) {
-            Box(
-                modifier = Modifier.fillMaxSize()
-                    .verticalScroll(rememberScrollState())
-                    .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
-            ) {
-                if (Auth().currentUser == null) {
-                    Column(
-                        modifier = modifier
-                            .padding(8.dp)
-                            .fillMaxSize(),
+      Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+      ) {
+        if (Auth().currentUser == null) {
+          Column(
+            modifier = modifier
+                .padding(8.dp)
+                .fillMaxSize(),
 
 
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center //
-                    ) {
-                        //Logo
-                        Image(
-                            painter = painterResource(id = R.drawable.skiltskern),
-                            contentDescription = "skiltskern",
-                            modifier = Modifier.size(200.dp)
-                        )
-                        Text(
-                            text = stringResource(R.string.login_melding_favoritter),
-                            fontSize = 20.sp,
-                            textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                            modifier = modifier.padding(20.dp)
-                        )
-                        Row {
-                        Button(
-                            colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
-                            onClick = { navController.navigate(Screen.Register.ruter) }) {
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center //
+          ) {
+            //Logo
+            Image(
+              painter = painterResource(id = R.drawable.skiltskern),
+              contentDescription = "skiltskern",
+              modifier = Modifier.size(200.dp)
+            )
+            Text(
+                text = stringResource(R.string.login_melding_favoritter),
+                fontSize = 20.sp,
+                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+                modifier = modifier.padding(20.dp),
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+            Row {
+              Button(
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
+                onClick = { navController.navigate(Screen.Register.ruter) }) {
 
-                        Text(
-                             text = stringResource(R.string.registrer),
-                             fontSize = 20.sp,
-                             color = colorResource(id = R.color.TEXTLIGHT)
-                            )
-                        }
-                        Spacer(modifier = Modifier.width(16.dp))
-                        Button(
-                            colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
-                            onClick = { navController.navigate(Screen.Login.ruter) }
+                Text(
+                  text = stringResource(R.string.registrer),
+                  fontSize = 20.sp,
+                  color = colorResource(id = R.color.TEXTLIGHT)
+                )
+              }
+              Spacer(modifier = Modifier.width(16.dp))
+              Button(
+                colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
+                onClick = { navController.navigate(Screen.Login.ruter) }
 
-                        ) {
+              ) {
 
-                        Text(
-                            text = stringResource(R.string.logg_inn),
-                            fontSize = 20.sp,
-                            color = colorResource(id = R.color.TEXTLIGHT)
-                                )
-                            }
-                        }
-                    }
-                    } else {
-                        FavoritterDropdownMeny(
-                            viewModel = viewModel(),
-                            navController = navController
-                        )
-                    }
-                }
+                Text(
+                  text = stringResource(R.string.logg_inn),
+                  fontSize = 20.sp,
+                  color = colorResource(id = R.color.TEXTLIGHT)
+                )
+              }
             }
+          }
+        } else {
+          FavoritterDropdownMeny(
+            viewModel = viewModel(),
+            navController = navController
+          )
         }
+      }
     }
-
+  }
+}

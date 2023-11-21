@@ -1,9 +1,6 @@
 package com.example.mob3000oblig
 
-import android.content.res.Configuration
-import androidx.browser.trusted.ScreenOrientation
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,20 +11,16 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -36,27 +29,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import io.grpc.okhttp.internal.Platform.TlsExtensionType
 import java.util.regex.Pattern
 
 
 class Start {
-
   enum class ScreenRotation(val degrees: Float) {
     VENSTRE_90(-90f), HOYRE_90(90f), NORMAL(0f)
   }
+
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
-    val containerColor = colorResource(R.color.PRIMARY_LIGHTOGDARK)
     val config = LocalConfiguration.current
 
     Column(modifier = modifier.fillMaxSize()) {
@@ -64,7 +52,6 @@ class Start {
         modifier = modifier
           .fillMaxSize()
           .verticalScroll(rememberScrollState())
-          .background(colorResource(id = R.color.LIGHT_BACKGROUNDD))
       ) {
         //Hoved-kolonnen
         Column(
@@ -116,7 +103,7 @@ class Start {
               Text("Skriv inn gyldig skiltnummer!")
             }
             Button(
-              colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
+              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
               onClick = {
                 navController.navigate(Screen.Info.withArgs(licenseNumberQuery))
               },
@@ -126,7 +113,7 @@ class Start {
               Text(
                 text = "Søk",
                 fontSize = 16.sp,
-                color = colorResource(id = R.color.TEXTLIGHT)
+                color = Color.Black
               )
             }
           }
@@ -134,19 +121,18 @@ class Start {
           //Sammenlign-knapp
           Button(
             onClick = { navController.navigate(Screen.Sammenlign.ruter) },
-            colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
           ) {
             Icon(
               imageVector = Icons.Filled.List,
               contentDescription = null,
               modifier = Modifier.size(36.dp),
-              colorResource(id = R.color.TEXTLIGHT)
-
+              tint = Color.Black
             )
             Text(
               text = "SAMMENLIGN",
               fontSize = 30.sp,
-              color = colorResource(id = R.color.TEXTLIGHT)
+              color = Color.Black,
             )
 
           }
@@ -158,37 +144,36 @@ class Start {
             //Kamera-knapp
             Button(
               onClick = { navController.navigate(Screen.Kamera.ruter) },
-              colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
+              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
             ) {
               Icon(
                 imageVector = Icons.Filled.Search,
                 contentDescription = null,
                 modifier = Modifier.size(36.dp),
-                colorResource(id = R.color.TEXTLIGHT)
+                tint = Color.Black
               )
               Text(
                 text = "KAMERA",
                 fontSize = 16.sp,
-                color = colorResource(id = R.color.TEXTLIGHT)
-
-                )
-              }
+                color = Color.Black
+              )
+            }
 
             //Favoritter-knapp
             Button(
               onClick = { navController.navigate(Screen.Favoritter.ruter) },
-              colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK))
+              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
               Icon(
                 imageVector = Icons.Filled.Star,
                 contentDescription = null,
                 modifier = Modifier.size(36.dp),
-                colorResource(id = R.color.TEXTLIGHT)
+                tint = Color.Black
               )
               Text(
                 text = "FAVORITTER",
                 fontSize = 16.sp,
-                color = colorResource(id = R.color.TEXTLIGHT)
+                color = Color.Black
               )
             }
           }
