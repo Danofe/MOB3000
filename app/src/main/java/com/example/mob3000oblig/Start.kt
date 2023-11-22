@@ -108,7 +108,7 @@ class Start {
             Button(
               colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
               onClick = {
-                navController.navigate(Screen.Info.withArgs(licenseNumberQuery))
+                navController.navigate(Screen.Info.withArgs(licenseNumberQuery.uppercase()))
               },
               enabled = !licenseNumberQuery.isEmpty() && !showError
             )
@@ -137,7 +137,6 @@ class Start {
               fontSize = 30.sp,
               color = Color.Black,
             )
-
           }
           // Rad for Kamera og Favoritter
           Row(

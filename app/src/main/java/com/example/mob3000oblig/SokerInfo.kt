@@ -70,7 +70,6 @@ class SokerInfo {
         )
       }
     }
-
     Column(
       modifier = modifier
       .verticalScroll(rememberScrollState()),
@@ -86,12 +85,10 @@ class SokerInfo {
 
 
         Text(
-          text = "${name?.uppercase()}",
+          text = "$name",
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
         )
-
-
 
           // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
 
@@ -348,7 +345,7 @@ class SokerInfo {
 
             )
             {
-              Text(visMerKnappText)
+              Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
             }
 
             Button(
