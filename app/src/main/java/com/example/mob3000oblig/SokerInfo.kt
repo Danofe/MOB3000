@@ -70,7 +70,6 @@ class SokerInfo {
         )
       }
     }
-
     Column(
       modifier = modifier
         .padding(8.dp)
@@ -91,7 +90,7 @@ class SokerInfo {
           verticalArrangement = Arrangement.Top
         ) {
         Text(
-          text = "${name?.uppercase()}",
+          text = "$name",
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
           modifier = modifier
@@ -125,12 +124,12 @@ class SokerInfo {
               Toast.makeText(
                 context,
                 "$name er lagt til som favoritt",
-                Toast.LENGTH_SHORT
+                Toast.LENGTH_LONG
               ).show()
             },
             enabled = (Auth.innlogget() && !lagtInn)
           ) {
-          Text("Legg til i favoritter")
+          Text("Legg til i favoritter", color = MaterialTheme.colorScheme.onSurface)
         }
         }
         Spacer(modifier = modifier.width(50.dp))
@@ -392,7 +391,7 @@ class SokerInfo {
                 .align(Alignment.CenterHorizontally)
             )
             {
-              Text(visMerKnappText)
+              Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
             }
             Spacer(modifier = modifier.height(50.dp))
 

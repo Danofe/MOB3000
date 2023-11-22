@@ -27,6 +27,7 @@ import com.example.mob3000oblig.Favoritter.Favoritter
 import com.example.mob3000oblig.Kamera.Kamera
 import com.example.mob3000oblig.Login.Login
 import com.example.mob3000oblig.Registrer.Register
+import com.example.mob3000oblig.Sammenlign.Sammenlign
 import com.example.mob3000oblig.Screen
 import com.example.mob3000oblig.Settings.settings
 import com.example.mob3000oblig.SokerInfo
@@ -101,6 +102,10 @@ fun Nav() {
 
       composable(route = Screen.Kamera.ruter) {
         Kamera().HovedSkjerm(navController = navController)
+      }
+
+      composable(route = Screen.Sammenlign.ruter) {
+        Sammenlign().SammenlignSkjerm()
       }
 
       composable(route = Screen.Info.ruter + "/{name}",
