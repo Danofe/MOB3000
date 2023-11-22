@@ -72,93 +72,42 @@ class SokerInfo {
     }
     Column(
       modifier = modifier
-        .padding(8.dp)
-        .padding(bottom = 40.dp)
-        .fillMaxSize(),
+      .verticalScroll(rememberScrollState()),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-      verticalArrangement = Arrangement.Center
+     verticalArrangement = Arrangement.spacedBy(16.dp)
+
     ) {
       val verdi = bilInfoVariabler(bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
       val error = "Ikke oppgitt"
       var lagtInn by remember { mutableStateOf(false) }
-        Column(
-          modifier = modifier
-            .padding(top = 40.dp),
-          horizontalAlignment = Alignment.CenterHorizontally,
-          verticalArrangement = Arrangement.Top
-        ) {
+
+
         Text(
           text = "$name",
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
-          modifier = modifier
-            //  .align(Alignment.TopCenter)
-            .padding(top = 40.dp)
         )
-          Button(
-            onClick = {
-              Firestore.leggInnFavoritt(
-                name,
-                verdi.merke,
-                verdi.hk,
-                verdi.antSeter,
-                verdi.farge,
-                verdi.type,
-                verdi.toppHastighet,
-                verdi.drivstoff,
-                verdi.girtyp,
-                verdi.lengde,
-                verdi.hoyde,
-                verdi.bredde,
-                verdi.vekt,
-                verdi.hybrid,
-                verdi.sistgodkjent,
-                verdi.nesteEU,
-                verdi.forsteReg,
-                verdi.antdorer,
-                verdi.handelsbetegnelse
-              )
-              lagtInn = true
-              Toast.makeText(
-                context,
-                "$name er lagt til som favoritt",
-                Toast.LENGTH_LONG
-              ).show()
-            },
-            enabled = (Auth.innlogget() && !lagtInn)
-          ) {
-          Text("Legg til i favoritter", color = MaterialTheme.colorScheme.onSurface)
-        }
-        }
-        Spacer(modifier = modifier.width(50.dp))
-        Column(
-          modifier = modifier
-            .padding(top = 40.dp)
-            .padding(8.dp),
-          horizontalAlignment = Alignment.CenterHorizontally,
-          verticalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
+
           // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
 
           if (verdi.merke != error) {
             Box(
               modifier = modifier
-                .height(370.dp)
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState())
+
             ) {
             Card() {
             Row(
               modifier = modifier
-                .fillMaxWidth(),
-              horizontalArrangement = Arrangement.spacedBy(16.dp)
+              .align(Alignment.CenterHorizontally),
+              horizontalArrangement = Arrangement.spacedBy(16.dp),
+
+
             ) {
               Column(
-                modifier = modifier
-                  .padding(8.dp),
-                verticalArrangement = Arrangement.spacedBy(15.dp)
+                modifier = modifier,
+                verticalArrangement = Arrangement.spacedBy(8.dp)
 
               ) {
                 Text(
@@ -255,11 +204,9 @@ class SokerInfo {
                 }
               }
 
-                //Spacer(modifier = modifier.width(30.dp))
                 Column(
-                  modifier = modifier
-                    .padding(8.dp),
-                  verticalArrangement = Arrangement.spacedBy(15.dp)
+                  modifier = modifier,
+                  verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                   Text(
                     text = verdi.merke,
@@ -380,22 +327,65 @@ class SokerInfo {
                 }
               }
             }
+
             }
-            Spacer(modifier = modifier.width(50.dp))
+            Row(
+              modifier = Modifier
+              .padding(vertical = 8.dp)
+              .align(Alignment.CenterHorizontally),
+              horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+
             Button(
               onClick = {
                 visMerKnapp = !visMerKnapp
                 visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
               },
               modifier = modifier
-                .align(Alignment.CenterHorizontally)
+
             )
             {
               Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
             }
-            Spacer(modifier = modifier.height(50.dp))
 
-          } else {
+            Button(
+              onClick = {
+                Firestore.leggInnFavoritt(
+                  name,
+                  verdi.merke,
+                  verdi.hk,
+                  verdi.antSeter,
+                  verdi.farge,
+                  verdi.type,
+                  verdi.toppHastighet,
+                  verdi.drivstoff,
+                  verdi.girtyp,
+                  verdi.lengde,
+                  verdi.hoyde,
+                  verdi.bredde,
+                  verdi.vekt,
+                  verdi.hybrid,
+                  verdi.sistgodkjent,
+                  verdi.nesteEU,
+                  verdi.forsteReg,
+                  verdi.antdorer,
+                  verdi.handelsbetegnelse
+                )
+                lagtInn = true
+                Toast.makeText(
+                  context,
+                  "$name er lagt til som favoritt",
+                  Toast.LENGTH_SHORT
+                ).show()
+              },
+              enabled = (Auth.innlogget() && !lagtInn)
+            ) {
+              Text("Legg til i favoritter")
+            }
+
+            }
+          }
+          else {
             Column(
               horizontalAlignment = Alignment.CenterHorizontally,
               verticalArrangement = Arrangement.Center,
@@ -415,7 +405,8 @@ class SokerInfo {
                 )
             }
           }
+      Spacer(modifier = modifier.padding(bottom = 84.dp))
         }
+
     }
   }
-}

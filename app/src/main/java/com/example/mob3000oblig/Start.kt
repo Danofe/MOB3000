@@ -1,11 +1,14 @@
 package com.example.mob3000oblig
 
+import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -39,9 +42,6 @@ import java.util.regex.Pattern
 
 
 class Start {
-  enum class ScreenRotation(val degrees: Float) {
-    VENSTRE_90(-90f), HOYRE_90(90f), NORMAL(0f)
-  }
 
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
@@ -57,13 +57,11 @@ class Start {
         //Hoved-kolonnen
         Column(
           modifier = modifier
-            .padding(16.dp)
             .fillMaxSize(),
+
           horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
           verticalArrangement = Arrangement.spacedBy(8.dp), //Spacing mellom alt som er i denne kolonnen
-
         ) {
-
           //Logo
           Image(
             painter = painterResource(id = R.drawable.skiltskern),
@@ -86,9 +84,9 @@ class Start {
 
           // Kolonne for Tekstfield og Søkknappen
           Column(
-            modifier = Modifier.padding(24.dp),
+            modifier = Modifier.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-            verticalArrangement = Arrangement.spacedBy(16.dp) //Spacing mellom textfield og søk-knapp
+            verticalArrangement = Arrangement.spacedBy(8.dp) //Spacing mellom textfield og søk-knapp
           ) {
 
             TextField(
@@ -142,7 +140,9 @@ class Start {
           }
           // Rad for Kamera og Favoritter
           Row(
-            modifier = Modifier.padding(vertical = 8.dp),
+            modifier = Modifier
+              .padding(vertical = 8.dp)
+              .align(Alignment.CenterHorizontally),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
           ) {
             //Kamera-knapp
@@ -181,8 +181,10 @@ class Start {
               )
             }
           }
+          Spacer(modifier = modifier.padding(bottom = 84.dp))
+
+          }
         }
       }
     }
   }
-}

@@ -60,9 +60,9 @@ class Login {
       ) {
         Column(
           modifier = modifier
-            .padding(8.dp),
-          verticalArrangement = Arrangement.spacedBy(16.dp),
+            .fillMaxSize(),
           horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
+          verticalArrangement = Arrangement.spacedBy(8.dp),
 
         ) {
           Image(
@@ -179,6 +179,7 @@ class Login {
               fontSize = 20.sp,
             )
           }
+          Spacer(modifier = modifier.padding(bottom = 200.dp))
         }
       }
     }
