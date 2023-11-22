@@ -37,21 +37,20 @@ class Favoritter {
     modifier: Modifier = Modifier,
     navController: NavController
   ) {
-    Column(
-      modifier = modifier
+    Column(modifier = modifier.fillMaxSize()
     ) {
       Box(
         modifier = Modifier
           .fillMaxSize()
           .verticalScroll(rememberScrollState())
+
       ) {
         if (Auth().currentUser == null) {
           Column(
             modifier = modifier
-              .padding(8.dp)
               .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center //
+            verticalArrangement = Arrangement.spacedBy(8.dp)
           ) {
             //Logo
             Image(
@@ -66,7 +65,12 @@ class Favoritter {
               modifier = modifier.padding(20.dp),
               color = MaterialTheme.colorScheme.onBackground,
             )
-            Row {
+            Row(
+              modifier
+              .padding(vertical = 8.dp)
+              .align(Alignment.CenterHorizontally),
+              horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
               Button(
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 onClick = { navController.navigate(Screen.Register.ruter) }) {
@@ -77,21 +81,21 @@ class Favoritter {
                   color = MaterialTheme.colorScheme.onSurface,
                 )
               }
-              Spacer(modifier = Modifier.width(16.dp))
+
               Button(
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 onClick = { navController.navigate(Screen.Login.ruter) }
-
               ) {
-
                 Text(
                   text = stringResource(R.string.logg_inn),
                   fontSize = 20.sp,
                   color = MaterialTheme.colorScheme.onSurface,
                 )
               }
+              Spacer(modifier = modifier.padding(bottom = 200.dp))
             }
           }
+
         } else {
           FavoritterDropdownMeny(
             viewModel = viewModel(),

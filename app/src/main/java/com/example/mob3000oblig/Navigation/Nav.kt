@@ -40,18 +40,17 @@ fun Nav() {
   val viewModel: APIViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
     .create(APIViewModel::class.java)
   Scaffold(
+    modifier = Modifier.fillMaxSize(),
     bottomBar = {
-      NavigationBar {
+      NavigationBar(
+      ) {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
         val currentDestination: NavDestination? = navBackStackEntry?.destination
-
         listOfBottonNavigationItem.forEach { bottonNavigationItem: BottomNavigationItem ->
           NavigationBarItem(
             selected = currentDestination?.hierarchy?.any { it.route == bottonNavigationItem.route } == true,
             onClick = {
-              //Log.d("Navigation", "Clicked on ${bottonNavigationItem.label}")
               navController.navigate(bottonNavigationItem.route) {
-                // Log.d("ROUTE", "Clicked on ${bottonNavigationItem.route}")
                 popUpTo(navController.graph.findStartDestination().id) {
                   saveState = true
                 }
@@ -80,7 +79,8 @@ fun Nav() {
 
     NavHost(
       navController = navController,
-      startDestination = Screen.Start.ruter
+      startDestination = Screen.Start.ruter,
+      modifier = Modifier.fillMaxSize()
     ) {
 
       composable(route = Screen.Login.ruter) {
@@ -96,7 +96,7 @@ fun Nav() {
       }
 
       composable(route = Screen.Settings.ruter) {
-        settings().SettingsPage(navController = navController)
+        settings().SettingsPage(navController = navController, modifier = Modifier)
       }
 
       composable(route = Screen.Kamera.ruter) {
