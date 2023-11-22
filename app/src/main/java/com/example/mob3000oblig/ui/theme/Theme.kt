@@ -1,13 +1,11 @@
 package com.example.mob3000oblig.ui.theme
 
 import android.app.Activity
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
@@ -16,13 +14,15 @@ import androidx.core.view.WindowCompat
 private val darkColorScheme = darkColorScheme(
   primary = PrimaryColor,
   onBackground = TextDark,
-  background = BackgroundDark
+  background = BackgroundDark,
+  onSurface = BackgroundDark
 )
 
 private val lightColorScheme = lightColorScheme(
   primary = PrimaryColor,
   onBackground = TextLight,
-  background = BackgroundLight
+  background = BackgroundLight,
+  onSurface = BackgroundDark
 
   /* Other default colors to override
   background = Color(0xFFFFFBFE),
@@ -38,7 +38,7 @@ private val lightColorScheme = lightColorScheme(
 
 @Composable
 fun AppTheme(
-darkTheme: Boolean,
+  darkTheme: Boolean,
   content: @Composable () -> Unit,
 ) {
   MaterialTheme(

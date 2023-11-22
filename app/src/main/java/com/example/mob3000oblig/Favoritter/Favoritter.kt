@@ -1,7 +1,6 @@
 package com.example.mob3000oblig.Favoritter
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,7 +33,7 @@ import com.example.mob3000oblig.Screen
 class Favoritter {
 
   @Composable
-  fun favoritterSkjerm(
+  fun FavoritterSkjerm(
     modifier: Modifier = Modifier,
     navController: NavController
   ) {
@@ -43,16 +42,14 @@ class Favoritter {
     ) {
       Box(
         modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
+          .fillMaxSize()
+          .verticalScroll(rememberScrollState())
       ) {
         if (Auth().currentUser == null) {
           Column(
             modifier = modifier
-                .padding(8.dp)
-                .fillMaxSize(),
-
-
+              .padding(8.dp)
+              .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center //
           ) {
@@ -63,26 +60,26 @@ class Favoritter {
               modifier = Modifier.size(200.dp)
             )
             Text(
-                text = stringResource(R.string.login_melding_favoritter),
-                fontSize = 20.sp,
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center,
-                modifier = modifier.padding(20.dp),
-                color = MaterialTheme.colorScheme.onBackground,
-              )
+              text = stringResource(R.string.login_melding_favoritter),
+              fontSize = 20.sp,
+              textAlign = androidx.compose.ui.text.style.TextAlign.Center,
+              modifier = modifier.padding(20.dp),
+              color = MaterialTheme.colorScheme.onBackground,
+            )
             Row {
               Button(
-                colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 onClick = { navController.navigate(Screen.Register.ruter) }) {
 
                 Text(
                   text = stringResource(R.string.registrer),
                   fontSize = 20.sp,
-                  color = colorResource(id = R.color.TEXTLIGHT)
+                  color = MaterialTheme.colorScheme.onSurface,
                 )
               }
               Spacer(modifier = Modifier.width(16.dp))
               Button(
-                colors = ButtonDefaults.buttonColors(colorResource(R.color.PRIMARY_LIGHTOGDARK)),
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
                 onClick = { navController.navigate(Screen.Login.ruter) }
 
               ) {
@@ -90,7 +87,7 @@ class Favoritter {
                 Text(
                   text = stringResource(R.string.logg_inn),
                   fontSize = 20.sp,
-                  color = colorResource(id = R.color.TEXTLIGHT)
+                  color = MaterialTheme.colorScheme.onSurface,
                 )
               }
             }

@@ -20,6 +20,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -53,7 +54,7 @@ class settings {
             Button(onClick = { navController.navigate(Screen.Login.ruter) }) {
               Text(
                 text = "Login",
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 12.sp
               )
             }
@@ -66,7 +67,7 @@ class settings {
             Button(onClick = { navController.navigate(Screen.Register.ruter) }) {
               Text(
                 text = "Registrer",
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 12.sp
               )
             }
@@ -92,6 +93,7 @@ class settings {
           ) {
             Text(
               text = "Profil",
+              color = MaterialTheme.colorScheme.onBackground,
               fontSize = 20.sp,
               fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
             )
@@ -105,7 +107,6 @@ class settings {
           ) {
             Card(
               modifier = Modifier
-
                 .align(Alignment.CenterHorizontally)
             ) {
               ProfilCard()
@@ -150,7 +151,17 @@ class settings {
           OutlinedTextField(
             value = passord,
             onValueChange = { passord = it },
-            label = { Text(text = "Nytt Passord") },
+            label = {
+              Text(
+                text = "Nytt Passord",
+                color = MaterialTheme.colorScheme.onBackground
+              )
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+              MaterialTheme.colorScheme.onBackground,
+              cursorColor = MaterialTheme.colorScheme.onBackground,
+              focusedBorderColor = MaterialTheme.colorScheme.onBackground
+            ),
             modifier = Modifier
               .fillMaxWidth()
               .padding(8.dp)
@@ -164,7 +175,10 @@ class settings {
                      Toast.LENGTH_SHORT
                    ).show()
                  }) {
-            Text(text = "Bytt passord")
+            Text(
+              text = "Bytt passord",
+              color = MaterialTheme.colorScheme.onSurface,
+            )
 
           }
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -172,11 +186,14 @@ class settings {
                    Auth().loggUt()
                    Toast.makeText(
                      context,
-                     "Logget ut",
+                     "${Auth().hentBrukerEmail()} logget ut",
                      Toast.LENGTH_SHORT
                    ).show()
                  }) {
-            Text(text = "Logg ut")
+            Text(
+              text = "Logg ut",
+              color = MaterialTheme.colorScheme.onSurface,
+            )
           }
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
                  colors = ButtonDefaults.buttonColors(Color.Red),
@@ -184,11 +201,14 @@ class settings {
                    Auth().slettBruker()
                    Toast.makeText(
                      context,
-                     "Du har slettet brukeren",
+                     "${Auth().hentBrukerEmail()} slettet",
                      Toast.LENGTH_SHORT
                    ).show()
                  }) {
-            Text(text = "Slett bruker")
+            Text(
+              text = "Slett bruker",
+              color = MaterialTheme.colorScheme.onSurface,
+            )
           }
         }
       }
@@ -259,8 +279,8 @@ class settings {
             Button(onClick = {/*TODO: darkmode */ }) {
               Text(
                 text = "Darkmode",
-                color = Color.Black,
-                fontSize = 12.sp
+                color = MaterialTheme.colorScheme.onSurface,
+                fontSize = 12.sp,
               )
             }
           }
@@ -270,7 +290,7 @@ class settings {
             Button(onClick = { /*TODO: lightmode */ }) {
               Text(
                 text = "Lightmode",
-                color = Color.Black,
+                color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 12.sp
               )
             }

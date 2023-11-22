@@ -42,7 +42,7 @@ private fun ImgenTillatelseInnhold(
     Button(onClick = onRequestPermission) {
       Text(
         text = "Tillat",
-        color = Color.Black,
+        color = MaterialTheme.colorScheme.onSurface,
       )
     }
   }
