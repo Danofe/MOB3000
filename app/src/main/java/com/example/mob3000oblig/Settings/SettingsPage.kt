@@ -37,7 +37,6 @@ import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth
 import com.example.mob3000oblig.Screen
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
-import com.example.mob3000oblig.ui.theme.getAppThemeState
 
 
 class SettingsPage {
