@@ -84,19 +84,15 @@ class SokerInfo {
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
         )
-          // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
           if (verdi.merke != error) {
             Box(
               modifier = modifier
-
             ) {
             Card() {
             Row(
               modifier = modifier
               .align(Alignment.CenterHorizontally),
               horizontalArrangement = Arrangement.spacedBy(16.dp),
-
-
             ) {
               Column(
                 modifier = modifier,
@@ -196,7 +192,6 @@ class SokerInfo {
                   )
                 }
               }
-
                 Column(
                   modifier = modifier,
                   verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -320,88 +315,86 @@ class SokerInfo {
                 }
               }
             }
+          }
+          Row(
+            modifier = Modifier
+            .padding(vertical = 8.dp)
+            .align(Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+          ) {
 
-            }
-            Row(
-              modifier = Modifier
-              .padding(vertical = 8.dp)
-              .align(Alignment.CenterHorizontally),
-              horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
+          Button(
+            onClick = {
+              visMerKnapp = !visMerKnapp
+              visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
+            },
+            modifier = modifier
 
-            Button(
-              onClick = {
-                visMerKnapp = !visMerKnapp
-                visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
-              },
-              modifier = modifier
+          )
+          {
+            Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
+          }
 
+          Button(
+            onClick = {
+              Firestore.leggInnFavoritt(
+                name,
+                verdi.merke,
+                verdi.hk,
+                verdi.antSeter,
+                verdi.farge,
+                verdi.type,
+                verdi.toppHastighet,
+                verdi.drivstoff,
+                verdi.girtyp,
+                verdi.lengde,
+                verdi.hoyde,
+                verdi.bredde,
+                verdi.vekt,
+                verdi.hybrid,
+                verdi.sistgodkjent,
+                verdi.nesteEU,
+                verdi.forsteReg,
+                verdi.antdorer,
+                verdi.handelsbetegnelse
+              )
+              lagtInn = true
+              Toast.makeText(
+                context,
+                "$name er lagt til som favoritt",
+                Toast.LENGTH_SHORT
+              ).show()
+            },
+            enabled = (Auth.innlogget() && !lagtInn)
+          ) {
+            Text("Legg til i favoritter",
+              color = MaterialTheme.colorScheme.onSurface
             )
-            {
-              Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
-            }
-
-            Button(
-              onClick = {
-                Firestore.leggInnFavoritt(
-                  name,
-                  verdi.merke,
-                  verdi.hk,
-                  verdi.antSeter,
-                  verdi.farge,
-                  verdi.type,
-                  verdi.toppHastighet,
-                  verdi.drivstoff,
-                  verdi.girtyp,
-                  verdi.lengde,
-                  verdi.hoyde,
-                  verdi.bredde,
-                  verdi.vekt,
-                  verdi.hybrid,
-                  verdi.sistgodkjent,
-                  verdi.nesteEU,
-                  verdi.forsteReg,
-                  verdi.antdorer,
-                  verdi.handelsbetegnelse
-                )
-                lagtInn = true
-                Toast.makeText(
-                  context,
-                  "$name er lagt til som favoritt",
-                  Toast.LENGTH_SHORT
-                ).show()
-              },
-              enabled = (Auth.innlogget() && !lagtInn)
-            ) {
-              Text("Legg til i favoritter",
-                color = MaterialTheme.colorScheme.onSurface
-              )
-            }
-
-            }
           }
-          else {
-            Column(
-              horizontalAlignment = Alignment.CenterHorizontally,
-              verticalArrangement = Arrangement.Center,
-              modifier = modifier.fillMaxSize()
-            ) {
-              Image(
-                painter = painterResource(id = R.drawable.skiltskern),
-                contentDescription = "skiltskern",
-                modifier = Modifier.size(200.dp)
-              )
 
-              Text(
-                text = "Fant ingen kjøretøy med dette skiltnummeret.",
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onBackground,
-                )
-            }
           }
-      Spacer(modifier = modifier.padding(bottom = 84.dp))
         }
+        else {
+          Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxSize()
+          ) {
+            Image(
+              painter = painterResource(id = R.drawable.skiltskern),
+              contentDescription = "skiltskern",
+              modifier = Modifier.size(200.dp)
+            )
 
+            Text(
+              text = "Fant ingen kjøretøy med dette skiltnummeret.",
+              fontSize = 20.sp,
+              textAlign = TextAlign.Center,
+              color = MaterialTheme.colorScheme.onBackground
+            )
+          }
+        }
+        Spacer(modifier = modifier.padding(bottom = 84.dp))
+      }
     }
   }

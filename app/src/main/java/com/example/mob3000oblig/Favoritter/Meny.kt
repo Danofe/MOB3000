@@ -1,4 +1,4 @@
-package com.example.mob3000oblig.Sammenlign
+package com.example.mob3000oblig.Favoritter
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
