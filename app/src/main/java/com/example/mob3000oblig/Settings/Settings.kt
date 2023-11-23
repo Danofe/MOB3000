@@ -37,10 +37,9 @@ import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth
 import com.example.mob3000oblig.Screen
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
-import com.example.mob3000oblig.ui.theme.getAppThemeState
 
 
-class SettingsPage {
+class Settings {
   @Composable
   fun Profil(navController: NavController) {
     if (!Auth().innlogget()) {
@@ -219,7 +218,7 @@ class SettingsPage {
   }
 
   @Composable
-  fun Settings() {
+  fun SettingsCard() {
     Card(
       modifier = Modifier.padding(32.dp)
     ) {
@@ -359,7 +358,7 @@ class SettingsPage {
         .verticalScroll(rememberScrollState())
     ) {
       Profil(navController)
-      Settings()
+      SettingsCard()
       Terms()
       Spacer(modifier = modifier.padding(bottom = 84.dp))
 
