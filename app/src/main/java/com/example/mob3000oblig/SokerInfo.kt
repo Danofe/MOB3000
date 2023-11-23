@@ -86,10 +86,6 @@ class SokerInfo {
               fontSize = 40.sp,
               color = MaterialTheme.colorScheme.onBackground,
             )
-           // Box(
-             // modifier = modifier
-
-           // ) {
             Card() {
             Row(
               modifier = modifier
@@ -319,8 +315,6 @@ class SokerInfo {
                 }
               }
             }
-
-            //}
             Row(
               modifier = Modifier
               .padding(vertical = 8.dp)
