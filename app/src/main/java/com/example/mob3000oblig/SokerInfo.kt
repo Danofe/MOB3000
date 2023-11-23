@@ -73,11 +73,11 @@ class SokerInfo {
     Column(
       modifier = modifier
       .verticalScroll(rememberScrollState())
-        .padding(top = 25.dp,bottom = 20.dp),
+        .padding(top = 18.dp,bottom = 20.dp),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-     verticalArrangement = Arrangement.spacedBy(25.dp)
-
-    ) {
+     verticalArrangement = Arrangement.spacedBy(20.dp)
+    )
+     {
       val verdi = bilInfoVariabler(bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
@@ -98,10 +98,9 @@ class SokerInfo {
             Card() {
             Row(
               modifier = modifier
-              .align(Alignment.CenterHorizontally),
+              .align(Alignment.CenterHorizontally)
+                .padding(20.dp),
               horizontalArrangement = Arrangement.spacedBy(16.dp),
-
-
             ) {
               Column(
                 modifier = modifier,
@@ -378,9 +377,8 @@ class SokerInfo {
               },
               enabled = (Auth.innlogget() && !lagtInn)
             ) {
-              Text("Legg til i favoritter")
-            }
-
+              Text("Legg til i favoritter", color = MaterialTheme.colorScheme.onSurface)
+              }
             }
           }
           else {
