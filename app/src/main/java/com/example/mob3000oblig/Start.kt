@@ -1,5 +1,7 @@
 package com.example.mob3000oblig
 
+import android.content.res.Configuration
+import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -7,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -45,6 +48,7 @@ class Start {
   @Composable
   fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
     val config = LocalConfiguration.current
+    val orientation = LocalConfiguration.current.orientation
 
     Column(modifier = modifier.fillMaxSize()) {
       Box(
@@ -61,12 +65,15 @@ class Start {
           verticalArrangement = Arrangement.spacedBy(8.dp), //Spacing mellom alt som er i denne kolonnen
         ) {
           //Logo
-          Image(
-            painter = painterResource(id = R.drawable.skiltskern),
-            contentDescription = "skiltskern",
-            modifier = Modifier.size(200.dp)
-          )
-
+          if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            //Tom space for å fjerne logo fra landskap
+          } else {
+            Image(
+              painter = painterResource(id = R.drawable.skiltskern),
+              contentDescription = "skiltskern",
+              modifier = Modifier.size(200.dp)
+            )
+          }
           //---- Søke skiltnr
 
           fun isValidLicenseNumber(licenseNumberStr: String?) = licenseNumberStr?.let {

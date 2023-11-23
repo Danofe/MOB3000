@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.mob3000oblig.Auth
 import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Screen
 
@@ -45,102 +46,107 @@ class Register {
     registerViewModel: RegisterViewModel? = viewModel()
   ) {
 
-    val context = LocalContext.current
-    val regUiState = registerViewModel?.reguiState
-    var showError by remember { mutableStateOf(false) }
+    if (Auth().innlogget()) {
+      navController.navigate(Screen.Start.ruter)
+    } else {
+
+      val context = LocalContext.current
+      val regUiState = registerViewModel?.reguiState
+      var showError by remember { mutableStateOf(false) }
 
 
-    Column(modifier = modifier.padding()) {
-      Box(
-        modifier = modifier
-          .fillMaxSize()
-          .verticalScroll(rememberScrollState())
-      ) {
-        Column(
+      Column(modifier = modifier.padding()) {
+        Box(
           modifier = modifier
-            .fillMaxSize(),
-          horizontalAlignment = Alignment.CenterHorizontally,
-          verticalArrangement = Arrangement.spacedBy(16.dp),
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
         ) {
-          Image(
-            painter = painterResource(id = R.drawable.skiltskern),
-            contentDescription = "skiltskern",
-            modifier = Modifier.size(200.dp)
-          )
+          Column(
+            modifier = modifier
+              .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+          ) {
+            Image(
+              painter = painterResource(id = R.drawable.skiltskern),
+              contentDescription = "skiltskern",
+              modifier = Modifier.size(200.dp)
+            )
 
-          TextField(
-            value = regUiState?.emailReg ?: "",
-            onValueChange = { registerViewModel?.onEmailRegChange(it) },
-            label = {
-              Text(
-                text = "E-post",
-                color = MaterialTheme.colorScheme.onBackground
+            TextField(
+              value = regUiState?.emailReg ?: "",
+              onValueChange = { registerViewModel?.onEmailRegChange(it) },
+              label = {
+                Text(
+                  text = "E-post",
+                  color = MaterialTheme.colorScheme.onBackground
+                )
+              },
+              modifier = modifier.align(Alignment.CenterHorizontally),
+              colors = TextFieldDefaults.textFieldColors(
+                MaterialTheme.colorScheme.onBackground,
+                cursorColor = MaterialTheme.colorScheme.onBackground
               )
-            },
-            modifier = modifier.align(Alignment.CenterHorizontally),
-            colors = TextFieldDefaults.textFieldColors(
-              MaterialTheme.colorScheme.onBackground,
-              cursorColor = MaterialTheme.colorScheme.onBackground
             )
-          )
-          TextField(
-            value = regUiState?.passordReg ?: "",
-            onValueChange = { registerViewModel?.onPassordRegChange(it) },
-            label = {
-              Text(
-                "Passord",
-                color = MaterialTheme.colorScheme.onBackground
+            TextField(
+              value = regUiState?.passordReg ?: "",
+              onValueChange = { registerViewModel?.onPassordRegChange(it) },
+              label = {
+                Text(
+                  "Passord",
+                  color = MaterialTheme.colorScheme.onBackground
+                )
+              },
+              modifier = modifier.align(Alignment.CenterHorizontally),
+              colors = TextFieldDefaults.textFieldColors(
+                MaterialTheme.colorScheme.onBackground,
+                cursorColor = MaterialTheme.colorScheme.onBackground
               )
-            },
-            modifier = modifier.align(Alignment.CenterHorizontally),
-            colors = TextFieldDefaults.textFieldColors(
-              MaterialTheme.colorScheme.onBackground,
-              cursorColor = MaterialTheme.colorScheme.onBackground
             )
-          )
-          TextField(
-            value = regUiState?.passordBekreftReg ?: "",
-            onValueChange = { registerViewModel?.onPassordBekRegChange(it) },
-            label = {
-              Text(
-                "Bekreft Passord",
-                color = MaterialTheme.colorScheme.onBackground
+            TextField(
+              value = regUiState?.passordBekreftReg ?: "",
+              onValueChange = { registerViewModel?.onPassordBekRegChange(it) },
+              label = {
+                Text(
+                  "Bekreft Passord",
+                  color = MaterialTheme.colorScheme.onBackground
+                )
+              },
+              modifier = modifier.align(Alignment.CenterHorizontally),
+              colors = TextFieldDefaults.textFieldColors(
+                MaterialTheme.colorScheme.onBackground,
+                cursorColor = MaterialTheme.colorScheme.onBackground
               )
-            },
-            modifier = modifier.align(Alignment.CenterHorizontally),
-            colors = TextFieldDefaults.textFieldColors(
-              MaterialTheme.colorScheme.onBackground,
-              cursorColor = MaterialTheme.colorScheme.onBackground
             )
-          )
-          Row {
-            Button(
-              onClick = { navController.navigate(Screen.Start.ruter) },
-              // TODO: Endre farge i dark og light
-              colors = ButtonDefaults.buttonColors(Color.LightGray),
-            ) {
-              Text(
-                text = "Avbryt",
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 20.sp,
-              )
-            }
-            Spacer(modifier = Modifier.width(8.dp))
-            Button(
-              onClick = { registerViewModel?.lagBruker(context) },
-              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-
+            Row {
+              Button(
+                onClick = { navController.navigate(Screen.Start.ruter) },
+                // TODO: Endre farge i dark og light
+                colors = ButtonDefaults.buttonColors(Color.LightGray),
               ) {
-              Text(
-                text = "Registrer",
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 20.sp,
-              )
+                Text(
+                  text = "Avbryt",
+                  color = MaterialTheme.colorScheme.onSurface,
+                  fontSize = 20.sp,
+                )
+              }
+              Spacer(modifier = Modifier.width(8.dp))
+              Button(
+                onClick = { registerViewModel?.lagBruker(context) },
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+
+                ) {
+                Text(
+                  text = "Registrer",
+                  color = MaterialTheme.colorScheme.onSurface,
+                  fontSize = 20.sp,
+                )
+              }
+
+              Spacer(modifier = modifier.padding(bottom = 200.dp))
             }
 
-            Spacer(modifier = modifier.padding(bottom = 200.dp))
           }
-
         }
       }
     }

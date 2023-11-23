@@ -54,6 +54,7 @@ fun Meny(
             onValueChanged(it) },
         readOnly = true,
         textStyle = TextStyle(
+            color = MaterialTheme.colorScheme.onBackground,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold
         ),

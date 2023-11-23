@@ -16,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -70,27 +71,27 @@ class SokerInfo {
     }
     Column(
       modifier = modifier
-        .verticalScroll(rememberScrollState())
-        .padding(top = 25.dp, bottom = 20.dp),
+      .verticalScroll(rememberScrollState())
+        .padding(top = 18.dp,bottom = 20.dp),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-      verticalArrangement = Arrangement.spacedBy(10.dp)
+     verticalArrangement = Arrangement.spacedBy(20.dp)
     )
-    {
+     {
       val verdi = bilInfoVariabler(bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
       val error = "Ikke oppgitt"
       var lagtInn by remember { mutableStateOf(false) }
 
-      if (verdi.merke != error) {
-        Text(
-          text = "$name",
-          fontSize = 40.sp,
-          color = MaterialTheme.colorScheme.onBackground,
-        )
-        Card() {
-          Row(
-            modifier = modifier
+          if (verdi.merke != error) {
+            Text(
+              text = "$name",
+              fontSize = 40.sp,
+              color = MaterialTheme.colorScheme.onBackground,
+            )
+            Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
+            Row(
+              modifier = modifier
               .align(Alignment.CenterHorizontally)
               .padding(20.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),

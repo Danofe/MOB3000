@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -76,101 +78,117 @@ fun FavoritterSkjerm(
       Spacer(modifier = modifier.height(80.dp))
 
       if (index != -1) {
+        Card (colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)){
         Row(
-          modifier = modifier,
+          modifier = modifier
+          .padding(20.dp),
         ) {
           Column() {
-            Text(text = "Merke")
-            Text(text = "Serie")
-            Text(text = "Type")
-            Text(text = "Farge")
-            Text(text = "Girkassetype")
-            Text(text = "Drivstoff")
-            Text(text = "Hybrid")
-            Text(text = "Hestekrefter")
-            Text(text = "Maks hastighet")
-            Text(text = "Forste registrering")
-            Text(text = "Sitteplasser")
-            Text(text = "Antall dører:")
-            Text(text = "Høyde")
-            Text(text = "Bredde")
-            Text(text = "Lengde")
-            Text(text = "Egenvekt")
-            Text(text = "Sist godkjent:")
-            Text(text = "Neste EU-kontroll:")
+            Text(text = "Merke", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Serie", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Type", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Farge", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Girkassetype", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Drivstoff", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Hybrid", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Hestekrefter", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Maks hastighet", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Forste registrering", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Sitteplasser", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Antall dører:", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Høyde", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Bredde", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Lengde", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Egenvekt", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Sist godkjent:", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = "Neste EU-kontroll:", color = MaterialTheme.colorScheme.onBackground)
           }
           Spacer(modifier = modifier.width(30.dp))
           Column {
             Text(
               kjoretoy.substringAfter("merke=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("serie=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("type=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("farge=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("girinfo=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("drivstoffinfo=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("hybrid=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             if (hestekrefter != "Ikke oppgitt") {
               Text(
                 "$hestekrefter hk",
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
             } else {
               Text(
                 hestekrefter,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
               )
             }
             if (maksHastighet != "Ikke oppgitt") {
               Text(
                 "$maksHastighet km/t",
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
             } else {
               Text(
                 maksHastighet,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
             }
             Text(
               kjoretoy.substringAfter("forstereg=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("sitteplasser=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("antDorer=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
@@ -179,6 +197,7 @@ fun FavoritterSkjerm(
               } else {
                 hoyde
               },
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
@@ -187,6 +206,7 @@ fun FavoritterSkjerm(
               } else {
                 bredde
               },
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
@@ -195,6 +215,7 @@ fun FavoritterSkjerm(
               } else {
                 lengde
               },
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
@@ -203,19 +224,23 @@ fun FavoritterSkjerm(
               } else {
                 vekt
               },
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("sistgodkjent=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("nesteEU=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
           }
+        }
         }
         Button(
           onClick = {
