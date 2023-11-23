@@ -58,7 +58,7 @@ fun Meny(
             fontWeight = FontWeight.Bold
         ),
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .onGloballyPositioned { coordinates ->
                 textFieldSize = coordinates.size.width
             },
