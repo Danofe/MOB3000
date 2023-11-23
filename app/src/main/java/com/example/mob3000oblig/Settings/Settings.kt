@@ -2,7 +2,6 @@ package com.example.mob3000oblig.Settings
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +17,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -35,9 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key.Companion.Refresh
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -53,7 +49,8 @@ class Settings {
   @Composable
   fun Profil(navController: NavController) {
     if (!Auth().innlogget()) {
-      Card(modifier = Modifier.padding(32.dp),
+      Card(
+        modifier = Modifier.padding(32.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
       ) {
         Row(
@@ -123,7 +120,7 @@ class Settings {
             Card(
               modifier = Modifier
                 .align(Alignment.CenterHorizontally),
-                      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+              colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
             ) {
               ProfilCard(navController)
             }
@@ -139,7 +136,7 @@ class Settings {
     val context = LocalContext.current
     Card(
       modifier = Modifier.padding(16.dp),
-              colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
     ) {
       Column(
         Modifier
@@ -253,7 +250,6 @@ class Settings {
       var utvidet by remember {
         mutableStateOf(false)
       }
-
       Column(
         Modifier
           .clickable { utvidet = !utvidet }
@@ -270,7 +266,7 @@ class Settings {
             text = stringResource(R.string.settings),
             fontSize = 20.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground
           )
         }
         AnimatedVisibility(
@@ -282,7 +278,6 @@ class Settings {
         ) {
           Card(
             modifier = Modifier
-
               .align(Alignment.CenterHorizontally),
             colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
           ) {
@@ -305,24 +300,25 @@ class Settings {
             .fillMaxWidth()
             .align(Alignment.CenterHorizontally)
         ) {
-            Row(
-              Modifier.padding(2.dp),
-              verticalAlignment = Alignment.CenterVertically
-            ) {
-              Text(text = stringResource(R.string.change_appearance))
-              Spacer(modifier = Modifier.width(10.dp))
-              Text(text = "Endre utseende",color = MaterialTheme.colorScheme.onBackground,)
-              Switch(
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                colors = SwitchDefaults.colors(
-                  uncheckedThumbColor = MaterialTheme.colorScheme.secondary,
-                  uncheckedTrackColor = MaterialTheme.colorScheme.tertiary,
-                  checkedThumbColor = MaterialTheme.colorScheme.tertiary,
-                ),
-                checked = darkMode,
-                onCheckedChange = { toggleDarkmode() }
-              )
-            }
+          Row(
+            Modifier.padding(2.dp),
+            verticalAlignment = Alignment.CenterVertically
+          ) {
+            Text(
+              text = stringResource(R.string.change_appearance),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+            Switch(
+              colors = SwitchDefaults.colors(
+                uncheckedThumbColor = MaterialTheme.colorScheme.secondary,
+                uncheckedTrackColor = MaterialTheme.colorScheme.tertiary,
+                checkedThumbColor = MaterialTheme.colorScheme.tertiary,
+              ),
+              checked = darkMode,
+              onCheckedChange = { toggleDarkmode() }
+            )
+          }
         }
         LanguageToggle()
       }
@@ -331,8 +327,11 @@ class Settings {
 
   @Composable
   fun LanguageToggle() {
-  // todo: språktoggle
-    Text("Språk")
+    // todo: språktoggle
+    Text(
+      "Språk",
+      color = MaterialTheme.colorScheme.onBackground
+    )
   }
 
   @Composable
@@ -356,7 +355,7 @@ class Settings {
             text = stringResource(R.string.terms_and_conditions),
             fontSize = 20.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground
           )
         }
         AnimatedVisibility(
@@ -370,7 +369,7 @@ class Settings {
             modifier = Modifier
 
               .align(Alignment.CenterHorizontally),
-                    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
           ) {
             TosCard()
           }
@@ -391,7 +390,7 @@ class Settings {
           .align(Alignment.CenterHorizontally)
       ) {
         Column {
-          Text(text = stringResource(R.string.terms_text))
+          Text(text = stringResource(R.string.terms_text), color = MaterialTheme.colorScheme.onBackground)
 
         }
       }
@@ -418,23 +417,23 @@ class Settings {
         )
         Spacer(modifier = Modifier.padding(16.dp))
         Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-          colors = ButtonDefaults.buttonColors(Color(0xFFeb4949)),
-          onClick = {
-            Toast.makeText(
-              context,
-              "${Auth().hentBrukerEmail()} slettet",
-              Toast.LENGTH_SHORT
-            ).show()
-            Auth().slettBruker()
-            navController.navigate(Screen.Start.ruter)
-          }) {
+               colors = ButtonDefaults.buttonColors(Color(0xFFeb4949)),
+               onClick = {
+                 Toast.makeText(
+                   context,
+                   context.getString(R.string.delete_favorite_confirmation),
+                   Toast.LENGTH_SHORT
+                 ).show()
+                 Auth().slettBruker()
+                 navController.navigate(Screen.Start.ruter)
+               }) {
           Text(
-            text = "Slett bruker",
+            text = stringResource(R.string.delete_user),
             color = MaterialTheme.colorScheme.tertiary,
           )
         }
       }
-        Spacer(modifier = modifier.padding(bottom = 84.dp))
+      Spacer(modifier = modifier.padding(bottom = 84.dp))
     }
   }
 }

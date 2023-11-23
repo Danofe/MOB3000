@@ -49,22 +49,6 @@ fun Meny(
   } else {
     Icons.Filled.KeyboardArrowDown
   }
-
-    OutlinedTextField(
-        value = valgt,
-        onValueChange = {
-            onValueChanged(it) },
-        readOnly = true,
-        textStyle = TextStyle(
-            color = MaterialTheme.colorScheme.onBackground,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold
-        ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .onGloballyPositioned { coordinates ->
-                textFieldSize = coordinates.size.width
-            },
   OutlinedTextField(
     value = valgt,
     onValueChange = {

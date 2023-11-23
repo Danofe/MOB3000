@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ import com.example.mob3000oblig.Favoritter.FavoritterViewModel
 import com.example.mob3000oblig.R
 
 class Sammenlign {
+  @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun SammenlignSkjerm(
     modifier: Modifier = Modifier,
@@ -70,9 +72,9 @@ var valgtFavoritt by remember { mutableStateOf("") }
           )
       }
       Button(
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-                onClick = {},
-                enabled = !skilt1.isEmpty() && !skilt2.isEmpty(),
+        colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+        onClick = {},
+        enabled = !skilt1.isEmpty() && !skilt2.isEmpty(),
         modifier = Modifier.padding(top = 20.dp, bottom = 20.dp)
         ) {
       Text(
