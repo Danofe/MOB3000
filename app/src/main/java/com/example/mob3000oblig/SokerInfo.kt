@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -71,30 +73,26 @@ class SokerInfo {
       .verticalScroll(rememberScrollState())
         .padding(top = 25.dp,bottom = 20.dp),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-     verticalArrangement = Arrangement.spacedBy(16.dp)
-
-    ) {
+      verticalArrangement = Arrangement.spacedBy(10.dp)
+    )
+     {
       val verdi = bilInfoVariabler(bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
       val error = "Ikke oppgitt"
       var lagtInn by remember { mutableStateOf(false) }
 
-        Text(
-          text = "$name",
-          fontSize = 40.sp,
-          color = MaterialTheme.colorScheme.onBackground,
-        )
-          // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
           if (verdi.merke != error) {
-            Box(
-              modifier = modifier
-
-            ) {
+            Text(
+              text = "$name",
+              fontSize = 40.sp,
+              color = MaterialTheme.colorScheme.onBackground,
+            )
             Card() {
             Row(
               modifier = modifier
-              .align(Alignment.CenterHorizontally),
+              .align(Alignment.CenterHorizontally)
+                .padding(20.dp),
               horizontalArrangement = Arrangement.spacedBy(16.dp),
             ) {
               Column(
@@ -337,44 +335,44 @@ class SokerInfo {
           {
             Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
           }
-
-          Button(
-            onClick = {
-              Firestore.leggInnFavoritt(
-                name,
-                verdi.merke,
-                verdi.hk,
-                verdi.antSeter,
-                verdi.farge,
-                verdi.type,
-                verdi.toppHastighet,
-                verdi.drivstoff,
-                verdi.girtyp,
-                verdi.lengde,
-                verdi.hoyde,
-                verdi.bredde,
-                verdi.vekt,
-                verdi.hybrid,
-                verdi.sistgodkjent,
-                verdi.nesteEU,
-                verdi.forsteReg,
-                verdi.antdorer,
-                verdi.handelsbetegnelse
+            Button(
+              onClick = {
+                Firestore.leggInnFavoritt(
+                  name,
+                  verdi.merke,
+                  verdi.hk,
+                  verdi.antSeter,
+                  verdi.farge,
+                  verdi.type,
+                  verdi.toppHastighet,
+                  verdi.drivstoff,
+                  verdi.girtyp,
+                  verdi.lengde,
+                  verdi.hoyde,
+                  verdi.bredde,
+                  verdi.vekt,
+                  verdi.hybrid,
+                  verdi.sistgodkjent,
+                  verdi.nesteEU,
+                  verdi.forsteReg,
+                  verdi.antdorer,
+                  verdi.handelsbetegnelse
+                )
+                lagtInn = true
+                Toast.makeText(
+                  context,
+                  "$name er lagt til som favoritt",
+                  Toast.LENGTH_SHORT
+                ).show()
+              },
+              enabled = (Auth.innlogget() && !lagtInn),
+              colors = ButtonDefaults.buttonColors(
+                disabledContainerColor = Color.LightGray
               )
-              lagtInn = true
-              Toast.makeText(
-                context,
-                "$name er lagt til som favoritt",
-                Toast.LENGTH_SHORT
-              ).show()
-            },
-            enabled = (Auth.innlogget() && !lagtInn)
-          ) {
-            Text("Legg til i favoritter",
-              color = MaterialTheme.colorScheme.onSurface
-            )
-          }
-
+            ) {
+              Text("Legg til i favoritter", color = MaterialTheme.colorScheme.onSurface)
+              }
+            }
           }
         }
         else {
