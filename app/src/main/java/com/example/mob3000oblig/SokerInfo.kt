@@ -68,7 +68,8 @@ class SokerInfo {
     }
     Column(
       modifier = modifier
-      .verticalScroll(rememberScrollState()),
+      .verticalScroll(rememberScrollState())
+        .padding(top = 25.dp,bottom = 20.dp),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
      verticalArrangement = Arrangement.spacedBy(16.dp)
 
@@ -84,9 +85,11 @@ class SokerInfo {
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
         )
+          // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
           if (verdi.merke != error) {
             Box(
               modifier = modifier
+
             ) {
             Card() {
             Row(
