@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -69,9 +71,9 @@ class SokerInfo {
     Column(
       modifier = modifier
       .verticalScroll(rememberScrollState())
-        .padding(top = 18.dp,bottom = 20.dp),
+        .padding(top = 25.dp,bottom = 20.dp),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-     verticalArrangement = Arrangement.spacedBy(20.dp)
+     verticalArrangement = Arrangement.spacedBy(10.dp)
     )
      {
       val verdi = bilInfoVariabler(bilInfo)
@@ -364,7 +366,10 @@ class SokerInfo {
                   Toast.LENGTH_SHORT
                 ).show()
               },
-              enabled = (Auth.innlogget() && !lagtInn)
+              enabled = (Auth.innlogget() && !lagtInn),
+              colors = ButtonDefaults.buttonColors(
+                disabledContainerColor = Color.LightGray
+              )
             ) {
               Text("Legg til i favoritter", color = MaterialTheme.colorScheme.onSurface)
               }

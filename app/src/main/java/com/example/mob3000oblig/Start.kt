@@ -104,7 +104,9 @@ class Start {
               Text("Skriv inn gyldig skiltnummer!")
             }
             Button(
-              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+              colors = ButtonDefaults.buttonColors(
+                disabledContainerColor = Color.LightGray
+              ),
               onClick = {
                 navController.navigate(Screen.Info.withArgs(licenseNumberQuery.uppercase()))
               },
