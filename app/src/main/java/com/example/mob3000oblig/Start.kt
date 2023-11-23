@@ -104,6 +104,7 @@ class Start {
               placeholder = { Text(text = stringResource(R.string.write_licence_number)) },
               colors = TextFieldDefaults.textFieldColors(
                 MaterialTheme.colorScheme.onBackground,
+                containerColor = MaterialTheme.colorScheme.tertiary,
                 cursorColor = MaterialTheme.colorScheme.onBackground
               ),
             )
@@ -111,11 +112,14 @@ class Start {
               Text(stringResource(R.string.write_valid_licence_number))
             }
             Button(
-              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+              colors = ButtonDefaults.buttonColors(
+                disabledContainerColor = Color.LightGray
+              ),
               onClick = {
                 navController.navigate(Screen.Info.withArgs(licenseNumberQuery.uppercase()))
               },
-              enabled = !licenseNumberQuery.isEmpty() && !showError
+              enabled = !licenseNumberQuery.isEmpty() && !showError,
+
             )
             {
               Text(
