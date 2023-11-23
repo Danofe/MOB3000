@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.mob3000oblig.R
 
 @Composable
 fun IngenTillatelseSkjerm(
@@ -34,14 +36,14 @@ private fun ImgenTillatelseInnhold(
     verticalArrangement = Arrangement.Center
   ) {
     Text(
-      text = "Vennligst tillat bruk av kameraet for å bruke denne funksjonen",
+      text = stringResource(R.string.allow_permission_camera),
       textAlign = TextAlign.Center,
       color = MaterialTheme.colorScheme.onBackground,
     )
     Spacer(modifier = Modifier.height(20.dp))
     Button(onClick = onRequestPermission) {
       Text(
-        text = "Tillat",
+        text = stringResource(R.string.allow),
         color = MaterialTheme.colorScheme.onSurface,
       )
     }

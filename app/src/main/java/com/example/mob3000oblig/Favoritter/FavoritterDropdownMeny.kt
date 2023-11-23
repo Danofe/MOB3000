@@ -1,9 +1,6 @@
 package com.example.mob3000oblig.Favoritter
 
-import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 
@@ -13,21 +10,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,13 +25,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mob3000oblig.R
 
@@ -95,24 +81,24 @@ fun FavoritterDropdownMeny(
           modifier = modifier,
         ) {
           Column() {
-            Text(text = "Merke")
-            Text(text = "Serie")
-            Text(text = "Type")
-            Text(text = "Farge")
-            Text(text = "Girkassetype")
-            Text(text = "Drivstoff")
-            Text(text = "Hybrid")
-            Text(text = "Hestekrefter")
-            Text(text = "Maks hastighet")
-            Text(text = "Forste registrering")
-            Text(text = "Sitteplasser")
-            Text(text = "Antall dører:")
-            Text(text = "Høyde")
-            Text(text = "Bredde")
-            Text(text = "Lengde")
-            Text(text = "Egenvekt")
-            Text(text = "Sist godkjent:")
-            Text(text = "Neste EU kontroll:")
+            Text(text = stringResource(R.string.brand))
+            Text(text = stringResource(R.string.series))
+            Text(text = stringResource(R.string.type))
+            Text(text = stringResource(R.string.color))
+            Text(text = stringResource(R.string.gearbox_type))
+            Text(text = stringResource(R.string.fuel))
+            Text(text = stringResource(R.string.hybrid))
+            Text(text = stringResource(R.string.horsepower))
+            Text(text = stringResource(R.string.max_speed))
+            Text(text = stringResource(R.string.first_registration))
+            Text(text = stringResource(R.string.number_of_seats))
+            Text(text = stringResource(R.string.number_of_doors))
+            Text(text = stringResource(R.string.height))
+            Text(text = stringResource(R.string.width))
+            Text(text = stringResource(R.string.length))
+            Text(text = stringResource(R.string.weight))
+            Text(text = stringResource(R.string.latest_approval))
+            Text(text = stringResource(R.string.next_eu_control))
           }
           Spacer(modifier = modifier.width(30.dp))
           Column {
@@ -151,7 +137,7 @@ fun FavoritterDropdownMeny(
                 .substringBefore(","),
               fontWeight = FontWeight.Bold
             )
-            if (hestekrefter != "Ikke oppgitt") {
+            if (hestekrefter != stringResource(R.string.not_specified)) {
               Text(
                 "≈$hestekrefter hk",
                 fontWeight = FontWeight.Bold
@@ -162,7 +148,7 @@ fun FavoritterDropdownMeny(
                 fontWeight = FontWeight.Bold
               )
             }
-            if (maksHastighet != "Ikke oppgitt") {
+            if (maksHastighet != stringResource(R.string.not_specified)) {
               Text(
                 "$maksHastighet km/t",
                 fontWeight = FontWeight.Bold
@@ -229,7 +215,7 @@ fun FavoritterDropdownMeny(
             .padding(20.dp)
         ) {
           Text(
-            text = "Slett favoritt",
+            text = stringResource(R.string.delete_favorite),
             color = MaterialTheme.colorScheme.onSurface
           )
         }
@@ -240,13 +226,16 @@ fun FavoritterDropdownMeny(
             },
             title = {
               Text(
-                "Slette favoritt?",
+                stringResource(R.string.delete_favorite_question),
                 color = MaterialTheme.colorScheme.onBackground
               )
             },
             text = {
               Text(
-                "$valgtFavoritt vil for alltid bli slettet fra dine favoritter.",
+                stringResource(
+                  R.string.delete_favorite_do_you_want,
+                  valgtFavoritt
+                ),
                 color = MaterialTheme.colorScheme.onBackground
               )
             },
@@ -258,7 +247,10 @@ fun FavoritterDropdownMeny(
                   slettemelding.value = false
                   Toast.makeText(
                     context,
-                    "$valgtFavoritt er slettet",
+                    context.getString(
+                      R.string.delete_favorite_confirmation,
+                      valgtFavoritt
+                    ),
                     Toast.LENGTH_LONG
                   ).show()
                   valgtFavoritt = ""
@@ -266,7 +258,7 @@ fun FavoritterDropdownMeny(
 
                 ) {
                 Text(
-                  "Slett favoritt",
+                  stringResource(R.string.delete_favorite),
                   color = MaterialTheme.colorScheme.onSurface
                 )
               }
@@ -278,18 +270,16 @@ fun FavoritterDropdownMeny(
                 }
               ) {
                 Text(
-                  "Avbryt",
+                  stringResource(R.string.cancel),
                   color = MaterialTheme.colorScheme.onSurface
                 )
               }
             })
         }
-      } else if (favorittliste?.isEmpty() == true) {
-        Text("Du har ingen lagrede favoritter")
+      } else if (favorittliste.isEmpty()) {
+        Text(stringResource(R.string.you_have_no_saved_favorites))
       } else {
-        Text("Velg en favoritt fra menyen")
+        Text(stringResource(R.string.choose_favorite))
       }
     }
   }
-
-

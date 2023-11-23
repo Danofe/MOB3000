@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -19,7 +18,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -57,11 +55,11 @@ class Favoritter {
             //Logo
             Image(
               painter = painterResource(id = R.drawable.skiltskern),
-              contentDescription = "skiltskern",
+              contentDescription = stringResource(R.string.logo_name),
               modifier = Modifier.size(200.dp)
             )
             Text(
-              text = stringResource(R.string.login_melding_favoritter),
+              text = stringResource(R.string.login_to_see_favorites),
               fontSize = 20.sp,
               textAlign = androidx.compose.ui.text.style.TextAlign.Center,
               modifier = modifier.padding(20.dp),
@@ -69,8 +67,8 @@ class Favoritter {
             )
             Row(
               modifier
-              .padding(vertical = 8.dp)
-              .align(Alignment.CenterHorizontally),
+                .padding(vertical = 8.dp)
+                .align(Alignment.CenterHorizontally),
               horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
               Button(
@@ -78,7 +76,7 @@ class Favoritter {
                 onClick = { navController.navigate(Screen.Register.ruter) }) {
 
                 Text(
-                  text = stringResource(R.string.registrer),
+                  text = stringResource(R.string.register),
                   fontSize = 20.sp,
                   color = MaterialTheme.colorScheme.onSurface,
                 )
@@ -89,7 +87,7 @@ class Favoritter {
                 onClick = { navController.navigate(Screen.Login.ruter) }
               ) {
                 Text(
-                  text = stringResource(R.string.logg_inn),
+                  text = stringResource(R.string.login),
                   fontSize = 20.sp,
                   color = MaterialTheme.colorScheme.onSurface,
                 )

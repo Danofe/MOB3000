@@ -1,6 +1,5 @@
 package com.example.mob3000oblig
 
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -35,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -96,14 +95,14 @@ class Start {
                 showError = !isValidLicenseNumber(it)!!
               },
               isError = showError,
-              placeholder = { Text(text = "Skriv skiltnr her:") },
+              placeholder = { Text(text = stringResource(R.string.write_licence_number)) },
               colors = TextFieldDefaults.textFieldColors(
                 MaterialTheme.colorScheme.onBackground,
                 cursorColor = MaterialTheme.colorScheme.onBackground
               ),
             )
             if (showError) {
-              Text("Skriv inn gyldig skiltnummer!")
+              Text(stringResource(R.string.write_valid_licence_number))
             }
             Button(
               colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
@@ -114,7 +113,7 @@ class Start {
             )
             {
               Text(
-                text = "Søk",
+                text = stringResource(R.string.search),
                 fontSize = 16.sp,
                 color = Color.Black
               )
@@ -133,7 +132,7 @@ class Start {
               tint = Color.Black
             )
             Text(
-              text = "SAMMENLIGN",
+              text = stringResource(R.string.compare).uppercase(),
               fontSize = 30.sp,
               color = Color.Black,
             )
@@ -157,7 +156,7 @@ class Start {
                 tint = Color.Black
               )
               Text(
-                text = "KAMERA",
+                text = stringResource(R.string.camera).uppercase(),
                 fontSize = 16.sp,
                 color = Color.Black
               )
@@ -175,16 +174,15 @@ class Start {
                 tint = Color.Black
               )
               Text(
-                text = "FAVORITTER",
+                text = stringResource(R.string.favorites).uppercase(),
                 fontSize = 16.sp,
                 color = Color.Black
               )
             }
           }
           Spacer(modifier = modifier.padding(bottom = 84.dp))
-
-          }
         }
       }
     }
   }
+}

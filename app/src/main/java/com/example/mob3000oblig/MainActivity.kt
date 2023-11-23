@@ -15,13 +15,6 @@ import com.example.mob3000oblig.ui.theme.AppTheme
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
 class MainActivity : ComponentActivity() {
-  // Lagres i Datastore??
-  val isDark = mutableStateOf(false)
-
-  fun toggleTheme() {
-    isDark.value = !isDark.value
-  }
-
   private val viewModel: APIViewModel by viewModels()
 
   @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -37,7 +30,3 @@ class MainActivity : ComponentActivity() {
     }
   }
 }
-//@Preview(showBackground = true)
-//@Composable
-//fun GreetingPreview() {
-//}

@@ -22,79 +22,82 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mob3000oblig.Favoritter.FavoritterViewModel
+import com.example.mob3000oblig.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Meny(
-    viewModel: FavoritterViewModel? = viewModel(),
-    onValueChanged: (String) -> Unit = {},
-    valgt: String,
-    modifier: Modifier = Modifier
+  viewModel: FavoritterViewModel? = viewModel(),
+  onValueChanged: (String) -> Unit = {},
+  valgt: String,
+  modifier: Modifier = Modifier
 ) {
-    var utvidet by remember { mutableStateOf(false) }
-    val favorittliste = viewModel?.favoritterSkilt?.value
-    var valgt = valgt
-    var textFieldSize by remember { mutableStateOf(0) }
+  var utvidet by remember { mutableStateOf(false) }
+  val favorittliste = viewModel?.favoritterSkilt?.value
+  var valgt = valgt
+  var textFieldSize by remember { mutableStateOf(0) }
 
-    val ikon = if (utvidet) {
-        Icons.Filled.KeyboardArrowUp
-    } else {
-        Icons.Filled.KeyboardArrowDown
-    }
+  val ikon = if (utvidet) {
+    Icons.Filled.KeyboardArrowUp
+  } else {
+    Icons.Filled.KeyboardArrowDown
+  }
 
-    OutlinedTextField(
-        value = valgt,
-        onValueChange = {
-            onValueChanged(it) },
-        readOnly = true,
-        textStyle = TextStyle(
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold
-        ),
-        modifier = Modifier
-            .fillMaxSize()
-            .onGloballyPositioned { coordinates ->
-                textFieldSize = coordinates.size.width
-            },
-
-        label = { Text("Velg skiltnr") },
-
-        trailingIcon = {
-            Icon(
-                ikon,
-                "",
-                Modifier.clickable { utvidet = !utvidet }
-            )
+  OutlinedTextField(
+    value = valgt,
+    onValueChange = {
+      onValueChanged(it)
+    },
+    readOnly = true,
+    textStyle = TextStyle(
+      fontSize = 30.sp,
+      fontWeight = FontWeight.Bold
+    ),
+    modifier = Modifier
+        .fillMaxSize()
+        .onGloballyPositioned { coordinates ->
+            textFieldSize = coordinates.size.width
         },
-    )
-    DropdownMenu(
-        expanded = utvidet,
-        onDismissRequest = { utvidet = false },
-        modifier = Modifier
-            .width(with(LocalDensity.current) { textFieldSize.toDp() })
-            .fillMaxWidth()
-            .zIndex(1f)
-    ) {
-        for (i in favorittliste!!) {
-            DropdownMenuItem(
-                text = {
-                    Text(
-                        text = i,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                },
-                onClick = {
-                    valgt = i
-                    utvidet = false
-                    onValueChanged(valgt)
-                }
-            )
+
+    label = { Text(stringResource(R.string.choose_license_number)) },
+
+    trailingIcon = {
+      Icon(
+        ikon,
+        "",
+        Modifier.clickable { utvidet = !utvidet }
+      )
+    },
+  )
+  DropdownMenu(
+    expanded = utvidet,
+    onDismissRequest = { utvidet = false },
+    modifier = Modifier
+        .width(with(LocalDensity.current) { textFieldSize.toDp() })
+        .fillMaxWidth()
+        .zIndex(1f)
+  ) {
+    for (i in favorittliste!!) {
+      DropdownMenuItem(
+        text = {
+          Text(
+            text = i,
+            color = MaterialTheme.colorScheme.onBackground
+          )
+        },
+        onClick = {
+          valgt = i
+          utvidet = false
+          onValueChanged(valgt)
         }
+      )
     }
+  }
 }

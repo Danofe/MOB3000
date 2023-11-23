@@ -32,12 +32,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
+import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Screen
 
 @Composable
@@ -53,7 +55,7 @@ private fun KameraInnhold(navController: NavController) {
   val context = LocalContext.current
   val lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current
   val cameraController: LifecycleCameraController = remember { LifecycleCameraController(context) }
-  var detectedText: String by remember { mutableStateOf("Finner ingen bilskilt") }
+  var detectedText: String by remember { mutableStateOf(context.getString(R.string.cant_find_license_number)) }
 
   fun onTextUpdated(updatedText: String) {
     detectedText = updatedText

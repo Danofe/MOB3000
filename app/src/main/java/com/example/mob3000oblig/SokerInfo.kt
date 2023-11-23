@@ -4,17 +4,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -31,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -72,343 +68,369 @@ class SokerInfo {
     }
     Column(
       modifier = modifier
-      .verticalScroll(rememberScrollState())
-        .padding(top = 25.dp,bottom = 20.dp),
+        .verticalScroll(rememberScrollState())
+        .padding(
+          top = 25.dp,
+          bottom = 20.dp
+        ),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-     verticalArrangement = Arrangement.spacedBy(25.dp)
+      verticalArrangement = Arrangement.spacedBy(25.dp)
 
     ) {
       val verdi = bilInfoVariabler(bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
-      val error = "Ikke oppgitt"
+      val ikkeOppgitt= stringResource(R.string.not_specified)
       var lagtInn by remember { mutableStateOf(false) }
-          // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
+      // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
 
-          if (verdi.merke != error) {
-            Text(
-              text = "$name",
-              fontSize = 40.sp,
-              color = MaterialTheme.colorScheme.onBackground,
-            )
-           // Box(
-             // modifier = modifier
+      if (verdi.merke != ikkeOppgitt) {
+        Text(
+          text = "$name",
+          fontSize = 40.sp,
+          color = MaterialTheme.colorScheme.onBackground,
+        )
+        // Box(
+        // modifier = modifier
 
-           // ) {
-            Card() {
-            Row(
-              modifier = modifier
+        // ) {
+        Card() {
+          Row(
+            modifier = modifier
               .align(Alignment.CenterHorizontally),
-              horizontalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
 
 
             ) {
-              Column(
-                modifier = modifier,
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-
-              ) {
-                Text(
-                  text = "Merke",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Serie",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Type",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Farge",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Girkassetype",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Drivstoff",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Hybrid",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Hestekrefter",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Maks hastighet",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                Text(
-                  text = "Forste registrering",
-                  color = MaterialTheme.colorScheme.onBackground,
-                  fontWeight = FontWeight.Bold
-                )
-                if (visMerKnapp) {
-                  Text(
-                    text = "Sitteplasser",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold
-                  )
-                  Text(
-                    text = "Antall dører:",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold
-                  )
-                  Text(
-                    text = "Høyde",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold
-                  )
-                  Text(
-                    text = "Bredde",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold
-                  )
-                  Text(
-                    text = "Lengde",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold
-                  )
-                  Text(
-                    text = "Egenvekt",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold
-                  )
-                  Text(
-                    text = "Sist godkjent:",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold
-                  )
-                  Text(
-                    text = "Neste EU kontroll:",
-                    color = MaterialTheme.colorScheme.onBackground,
-                    fontWeight = FontWeight.Bold
-                  )
-                }
-              }
-
-                Column(
-                  modifier = modifier,
-                  verticalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                  Text(
-                    text = verdi.merke,
-                    color = MaterialTheme.colorScheme.onBackground,
-                  )
-                  Text(
-                    text = verdi.handelsbetegnelse,
-                    color = MaterialTheme.colorScheme.onBackground,
-                  )
-                  Text(
-                    text = verdi.type,
-                    color = MaterialTheme.colorScheme.onBackground,
-                  )
-                  Text(
-                    text = verdi.farge,
-                    color = MaterialTheme.colorScheme.onBackground,
-                  )
-                  Text(
-                    text = verdi.girtyp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                  )
-                  Text(
-                    text = verdi.drivstoff,
-                    color = MaterialTheme.colorScheme.onBackground,
-                  )
-                  Text(
-                    text = verdi.hybrid,
-                    color = MaterialTheme.colorScheme.onBackground,
-                  )
-                  if (verdi.hk != error) {
-                    Text(
-                      text = "${verdi.hk} hk",
-                      color = MaterialTheme.colorScheme.onBackground,
-                    )
-                  } else {
-                    Text(
-                      text = verdi.hk,
-                      color = MaterialTheme.colorScheme.onBackground,
-                    )
-                  }
-                  if (verdi.toppHastighet != error) {
-                    Text(
-                      text = "${verdi.toppHastighet} km/t",
-                      color = MaterialTheme.colorScheme.onBackground,
-                    )
-                  } else {
-                    Text(
-                      text = verdi.toppHastighet,
-                      color = MaterialTheme.colorScheme.onBackground,
-                    )
-                  }
-                  Text(
-                    text = verdi.forsteReg,
-                    color = MaterialTheme.colorScheme.onBackground,
-                  )
-                  if (visMerKnapp) {
-                    Text(
-                      text = verdi.antSeter,
-                      color = MaterialTheme.colorScheme.onBackground,
-                    )
-                    Text(
-                      text = verdi.antdorer,
-                      color = MaterialTheme.colorScheme.onBackground,
-                    )
-                    if (verdi.hoyde != error) {
-                      Text(
-                        text = "${verdi.hoyde} cm",
-                        color = MaterialTheme.colorScheme.onBackground,
-                      )
-                    } else {
-                      Text(
-                        text = verdi.hoyde,
-                        color = MaterialTheme.colorScheme.onBackground,
-                      )
-                    }
-                    if (verdi.bredde != error) {
-                      Text(
-                        text = "${verdi.bredde} cm",
-                        color = MaterialTheme.colorScheme.onBackground,
-                      )
-                    } else {
-                      Text(
-                        text = verdi.bredde,
-                        color = MaterialTheme.colorScheme.onBackground,
-                      )
-                    }
-                    if (verdi.lengde != error) {
-                      Text(
-                        text = "${verdi.lengde} cm",
-                        color = MaterialTheme.colorScheme.onBackground,
-                      )
-                    } else {
-                      Text(
-                        text = verdi.lengde,
-                        color = MaterialTheme.colorScheme.onBackground,
-                      )
-                    }
-                    if (verdi.vekt != error) {
-                      Text(
-                        text = "${verdi.vekt} kg",
-                        color = MaterialTheme.colorScheme.onBackground,
-                      )
-                    } else {
-                      Text(
-                        text = verdi.vekt,
-                        color = MaterialTheme.colorScheme.onBackground,
-                      )
-                    }
-                    Text(
-                      text = verdi.sistgodkjent,
-                      color = MaterialTheme.colorScheme.onBackground,
-                    )
-                    Text(
-                      text = verdi.nesteEU,
-                      color = MaterialTheme.colorScheme.onBackground,
-                    )
-                  }
-                }
-              }
-            }
-
-            //}
-            Row(
-              modifier = Modifier
-              .padding(vertical = 8.dp)
-              .align(Alignment.CenterHorizontally),
-              horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-
-            Button(
-              onClick = {
-                visMerKnapp = !visMerKnapp
-                visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
-              },
-              modifier = modifier
-
-            )
-            {
-              Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
-            }
-
-            Button(
-              onClick = {
-                Firestore.leggInnFavoritt(
-                  name,
-                  verdi.merke,
-                  verdi.hk,
-                  verdi.antSeter,
-                  verdi.farge,
-                  verdi.type,
-                  verdi.toppHastighet,
-                  verdi.drivstoff,
-                  verdi.girtyp,
-                  verdi.lengde,
-                  verdi.hoyde,
-                  verdi.bredde,
-                  verdi.vekt,
-                  verdi.hybrid,
-                  verdi.sistgodkjent,
-                  verdi.nesteEU,
-                  verdi.forsteReg,
-                  verdi.antdorer,
-                  verdi.handelsbetegnelse
-                )
-                lagtInn = true
-                Toast.makeText(
-                  context,
-                  "$name er lagt til som favoritt",
-                  Toast.LENGTH_SHORT
-                ).show()
-              },
-              enabled = (Auth.innlogget() && !lagtInn)
-            ) {
-              Text("Legg til i favoritter")
-            }
-
-            }
-          }
-          else {
             Column(
-              horizontalAlignment = Alignment.CenterHorizontally,
-              verticalArrangement = Arrangement.Center,
-              modifier = modifier.fillMaxSize()
+              modifier = modifier,
+              verticalArrangement = Arrangement.spacedBy(8.dp)
+
             ) {
-              Image(
-                painter = painterResource(id = R.drawable.skiltskern),
-                contentDescription = "skiltskern",
-                modifier = Modifier.size(200.dp)
+              Text(
+                text = stringResource(R.string.brand),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
               )
               Text(
-                text = "$name",
-                fontSize = 40.sp,
+                text = stringResource(R.string.series),
                 color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Fant ingen kjøretøy med dette skiltnummeret.",
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center,
+                text = stringResource(R.string.type),
                 color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
+              )
+              Text(
+                text = stringResource(R.string.color),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
+              )
+              Text(
+                text = stringResource(R.string.gearbox_type),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
+              )
+              Text(
+                text = stringResource(R.string.fuel),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
+              )
+              Text(
+                text = stringResource(R.string.hybrid),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
+              )
+              Text(
+                text = stringResource(R.string.horsepower),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
+              )
+              Text(
+                text = stringResource(R.string.max_speed),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
+              )
+              Text(
+                text = stringResource(R.string.first_registration),
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.Bold
+              )
+              if (visMerKnapp) {
+                Text(
+                  text = stringResource(R.string.number_of_seats),
+                  color = MaterialTheme.colorScheme.onBackground,
+                  fontWeight = FontWeight.Bold
                 )
+                Text(
+                  text = stringResource(R.string.number_of_doors),
+                  color = MaterialTheme.colorScheme.onBackground,
+                  fontWeight = FontWeight.Bold
+                )
+                Text(
+                  text = stringResource(R.string.height),
+                  color = MaterialTheme.colorScheme.onBackground,
+                  fontWeight = FontWeight.Bold
+                )
+                Text(
+                  text = stringResource(R.string.width),
+                  color = MaterialTheme.colorScheme.onBackground,
+                  fontWeight = FontWeight.Bold
+                )
+                Text(
+                  text = stringResource(R.string.length),
+                  color = MaterialTheme.colorScheme.onBackground,
+                  fontWeight = FontWeight.Bold
+                )
+                Text(
+                  text = stringResource(R.string.weight),
+                  color = MaterialTheme.colorScheme.onBackground,
+                  fontWeight = FontWeight.Bold
+                )
+                Text(
+                  text = stringResource(R.string.latest_approval),
+                  color = MaterialTheme.colorScheme.onBackground,
+                  fontWeight = FontWeight.Bold
+                )
+                Text(
+                  text = stringResource(R.string.next_eu_control),
+                  color = MaterialTheme.colorScheme.onBackground,
+                  fontWeight = FontWeight.Bold
+                )
+              }
+            }
+
+            Column(
+              modifier = modifier,
+              verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+              Text(
+                text = verdi.merke,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+              Text(
+                text = verdi.handelsbetegnelse,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+              Text(
+                text = verdi.type,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+              Text(
+                text = verdi.farge,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+              Text(
+                text = verdi.girtyp,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+              Text(
+                text = verdi.drivstoff,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+              Text(
+                text = verdi.hybrid,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+              if (verdi.hk != ikkeOppgitt) {
+                Text(
+                  text = stringResource(
+                    R.string.hp, // hestekrefter
+                    verdi.hk
+                  ),
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+              } else {
+                Text(
+                  text = verdi.hk,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+              }
+              if (verdi.toppHastighet != ikkeOppgitt) {
+                Text(
+                  text = stringResource(
+                    R.string.km_h,
+                    verdi.toppHastighet
+                  ),
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+              } else {
+                Text(
+                  text = verdi.toppHastighet,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+              }
+              Text(
+                text = verdi.forsteReg,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+              if (visMerKnapp) {
+                Text(
+                  text = verdi.antSeter,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                  text = verdi.antdorer,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                if (verdi.hoyde != ikkeOppgitt) {
+                  Text(
+                    text = stringResource(
+                      R.string.cm,
+                      verdi.hoyde
+                    ),
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                } else {
+                  Text(
+                    text = verdi.hoyde,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                }
+                if (verdi.bredde != ikkeOppgitt) {
+                  Text(
+                    text = stringResource(
+                      R.string.cm,
+                      verdi.bredde
+                    ),
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                } else {
+                  Text(
+                    text = verdi.bredde,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                }
+                if (verdi.lengde != ikkeOppgitt) {
+                  Text(
+                    text = stringResource(
+                      R.string.cm,
+                      verdi.lengde
+                    ),
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                } else {
+                  Text(
+                    text = verdi.lengde,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                }
+                if (verdi.vekt != ikkeOppgitt) {
+                  Text(
+                    text = stringResource(
+                      R.string.kg,
+                      verdi.vekt
+                    ),
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                } else {
+                  Text(
+                    text = verdi.vekt,
+                    color = MaterialTheme.colorScheme.onBackground,
+                  )
+                }
+                Text(
+                  text = verdi.sistgodkjent,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+                Text(
+                  text = verdi.nesteEU,
+                  color = MaterialTheme.colorScheme.onBackground,
+                )
+              }
             }
           }
-      Spacer(modifier = modifier.padding(bottom = 84.dp))
         }
 
+        //}
+        Row(
+          modifier = Modifier
+            .padding(vertical = 8.dp)
+            .align(Alignment.CenterHorizontally),
+          horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+
+          Button(
+            onClick = {
+              visMerKnapp = !visMerKnapp
+              visMerKnappText = if (visMerKnapp) context.getString(R.string.show_less) else context.getString(R.string.show_more)
+            },
+            modifier = modifier
+
+          )
+          {
+            Text(
+              visMerKnappText,
+              color = MaterialTheme.colorScheme.onSurface
+            )
+          }
+
+          Button(
+            onClick = {
+              Firestore.leggInnFavoritt(
+                name,
+                verdi.merke,
+                verdi.hk,
+                verdi.antSeter,
+                verdi.farge,
+                verdi.type,
+                verdi.toppHastighet,
+                verdi.drivstoff,
+                verdi.girtyp,
+                verdi.lengde,
+                verdi.hoyde,
+                verdi.bredde,
+                verdi.vekt,
+                verdi.hybrid,
+                verdi.sistgodkjent,
+                verdi.nesteEU,
+                verdi.forsteReg,
+                verdi.antdorer,
+                verdi.handelsbetegnelse
+              )
+              lagtInn = true
+              Toast.makeText(
+                context,
+                context.getString(
+                  R.string.added_to_favorites,
+                  name
+                ),
+                Toast.LENGTH_SHORT
+              ).show()
+            },
+            enabled = (Auth.innlogget() && !lagtInn)
+          ) {
+            Text(stringResource(R.string.add_to_favorites))
+          }
+
+        }
+      } else {
+        Column(
+          horizontalAlignment = Alignment.CenterHorizontally,
+          verticalArrangement = Arrangement.Center,
+          modifier = modifier.fillMaxSize()
+        ) {
+          Image(
+            painter = painterResource(id = R.drawable.skiltskern),
+            contentDescription = stringResource(R.string.logo_name),
+            modifier = Modifier.size(200.dp)
+          )
+          Text(
+            text = "$name",
+            fontSize = 40.sp,
+            color = MaterialTheme.colorScheme.onBackground,
+          )
+          Text(
+            text = stringResource(R.string.found_no_vehicles),
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onBackground,
+          )
+        }
+      }
+      Spacer(modifier = modifier.padding(bottom = 84.dp))
     }
+
   }
+}
