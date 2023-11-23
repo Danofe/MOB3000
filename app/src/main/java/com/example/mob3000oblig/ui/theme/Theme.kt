@@ -21,14 +21,18 @@ private val darkColorScheme = darkColorScheme(
   primary = PrimaryColor,
   onBackground = TextDark,
   background = BackgroundDark,
-  onSurface = BackgroundDark
+  onSurface = BackgroundDark,
+  secondary = DarkNav,
+  tertiary = CardColor
 )
 
 private val lightColorScheme = lightColorScheme(
   primary = PrimaryColor,
   onBackground = TextLight,
   background = BackgroundLight,
-  onSurface = BackgroundDark
+  onSurface = BackgroundDark,
+  secondary = LightNav,
+  tertiary = CardColorLight
 
   /* Other default colors to override
   background = Color(0xFFFFFBFE),
@@ -73,6 +77,7 @@ fun AppTheme(
   content: @Composable () -> Unit
 ) {
   val darkMode = getAppThemeState()
+
 
   MaterialTheme(
     colorScheme = if (darkMode) darkColorScheme else lightColorScheme

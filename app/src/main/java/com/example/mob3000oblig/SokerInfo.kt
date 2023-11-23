@@ -13,7 +13,9 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -70,19 +73,18 @@ class SokerInfo {
       modifier = modifier
         .verticalScroll(rememberScrollState())
         .padding(
-          top = 25.dp,
+          top = 18.dp,
           bottom = 20.dp
         ),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-      verticalArrangement = Arrangement.spacedBy(25.dp)
-
-    ) {
+      verticalArrangement = Arrangement.spacedBy(20.dp)
+    )
+     {
       val verdi = bilInfoVariabler(bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
       val ikkeOppgitt= stringResource(R.string.not_specified)
       var lagtInn by remember { mutableStateOf(false) }
-      // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
 
       if (verdi.merke != ikkeOppgitt) {
         Text(
@@ -90,15 +92,12 @@ class SokerInfo {
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
         )
-        // Box(
-        // modifier = modifier
 
-        // ) {
-        Card() {
+        Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
           Row(
             modifier = modifier
-              .align(Alignment.CenterHorizontally),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+              .align(Alignment.CenterHorizontally)
+            .padding(20.dp),horizontalArrangement = Arrangement.spacedBy(16.dp),
 
 
             ) {
@@ -337,13 +336,12 @@ class SokerInfo {
                 Text(
                   text = verdi.nesteEU,
                   color = MaterialTheme.colorScheme.onBackground,
-                )
-              }
-            }
+
+            )
           }
         }
-
-        //}
+}
+        }
         Row(
           modifier = Modifier
             .padding(vertical = 8.dp)
@@ -358,6 +356,69 @@ class SokerInfo {
             },
             modifier = modifier
 
+        )
+        {
+          Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
+        }
+        Button(
+          onClick = {
+            Firestore.leggInnFavoritt(
+              name,
+              verdi.merke,
+              verdi.hk,
+              verdi.antSeter,
+              verdi.farge,
+              verdi.type,
+              verdi.toppHastighet,
+              verdi.drivstoff,
+              verdi.girtyp,
+              verdi.lengde,
+              verdi.hoyde,
+              verdi.bredde,
+              verdi.vekt,
+              verdi.hybrid,
+              verdi.sistgodkjent,
+              verdi.nesteEU,
+              verdi.forsteReg,
+              verdi.antdorer,
+              verdi.handelsbetegnelse
+            )
+            lagtInn = true
+            Toast.makeText(
+              context,
+              "$name er lagt til som favoritt",
+              Toast.LENGTH_SHORT
+            ).show()
+          },
+          enabled = (Auth.innlogget() && !lagtInn),
+          colors = ButtonDefaults.buttonColors(
+            disabledContainerColor = Color.LightGray
+          )
+        ) {
+          Text("Legg til i favoritter", color = MaterialTheme.colorScheme.onSurface)
+        }
+      }
+    }
+    else {
+      Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxSize()
+      ) {
+        Image(
+          painter = painterResource(id = R.drawable.skiltskern),
+          contentDescription = "skiltskern",
+          modifier = Modifier.size(200.dp)
+        )
+
+        Text(
+          text = "Fant ingen kjøretøy med dette skiltnummeret.",
+          fontSize = 20.sp,
+          textAlign = TextAlign.Center,
+          color = MaterialTheme.colorScheme.onBackground
+        )
+      }
+    }
           )
           {
             Text(
@@ -431,6 +492,5 @@ class SokerInfo {
       }
       Spacer(modifier = modifier.padding(bottom = 84.dp))
     }
-
-  }
 }
+  }

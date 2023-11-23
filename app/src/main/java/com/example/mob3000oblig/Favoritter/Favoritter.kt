@@ -35,18 +35,15 @@ class Favoritter {
     modifier: Modifier = Modifier,
     navController: NavController
   ) {
-
     Column(modifier = modifier.fillMaxSize()
     ) {
       Box(
         modifier
           .fillMaxSize()
           .verticalScroll(rememberScrollState())
-
       ) {
         if (Auth().currentUser == null) {
           Column(
-
             modifier = modifier
               .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -97,7 +94,7 @@ class Favoritter {
           }
 
         } else {
-          FavoritterDropdownMeny(
+          FavoritterSkjerm(
             viewModel = viewModel()
           )
         }

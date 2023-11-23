@@ -2,6 +2,7 @@ package com.example.mob3000oblig.Settings
 
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -17,10 +18,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -30,7 +35,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.key.Key.Companion.Refresh
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -46,7 +53,9 @@ class Settings {
   @Composable
   fun Profil(navController: NavController) {
     if (!Auth().innlogget()) {
-      Card(modifier = Modifier.padding(32.dp)) {
+      Card(modifier = Modifier.padding(32.dp),
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+      ) {
         Row(
           Modifier
             .fillMaxWidth(),
@@ -81,7 +90,8 @@ class Settings {
       }
     } else {
       Card(
-        modifier = Modifier.padding(32.dp)
+        modifier = Modifier.padding(32.dp),
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
       ) {
         var utvidet by remember {
           mutableStateOf(false)
@@ -112,9 +122,10 @@ class Settings {
           ) {
             Card(
               modifier = Modifier
-                .align(Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally),
+                      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
             ) {
-              ProfilCard()
+              ProfilCard(navController)
             }
           }
         }
@@ -124,10 +135,11 @@ class Settings {
 
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun ProfilCard() {
+  fun ProfilCard(navController: NavController) {
     val context = LocalContext.current
     Card(
-      modifier = Modifier.padding(16.dp)
+      modifier = Modifier.padding(16.dp),
+              colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
     ) {
       Column(
         Modifier
@@ -141,7 +153,9 @@ class Settings {
             .align(Alignment.CenterHorizontally)
         ) {
           Text(
+            modifier = Modifier.align(Alignment.Center),
             text = Auth().hentBrukerEmail(),
+            color = MaterialTheme.colorScheme.onBackground,
             fontSize = 16.sp
           )
         }
@@ -174,11 +188,13 @@ class Settings {
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
                  onClick = {
                    Auth().byttPassord(passord)
+                   Auth().loggUt()
                    Toast.makeText(
                      context,
                      context.getString(R.string.password_changed),
-                     Toast.LENGTH_SHORT
+                     Toast.LENGTH_LONG
                    ).show()
+                   navController.navigate(Screen.Start.ruter)
                  }) {
             Text(
               text = stringResource(R.string.change_password),
@@ -189,6 +205,7 @@ class Settings {
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
                  onClick = {
                    Auth().loggUt()
+                   navController.navigate(Screen.Start.ruter)
                    Toast.makeText(
                      context,
                      context.getString(
@@ -221,6 +238,7 @@ class Settings {
               color = MaterialTheme.colorScheme.onSurface,
             )
           }
+
         }
       }
     }
@@ -229,7 +247,8 @@ class Settings {
   @Composable
   fun SettingsCard() {
     Card(
-      modifier = Modifier.padding(32.dp)
+      modifier = Modifier.padding(32.dp),
+      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
     ) {
       var utvidet by remember {
         mutableStateOf(false)
@@ -250,7 +269,8 @@ class Settings {
           Text(
             text = stringResource(R.string.settings),
             fontSize = 20.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
           )
         }
         AnimatedVisibility(
@@ -263,7 +283,8 @@ class Settings {
           Card(
             modifier = Modifier
 
-              .align(Alignment.CenterHorizontally)
+              .align(Alignment.CenterHorizontally),
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
           ) {
             SettingCard()
           }
@@ -276,7 +297,9 @@ class Settings {
   @Composable
   fun SettingCard() {
     ProvideAppThemeState { darkMode, toggleDarkmode ->
-      Card {
+      Card(
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+      ) {
         Column(
           Modifier
             .fillMaxWidth()
@@ -288,7 +311,14 @@ class Settings {
             ) {
               Text(text = stringResource(R.string.change_appearance))
               Spacer(modifier = Modifier.width(10.dp))
+              Text(text = "Endre utseende",color = MaterialTheme.colorScheme.onBackground,)
               Switch(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                colors = SwitchDefaults.colors(
+                  uncheckedThumbColor = MaterialTheme.colorScheme.secondary,
+                  uncheckedTrackColor = MaterialTheme.colorScheme.tertiary,
+                  checkedThumbColor = MaterialTheme.colorScheme.tertiary,
+                ),
                 checked = darkMode,
                 onCheckedChange = { toggleDarkmode() }
               )
@@ -308,7 +338,8 @@ class Settings {
   @Composable
   fun Terms() {
     Card(
-      modifier = Modifier.padding(32.dp)
+      modifier = Modifier.padding(32.dp),
+      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
     ) {
       var utvidet by remember {
         mutableStateOf(false)
@@ -324,7 +355,8 @@ class Settings {
           Text(
             text = stringResource(R.string.terms_and_conditions),
             fontSize = 20.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
           )
         }
         AnimatedVisibility(
@@ -337,7 +369,8 @@ class Settings {
           Card(
             modifier = Modifier
 
-              .align(Alignment.CenterHorizontally)
+              .align(Alignment.CenterHorizontally),
+                    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
           ) {
             TosCard()
           }
@@ -349,7 +382,8 @@ class Settings {
   @Composable
   fun TosCard() {
     Card(
-      modifier = Modifier.padding(16.dp)
+      modifier = Modifier.padding(16.dp),
+      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
     ) {
       Column(
         Modifier
@@ -358,6 +392,7 @@ class Settings {
       ) {
         Column {
           Text(text = stringResource(R.string.terms_text))
+
         }
       }
     }
@@ -365,6 +400,7 @@ class Settings {
 
   @Composable
   fun SettingsPage(navController: NavController, modifier: Modifier) {
+    val context = LocalContext.current
     Column(
       Modifier
         .fillMaxSize()
@@ -374,8 +410,31 @@ class Settings {
       Profil(navController)
       SettingsCard()
       Terms()
-      Spacer(modifier = modifier.padding(bottom = 84.dp))
-
+      if (Auth().innlogget()) {
+        Divider(
+          color = MaterialTheme.colorScheme.tertiary,
+          thickness = 2.dp,
+          modifier = modifier.padding(16.dp)
+        )
+        Spacer(modifier = Modifier.padding(16.dp))
+        Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+          colors = ButtonDefaults.buttonColors(Color(0xFFeb4949)),
+          onClick = {
+            Toast.makeText(
+              context,
+              "${Auth().hentBrukerEmail()} slettet",
+              Toast.LENGTH_SHORT
+            ).show()
+            Auth().slettBruker()
+            navController.navigate(Screen.Start.ruter)
+          }) {
+          Text(
+            text = "Slett bruker",
+            color = MaterialTheme.colorScheme.tertiary,
+          )
+        }
+      }
+        Spacer(modifier = modifier.padding(bottom = 84.dp))
     }
   }
 }

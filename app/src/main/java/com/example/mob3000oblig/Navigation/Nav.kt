@@ -2,7 +2,9 @@ package com.example.mob3000oblig.Navigation
 
 import android.annotation.SuppressLint
 import android.app.Application
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.BottomAppBarDefaults.containerColor
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -49,6 +51,8 @@ fun Nav() {
     modifier = Modifier.fillMaxSize(),
     bottomBar = {
       NavigationBar(
+        containerColor = MaterialTheme.colorScheme.secondary,
+
       ) {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
         val currentDestination: NavDestination? = navBackStackEntry?.destination

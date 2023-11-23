@@ -1,4 +1,4 @@
-package com.example.mob3000oblig.Sammenlign
+package com.example.mob3000oblig.Favoritter
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
@@ -50,6 +50,21 @@ fun Meny(
     Icons.Filled.KeyboardArrowDown
   }
 
+    OutlinedTextField(
+        value = valgt,
+        onValueChange = {
+            onValueChanged(it) },
+        readOnly = true,
+        textStyle = TextStyle(
+            color = MaterialTheme.colorScheme.onBackground,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold
+        ),
+        modifier = Modifier
+            .fillMaxWidth()
+            .onGloballyPositioned { coordinates ->
+                textFieldSize = coordinates.size.width
+            },
   OutlinedTextField(
     value = valgt,
     onValueChange = {

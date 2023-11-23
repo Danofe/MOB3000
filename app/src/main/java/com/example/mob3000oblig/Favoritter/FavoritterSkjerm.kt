@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,14 +32,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mob3000oblig.R
-
-
-import com.example.mob3000oblig.Sammenlign.Meny
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoritterDropdownMeny(
+fun FavoritterSkjerm(
   viewModel: FavoritterViewModel? = viewModel(),
   modifier: Modifier = Modifier
 ) {
@@ -73,12 +71,18 @@ fun FavoritterDropdownMeny(
       kjoretoy = viewModel.allefavoritter.value.getOrNull(index).toString()
       val hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
       val maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
+      val bredde = kjoretoy.substringAfter("bredde=").substringBefore(",")
+      val lengde = kjoretoy.substringAfter("lengde=").substringBefore(",")
+      val hoyde = kjoretoy.substringAfter("hoyde=").substringBefore(",")
+      val vekt = kjoretoy.substringAfter("vekt=").substringBefore(",")
 
       Spacer(modifier = modifier.height(80.dp))
 
       if (index != -1) {
+        Card (colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)){
         Row(
-          modifier = modifier,
+          modifier = modifier
+          .padding(20.dp),
         ) {
           Column() {
             Text(text = stringResource(R.string.brand))
@@ -105,106 +109,139 @@ fun FavoritterDropdownMeny(
             Text(
               kjoretoy.substringAfter("merke=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("serie=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("type=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("farge=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("girinfo=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("drivstoffinfo=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("hybrid=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             if (hestekrefter != stringResource(R.string.not_specified)) {
               Text(
-                "≈$hestekrefter hk",
+                "$hestekrefter hk",
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
             } else {
               Text(
                 hestekrefter,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                        color = MaterialTheme.colorScheme.onBackground
               )
             }
             if (maksHastighet != stringResource(R.string.not_specified)) {
               Text(
                 "$maksHastighet km/t",
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
             } else {
               Text(
                 maksHastighet,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
             }
             Text(
               kjoretoy.substringAfter("forstereg=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("sitteplasser=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("antDorer=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
-              kjoretoy.substringAfter("hoyde=")
-                .substringBefore(","),
+              if (hoyde != "Ikke oppgitt") {
+                "$hoyde cm"
+              } else {
+                hoyde
+              },
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
-              kjoretoy.substringAfter("bredde=")
-                .substringBefore(","),
+              if (bredde != "Ikke oppgitt") {
+                "$bredde cm"
+              } else {
+                bredde
+              },
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
-              kjoretoy.substringAfter("lengde=")
-                .substringBefore(","),
+              if (lengde != "Ikke oppgitt") {
+                "$lengde cm"
+              } else {
+                lengde
+              },
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
-              kjoretoy.substringAfter("vekt=")
-                .substringBefore(","),
+              if (vekt != "Ikke oppgitt") {
+                "$vekt kg"
+              } else {
+                vekt
+              },
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("sistgodkjent=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
             Text(
               kjoretoy.substringAfter("nesteEU=")
                 .substringBefore(","),
+              color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
           }
+        }
         }
         Button(
           onClick = {
