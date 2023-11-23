@@ -72,9 +72,10 @@ class SokerInfo {
     }
     Column(
       modifier = modifier
-      .verticalScroll(rememberScrollState()),
+      .verticalScroll(rememberScrollState())
+        .padding(top = 25.dp,bottom = 20.dp),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-     verticalArrangement = Arrangement.spacedBy(16.dp)
+     verticalArrangement = Arrangement.spacedBy(25.dp)
 
     ) {
       val verdi = bilInfoVariabler(bilInfo)
@@ -82,21 +83,18 @@ class SokerInfo {
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
       val error = "Ikke oppgitt"
       var lagtInn by remember { mutableStateOf(false) }
-
-
-        Text(
-          text = "$name",
-          fontSize = 40.sp,
-          color = MaterialTheme.colorScheme.onBackground,
-        )
-
           // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
 
           if (verdi.merke != error) {
-            Box(
-              modifier = modifier
+            Text(
+              text = "$name",
+              fontSize = 40.sp,
+              color = MaterialTheme.colorScheme.onBackground,
+            )
+           // Box(
+             // modifier = modifier
 
-            ) {
+           // ) {
             Card() {
             Row(
               modifier = modifier
@@ -328,7 +326,7 @@ class SokerInfo {
               }
             }
 
-            }
+            //}
             Row(
               modifier = Modifier
               .padding(vertical = 8.dp)
@@ -396,7 +394,11 @@ class SokerInfo {
                 contentDescription = "skiltskern",
                 modifier = Modifier.size(200.dp)
               )
-
+              Text(
+                text = "$name",
+                fontSize = 40.sp,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
               Text(
                 text = "Fant ingen kjøretøy med dette skiltnummeret.",
                 fontSize = 20.sp,
