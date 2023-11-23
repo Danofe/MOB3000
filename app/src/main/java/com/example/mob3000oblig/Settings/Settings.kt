@@ -39,7 +39,7 @@ import com.example.mob3000oblig.Screen
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
 
-class SettingsPage {
+class Settings {
   @Composable
   fun Profil(navController: NavController) {
     if (!Auth().innlogget()) {
@@ -218,7 +218,7 @@ class SettingsPage {
   }
 
   @Composable
-  fun Settings() {
+  fun SettingsCard() {
     Card(
       modifier = Modifier.padding(32.dp)
     ) {
@@ -350,7 +350,7 @@ class SettingsPage {
   }
 
   @Composable
-  fun SettingsPage(navController: NavController) {
+  fun SettingsPage(navController: NavController, modifier: Modifier) {
     Column(
       Modifier
         .fillMaxSize()
@@ -358,8 +358,10 @@ class SettingsPage {
         .verticalScroll(rememberScrollState())
     ) {
       Profil(navController)
-      Settings()
+      SettingsCard()
       Terms()
+      Spacer(modifier = modifier.padding(bottom = 84.dp))
+
     }
   }
 }
