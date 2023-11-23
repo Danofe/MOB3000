@@ -351,7 +351,7 @@ class SettingsPage {
   }
 
   @Composable
-  fun SettingsPage(navController: NavController) {
+  fun SettingsPage(navController: NavController, modifier: Modifier) {
     Column(
       Modifier
         .fillMaxSize()
@@ -361,6 +361,8 @@ class SettingsPage {
       Profil(navController)
       Settings()
       Terms()
+      Spacer(modifier = modifier.padding(bottom = 84.dp))
+
     }
   }
 }

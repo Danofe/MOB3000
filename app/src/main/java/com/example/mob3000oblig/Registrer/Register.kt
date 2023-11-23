@@ -138,7 +138,7 @@ class Register {
               )
             }
 
-
+            Spacer(modifier = modifier.padding(bottom = 200.dp))
           }
 
         }
