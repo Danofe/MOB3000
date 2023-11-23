@@ -1,11 +1,17 @@
 package com.example.mob3000oblig.ui.theme
 
 import android.app.Activity
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
@@ -36,13 +42,40 @@ private val lightColorScheme = lightColorScheme(
 )
 
 
+object AppThemeState {
+  var isDarkMode by mutableStateOf(false)
+}
+
+@Composable
+fun ProvideAppThemeState(
+  darkMode: Boolean = isSystemInDarkTheme() || AppThemeState.isDarkMode,
+  content: @Composable (darkMode: Boolean, toggleDarkMode: () -> Unit) -> Unit
+) {
+  val systemInDarkMode = isSystemInDarkTheme()
+  CompositionLocalProvider(LocalAppThemeState provides (systemInDarkMode || AppThemeState.isDarkMode)) {
+    content(AppThemeState.isDarkMode) {
+      AppThemeState.isDarkMode = !AppThemeState.isDarkMode
+    }
+  }
+}
+
+private val LocalAppThemeState = staticCompositionLocalOf<Boolean> {
+  error("No LocalAppThemeState provided")
+}
+
+@Composable
+fun getAppThemeState(): Boolean {
+  return LocalAppThemeState.current
+}
+
 @Composable
 fun AppTheme(
-  darkTheme: Boolean,
-  content: @Composable () -> Unit,
+  content: @Composable () -> Unit
 ) {
+  val darkMode = getAppThemeState()
+
   MaterialTheme(
-    colorScheme = if (darkTheme) darkColorScheme else lightColorScheme
+    colorScheme = if (darkMode) darkColorScheme else lightColorScheme
   ) {
     val view = LocalView.current
     if (!view.isInEditMode) {
@@ -52,11 +85,35 @@ fun AppTheme(
         WindowCompat.getInsetsController(
           window,
           view
-        ).isAppearanceLightStatusBars = darkTheme
+        ).isAppearanceLightStatusBars = darkMode
       }
     }
     content()
   }
+}
+
+
+//@Composable
+//fun AppTheme(
+//  darkTheme: Boolean,
+//  content: @Composable () -> Unit,
+//) {
+//  MaterialTheme(
+//    colorScheme = if (darkTheme) darkColorScheme else lightColorScheme
+//  ) {
+//    val view = LocalView.current
+//    if (!view.isInEditMode) {
+//      SideEffect {
+//        val window = (view.context as Activity).window
+//        window.statusBarColor = Color.Gray.toArgb()
+//        WindowCompat.getInsetsController(
+//          window,
+//          view
+//        ).isAppearanceLightStatusBars = darkTheme
+//      }
+//    }
+//    content()
+//  }
 
 //  val colorScheme = when {
 //    dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
@@ -73,4 +130,4 @@ fun AppTheme(
 //    typography = Typography,
 //    content = content
 //  )
-}
+//}

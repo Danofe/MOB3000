@@ -19,6 +19,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -35,9 +36,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth
 import com.example.mob3000oblig.Screen
+import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
+import com.example.mob3000oblig.ui.theme.getAppThemeState
 
 
-class settings {
+class SettingsPage {
   @Composable
   fun Profil(navController: NavController) {
     if (!Auth().innlogget()) {
@@ -264,34 +267,23 @@ class settings {
 
   @Composable
   fun SettingCard() {
-    Card() {
-      Column(
-        Modifier
-          .fillMaxWidth()
-          .align(Alignment.CenterHorizontally)
-      ) {
-        Row(
-          Modifier.align(Alignment.CenterHorizontally)
+    ProvideAppThemeState { darkMode, toggleDarkmode ->
+      Card() {
+        Column(
+          Modifier
+            .fillMaxWidth()
+            .align(Alignment.CenterHorizontally)
         ) {
-          Box(
-            Modifier.padding(2.dp)
+          Row(
+            Modifier.align(Alignment.CenterHorizontally)
           ) {
-            Button(onClick = {/*TODO: darkmode */ }) {
-              Text(
-                text = "Darkmode",
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 12.sp,
-              )
-            }
-          }
-          Box(
-            Modifier.padding(2.dp)
-          ) {
-            Button(onClick = { /*TODO: lightmode */ }) {
-              Text(
-                text = "Lightmode",
-                color = MaterialTheme.colorScheme.onSurface,
-                fontSize = 12.sp
+            Column(
+              Modifier.padding(2.dp)
+            ) {
+              Text(text = "Endre utseende")
+              Switch(
+                checked = darkMode,
+                onCheckedChange = { toggleDarkmode() }
               )
             }
           }
