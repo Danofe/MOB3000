@@ -32,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.mob3000oblig.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +44,7 @@ fun FavoritterSkjerm(
   val slettemelding = remember { mutableStateOf(false) }
   var valgtFavoritt by remember { mutableStateOf("") }
   val favorittliste = viewModel?.favoritterSkilt?.value
-  var index by remember { mutableStateOf(-1)}
+  var index by remember { mutableStateOf(-1) }
 
   val context = LocalContext.current
 
@@ -67,42 +68,96 @@ fun FavoritterSkjerm(
         modifier = modifier
       )
     }
-      index = favorittliste?.indexOf(valgtFavoritt)!!
-      kjoretoy = viewModel.allefavoritter.value.getOrNull(index).toString()
-      val hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
-      val maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
-      val bredde = kjoretoy.substringAfter("bredde=").substringBefore(",")
-      val lengde = kjoretoy.substringAfter("lengde=").substringBefore(",")
-      val hoyde = kjoretoy.substringAfter("hoyde=").substringBefore(",")
-      val vekt = kjoretoy.substringAfter("vekt=").substringBefore(",")
+    index = favorittliste?.indexOf(valgtFavoritt)!!
+    kjoretoy = viewModel.allefavoritter.value.getOrNull(index).toString()
+    val hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
+    val maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
+    val bredde = kjoretoy.substringAfter("bredde=").substringBefore(",")
+    val lengde = kjoretoy.substringAfter("lengde=").substringBefore(",")
+    val hoyde = kjoretoy.substringAfter("hoyde=").substringBefore(",")
+    val vekt = kjoretoy.substringAfter("vekt=").substringBefore(",")
 
-      Spacer(modifier = modifier.height(80.dp))
+    Spacer(modifier = modifier.height(80.dp))
 
-      if (index != -1) {
-        Card (colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)){
+    if (index != -1) {
+      Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
         Row(
           modifier = modifier
-          .padding(20.dp),
+            .padding(20.dp),
         ) {
           Column() {
-            Text(text = stringResource(R.string.brand))
-            Text(text = stringResource(R.string.series))
-            Text(text = stringResource(R.string.type))
-            Text(text = stringResource(R.string.color))
-            Text(text = stringResource(R.string.gearbox_type))
-            Text(text = stringResource(R.string.fuel))
-            Text(text = stringResource(R.string.hybrid))
-            Text(text = stringResource(R.string.horsepower))
-            Text(text = stringResource(R.string.max_speed))
-            Text(text = stringResource(R.string.first_registration))
-            Text(text = stringResource(R.string.number_of_seats))
-            Text(text = stringResource(R.string.number_of_doors))
-            Text(text = stringResource(R.string.height))
-            Text(text = stringResource(R.string.width))
-            Text(text = stringResource(R.string.length))
-            Text(text = stringResource(R.string.weight))
-            Text(text = stringResource(R.string.latest_approval))
-            Text(text = stringResource(R.string.next_eu_control))
+            Text(
+              text = stringResource(R.string.brand),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.series),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.type),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.color),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.gearbox_type),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.fuel),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.hybrid),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.horsepower),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.max_speed),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.first_registration),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.number_of_seats),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.number_of_doors),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.height),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.width),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.length),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.weight),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.latest_approval),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+            Text(
+              text = stringResource(R.string.next_eu_control),
+              color = MaterialTheme.colorScheme.onBackground
+            )
           }
           Spacer(modifier = modifier.width(30.dp))
           Column {
@@ -158,7 +213,7 @@ fun FavoritterSkjerm(
               Text(
                 hestekrefter,
                 fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onBackground
+                color = MaterialTheme.colorScheme.onBackground
               )
             }
             if (maksHastighet != stringResource(R.string.not_specified)) {
@@ -242,81 +297,81 @@ fun FavoritterSkjerm(
             )
           }
         }
-        }
-        Button(
-          onClick = {
-            slettemelding.value = true
-          },
-          modifier = modifier
-            .align(Alignment.CenterHorizontally)
-            .padding(20.dp)
-        ) {
-          Text(
-            text = stringResource(R.string.delete_favorite),
-            color = MaterialTheme.colorScheme.onSurface
-          )
-        }
-        if (slettemelding.value) {
-          AlertDialog(
-            onDismissRequest = {
-              slettemelding.value = false
-            },
-            title = {
-              Text(
-                stringResource(R.string.delete_favorite_question),
-                color = MaterialTheme.colorScheme.onBackground
-              )
-            },
-            text = {
-              Text(
-                stringResource(
-                  R.string.delete_favorite_do_you_want,
-                  valgtFavoritt
-                ),
-                color = MaterialTheme.colorScheme.onBackground
-              )
-            },
-            confirmButton = {
-              Button(
-                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-                onClick = {
-                  viewModel.slettFavoritt(valgtFavoritt)
-                  slettemelding.value = false
-                  Toast.makeText(
-                    context,
-                    context.getString(
-                      R.string.delete_favorite_confirmation,
-                      valgtFavoritt
-                    ),
-                    Toast.LENGTH_LONG
-                  ).show()
-                  valgtFavoritt = ""
-                },
-
-                ) {
-                Text(
-                  stringResource(R.string.delete_favorite),
-                  color = MaterialTheme.colorScheme.onSurface
-                )
-              }
-            },
-            dismissButton = {
-              Button(
-                onClick = {
-                  slettemelding.value = false
-                }
-              ) {
-                Text(
-                  stringResource(R.string.cancel),
-                  color = MaterialTheme.colorScheme.onSurface
-                )
-              }
-            })
-        }
-      } else if (favorittliste.isEmpty()) {
-        Text(stringResource(R.string.you_have_no_saved_favorites))
-      } else {
-        Text(stringResource(R.string.choose_favorite))
       }
+      Button(
+        onClick = {
+          slettemelding.value = true
+        },
+        modifier = modifier
+          .align(Alignment.CenterHorizontally)
+          .padding(20.dp)
+      ) {
+        Text(
+          text = stringResource(R.string.delete_favorite),
+          color = MaterialTheme.colorScheme.onSurface
+        )
+      }
+      if (slettemelding.value) {
+        AlertDialog(
+          onDismissRequest = {
+            slettemelding.value = false
+          },
+          title = {
+            Text(
+              stringResource(R.string.delete_favorite_question),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+          },
+          text = {
+            Text(
+              stringResource(
+                R.string.delete_favorite_do_you_want,
+                valgtFavoritt
+              ),
+              color = MaterialTheme.colorScheme.onBackground
+            )
+          },
+          confirmButton = {
+            Button(
+              colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+              onClick = {
+                viewModel.slettFavoritt(valgtFavoritt)
+                slettemelding.value = false
+                Toast.makeText(
+                  context,
+                  context.getString(
+                    R.string.delete_favorite_confirmation,
+                    valgtFavoritt
+                  ),
+                  Toast.LENGTH_LONG
+                ).show()
+                valgtFavoritt = ""
+              },
+
+              ) {
+              Text(
+                stringResource(R.string.delete_favorite),
+                color = MaterialTheme.colorScheme.onSurface
+              )
+            }
+          },
+          dismissButton = {
+            Button(
+              onClick = {
+                slettemelding.value = false
+              }
+            ) {
+              Text(
+                stringResource(R.string.cancel),
+                color = MaterialTheme.colorScheme.onSurface
+              )
+            }
+          })
+      }
+    } else if (favorittliste.isEmpty()) {
+      Text(stringResource(R.string.you_have_no_saved_favorites))
+    } else {
+      Text(stringResource(R.string.choose_favorite))
     }
   }
+}

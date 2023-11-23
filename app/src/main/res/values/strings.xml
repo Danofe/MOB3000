@@ -36,7 +36,7 @@
     <string name="allow_permission_camera">Vennligst tillat bruk av kameraet for å bruke denne funksjonen</string>
     <string name="allow">Tillat</string>
     <string name="cant_find_license_number">Finner ingen bilskilt</string>
-    <string name="login_or_registrer_new_user">Logg inn eller registrer ny bruker for å benytte denne funksjonen.</string>
+<!-- Vet ikke om denne trengs   <string name="login_or_registrer_new_user">Logg inn eller registrer ny bruker</string>-->
     <string name="wrong_credentials">Feil brukernavn eller passord</string>
     <string name="password">Passord</string>
     <string name="email">E-post</string>

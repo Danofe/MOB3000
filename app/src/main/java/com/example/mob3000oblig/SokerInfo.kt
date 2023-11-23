@@ -79,11 +79,11 @@ class SokerInfo {
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
       verticalArrangement = Arrangement.spacedBy(20.dp)
     )
-     {
+    {
       val verdi = bilInfoVariabler(bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
-      val ikkeOppgitt= stringResource(R.string.not_specified)
+      val ikkeOppgitt = stringResource(R.string.not_specified)
       var lagtInn by remember { mutableStateOf(false) }
 
       if (verdi.merke != ikkeOppgitt) {
@@ -97,7 +97,8 @@ class SokerInfo {
           Row(
             modifier = modifier
               .align(Alignment.CenterHorizontally)
-            .padding(20.dp),horizontalArrangement = Arrangement.spacedBy(16.dp),
+              .padding(20.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
 
 
             ) {
@@ -337,10 +338,10 @@ class SokerInfo {
                   text = verdi.nesteEU,
                   color = MaterialTheme.colorScheme.onBackground,
 
-            )
+                  )
+              }
+            }
           }
-        }
-}
         }
         Row(
           modifier = Modifier
@@ -348,77 +349,14 @@ class SokerInfo {
             .align(Alignment.CenterHorizontally),
           horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-
           Button(
             onClick = {
               visMerKnapp = !visMerKnapp
-              visMerKnappText = if (visMerKnapp) context.getString(R.string.show_less) else context.getString(R.string.show_more)
+              visMerKnappText =
+                if (visMerKnapp) context.getString(R.string.show_less) else context.getString(R.string.show_more)
             },
             modifier = modifier
 
-        )
-        {
-          Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
-        }
-        Button(
-          onClick = {
-            Firestore.leggInnFavoritt(
-              name,
-              verdi.merke,
-              verdi.hk,
-              verdi.antSeter,
-              verdi.farge,
-              verdi.type,
-              verdi.toppHastighet,
-              verdi.drivstoff,
-              verdi.girtyp,
-              verdi.lengde,
-              verdi.hoyde,
-              verdi.bredde,
-              verdi.vekt,
-              verdi.hybrid,
-              verdi.sistgodkjent,
-              verdi.nesteEU,
-              verdi.forsteReg,
-              verdi.antdorer,
-              verdi.handelsbetegnelse
-            )
-            lagtInn = true
-            Toast.makeText(
-              context,
-              "$name er lagt til som favoritt",
-              Toast.LENGTH_SHORT
-            ).show()
-          },
-          enabled = (Auth.innlogget() && !lagtInn),
-          colors = ButtonDefaults.buttonColors(
-            disabledContainerColor = Color.LightGray
-          )
-        ) {
-          Text("Legg til i favoritter", color = MaterialTheme.colorScheme.onSurface)
-        }
-      }
-    }
-    else {
-      Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = modifier.fillMaxSize()
-      ) {
-        Image(
-          painter = painterResource(id = R.drawable.skiltskern),
-          contentDescription = "skiltskern",
-          modifier = Modifier.size(200.dp)
-        )
-
-        Text(
-          text = "Fant ingen kjøretøy med dette skiltnummeret.",
-          fontSize = 20.sp,
-          textAlign = TextAlign.Center,
-          color = MaterialTheme.colorScheme.onBackground
-        )
-      }
-    }
           )
           {
             Text(
@@ -426,7 +364,6 @@ class SokerInfo {
               color = MaterialTheme.colorScheme.onSurface
             )
           }
-
           Button(
             onClick = {
               Firestore.leggInnFavoritt(
@@ -453,18 +390,20 @@ class SokerInfo {
               lagtInn = true
               Toast.makeText(
                 context,
-                context.getString(
-                  R.string.added_to_favorites,
-                  name
-                ),
+                context.getString(R.string.added_to_favorites),
                 Toast.LENGTH_SHORT
               ).show()
             },
-            enabled = (Auth.innlogget() && !lagtInn)
+            enabled = (Auth.innlogget() && !lagtInn),
+            colors = ButtonDefaults.buttonColors(
+              disabledContainerColor = Color.LightGray
+            )
           ) {
-            Text(stringResource(R.string.add_to_favorites))
+            Text(
+              stringResource(R.string.add_to_favorites),
+              color = MaterialTheme.colorScheme.onSurface
+            )
           }
-
         }
       } else {
         Column(
@@ -478,19 +417,14 @@ class SokerInfo {
             modifier = Modifier.size(200.dp)
           )
           Text(
-            text = "$name",
-            fontSize = 40.sp,
-            color = MaterialTheme.colorScheme.onBackground,
-          )
-          Text(
             text = stringResource(R.string.found_no_vehicles),
             fontSize = 20.sp,
             textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.onBackground,
+            color = MaterialTheme.colorScheme.onBackground
           )
         }
       }
       Spacer(modifier = modifier.padding(bottom = 84.dp))
     }
-}
   }
+}
