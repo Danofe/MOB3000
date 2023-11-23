@@ -13,7 +13,6 @@ class Firestore {
                         sistgodkjent: String, nesteEU: String, forsteReg: String, antdorer: String,
                         handelsbetegnelse: String
     ) {
-
         val brukerID = Firebase.auth.currentUser?.uid.toString()
 
         val bil = hashMapOf(

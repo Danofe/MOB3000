@@ -30,9 +30,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
-
-import com.example.mob3000oblig.Sammenlign.Meny
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritterSkjerm(

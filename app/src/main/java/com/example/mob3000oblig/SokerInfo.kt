@@ -73,7 +73,7 @@ class SokerInfo {
       .verticalScroll(rememberScrollState())
         .padding(top = 25.dp,bottom = 20.dp),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-     verticalArrangement = Arrangement.spacedBy(10.dp)
+      verticalArrangement = Arrangement.spacedBy(10.dp)
     )
      {
       val verdi = bilInfoVariabler(bilInfo)
@@ -193,7 +193,6 @@ class SokerInfo {
                   )
                 }
               }
-
                 Column(
                   modifier = modifier,
                   verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -317,25 +316,25 @@ class SokerInfo {
                 }
               }
             }
-            Row(
-              modifier = Modifier
-              .padding(vertical = 8.dp)
-              .align(Alignment.CenterHorizontally),
-              horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
+          }
+          Row(
+            modifier = Modifier
+            .padding(vertical = 8.dp)
+            .align(Alignment.CenterHorizontally),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+          ) {
 
-            Button(
-              onClick = {
-                visMerKnapp = !visMerKnapp
-                visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
-              },
-              modifier = modifier
+          Button(
+            onClick = {
+              visMerKnapp = !visMerKnapp
+              visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
+            },
+            modifier = modifier
 
-            )
-            {
-              Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
-            }
-
+          )
+          {
+            Text(visMerKnappText, color = MaterialTheme.colorScheme.onSurface)
+          }
             Button(
               onClick = {
                 Firestore.leggInnFavoritt(
@@ -375,32 +374,28 @@ class SokerInfo {
               }
             }
           }
-          else {
-            Column(
-              horizontalAlignment = Alignment.CenterHorizontally,
-              verticalArrangement = Arrangement.Center,
-              modifier = modifier.fillMaxSize()
-            ) {
-              Image(
-                painter = painterResource(id = R.drawable.skiltskern),
-                contentDescription = "skiltskern",
-                modifier = Modifier.size(200.dp)
-              )
-              Text(
-                text = "$name",
-                fontSize = 40.sp,
-                color = MaterialTheme.colorScheme.onBackground,
-              )
-              Text(
-                text = "Fant ingen kjøretøy med dette skiltnummeret.",
-                fontSize = 20.sp,
-                textAlign = TextAlign.Center,
-                color = MaterialTheme.colorScheme.onBackground,
-                )
-            }
-          }
-      Spacer(modifier = modifier.padding(bottom = 84.dp))
         }
+        else {
+          Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = modifier.fillMaxSize()
+          ) {
+            Image(
+              painter = painterResource(id = R.drawable.skiltskern),
+              contentDescription = "skiltskern",
+              modifier = Modifier.size(200.dp)
+            )
 
+            Text(
+              text = "Fant ingen kjøretøy med dette skiltnummeret.",
+              fontSize = 20.sp,
+              textAlign = TextAlign.Center,
+              color = MaterialTheme.colorScheme.onBackground
+            )
+          }
+        }
+        Spacer(modifier = modifier.padding(bottom = 84.dp))
+      }
     }
   }
