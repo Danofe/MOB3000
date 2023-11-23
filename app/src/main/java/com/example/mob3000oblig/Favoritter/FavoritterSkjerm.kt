@@ -28,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -84,24 +85,24 @@ fun FavoritterSkjerm(
           .padding(20.dp),
         ) {
           Column() {
-            Text(text = "Merke", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Serie", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Type", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Farge", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Girkassetype", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Drivstoff", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Hybrid", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Hestekrefter", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Maks hastighet", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Forste registrering", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Sitteplasser", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Antall dører:", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Høyde", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Bredde", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Lengde", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Egenvekt", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Sist godkjent:", color = MaterialTheme.colorScheme.onBackground)
-            Text(text = "Neste EU-kontroll:", color = MaterialTheme.colorScheme.onBackground)
+            Text(text = stringResource(R.string.brand))
+            Text(text = stringResource(R.string.series))
+            Text(text = stringResource(R.string.type))
+            Text(text = stringResource(R.string.color))
+            Text(text = stringResource(R.string.gearbox_type))
+            Text(text = stringResource(R.string.fuel))
+            Text(text = stringResource(R.string.hybrid))
+            Text(text = stringResource(R.string.horsepower))
+            Text(text = stringResource(R.string.max_speed))
+            Text(text = stringResource(R.string.first_registration))
+            Text(text = stringResource(R.string.number_of_seats))
+            Text(text = stringResource(R.string.number_of_doors))
+            Text(text = stringResource(R.string.height))
+            Text(text = stringResource(R.string.width))
+            Text(text = stringResource(R.string.length))
+            Text(text = stringResource(R.string.weight))
+            Text(text = stringResource(R.string.latest_approval))
+            Text(text = stringResource(R.string.next_eu_control))
           }
           Spacer(modifier = modifier.width(30.dp))
           Column {
@@ -147,7 +148,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground,
               fontWeight = FontWeight.Bold
             )
-            if (hestekrefter != "Ikke oppgitt") {
+            if (hestekrefter != stringResource(R.string.not_specified)) {
               Text(
                 "$hestekrefter hk",
                 color = MaterialTheme.colorScheme.onBackground,
@@ -160,7 +161,7 @@ fun FavoritterSkjerm(
                         color = MaterialTheme.colorScheme.onBackground
               )
             }
-            if (maksHastighet != "Ikke oppgitt") {
+            if (maksHastighet != stringResource(R.string.not_specified)) {
               Text(
                 "$maksHastighet km/t",
                 color = MaterialTheme.colorScheme.onBackground,
@@ -251,7 +252,7 @@ fun FavoritterSkjerm(
             .padding(20.dp)
         ) {
           Text(
-            text = "Slett favoritt",
+            text = stringResource(R.string.delete_favorite),
             color = MaterialTheme.colorScheme.onSurface
           )
         }
@@ -262,13 +263,16 @@ fun FavoritterSkjerm(
             },
             title = {
               Text(
-                "Slette favoritt?",
+                stringResource(R.string.delete_favorite_question),
                 color = MaterialTheme.colorScheme.onBackground
               )
             },
             text = {
               Text(
-                "$valgtFavoritt vil for alltid bli slettet fra dine favoritter.",
+                stringResource(
+                  R.string.delete_favorite_do_you_want,
+                  valgtFavoritt
+                ),
                 color = MaterialTheme.colorScheme.onBackground
               )
             },
@@ -280,7 +284,10 @@ fun FavoritterSkjerm(
                   slettemelding.value = false
                   Toast.makeText(
                     context,
-                    "$valgtFavoritt er slettet",
+                    context.getString(
+                      R.string.delete_favorite_confirmation,
+                      valgtFavoritt
+                    ),
                     Toast.LENGTH_LONG
                   ).show()
                   valgtFavoritt = ""
@@ -288,7 +295,7 @@ fun FavoritterSkjerm(
 
                 ) {
                 Text(
-                  "Slett favoritt",
+                  stringResource(R.string.delete_favorite),
                   color = MaterialTheme.colorScheme.onSurface
                 )
               }
@@ -300,18 +307,16 @@ fun FavoritterSkjerm(
                 }
               ) {
                 Text(
-                  "Avbryt",
+                  stringResource(R.string.cancel),
                   color = MaterialTheme.colorScheme.onSurface
                 )
               }
             })
         }
-      } else if (favorittliste?.isEmpty() == true) {
-        Text("Du har ingen lagrede favoritter")
+      } else if (favorittliste.isEmpty()) {
+        Text(stringResource(R.string.you_have_no_saved_favorites))
       } else {
-        Text("Velg en favoritt fra menyen")
+        Text(stringResource(R.string.choose_favorite))
       }
     }
   }
-
-

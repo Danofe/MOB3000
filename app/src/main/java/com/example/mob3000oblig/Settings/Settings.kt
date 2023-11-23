@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -38,10 +39,12 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.key.Key.Companion.Refresh
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth
+import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Screen
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
@@ -64,7 +67,7 @@ class Settings {
           ) {
             Button(onClick = { navController.navigate(Screen.Login.ruter) }) {
               Text(
-                text = "Login",
+                text = stringResource(R.string.login),
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 12.sp
               )
@@ -77,7 +80,7 @@ class Settings {
           ) {
             Button(onClick = { navController.navigate(Screen.Register.ruter) }) {
               Text(
-                text = "Registrer",
+                text = stringResource(R.string.register),
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 12.sp
               )
@@ -104,7 +107,7 @@ class Settings {
             modifier = Modifier.align(Alignment.CenterHorizontally)
           ) {
             Text(
-              text = "Profil",
+              text = stringResource(R.string.profile),
               color = MaterialTheme.colorScheme.onBackground,
               fontSize = 20.sp,
               fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
@@ -169,7 +172,7 @@ class Settings {
             onValueChange = { passord = it },
             label = {
               Text(
-                text = "Nytt Passord",
+                text = stringResource(R.string.new_password),
                 color = MaterialTheme.colorScheme.onBackground
               )
             },
@@ -188,13 +191,13 @@ class Settings {
                    Auth().loggUt()
                    Toast.makeText(
                      context,
-                     "Passord endret",
+                     context.getString(R.string.password_changed),
                      Toast.LENGTH_LONG
                    ).show()
                    navController.navigate(Screen.Start.ruter)
                  }) {
             Text(
-              text = "Bytt passord",
+              text = stringResource(R.string.change_password),
               color = MaterialTheme.colorScheme.onSurface,
             )
 
@@ -205,12 +208,33 @@ class Settings {
                    navController.navigate(Screen.Start.ruter)
                    Toast.makeText(
                      context,
-                     "${Auth().hentBrukerEmail()} logget ut",
+                     context.getString(
+                       R.string.user_logged_out,
+                       Auth().hentBrukerEmail()
+                     ),
                      Toast.LENGTH_SHORT
                    ).show()
                  }) {
             Text(
-              text = "Logg ut",
+              text = stringResource(R.string.logout),
+              color = MaterialTheme.colorScheme.onSurface,
+            )
+          }
+          Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+                 colors = ButtonDefaults.buttonColors(Color.Red),
+                 onClick = {
+                   Auth().slettBruker()
+                   Toast.makeText(
+                     context,
+                     context.getString(
+                       R.string.user_deleted,
+                       Auth().hentBrukerEmail()
+                     ),
+                     Toast.LENGTH_SHORT
+                   ).show()
+                 }) {
+            Text(
+              text = stringResource(R.string.delete_user),
               color = MaterialTheme.colorScheme.onSurface,
             )
           }
@@ -243,7 +267,7 @@ class Settings {
 
         ) {
           Text(
-            text = "Instillinger",
+            text = stringResource(R.string.settings),
             fontSize = 20.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
@@ -281,12 +305,12 @@ class Settings {
             .fillMaxWidth()
             .align(Alignment.CenterHorizontally)
         ) {
-          Row(
-            Modifier.align(Alignment.CenterHorizontally)
-          ) {
-            Column(
-              Modifier.padding(2.dp)
+            Row(
+              Modifier.padding(2.dp),
+              verticalAlignment = Alignment.CenterVertically
             ) {
+              Text(text = stringResource(R.string.change_appearance))
+              Spacer(modifier = Modifier.width(10.dp))
               Text(text = "Endre utseende",color = MaterialTheme.colorScheme.onBackground,)
               Switch(
                 modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -299,10 +323,16 @@ class Settings {
                 onCheckedChange = { toggleDarkmode() }
               )
             }
-          }
         }
+        LanguageToggle()
       }
     }
+  }
+
+  @Composable
+  fun LanguageToggle() {
+  // todo: språktoggle
+    Text("Språk")
   }
 
   @Composable
@@ -323,7 +353,7 @@ class Settings {
           modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
           Text(
-            text = "Terms And Conditions",
+            text = stringResource(R.string.terms_and_conditions),
             fontSize = 20.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground
@@ -361,7 +391,8 @@ class Settings {
           .align(Alignment.CenterHorizontally)
       ) {
         Column {
-          Text(text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", color = MaterialTheme.colorScheme.onBackground,)
+          Text(text = stringResource(R.string.terms_text))
+
         }
       }
     }

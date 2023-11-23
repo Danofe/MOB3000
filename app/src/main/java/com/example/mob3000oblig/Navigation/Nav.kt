@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDestination
@@ -37,10 +38,12 @@ import com.example.mob3000oblig.Settings.Settings
 import com.example.mob3000oblig.SokerInfo
 import com.example.mob3000oblig.Start
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Nav() {
+  val context = LocalContext.current
   val navController = rememberNavController()
   val viewModel: APIViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
     .create(APIViewModel::class.java)
@@ -74,7 +77,7 @@ fun Nav() {
 
             label = {
               Text(
-                text = bottonNavigationItem.label,
+                text = context.getString(bottonNavigationItem.labelStringId),
                 color = MaterialTheme.colorScheme.onBackground
               )
             }
@@ -95,7 +98,7 @@ fun Nav() {
       }
 
       composable(route = Screen.Register.ruter) {
-        Register().registerSkjerm(navController = navController)
+        Register().RegisterSkjerm(navController = navController)
       }
 
       composable(route = Screen.Start.ruter) {
@@ -103,7 +106,10 @@ fun Nav() {
       }
 
       composable(route = Screen.Settings.ruter) {
-        Settings().SettingsPage(navController = navController, modifier = Modifier)
+        Settings().SettingsPage(
+          navController = navController,
+          modifier = Modifier
+        )
       }
 
       composable(route = Screen.Kamera.ruter) {

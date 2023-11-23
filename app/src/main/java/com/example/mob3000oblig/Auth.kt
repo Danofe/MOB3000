@@ -1,7 +1,5 @@
 package com.example.mob3000oblig
 
-import android.widget.Toast
-import androidx.compose.ui.platform.LocalContext
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase

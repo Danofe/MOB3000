@@ -56,7 +56,7 @@ fun ProvideAppThemeState(
   content: @Composable (darkMode: Boolean, toggleDarkMode: () -> Unit) -> Unit
 ) {
   val systemInDarkMode = isSystemInDarkTheme()
-  CompositionLocalProvider(LocalAppThemeState provides (systemInDarkMode || AppThemeState.isDarkMode)) {
+  CompositionLocalProvider(LocalAppThemeState provides (darkMode || AppThemeState.isDarkMode)) {
     content(AppThemeState.isDarkMode) {
       AppThemeState.isDarkMode = !AppThemeState.isDarkMode
     }

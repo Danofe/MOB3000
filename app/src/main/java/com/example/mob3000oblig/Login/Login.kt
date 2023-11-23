@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -67,19 +68,19 @@ class Login {
         ) {
           Image(
             painter = painterResource(id = R.drawable.skiltskern),
-            contentDescription = "skiltskern",
+            contentDescription = stringResource(R.string.logo_name),
             modifier = Modifier.size(200.dp)
           )
 
           Text(
-            text = "Logg inn eller registrer ny bruker for å benytte denne funksjonen.",
+            text = stringResource(R.string.login_or_registrer_new_user),
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onBackground,
           )
 
           if (error) {
             Text(
-              text = "Feil brukernavn eller passord",
+              text = stringResource(R.string.wrong_credentials),
               color = MaterialTheme.colorScheme.onBackground,
             )
           }
@@ -113,7 +114,7 @@ class Login {
             onValueChange = { loginViewModel?.onPassordChange(it) },
             label = {
               Text(
-                "Passord",
+                stringResource(R.string.password),
                 color = MaterialTheme.colorScheme.onBackground
               )
             },
@@ -141,7 +142,7 @@ class Login {
                 )
               }) {
               Text(
-                text = "Logg inn",
+                text = stringResource(R.string.login),
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 20.sp,
               )
@@ -160,7 +161,7 @@ class Login {
 
               ) {
               Text(
-                text = "Registrer",
+                text = stringResource(R.string.register),
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = 20.sp,
               )
@@ -170,11 +171,11 @@ class Login {
           Button(
             onClick = { navController.navigate(Screen.Start.ruter) },
             // TODO: Endre farge i dark og light
-            colors = ButtonDefaults.buttonColors(Color.LightGray),
+            colors = ButtonDefaults.buttonColors(Color.LightGray, ),
             modifier = modifier.align(Alignment.CenterHorizontally),
           ) {
             Text(
-              text = "Avbryt",
+              text = stringResource(R.string.cancel),
               color = MaterialTheme.colorScheme.onSurface,
               fontSize = 20.sp,
             )

@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -40,7 +41,7 @@ import com.example.mob3000oblig.Screen
 class Register {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun registerSkjerm(
+  fun RegisterSkjerm(
     modifier: Modifier = Modifier,
     navController: NavController,
     registerViewModel: RegisterViewModel? = viewModel()
@@ -69,7 +70,7 @@ class Register {
           ) {
             Image(
               painter = painterResource(id = R.drawable.skiltskern),
-              contentDescription = "skiltskern",
+              contentDescription = stringResource(R.string.logo_name),
               modifier = Modifier.size(200.dp)
             )
 
@@ -78,7 +79,7 @@ class Register {
               onValueChange = { registerViewModel?.onEmailRegChange(it) },
               label = {
                 Text(
-                  text = "E-post",
+                  text = stringResource(R.string.email),
                   color = MaterialTheme.colorScheme.onBackground
                 )
               },
@@ -93,7 +94,7 @@ class Register {
               onValueChange = { registerViewModel?.onPassordRegChange(it) },
               label = {
                 Text(
-                  "Passord",
+                  stringResource(R.string.password),
                   color = MaterialTheme.colorScheme.onBackground
                 )
               },
@@ -108,24 +109,24 @@ class Register {
               onValueChange = { registerViewModel?.onPassordBekRegChange(it) },
               label = {
                 Text(
-                  "Bekreft Passord",
-                  color = MaterialTheme.colorScheme.onBackground
-                )
-              },
-              modifier = modifier.align(Alignment.CenterHorizontally),
-              colors = TextFieldDefaults.textFieldColors(
-                MaterialTheme.colorScheme.onBackground,
-                cursorColor = MaterialTheme.colorScheme.onBackground
+                  stringResource(R.string.confirm_password) ,
+                color = MaterialTheme.colorScheme.onBackground
               )
+            },
+            modifier = modifier.align(Alignment.CenterHorizontally),
+            colors = TextFieldDefaults.textFieldColors(
+              MaterialTheme.colorScheme.onBackground,
+              cursorColor = MaterialTheme.colorScheme.onBackground
             )
-            Row {
-              Button(
-                onClick = { navController.navigate(Screen.Start.ruter) },
-                // TODO: Endre farge i dark og light
-                colors = ButtonDefaults.buttonColors(Color.LightGray),
-              ) {
-                Text(
-                  text = "Avbryt",
+          )
+          Row {
+            Button(
+              onClick = { navController.navigate(Screen.Start.ruter) },
+              // TODO: Endre farge i dark og light
+              colors = ButtonDefaults.buttonColors(Color.LightGray),
+            ) {
+              Text(
+                text = stringResource(R.string.cancel),
                   color = MaterialTheme.colorScheme.onSurface,
                   fontSize = 20.sp,
                 )
@@ -137,7 +138,7 @@ class Register {
 
                 ) {
                 Text(
-                  text = "Registrer",
+                  text = stringResource(R.string.register),
                   color = MaterialTheme.colorScheme.onSurface,
                   fontSize = 20.sp,
                 )

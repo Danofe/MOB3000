@@ -4,7 +4,6 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -30,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -71,129 +71,135 @@ class SokerInfo {
     }
     Column(
       modifier = modifier
-      .verticalScroll(rememberScrollState())
-        .padding(top = 18.dp,bottom = 20.dp),
+        .verticalScroll(rememberScrollState())
+        .padding(
+          top = 18.dp,
+          bottom = 20.dp
+        ),
       horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-     verticalArrangement = Arrangement.spacedBy(20.dp)
+      verticalArrangement = Arrangement.spacedBy(20.dp)
     )
      {
       val verdi = bilInfoVariabler(bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf("Vis mer") }
-      val error = "Ikke oppgitt"
+      val ikkeOppgitt= stringResource(R.string.not_specified)
       var lagtInn by remember { mutableStateOf(false) }
 
-          if (verdi.merke != error) {
-            Text(
-              text = "$name",
-              fontSize = 40.sp,
-              color = MaterialTheme.colorScheme.onBackground,
-            )
-            Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
-            Row(
-              modifier = modifier
+      if (verdi.merke != ikkeOppgitt) {
+        Text(
+          text = "$name",
+          fontSize = 40.sp,
+          color = MaterialTheme.colorScheme.onBackground,
+        )
+
+        Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
+          Row(
+            modifier = modifier
               .align(Alignment.CenterHorizontally)
-              .padding(20.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
-          ) {
+            .padding(20.dp),horizontalArrangement = Arrangement.spacedBy(16.dp),
+
+
+            ) {
             Column(
               modifier = modifier,
               verticalArrangement = Arrangement.spacedBy(8.dp)
 
             ) {
               Text(
-                text = "Merke",
+                text = stringResource(R.string.brand),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Serie",
+                text = stringResource(R.string.series),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Type",
+                text = stringResource(R.string.type),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Farge",
+                text = stringResource(R.string.color),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Girkassetype",
+                text = stringResource(R.string.gearbox_type),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Drivstoff",
+                text = stringResource(R.string.fuel),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Hybrid",
+                text = stringResource(R.string.hybrid),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Hestekrefter",
+                text = stringResource(R.string.horsepower),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Maks hastighet",
+                text = stringResource(R.string.max_speed),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               Text(
-                text = "Forste registrering",
+                text = stringResource(R.string.first_registration),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold
               )
               if (visMerKnapp) {
                 Text(
-                  text = "Sitteplasser",
+                  text = stringResource(R.string.number_of_seats),
                   color = MaterialTheme.colorScheme.onBackground,
                   fontWeight = FontWeight.Bold
                 )
                 Text(
-                  text = "Antall dører:",
+                  text = stringResource(R.string.number_of_doors),
                   color = MaterialTheme.colorScheme.onBackground,
                   fontWeight = FontWeight.Bold
                 )
                 Text(
-                  text = "Høyde",
+                  text = stringResource(R.string.height),
                   color = MaterialTheme.colorScheme.onBackground,
                   fontWeight = FontWeight.Bold
                 )
                 Text(
-                  text = "Bredde",
+                  text = stringResource(R.string.width),
                   color = MaterialTheme.colorScheme.onBackground,
                   fontWeight = FontWeight.Bold
                 )
                 Text(
-                  text = "Lengde",
+                  text = stringResource(R.string.length),
                   color = MaterialTheme.colorScheme.onBackground,
                   fontWeight = FontWeight.Bold
                 )
                 Text(
-                  text = "Egenvekt",
+                  text = stringResource(R.string.weight),
                   color = MaterialTheme.colorScheme.onBackground,
                   fontWeight = FontWeight.Bold
                 )
                 Text(
-                  text = "Sist godkjent:",
+                  text = stringResource(R.string.latest_approval),
                   color = MaterialTheme.colorScheme.onBackground,
                   fontWeight = FontWeight.Bold
                 )
                 Text(
-                  text = "Neste EU kontroll:",
+                  text = stringResource(R.string.next_eu_control),
                   color = MaterialTheme.colorScheme.onBackground,
                   fontWeight = FontWeight.Bold
                 )
               }
             }
+
             Column(
               modifier = modifier,
               verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -226,9 +232,12 @@ class SokerInfo {
                 text = verdi.hybrid,
                 color = MaterialTheme.colorScheme.onBackground,
               )
-              if (verdi.hk != error) {
+              if (verdi.hk != ikkeOppgitt) {
                 Text(
-                  text = "${verdi.hk} hk",
+                  text = stringResource(
+                    R.string.hp, // hestekrefter
+                    verdi.hk
+                  ),
                   color = MaterialTheme.colorScheme.onBackground,
                 )
               } else {
@@ -237,9 +246,12 @@ class SokerInfo {
                   color = MaterialTheme.colorScheme.onBackground,
                 )
               }
-              if (verdi.toppHastighet != error) {
+              if (verdi.toppHastighet != ikkeOppgitt) {
                 Text(
-                  text = "${verdi.toppHastighet} km/t",
+                  text = stringResource(
+                    R.string.km_h,
+                    verdi.toppHastighet
+                  ),
                   color = MaterialTheme.colorScheme.onBackground,
                 )
               } else {
@@ -261,9 +273,12 @@ class SokerInfo {
                   text = verdi.antdorer,
                   color = MaterialTheme.colorScheme.onBackground,
                 )
-                if (verdi.hoyde != error) {
+                if (verdi.hoyde != ikkeOppgitt) {
                   Text(
-                    text = "${verdi.hoyde} cm",
+                    text = stringResource(
+                      R.string.cm,
+                      verdi.hoyde
+                    ),
                     color = MaterialTheme.colorScheme.onBackground,
                   )
                 } else {
@@ -272,9 +287,12 @@ class SokerInfo {
                     color = MaterialTheme.colorScheme.onBackground,
                   )
                 }
-                if (verdi.bredde != error) {
+                if (verdi.bredde != ikkeOppgitt) {
                   Text(
-                    text = "${verdi.bredde} cm",
+                    text = stringResource(
+                      R.string.cm,
+                      verdi.bredde
+                    ),
                     color = MaterialTheme.colorScheme.onBackground,
                   )
                 } else {
@@ -283,9 +301,12 @@ class SokerInfo {
                     color = MaterialTheme.colorScheme.onBackground,
                   )
                 }
-                if (verdi.lengde != error) {
+                if (verdi.lengde != ikkeOppgitt) {
                   Text(
-                    text = "${verdi.lengde} cm",
+                    text = stringResource(
+                      R.string.cm,
+                      verdi.lengde
+                    ),
                     color = MaterialTheme.colorScheme.onBackground,
                   )
                 } else {
@@ -294,9 +315,12 @@ class SokerInfo {
                     color = MaterialTheme.colorScheme.onBackground,
                   )
                 }
-                if (verdi.vekt != error) {
+                if (verdi.vekt != ikkeOppgitt) {
                   Text(
-                    text = "${verdi.vekt} kg",
+                    text = stringResource(
+                      R.string.kg,
+                      verdi.vekt
+                    ),
                     color = MaterialTheme.colorScheme.onBackground,
                   )
                 } else {
@@ -312,24 +336,25 @@ class SokerInfo {
                 Text(
                   text = verdi.nesteEU,
                   color = MaterialTheme.colorScheme.onBackground,
-                )
-              }
-            }
-          }
-      }
-      Row(
-        modifier = Modifier
-          .padding(vertical = 8.dp)
-          .align(Alignment.CenterHorizontally),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-      ) {
 
-        Button(
-          onClick = {
-            visMerKnapp = !visMerKnapp
-            visMerKnappText = if (visMerKnapp) "Vis mindre" else "Vis mer"
-          },
-          modifier = modifier
+            )
+          }
+        }
+}
+        }
+        Row(
+          modifier = Modifier
+            .padding(vertical = 8.dp)
+            .align(Alignment.CenterHorizontally),
+          horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+
+          Button(
+            onClick = {
+              visMerKnapp = !visMerKnapp
+              visMerKnappText = if (visMerKnapp) context.getString(R.string.show_less) else context.getString(R.string.show_more)
+            },
+            modifier = modifier
 
         )
         {
@@ -394,7 +419,78 @@ class SokerInfo {
         )
       }
     }
+          )
+          {
+            Text(
+              visMerKnappText,
+              color = MaterialTheme.colorScheme.onSurface
+            )
+          }
+
+          Button(
+            onClick = {
+              Firestore.leggInnFavoritt(
+                name,
+                verdi.merke,
+                verdi.hk,
+                verdi.antSeter,
+                verdi.farge,
+                verdi.type,
+                verdi.toppHastighet,
+                verdi.drivstoff,
+                verdi.girtyp,
+                verdi.lengde,
+                verdi.hoyde,
+                verdi.bredde,
+                verdi.vekt,
+                verdi.hybrid,
+                verdi.sistgodkjent,
+                verdi.nesteEU,
+                verdi.forsteReg,
+                verdi.antdorer,
+                verdi.handelsbetegnelse
+              )
+              lagtInn = true
+              Toast.makeText(
+                context,
+                context.getString(
+                  R.string.added_to_favorites,
+                  name
+                ),
+                Toast.LENGTH_SHORT
+              ).show()
+            },
+            enabled = (Auth.innlogget() && !lagtInn)
+          ) {
+            Text(stringResource(R.string.add_to_favorites))
+          }
+
+        }
+      } else {
+        Column(
+          horizontalAlignment = Alignment.CenterHorizontally,
+          verticalArrangement = Arrangement.Center,
+          modifier = modifier.fillMaxSize()
+        ) {
+          Image(
+            painter = painterResource(id = R.drawable.skiltskern),
+            contentDescription = stringResource(R.string.logo_name),
+            modifier = Modifier.size(200.dp)
+          )
+          Text(
+            text = "$name",
+            fontSize = 40.sp,
+            color = MaterialTheme.colorScheme.onBackground,
+          )
+          Text(
+            text = stringResource(R.string.found_no_vehicles),
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onBackground,
+          )
+        }
+      }
       Spacer(modifier = modifier.padding(bottom = 84.dp))
     }
-  }
 }
+  }
