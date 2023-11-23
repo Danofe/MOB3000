@@ -1,9 +1,6 @@
 package com.example.mob3000oblig.Favoritter
 
-import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 
@@ -13,21 +10,13 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,22 +25,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mob3000oblig.R
 
 
 import com.example.mob3000oblig.Sammenlign.Meny
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoritterDropdownMeny(
+fun FavoritterSkjerm(
   viewModel: FavoritterViewModel? = viewModel(),
   modifier: Modifier = Modifier
 ) {
@@ -87,6 +71,10 @@ fun FavoritterDropdownMeny(
       kjoretoy = viewModel.allefavoritter.value.getOrNull(index).toString()
       val hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
       val maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
+      val bredde = kjoretoy.substringAfter("bredde=").substringBefore(",")
+      val lengde = kjoretoy.substringAfter("lengde=").substringBefore(",")
+      val hoyde = kjoretoy.substringAfter("hoyde=").substringBefore(",")
+      val vekt = kjoretoy.substringAfter("vekt=").substringBefore(",")
 
       Spacer(modifier = modifier.height(80.dp))
 
@@ -153,7 +141,7 @@ fun FavoritterDropdownMeny(
             )
             if (hestekrefter != "Ikke oppgitt") {
               Text(
-                "≈$hestekrefter hk",
+                "$hestekrefter hk",
                 fontWeight = FontWeight.Bold
               )
             } else {
@@ -189,23 +177,35 @@ fun FavoritterDropdownMeny(
               fontWeight = FontWeight.Bold
             )
             Text(
-              kjoretoy.substringAfter("hoyde=")
-                .substringBefore(","),
+              if (hoyde != "Ikke oppgitt") {
+                "$hoyde cm"
+              } else {
+                hoyde
+              },
               fontWeight = FontWeight.Bold
             )
             Text(
-              kjoretoy.substringAfter("bredde=")
-                .substringBefore(","),
+              if (bredde != "Ikke oppgitt") {
+                "$bredde cm"
+              } else {
+                bredde
+              },
               fontWeight = FontWeight.Bold
             )
             Text(
-              kjoretoy.substringAfter("lengde=")
-                .substringBefore(","),
+              if (lengde != "Ikke oppgitt") {
+                "$lengde cm"
+              } else {
+                lengde
+              },
               fontWeight = FontWeight.Bold
             )
             Text(
-              kjoretoy.substringAfter("vekt=")
-                .substringBefore(","),
+              if (vekt != "Ikke oppgitt") {
+                "$vekt kg"
+              } else {
+                vekt
+              },
               fontWeight = FontWeight.Bold
             )
             Text(

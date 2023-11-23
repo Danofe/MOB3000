@@ -9,12 +9,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -83,15 +79,12 @@ class SokerInfo {
       val error = "Ikke oppgitt"
       var lagtInn by remember { mutableStateOf(false) }
 
-
         Text(
           text = "$name",
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
         )
-
           // Gjør at "legg til i favoritter"-knappen kan kun trykkes 1 gang, litt scuffed metode
-
           if (verdi.merke != error) {
             Box(
               modifier = modifier
@@ -380,7 +373,9 @@ class SokerInfo {
               },
               enabled = (Auth.innlogget() && !lagtInn)
             ) {
-              Text("Legg til i favoritter")
+              Text("Legg til i favoritter",
+                color = MaterialTheme.colorScheme.onSurface
+              )
             }
 
             }
