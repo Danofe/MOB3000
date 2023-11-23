@@ -100,7 +100,7 @@ fun FavoritterSkjerm(
             Text(text = "Lengde")
             Text(text = "Egenvekt")
             Text(text = "Sist godkjent:")
-            Text(text = "Neste EU kontroll:")
+            Text(text = "Neste EU-kontroll:")
           }
           Spacer(modifier = modifier.width(30.dp))
           Column {
