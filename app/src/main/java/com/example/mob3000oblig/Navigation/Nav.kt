@@ -28,7 +28,7 @@ import com.example.mob3000oblig.Kamera.Kamera
 import com.example.mob3000oblig.Login.Login
 import com.example.mob3000oblig.Registrer.Register
 import com.example.mob3000oblig.Screen
-import com.example.mob3000oblig.Settings.settings
+import com.example.mob3000oblig.Settings.SettingsPage
 import com.example.mob3000oblig.SokerInfo
 import com.example.mob3000oblig.Start
 
@@ -96,7 +96,7 @@ fun Nav() {
       }
 
       composable(route = Screen.Settings.ruter) {
-        settings().SettingsPage(navController = navController)
+        SettingsPage().SettingsPage(navController = navController)
       }
 
       composable(route = Screen.Kamera.ruter) {
