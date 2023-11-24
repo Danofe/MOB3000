@@ -14,6 +14,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -60,11 +61,11 @@ fun Meny(
       fontWeight = FontWeight.Bold
     ),
     modifier = Modifier
-        .fillMaxSize()
-        .onGloballyPositioned { coordinates ->
-            textFieldSize = coordinates.size.width
-        },
-
+      .fillMaxSize()
+      .onGloballyPositioned { coordinates ->
+        textFieldSize = coordinates.size.width
+      },
+    colors = TextFieldDefaults.textFieldColors(MaterialTheme.colorScheme.onBackground),
     label = { Text(stringResource(R.string.choose_license_number)) },
 
     trailingIcon = {

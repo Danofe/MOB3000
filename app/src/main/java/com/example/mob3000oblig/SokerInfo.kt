@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
@@ -391,7 +392,7 @@ class SokerInfo {
               lagtInn = true
               Toast.makeText(
                 context,
-                context.getString(R.string.added_to_favorites),
+                context.getString(R.string.added_to_favorites, name),
                 Toast.LENGTH_SHORT
               ).show()
             },
@@ -417,6 +418,12 @@ class SokerInfo {
             contentDescription = stringResource(R.string.logo_name),
             modifier = Modifier.size(200.dp)
           )
+          Text(
+            text = "$name",
+            fontSize = 40.sp,
+            color = MaterialTheme.colorScheme.onBackground,
+          )
+          Spacer(modifier = Modifier.height(10.dp))
           Text(
             text = stringResource(R.string.found_no_vehicles),
             fontSize = 20.sp,
