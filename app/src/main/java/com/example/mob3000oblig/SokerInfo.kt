@@ -80,9 +80,10 @@ class SokerInfo {
       verticalArrangement = Arrangement.spacedBy(20.dp)
     )
     {
-      val verdi = bilInfoVariabler(bilInfo)
+      val context = LocalContext.current
+      val verdi = bilInfoVariabler(context, bilInfo)
       var visMerKnapp by remember { mutableStateOf(false) }
-      var visMerKnappText by remember { mutableStateOf("Vis mer") }
+      var visMerKnappText by remember { mutableStateOf(context.getString(R.string.show_more)) }
       val ikkeOppgitt = stringResource(R.string.not_specified)
       var lagtInn by remember { mutableStateOf(false) }
 

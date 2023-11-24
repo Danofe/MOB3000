@@ -1,7 +1,12 @@
 package com.example.mob3000oblig.DataApi
 
+import android.content.Context
 import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
+import com.example.mob3000oblig.R
 import kotlin.math.roundToInt
 
 data class HentBilInfo(
@@ -24,9 +29,8 @@ data class HentBilInfo(
     val antdorer: String,
     val handelsbetegnelse: String
 )
-
-fun bilInfoVariabler (bilInfo: KjoretoyDataListe?): HentBilInfo {
-    val error = "Ikke oppgitt"
+fun bilInfoVariabler (context: Context, bilInfo: KjoretoyDataListe?): HentBilInfo {
+    val error = context.getString(R.string.not_specified)
     val merke = bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.tekniskeData?.generelt?.merke?.
     get(0)?.merke ?: error
     val type = bilInfo?.kjoretoydataListe?.get(0)?.godkjenning?.tekniskGodkjenning?.kjoretoyklassifisering?.beskrivelse
