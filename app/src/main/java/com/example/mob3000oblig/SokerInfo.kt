@@ -53,8 +53,6 @@ class SokerInfo {
     var url by remember { mutableStateOf("") }
     url = "kjoretoydata?kjennemerke=$name"
     var bilInfo by remember { mutableStateOf<KjoretoyDataListe?>(null) }
-    //val scope = rememberCoroutineScope()
-    val context = LocalContext.current
     LaunchedEffect(url) {
       try {
         val info = viewModel.hentBilInfo(url)
