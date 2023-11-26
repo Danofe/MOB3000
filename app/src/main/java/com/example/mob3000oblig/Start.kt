@@ -93,7 +93,6 @@ class Start {
             horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
             verticalArrangement = Arrangement.spacedBy(8.dp) //Spacing mellom textfield og søk-knapp
           ) {
-
             TextField(
               value = licenseNumberQuery,
               onValueChange = {
@@ -119,7 +118,6 @@ class Start {
                 navController.navigate(Screen.Info.withArgs(licenseNumberQuery.uppercase()))
               },
               enabled = !licenseNumberQuery.isEmpty() && !showError,
-
             )
             {
               Text(
@@ -129,7 +127,6 @@ class Start {
               )
             }
           }
-          //-----
           //Sammenlign-knapp
           Button(
             onClick = { navController.navigate(Screen.Sammenlign.ruter) },
@@ -171,7 +168,6 @@ class Start {
                 color = Color.Black
               )
             }
-
             //Favoritter-knapp
             Button(
               onClick = { navController.navigate(Screen.Favoritter.ruter) },

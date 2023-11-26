@@ -120,7 +120,7 @@ fun Nav() {
       }
 
       composable(route = Screen.Sammenlign.ruter) {
-        Sammenlign().SammenlignSkjerm()
+        Sammenlign().SammenlignSkjerm(viewModel = viewModel)
       }
 
       composable(route = Screen.Info.ruter + "/{name}",

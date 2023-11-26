@@ -92,15 +92,12 @@ class SokerInfo {
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
         )
-
         Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
           Row(
             modifier = modifier
               .align(Alignment.CenterHorizontally)
               .padding(20.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
-
-
             ) {
             Column(
               modifier = modifier,
@@ -200,7 +197,6 @@ class SokerInfo {
                 )
               }
             }
-
             Column(
               modifier = modifier,
               verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -233,7 +229,7 @@ class SokerInfo {
                 text = verdi.hybrid,
                 color = MaterialTheme.colorScheme.onBackground,
               )
-              if (verdi.hk != ikkeOppgitt) {
+              if (verdi.hk != "0") {
                 Text(
                   text = stringResource(
                     R.string.hp, // hestekrefter
@@ -243,7 +239,7 @@ class SokerInfo {
                 )
               } else {
                 Text(
-                  text = verdi.hk,
+                  text = ikkeOppgitt,
                   color = MaterialTheme.colorScheme.onBackground,
                 )
               }
@@ -337,8 +333,7 @@ class SokerInfo {
                 Text(
                   text = verdi.nesteEU,
                   color = MaterialTheme.colorScheme.onBackground,
-
-                  )
+                )
               }
             }
           }
@@ -356,7 +351,6 @@ class SokerInfo {
                 if (visMerKnapp) context.getString(R.string.show_less) else context.getString(R.string.show_more)
             },
             modifier = modifier
-
           )
           {
             Text(

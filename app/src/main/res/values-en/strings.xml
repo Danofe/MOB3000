@@ -2,6 +2,7 @@
     <string name="app_name">Mob3000Oblig</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
+    <string name="license_number">Plate no</string>
     <string name="login_to_see_favorites">You need to login to get access to favorites</string>
     <string name="height">Height</string>
     <string name="home">Home</string>
@@ -26,7 +27,7 @@
     <string name="latest_approval">Latest approval</string>
     <string name="next_eu_control">Next EU control</string>
     <string name="not_specified">Not specified</string>
-    <string name="delete_favorite">Delete favorite</string>
+    <string name="delete_favorite">Delete</string>
     <string name="delete_favorite_question">Delete favorite?</string>
     <string name="delete_favorite_do_you_want">%1$s will be permanently deleted from your favorites.</string>
     <string name="delete_favorite_confirmation">%1$s has been deleted</string>
