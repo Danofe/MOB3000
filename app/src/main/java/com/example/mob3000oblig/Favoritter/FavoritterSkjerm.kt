@@ -88,75 +88,93 @@ fun FavoritterSkjerm(
           Column() {
             Text(
               text = stringResource(R.string.brand),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.series),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.type),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.color),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.gearbox_type),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.fuel),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.hybrid),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.horsepower),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.max_speed),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.first_registration),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.number_of_seats),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.number_of_doors),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.height),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.width),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.length),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.weight),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.latest_approval),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
             Text(
               text = stringResource(R.string.next_eu_control),
-              color = MaterialTheme.colorScheme.onBackground
+              color = MaterialTheme.colorScheme.onBackground,
+              fontWeight = FontWeight.Bold
             )
           }
           Spacer(modifier = modifier.width(30.dp))
@@ -164,88 +182,74 @@ fun FavoritterSkjerm(
             Text(
               kjoretoy.substringAfter("merke=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("serie=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("type=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("farge=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("girinfo=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("drivstoffinfo=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("hybrid=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             if (hestekrefter != stringResource(R.string.not_specified)) {
               Text(
                 "$hestekrefter hk",
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.Bold
+                color = MaterialTheme.colorScheme.onBackground
               )
             } else {
               Text(
                 hestekrefter,
-                fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground
               )
             }
             if (maksHastighet != stringResource(R.string.not_specified)) {
               Text(
                 "$maksHastighet km/t",
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.Bold
+                color = MaterialTheme.colorScheme.onBackground
               )
             } else {
               Text(
                 maksHastighet,
-                color = MaterialTheme.colorScheme.onBackground,
-                fontWeight = FontWeight.Bold
+                color = MaterialTheme.colorScheme.onBackground
               )
             }
             Text(
               kjoretoy.substringAfter("forstereg=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("sitteplasser=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("antDorer=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               if (hoyde != "Ikke oppgitt") {
@@ -253,8 +257,7 @@ fun FavoritterSkjerm(
               } else {
                 hoyde
               },
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               if (bredde != "Ikke oppgitt") {
@@ -262,8 +265,7 @@ fun FavoritterSkjerm(
               } else {
                 bredde
               },
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               if (lengde != "Ikke oppgitt") {
@@ -271,8 +273,7 @@ fun FavoritterSkjerm(
               } else {
                 lengde
               },
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               if (vekt != "Ikke oppgitt") {
@@ -280,20 +281,17 @@ fun FavoritterSkjerm(
               } else {
                 vekt
               },
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("sistgodkjent=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
             Text(
               kjoretoy.substringAfter("nesteEU=")
                 .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground,
-              fontWeight = FontWeight.Bold
+              color = MaterialTheme.colorScheme.onBackground
             )
           }
         }
@@ -366,7 +364,8 @@ fun FavoritterSkjerm(
                 color = MaterialTheme.colorScheme.onSurface
               )
             }
-          })
+          }
+        )
       }
     } else if (favorittliste.isEmpty()) {
       Text(stringResource(R.string.you_have_no_saved_favorites))

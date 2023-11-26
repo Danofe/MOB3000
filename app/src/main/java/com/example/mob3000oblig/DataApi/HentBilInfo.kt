@@ -96,6 +96,7 @@ fun bilInfoVariabler (context: Context, bilInfo: KjoretoyDataListe?): HentBilInf
         hk = error
         // Henter kun ut kW, så må konvertere til hk
     } else {
+        Log.d("Hestekrefter: ", "$hk")
         var a = hk.toInt()
         hk = (a * 1.34102209).roundToInt().toString()
     }

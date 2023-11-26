@@ -2,6 +2,7 @@
     <string name="app_name">Mob3000Oblig</string>
     <string name="login">Logg inn</string>
     <string name="register">Registrer</string>
+    <string name="license_number">Skiltnr</string>
     <string name="login_to_see_favorites">Du må logge inn for å se dine favoritter</string>
     <string name="height">Høyde</string>
     <string name="home">Hjem</string>
@@ -26,7 +27,7 @@
     <string name="latest_approval">Sist godkjent</string>
     <string name="next_eu_control">Neste EU-kontroll</string>
     <string name="not_specified">Ikke oppgitt</string>
-    <string name="delete_favorite">Slett favoritt</string>
+    <string name="delete_favorite">Slett</string>
     <string name="delete_favorite_question">Slette favoritt?</string>
     <string name="delete_favorite_do_you_want">%1$s vil for alltid bli slettet fra dine favoritter.</string>
     <string name="delete_favorite_confirmation">%1$s er slettet</string>
