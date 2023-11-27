@@ -1,7 +1,10 @@
 package com.example.mob3000oblig.Settings
 
+import android.app.LocaleManager
+import android.os.LocaleList
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,35 +14,42 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Divider
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.key.Key.Companion.Refresh
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalTextInputService
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -221,101 +231,87 @@ class Settings {
               color = MaterialTheme.colorScheme.onSurface,
             )
           }
-          Button(modifier = Modifier.align(Alignment.CenterHorizontally),
-                 colors = ButtonDefaults.buttonColors(Color.Red),
-                 onClick = {
-                   Auth().slettBruker()
-                   Toast.makeText(
-                     context,
-                     context.getString(
-                       R.string.user_deleted,
-                       Auth().hentBrukerEmail()
-                     ),
-                     Toast.LENGTH_SHORT
-                   ).show()
-                 }) {
-            Text(
-              text = stringResource(R.string.delete_user),
-              color = MaterialTheme.colorScheme.onSurface,
-            )
-          }
-
         }
       }
     }
   }
 
+  //  @Composable
+//  fun SettingsCard() {
+//    Card(
+//      modifier = Modifier.padding(32.dp),
+//      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+//    ) {
+//      var utvidet by remember {
+//        mutableStateOf(false)
+//      }
+//      Column(
+//        Modifier
+//          .clickable { utvidet = !utvidet }
+//          .fillMaxWidth()
+//          .padding(16.dp)
+//          .align(Alignment.CenterHorizontally)
+//
+//      ) {
+//        Box(
+//          modifier = Modifier.align(Alignment.CenterHorizontally)
+//
+//        ) {
+//          Text(
+//            text = stringResource(R.string.settings),
+//            fontSize = 20.sp,
+//            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+//                    color = MaterialTheme.colorScheme.onBackground
+//          )
+//        }
+//        AnimatedVisibility(
+//          visible = utvidet,
+//          modifier = Modifier
+//            .fillMaxWidth()
+//            .padding(16.dp)
+//            .align(Alignment.CenterHorizontally)
+//        ) {
+//          Card(
+//            modifier = Modifier
+//              .align(Alignment.CenterHorizontally),
+//            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+//          ) {
+//            SettingCard()
+//          }
+//        }
+//      }
+//    }
+//  }
   @Composable
-  fun SettingsCard() {
-    Card(
-      modifier = Modifier.padding(32.dp),
-      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
-    ) {
-      var utvidet by remember {
-        mutableStateOf(false)
-      }
-      Column(
-        Modifier
-          .clickable { utvidet = !utvidet }
-          .fillMaxWidth()
-          .padding(16.dp)
-          .align(Alignment.CenterHorizontally)
-
-      ) {
-        Box(
-          modifier = Modifier.align(Alignment.CenterHorizontally)
-
-        ) {
-          Text(
-            text = stringResource(R.string.settings),
-            fontSize = 20.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
-          )
-        }
-        AnimatedVisibility(
-          visible = utvidet,
-          modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .align(Alignment.CenterHorizontally)
-        ) {
-          Card(
-            modifier = Modifier
-              .align(Alignment.CenterHorizontally),
-            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
-          ) {
-            SettingCard()
-          }
-        }
-      }
-    }
-  }
-
-
-  @Composable
-  fun SettingCard() {
+  fun SettingCard(modifier: Modifier = Modifier) {
     ProvideAppThemeState { darkMode, toggleDarkmode ->
       Card(
+        modifier = Modifier.padding(32.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
       ) {
         Column(
-          Modifier
+          modifier = modifier
             .fillMaxWidth()
             .align(Alignment.CenterHorizontally)
         ) {
           Row(
-            Modifier.padding(2.dp),
-            verticalAlignment = Alignment.CenterVertically
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = modifier
+              .padding(
+                vertical = 3.dp,
+                horizontal = 10.dp
+              )
+              .fillMaxWidth()
           ) {
             Text(
               text = stringResource(R.string.change_appearance),
               color = MaterialTheme.colorScheme.onBackground
             )
-            Spacer(modifier = Modifier.width(10.dp))
+            Spacer(modifier = modifier.width(10.dp))
             Switch(
               colors = SwitchDefaults.colors(
-                uncheckedThumbColor = MaterialTheme.colorScheme.secondary,
+                uncheckedThumbColor = Color.LightGray,
                 uncheckedTrackColor = MaterialTheme.colorScheme.tertiary,
                 checkedThumbColor = MaterialTheme.colorScheme.tertiary,
               ),
@@ -324,19 +320,112 @@ class Settings {
             )
           }
         }
+        Divider(
+          color = MaterialTheme.colorScheme.onBackground,
+          thickness = 2.dp,
+        )
+        Spacer(modifier = modifier.height(10.dp))
+        Column(modifier = modifier.padding(horizontal = 10.dp)) {
+          Text(text = stringResource(R.string.change_language), color = MaterialTheme.colorScheme.onBackground)
+        }
         LanguageToggle()
       }
     }
   }
 
+  @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun LanguageToggle() {
-    // todo: språktoggle
-    Text(
-      "Språk",
-      color = MaterialTheme.colorScheme.onBackground
+  fun LanguageToggle(modifier: Modifier = Modifier) {
+    val context = LocalContext.current
+    val språk = arrayOf(
+      "English",
+      "Norsk",
+      "Français"
     )
+    val flagg = listOf(
+      R.drawable.united_kingdom,
+      R.drawable.norway,
+      R.drawable.france
+    )
+    var utvidet by remember { mutableStateOf(false) }
+    var valgtSpråk = ""
+    when (Locale.current.language) {
+      "en" -> valgtSpråk = språk[0]
+      "nb" -> valgtSpråk = språk[1]
+      "fr" -> valgtSpråk = språk[2]
+    }
+    ExposedDropdownMenuBox(
+      expanded = utvidet,
+      onExpandedChange = {
+        utvidet = !utvidet
+      },
+      modifier = modifier.padding(horizontal = 10.dp)
+
+    ) {
+      CompositionLocalProvider(LocalTextInputService provides null) {
+        TextField(
+          value = valgtSpråk,
+          onValueChange = {},
+          readOnly = true,
+          colors = TextFieldDefaults.textFieldColors(
+            textColor = MaterialTheme.colorScheme.onBackground,
+            containerColor = MaterialTheme.colorScheme.tertiary,
+            focusedIndicatorColor = MaterialTheme.colorScheme.onBackground
+          ),
+          trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = utvidet) },
+          modifier = Modifier
+            .menuAnchor()
+            .fillMaxWidth()
+        )
+      }
+
+      ExposedDropdownMenu(
+        expanded = utvidet,
+        onDismissRequest = { utvidet = false },
+        modifier = modifier.background(MaterialTheme.colorScheme.tertiary)
+      ) {
+        språk.forEachIndexed { index, item ->
+          DropdownMenuItem(
+            text = {
+              Text(
+                text = item,
+                color = MaterialTheme.colorScheme.onBackground
+              )
+            },
+            leadingIcon = {
+              Image(
+                painter = painterResource(flagg[index]),
+                contentDescription = null,
+                modifier = modifier
+                  .height(20.dp)
+                  .width(30.dp)
+              )
+            },
+            onClick = {
+              valgtSpråk = item
+              when (valgtSpråk) {
+                "English" -> {
+                  context.getSystemService(LocaleManager::class.java)
+                    .applicationLocales = LocaleList.forLanguageTags("en")
+                }
+
+                "Norsk" -> {
+                  context.getSystemService(LocaleManager::class.java)
+                    .applicationLocales = LocaleList.forLanguageTags("nb")
+                }
+
+                "Français" -> {
+                  context.getSystemService(LocaleManager::class.java)
+                    .applicationLocales = LocaleList.forLanguageTags("fr")
+                }
+              }
+            }
+          )
+        }
+      }
+    }
   }
+
 
   @Composable
   fun Terms() {
@@ -394,7 +483,10 @@ class Settings {
           .align(Alignment.CenterHorizontally)
       ) {
         Column {
-          Text(text = stringResource(R.string.terms_text), color = MaterialTheme.colorScheme.onBackground)
+          Text(
+            text = stringResource(R.string.terms_text),
+            color = MaterialTheme.colorScheme.onBackground
+          )
 
         }
       }
@@ -403,6 +495,7 @@ class Settings {
 
   @Composable
   fun SettingsPage(navController: NavController, modifier: Modifier) {
+    val slettBruker = remember { mutableStateOf(false) }
     val context = LocalContext.current
     Column(
       Modifier
@@ -411,7 +504,7 @@ class Settings {
         .verticalScroll(rememberScrollState())
     ) {
       Profil(navController)
-      SettingsCard()
+      SettingCard()
       Terms()
       if (Auth().innlogget()) {
         Divider(
@@ -423,17 +516,69 @@ class Settings {
         Button(modifier = Modifier.align(Alignment.CenterHorizontally),
                colors = ButtonDefaults.buttonColors(Color(0xFFeb4949)),
                onClick = {
-                 Toast.makeText(
-                   context,
-                   context.getString(R.string.delete_favorite_confirmation),
-                   Toast.LENGTH_SHORT
-                 ).show()
-                 Auth().slettBruker()
-                 navController.navigate(Screen.Start.ruter)
+                 slettBruker.value = true
                }) {
           Text(
             text = stringResource(R.string.delete_user),
             color = MaterialTheme.colorScheme.tertiary,
+          )
+        }
+        if (slettBruker.value) {
+          AlertDialog(
+            onDismissRequest = {
+              slettBruker.value = false
+            },
+            title = {
+              Text(
+                stringResource(R.string.delete_user_question),
+                color = MaterialTheme.colorScheme.onBackground
+              )
+            },
+            text = {
+              Text(
+                stringResource(
+                  R.string.user_deleted_question,
+                  Auth().hentBrukerEmail()
+                ),
+                color = MaterialTheme.colorScheme.onBackground
+              )
+            },
+            confirmButton = {
+              Button(
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+                onClick = {
+                  slettBruker.value = false
+                  Toast.makeText(
+                    context,
+                    context.getString(
+                      R.string.delete_confirmation,
+                      Auth().hentBrukerEmail()
+                    ),
+                    Toast.LENGTH_LONG
+                  ).show()
+                  Auth().slettBruker()
+                  navController.navigate(Screen.Start.ruter)
+                },
+
+                ) {
+                Text(
+                  stringResource(R.string.delete_favorite),
+                  color = MaterialTheme.colorScheme.onSurface
+                )
+              }
+            },
+            dismissButton = {
+              Button(
+                onClick = {
+                  slettBruker.value = false
+                }
+              ) {
+                Text(
+                  stringResource(R.string.cancel),
+                  color = MaterialTheme.colorScheme.onSurface
+                )
+              }
+            }
           )
         }
       }
