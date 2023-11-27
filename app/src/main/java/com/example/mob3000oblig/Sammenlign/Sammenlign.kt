@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mob3000oblig.DataApi.APIViewModel
+import com.example.mob3000oblig.DataApi.HentBilInfo
 import com.example.mob3000oblig.DataApi.bilInfoVariabler
 import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
 import com.example.mob3000oblig.Favoritter.FavoritterViewModel
@@ -52,34 +53,30 @@ class Sammenlign {
       var url2 by remember { mutableStateOf("") }
       var bilInfo1 by remember { mutableStateOf<KjoretoyDataListe?>(null) }
       var bilInfo2 by remember { mutableStateOf<KjoretoyDataListe?>(null) }
+      var verdi1 by remember { mutableStateOf<HentBilInfo?>(null) }
+      var verdi2 by remember { mutableStateOf<HentBilInfo?>(null) }
       var viserInfo by remember { mutableStateOf(false) }
+      var visError by remember { mutableStateOf(false) }
       val context = LocalContext.current
 
-      fun hentInfo(skilt1: String, skilt2: String) {
-            url1 = "kjoretoydata=kjennemerke=$skilt1"
-            url2 = "kjoretoydata=kjennemerke=$skilt2"
-      }
-      LaunchedEffect(url1) {
-          try {
-              bilInfo1 = viewModel.hentBilInfo(url1)
-              val verdi1 = bilInfoVariabler(context, bilInfo1)
-              Log.d("LaunchedEffect hitter", verdi1.toString())
-              Log.d("URL SOM API SKAL CALLE PÅ", url1)
-          } catch (e: Exception) {
-              Log.d("Bilinfo1", e.toString())
-          }
-          viserInfo = true
-      }
-      LaunchedEffect(url2) {
-          try {
-              bilInfo2 = viewModel?.hentBilInfo(url2)
-          } catch (e: Exception) {
-              Log.d("Bilinfo2", e.toString())
-          }
+      suspend fun hentInfo(skilt1: String, skilt2: String) {
+        url1 = "kjoretoydata?kjennemerke=$skilt1"
+        url2 = "kjoretoydata?kjennemerke=$skilt2"
+
+        bilInfo1 = viewModel.hentBilInfo(url1)
+        bilInfo2 = viewModel.hentBilInfo(url2)
+
+        verdi1 = bilInfoVariabler(context, bilInfo1)
+        verdi2 = bilInfoVariabler(context, bilInfo2)
+
+        if (bilInfo1 != null && bilInfo2 != null) {
+            viserInfo = true
+        } else {
+            visError = true;
+        }
       }
       Column(
           modifier = modifier
-              //.fillMaxSize()
               .padding(24.dp),
           horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
           verticalArrangement = Arrangement.Top
@@ -117,7 +114,11 @@ class Sammenlign {
           Button(
               colors = ButtonDefaults.buttonColors(
                   disabledContainerColor = Color.LightGray),
-              onClick = {hentInfo(skilt1, skilt2)},
+              onClick = {
+                  viewModel.viewModelScope.launch {
+                      hentInfo(skilt1, skilt2)
+                  }
+                        },
               enabled = !skilt1.isEmpty() && !skilt2.isEmpty(),
               modifier = Modifier.padding(top = 20.dp, bottom = 20.dp)
           ) {
@@ -128,6 +129,7 @@ class Sammenlign {
               )
           }
         if (viserInfo) {
+            visError = false
               Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
                   Row(
                       modifier = modifier
@@ -183,15 +185,11 @@ class Sammenlign {
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.number_of_seats),
+                              text = stringResource(R.string.number_of_doors),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
                               text = stringResource(R.string.height),
-                              color = MaterialTheme.colorScheme.onBackground
-                          )
-                          Text(
-                              text = stringResource(R.string.weight),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
@@ -215,91 +213,169 @@ class Sammenlign {
                               color = MaterialTheme.colorScheme.onBackground
                           )
                       }
-                      // Placeholders for bil 1
+                      // bil 1
                       Column() {
                           Text(
                               text = skilt1.uppercase(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
-                          /*Text(
-                              text = verdi1.merke,
+                          Text(
+                              text = verdi1?.merke.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = verdi1.handelsbetegnelse,
-                              color = MaterialTheme.colorScheme.onBackground
-                          )*/
-                          Text(
-                              text = stringResource(R.string.type),
+                              text = verdi1?.handelsbetegnelse.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.color),
+                              text = verdi1?.type.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.gearbox_type),
+                              text = verdi1?.farge.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.fuel),
+                              text = verdi1?.girtyp.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.hybrid),
+                              text = verdi1?.drivstoff.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.horsepower),
+                              text = verdi1?.hybrid.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.max_speed),
+                              text = verdi1?.hk.toString() + stringResource(R.string.hp),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.first_registration),
+                              text = verdi1?.toppHastighet.toString() + stringResource(R.string.km_h),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.number_of_seats),
+                              text = verdi1?.forsteReg.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.number_of_seats),
+                              text = verdi1?.antSeter.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.height),
+                              text = verdi1?.antdorer.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.weight),
+                              text = verdi1?.hoyde.toString() + stringResource(R.string.cm),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.width),
+                              text = verdi1?.bredde.toString() + stringResource(R.string.cm),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.length),
+                              text = verdi1?.lengde.toString() + stringResource(R.string.cm),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.weight),
+                              text = verdi1?.vekt.toString() + stringResource(R.string.kg),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.latest_approval),
+                              text = verdi1?.sistgodkjent.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                           Text(
-                              text = stringResource(R.string.next_eu_control),
+                              text = verdi1?.nesteEU.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                      }
+                      // bil 2
+                      Column() {
+                          Text(
+                              text = skilt2.uppercase(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.merke.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.handelsbetegnelse.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.type.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.farge.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.girtyp.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.drivstoff.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.hybrid.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.hk.toString() + stringResource(R.string.hp),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.toppHastighet.toString() + stringResource(R.string.km_h),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.forsteReg.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.antSeter.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.antdorer.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.hoyde.toString() + stringResource(R.string.cm),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.bredde.toString() + stringResource(R.string.cm),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.lengde.toString() + stringResource(R.string.cm),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.vekt.toString() + stringResource(R.string.kg),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.sistgodkjent.toString(),
+                              color = MaterialTheme.colorScheme.onBackground
+                          )
+                          Text(
+                              text = verdi2?.nesteEU.toString(),
                               color = MaterialTheme.colorScheme.onBackground
                           )
                       }
                   }
-              }
+                }
+              } else if (visError) {
+                Text(text = "Skriv inn to gyldige skiltnr.")
+
           }
       }
   }
