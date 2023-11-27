@@ -1,7 +1,6 @@
 package com.example.mob3000oblig
 
 import android.content.res.Configuration
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -104,7 +103,8 @@ class Start {
               colors = TextFieldDefaults.textFieldColors(
                 MaterialTheme.colorScheme.onBackground,
                 containerColor = MaterialTheme.colorScheme.tertiary,
-                cursorColor = MaterialTheme.colorScheme.onBackground
+                cursorColor = MaterialTheme.colorScheme.onBackground,
+                focusedIndicatorColor = MaterialTheme.colorScheme.onBackground
               ),
             )
             if (showError) {

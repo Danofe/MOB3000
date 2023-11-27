@@ -252,7 +252,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (hoyde != "Ikke oppgitt") {
+              if (hoyde != stringResource(R.string.not_specified)) {
                 "$hoyde cm"
               } else {
                 hoyde
@@ -260,7 +260,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (bredde != "Ikke oppgitt") {
+              if (bredde != stringResource(R.string.not_specified)) {
                 "$bredde cm"
               } else {
                 bredde
@@ -268,7 +268,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (lengde != "Ikke oppgitt") {
+              if (lengde != stringResource(R.string.not_specified)) {
                 "$lengde cm"
               } else {
                 lengde
@@ -276,7 +276,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (vekt != "Ikke oppgitt") {
+              if (vekt != stringResource(R.string.not_specified)) {
                 "$vekt kg"
               } else {
                 vekt
@@ -338,7 +338,7 @@ fun FavoritterSkjerm(
                 Toast.makeText(
                   context,
                   context.getString(
-                    R.string.delete_favorite_confirmation,
+                    R.string.delete_confirmation,
                     valgtFavoritt
                   ),
                   Toast.LENGTH_LONG

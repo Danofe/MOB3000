@@ -3,6 +3,7 @@
     <string name="app_name">Mob3000Oblig</string>
     <string name="login">Se connecter</string>
     <string name="register">Register</string>
+    <string name="license_number">Numéro d\'immatriculation</string>
     <string name="login_to_see_favorites">Vous devez vous connecter pour voir vos favoris</string>
     <string name="height">Hauteur</string>
     <string name="home">Accueil</string>
@@ -30,14 +31,13 @@
     <string name="delete_favorite">Supprimer le favori</string>
     <string name="delete_favorite_question">Supprimer le favori ?</string>
     <string name="delete_favorite_do_you_want">%1$s sera définitivement supprimé de vos favoris.</string>
-    <string name="delete_favorite_confirmation">%1$s a été supprimé</string>
+    <string name="delete_confirmation">%1$s a été supprimé</string>
     <string name="cancel">Annuler</string>
     <string name="you_have_no_saved_favorites">Vous n\'avez aucun favori enregistré</string>
     <string name="choose_favorite">Choisissez un favori dans le menu</string>
     <string name="allow_permission_camera">Veuillez autoriser l\'utilisation de la caméra pour utiliser cette fonctionnalité</string>
     <string name="allow">Permettre</string>
     <string name="cant_find_license_number">Numéro d\'immatriculation non trouvé</string>
-    <string name="login_or_registrer_new_user">Connectez-vous ou enregistrez un nouvel utilisateur pour utiliser cette fonction.</string>
     <string name="wrong_credentials">Identifiant ou mot de passe incorrect</string>
     <string name="password">Mot de passe</string>
     <string name="email">E-mail</string>
@@ -69,4 +69,9 @@
     <string name="compare">Comparer</string>
     <string name="camera">Caméra</string>
     <string name="favorites">Favoris</string>
+    <string name="user_deleted_question">%1$s va être supprimé !</string>
+    <string name="delete_user_question">Supprimer le compte ?</string>
+    <string name="change_language">Changer la langue</string>
+    <string name="write_two_valid_numbers">Écris deux numéros d\'immatriculation valide</string>
+    <string name="run">Exécuter</string>
 </resources>
