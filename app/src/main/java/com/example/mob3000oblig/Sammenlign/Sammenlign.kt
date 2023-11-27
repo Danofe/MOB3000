@@ -5,8 +5,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
@@ -21,10 +24,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewModelScope
@@ -77,21 +82,29 @@ class Sammenlign {
       }
       Column(
           modifier = modifier
-              .padding(24.dp),
-          horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
-          verticalArrangement = Arrangement.Top
+              .padding(10.dp)
+              .verticalScroll(rememberScrollState())
+              .padding(
+                  top = 18.dp,
+                  bottom = 20.dp),
+          horizontalAlignment = Alignment.CenterHorizontally,
+          //verticalArrangement = Arrangement.Top,
+          verticalArrangement = Arrangement.spacedBy(10.dp)
       ) {
           Text(
               text = stringResource(R.string.compare_vehicles),
               fontSize = 30.sp,
-              modifier = Modifier.padding(
+              modifier = Modifier
+                  .padding(
                   top = 20.dp,
                   bottom = 20.dp
               )
           )
           Row(
-              modifier = Modifier,
-              horizontalArrangement = Arrangement.SpaceEvenly,
+              modifier = Modifier
+                  .align(Alignment.CenterHorizontally)
+                  .padding(15.dp),
+              horizontalArrangement = Arrangement.spacedBy(5.dp),
           ) {
               TextField(
                   modifier = modifier.width(150.dp),
@@ -101,7 +114,6 @@ class Sammenlign {
                   },
                   placeholder = { Text(text = "skilt 1") }
               )
-              Spacer(modifier.width(10.dp))
               TextField(
                   modifier = modifier.width(150.dp),
                   value = skilt2,
@@ -133,246 +145,325 @@ class Sammenlign {
               Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
                   Row(
                       modifier = modifier
-                          .padding(20.dp),
+                          .padding(10.dp)
+                          .align(Alignment.CenterHorizontally),
+                      horizontalArrangement = Arrangement.spacedBy(10.dp)
                   ) {
                       Column() {
                           Text(
                               text = stringResource(R.string.license_number),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.brand),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.series),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.type),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.color),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.gearbox_type),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.fuel),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.hybrid),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.horsepower),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.max_speed),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.first_registration),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.number_of_seats),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.number_of_doors),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.height),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.width),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.length),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.weight),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.latest_approval),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                           Text(
                               text = stringResource(R.string.next_eu_control),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp,
+                              fontWeight = FontWeight.Bold
                           )
                       }
                       // bil 1
                       Column() {
                           Text(
                               text = skilt1.uppercase(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.merke.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.handelsbetegnelse.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.type.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.farge.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.girtyp.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.drivstoff.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.hybrid.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.hk.toString() + stringResource(R.string.hp),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.toppHastighet.toString() + stringResource(R.string.km_h),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.forsteReg.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.antSeter.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.antdorer.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.hoyde.toString() + stringResource(R.string.cm),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.bredde.toString() + stringResource(R.string.cm),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.lengde.toString() + stringResource(R.string.cm),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.vekt.toString() + stringResource(R.string.kg),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.sistgodkjent.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi1?.nesteEU.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                       }
                       // bil 2
                       Column() {
                           Text(
                               text = skilt2.uppercase(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.merke.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.handelsbetegnelse.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.type.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.farge.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.girtyp.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.drivstoff.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.hybrid.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.hk.toString() + stringResource(R.string.hp),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.toppHastighet.toString() + stringResource(R.string.km_h),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.forsteReg.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.antSeter.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.antdorer.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.hoyde.toString() + stringResource(R.string.cm),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.bredde.toString() + stringResource(R.string.cm),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.lengde.toString() + stringResource(R.string.cm),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.vekt.toString() + stringResource(R.string.kg),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.sistgodkjent.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                           Text(
                               text = verdi2?.nesteEU.toString(),
-                              color = MaterialTheme.colorScheme.onBackground
+                              color = MaterialTheme.colorScheme.onBackground,
+                              fontSize = 15.sp
                           )
                       }
                   }
                 }
+            Spacer(modifier = modifier.padding(bottom = 84.dp))
               } else if (visError) {
                 Text(text = "Skriv inn to gyldige skiltnr.")
 
