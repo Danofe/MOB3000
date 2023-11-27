@@ -31,14 +31,13 @@
     <string name="delete_favorite">Delete</string>
     <string name="delete_favorite_question">Delete favorite?</string>
     <string name="delete_favorite_do_you_want">%1$s will be permanently deleted from your favorites.</string>
-    <string name="delete_favorite_confirmation">%1$s has been deleted</string>
+    <string name="delete_confirmation">%1$s has been deleted</string>
     <string name="cancel">Cancel</string>
     <string name="you_have_no_saved_favorites">You have no saved favorites</string>
     <string name="choose_favorite">Choose a favorite from the menu</string>
     <string name="allow_permission_camera">Please allow the use of the camera to use this feature</string>
     <string name="allow">Allow</string>
     <string name="cant_find_license_number">Can\'t find any license plates</string>
-    <string name="login_or_registrer_new_user">Log in or register a new user to use this function.</string>
     <string name="wrong_credentials">Incorrect username or password</string>
     <string name="password">Password</string>
     <string name="email">E-mail</string>
@@ -70,4 +69,9 @@
     <string name="compare">Compare</string>
     <string name="camera">Camera</string>
     <string name="favorites">Favorites</string>
+    <string name="user_deleted_question">%1$s will be deleted!</string>
+    <string name="delete_user_question">Delete user?</string>
+    <string name="change_language">Change language</string>
+    <string name="write_two_valid_numbers">Write two valid license plates</string>
+    <string name="run">Run</string>
 </resources>

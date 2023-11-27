@@ -253,6 +253,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
+
               if (hoyde != ikkeOppgitt) {
                 "$hoyde cm"
               } else {
@@ -269,7 +270,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (lengde != "Ikke oppgitt") {
+              if (lengde != stringResource(R.string.not_specified)) {
                 "$lengde cm"
               } else {
                 lengde
@@ -339,7 +340,7 @@ fun FavoritterSkjerm(
                 Toast.makeText(
                   context,
                   context.getString(
-                    R.string.delete_favorite_confirmation,
+                    R.string.delete_confirmation,
                     valgtFavoritt
                   ),
                   Toast.LENGTH_LONG
