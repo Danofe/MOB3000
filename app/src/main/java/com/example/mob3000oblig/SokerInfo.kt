@@ -229,7 +229,7 @@ class SokerInfo {
                 text = verdi.hybrid,
                 color = MaterialTheme.colorScheme.onBackground,
               )
-              if (verdi.hk != "0") {
+              if (verdi.hk != "0" && verdi.hk != ikkeOppgitt) {
                 Text(
                   text = stringResource(
                     R.string.hp, // hestekrefter

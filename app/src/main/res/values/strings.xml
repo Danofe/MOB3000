@@ -3,6 +3,7 @@
     <string name="login">Logg inn</string>
     <string name="register">Registrer</string>
     <string name="license_number">Skiltnr</string>
+    <string name="compare_error">Skriv inn to gyldige skiltnr.</string>
     <string name="login_to_see_favorites">Du må logge inn for å se dine favoritter</string>
     <string name="height">Høyde</string>
     <string name="home">Hjem</string>
@@ -17,15 +18,15 @@
     <string name="fuel">Drivstoff</string>
     <string name="hybrid">Hybrid</string>
     <string name="horsepower">Hestekrefter</string>
-    <string name="max_speed">Maks hastighet</string>
-    <string name="first_registration">Forste registrering</string>
+    <string name="max_speed">Topphastighet</string>
+    <string name="first_registration">Registrert</string>
     <string name="number_of_seats">Sitteplasser</string>
     <string name="number_of_doors">Antall dører</string>
     <string name="width">Bredde</string>
     <string name="length">Lengde</string>
     <string name="weight">Egenvekt</string>
     <string name="latest_approval">Sist godkjent</string>
-    <string name="next_eu_control">Neste EU-kontroll</string>
+    <string name="next_eu_control">Neste EU-kont.</string>
     <string name="not_specified">Ikke oppgitt</string>
     <string name="delete_favorite">Slett</string>
     <string name="delete_favorite_question">Slette favoritt?</string>

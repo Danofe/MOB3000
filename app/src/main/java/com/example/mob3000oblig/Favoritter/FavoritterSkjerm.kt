@@ -45,6 +45,7 @@ fun FavoritterSkjerm(
   var valgtFavoritt by remember { mutableStateOf("") }
   val favorittliste = viewModel?.favoritterSkilt?.value
   var index by remember { mutableStateOf(-1) }
+  var ikkeOppgitt = stringResource(R.string.not_specified)
 
   val context = LocalContext.current
 
@@ -214,7 +215,7 @@ fun FavoritterSkjerm(
                 .substringBefore(","),
               color = MaterialTheme.colorScheme.onBackground
             )
-            if (hestekrefter != stringResource(R.string.not_specified)) {
+            if (hestekrefter != ikkeOppgitt && hestekrefter != "0"){
               Text(
                 "$hestekrefter hk",
                 color = MaterialTheme.colorScheme.onBackground
@@ -225,7 +226,7 @@ fun FavoritterSkjerm(
                 color = MaterialTheme.colorScheme.onBackground
               )
             }
-            if (maksHastighet != stringResource(R.string.not_specified)) {
+            if (maksHastighet != ikkeOppgitt) {
               Text(
                 "$maksHastighet km/t",
                 color = MaterialTheme.colorScheme.onBackground
@@ -252,7 +253,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (hoyde != "Ikke oppgitt") {
+              if (hoyde != ikkeOppgitt) {
                 "$hoyde cm"
               } else {
                 hoyde
@@ -260,7 +261,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (bredde != "Ikke oppgitt") {
+              if (bredde != ikkeOppgitt) {
                 "$bredde cm"
               } else {
                 bredde
@@ -276,7 +277,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (vekt != "Ikke oppgitt") {
+              if (vekt != ikkeOppgitt) {
                 "$vekt kg"
               } else {
                 vekt

@@ -3,6 +3,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="license_number">Plate no</string>
+    <string name="compare_error">Enter two valid plate numbers.</string>
     <string name="login_to_see_favorites">You need to login to get access to favorites</string>
     <string name="height">Height</string>
     <string name="home">Home</string>
@@ -18,9 +19,9 @@
     <string name="hybrid">Hybrid</string>
     <string name="horsepower">Horsepower</string>
     <string name="max_speed">Max speed</string>
-    <string name="first_registration">First registration</string>
-    <string name="number_of_seats">Number of seats</string>
-    <string name="number_of_doors">Number of doors</string>
+    <string name="first_registration">1st registration</string>
+    <string name="number_of_seats">No. of seats</string>
+    <string name="number_of_doors">No. of doors</string>
     <string name="width">Width</string>
     <string name="length">Length</string>
     <string name="weight">Weight</string>
