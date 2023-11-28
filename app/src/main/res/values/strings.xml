@@ -3,7 +3,7 @@
     <string name="login">Logg inn</string>
     <string name="register">Registrer</string>
     <string name="license_number">Skiltnr</string>
-    <string name="compare_error">Skriv inn to gyldige skiltnr.</string>
+    <string name="compare_error">Skriv inn to gyldige skiltnr</string>
     <string name="login_to_see_favorites">Du må logge inn for å se dine favoritter</string>
     <string name="height">Høyde</string>
     <string name="home">Hjem</string>
@@ -72,6 +72,5 @@
     <string name="user_deleted_question">%1$s vil bli slettet!</string>
     <string name="delete_user_question">Slette bruker?</string>
     <string name="change_language">Endre språk</string>
-    <string name="write_two_valid_numbers">Skriv inn to gyldige skiltnummer</string>
     <string name="run">Gå</string>
 </resources>

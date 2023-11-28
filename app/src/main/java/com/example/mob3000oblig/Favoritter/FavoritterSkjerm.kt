@@ -1,5 +1,6 @@
 package com.example.mob3000oblig.Favoritter
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -45,7 +46,7 @@ fun FavoritterSkjerm(
   var valgtFavoritt by remember { mutableStateOf("") }
   val favorittliste = viewModel?.favoritterSkilt?.value
   var index by remember { mutableStateOf(-1) }
-  var ikkeOppgitt = stringResource(R.string.not_specified)
+  val ikkeOppgitt = stringResource(R.string.not_specified)
 
   val context = LocalContext.current
 
@@ -215,14 +216,14 @@ fun FavoritterSkjerm(
                 .substringBefore(","),
               color = MaterialTheme.colorScheme.onBackground
             )
-            if (hestekrefter != ikkeOppgitt && hestekrefter != "0"){
+            if (hestekrefter != ikkeOppgitt || hestekrefter != "0"){
               Text(
                 "$hestekrefter hk",
                 color = MaterialTheme.colorScheme.onBackground
               )
             } else {
               Text(
-                hestekrefter,
+                ikkeOppgitt,
                 color = MaterialTheme.colorScheme.onBackground
               )
             }
@@ -233,7 +234,7 @@ fun FavoritterSkjerm(
               )
             } else {
               Text(
-                maksHastighet,
+                ikkeOppgitt,
                 color = MaterialTheme.colorScheme.onBackground
               )
             }
@@ -252,36 +253,41 @@ fun FavoritterSkjerm(
                 .substringBefore(","),
               color = MaterialTheme.colorScheme.onBackground
             )
+            if (hoyde != ikkeOppgitt) {
+              Text(
+                text = stringResource(
+                  R.string.cm,
+                  hoyde
+                ),
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+            } else {
+              Text(
+                text = hoyde,
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+            }
             Text(
-
-              if (hoyde != ikkeOppgitt) {
-                "$hoyde cm"
-              } else {
-                hoyde
-              },
-              color = MaterialTheme.colorScheme.onBackground
-            )
-            Text(
-              if (bredde != ikkeOppgitt) {
+              if (bredde != ikkeOppgitt || bredde != "0") {
                 "$bredde cm"
               } else {
-                bredde
+                ikkeOppgitt
               },
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (lengde != stringResource(R.string.not_specified)) {
+              if (lengde != ikkeOppgitt || lengde != "0") {
                 "$lengde cm"
               } else {
-                lengde
+                ikkeOppgitt
               },
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (vekt != ikkeOppgitt) {
+              if (vekt != ikkeOppgitt || vekt != "0") {
                 "$vekt kg"
               } else {
-                vekt
+                ikkeOppgitt
               },
               color = MaterialTheme.colorScheme.onBackground
             )

@@ -72,6 +72,6 @@
     <string name="user_deleted_question">%1$s va être supprimé !</string>
     <string name="delete_user_question">Supprimer le compte ?</string>
     <string name="change_language">Changer la langue</string>
-    <string name="write_two_valid_numbers">Écris deux numéros d\'immatriculation valide</string>
+    <string name="compare_error">Écris deux numéros d\'immatriculation valide</string>
     <string name="run">Exécuter</string>
 </resources>

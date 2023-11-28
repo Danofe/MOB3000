@@ -47,7 +47,6 @@ class Sammenlign {
         modifier: Modifier = Modifier,
         viewModel: APIViewModel
     ) {
-
         var input1 by remember { mutableStateOf("") }
         var input2 by remember { mutableStateOf("") }
         var skilt1 by remember { mutableStateOf("") }
@@ -152,9 +151,9 @@ class Sammenlign {
                 modifier = Modifier.padding(top = 20.dp, bottom = 20.dp)
             ) {
                 Text(
-                    text = "Gå",
+                    text = stringResource(R.string.run),
                     fontSize = 16.sp,
-                    color = Color.Black
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
             if (viserInfo) {
@@ -335,12 +334,14 @@ class Sammenlign {
                                         R.string.hp,
                                         verdi1?.hk.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             if (verdi1?.toppHastighet.toString() != ikkeOppgitt) {
@@ -349,11 +350,13 @@ class Sammenlign {
                                         R.string.km_h,
                                         verdi1?.toppHastighet.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             }
@@ -378,12 +381,14 @@ class Sammenlign {
                                         R.string.cm,
                                         verdi1?.hoyde.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             if (verdi1?.bredde.toString() != ikkeOppgitt) {
@@ -392,12 +397,14 @@ class Sammenlign {
                                         R.string.cm,
                                         verdi1?.bredde.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             if (verdi1?.lengde.toString() != ikkeOppgitt) {
@@ -406,12 +413,14 @@ class Sammenlign {
                                         R.string.cm,
                                         verdi1?.lengde.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             if (verdi1?.vekt.toString() != ikkeOppgitt) {
@@ -420,12 +429,14 @@ class Sammenlign {
                                         R.string.kg,
                                         verdi1?.vekt.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             Text(
@@ -490,12 +501,14 @@ class Sammenlign {
                                         R.string.hp,
                                         verdi2?.hk.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             if (verdi2?.toppHastighet.toString() != ikkeOppgitt) {
@@ -504,12 +517,14 @@ class Sammenlign {
                                         R.string.km_h,
                                         verdi2?.toppHastighet.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             Text(
@@ -533,12 +548,14 @@ class Sammenlign {
                                         R.string.cm,
                                         verdi2?.hoyde.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             if (verdi2?.bredde.toString() != ikkeOppgitt) {
@@ -547,12 +564,14 @@ class Sammenlign {
                                         R.string.cm,
                                         verdi2?.bredde.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             if (verdi2?.lengde.toString() != ikkeOppgitt) {
@@ -561,12 +580,14 @@ class Sammenlign {
                                         R.string.cm,
                                         verdi2?.lengde.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             if (verdi2?.vekt.toString() != ikkeOppgitt) {
@@ -575,12 +596,14 @@ class Sammenlign {
                                         R.string.kg,
                                         verdi2?.vekt.toString()
                                     ),
+                                    fontSize = 15.sp,
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                             } else {
                                 Text(
                                     text = ikkeOppgitt,
-                                    color = MaterialTheme.colorScheme.onBackground
+                                    color = MaterialTheme.colorScheme.onBackground,
+                                    fontSize = 15.sp
                                 )
                             }
                             Text(
@@ -598,7 +621,7 @@ class Sammenlign {
                 }
                 Spacer(modifier = modifier.padding(bottom = 84.dp))
             } else if (visError) {
-                Text(text = stringResource(R.string.compare_error))
+                Text(text = stringResource(R.string.compare_error), fontSize = 20.sp)
             }
         }
     }

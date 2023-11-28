@@ -3,7 +3,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="license_number">Plate no</string>
-    <string name="compare_error">Enter two valid plate numbers.</string>
+    <string name="compare_error">Enter two valid plate numbers</string>
     <string name="login_to_see_favorites">You need to login to get access to favorites</string>
     <string name="height">Height</string>
     <string name="home">Home</string>
@@ -64,7 +64,7 @@
     <string name="added_to_favorites">%1$s has been added as a favorite</string>
     <string name="add_to_favorites">Add to favorites</string>
     <string name="found_no_vehicles">No vehicles found with this license plate number.</string>
-    <string name="write_licence_number">Write license plate number here:</string>
+    <string name="write_licence_number">Enter a plate number here:</string>
     <string name="write_valid_licence_number">Enter a valid license plate number!</string>
     <string name="compare">Compare</string>
     <string name="camera">Camera</string>
@@ -72,6 +72,5 @@
     <string name="user_deleted_question">%1$s will be deleted!</string>
     <string name="delete_user_question">Delete user?</string>
     <string name="change_language">Change language</string>
-    <string name="write_two_valid_numbers">Write two valid license plates</string>
     <string name="run">Run</string>
 </resources>
