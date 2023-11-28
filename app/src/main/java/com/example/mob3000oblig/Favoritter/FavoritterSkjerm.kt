@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mob3000oblig.R
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,7 +49,8 @@ fun FavoritterSkjerm(
   var valgtFavoritt by remember { mutableStateOf("") }
   val favorittliste = viewModel?.favoritterSkilt?.value
   var index by remember { mutableStateOf(-1) }
-  val ikkeOppgitt = stringResource(R.string.not_specified)
+
+  var ikkeOppgitt = ""
 
   val context = LocalContext.current
 
@@ -74,12 +76,36 @@ fun FavoritterSkjerm(
     }
     index = favorittliste?.indexOf(valgtFavoritt)!!
     kjoretoy = viewModel.allefavoritter.value.getOrNull(index).toString()
+
     val hestekrefter = kjoretoy.substringAfter("hestekrefter=").substringBefore(",")
     val maksHastighet = kjoretoy.substringAfter("maksHastighet=").substringBefore(",")
     val bredde = kjoretoy.substringAfter("bredde=").substringBefore(",")
     val lengde = kjoretoy.substringAfter("lengde=").substringBefore(",")
     val hoyde = kjoretoy.substringAfter("hoyde=").substringBefore(",")
     val vekt = kjoretoy.substringAfter("vekt=").substringBefore(",")
+    val merke = kjoretoy.substringAfter("merke=").substringBefore(",")
+    val nesteEU = kjoretoy.substringAfter("nesteEU=").substringBefore(",")
+    val serie = kjoretoy.substringAfter("serie=").substringBefore(",")
+    val type = kjoretoy.substringAfter("type=").substringBefore(",")
+    val farge = kjoretoy.substringAfter("farge=").substringBefore(",")
+    val girinfo = kjoretoy.substringAfter("girinfo=").substringBefore(",")
+    val drivstoffinfo = kjoretoy.substringAfter("drivstoffinfo=").substringBefore(",")
+    val hybrid = kjoretoy.substringAfter("hybrid=").substringBefore(",")
+    val forstereg = kjoretoy.substringAfter("forstereg=").substringBefore(",")
+    val sitteplasser = kjoretoy.substringAfter("sitteplasser=").substringBefore(",")
+    val antDorer = kjoretoy.substringAfter("antDorer=").substringBefore(",")
+    val sistGodkjent = kjoretoy.substringAfter("sistgodkjent=").substringBefore(",")
+
+    // Sjekker språket på "Ikke oppgitt" i databasen
+    if (kjoretoy.contains("Ikke oppgitt", ignoreCase = true)) {
+      ikkeOppgitt = "Ikke oppgitt"
+    }
+    if (kjoretoy.contains("Non spécifié", ignoreCase = true)) {
+      ikkeOppgitt = "Non spécifié"
+    }
+    if (kjoretoy.contains("Not specified", ignoreCase = true)) {
+      ikkeOppgitt = "Not specified"
+    }
 
     Spacer(modifier = modifier.height(80.dp))
 
@@ -185,80 +211,83 @@ fun FavoritterSkjerm(
             )
           }
           Spacer(modifier = modifier.width(30.dp))
+
+          // Sjekker alle verdiene på de forskjellige språkene, fikk ikke til å endre språket på verdier i databasen
           Column {
             Text(
-              kjoretoy.substringAfter("merke=")
-                .substringBefore(","),
+              if (merke == ikkeOppgitt) stringResource(R.string.not_specified) else merke.uppercase(),
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              kjoretoy.substringAfter("serie=")
-                .substringBefore(","),
+              if (serie == ikkeOppgitt) stringResource(R.string.not_specified)else serie.uppercase(),
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              kjoretoy.substringAfter("type=")
-                .substringBefore(","),
+              if (type == ikkeOppgitt) stringResource(R.string.not_specified) else type,
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              kjoretoy.substringAfter("farge=")
-                .substringBefore(","),
+              if (farge == ikkeOppgitt) stringResource(R.string.not_specified) else farge,
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              kjoretoy.substringAfter("girinfo=")
-                .substringBefore(","),
+              if (girinfo == ikkeOppgitt) stringResource(R.string.not_specified) else girinfo,
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              kjoretoy.substringAfter("drivstoffinfo=")
-                .substringBefore(","),
+              if (drivstoffinfo == ikkeOppgitt) stringResource(R.string.not_specified) else drivstoffinfo,
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              kjoretoy.substringAfter("hybrid=")
-                .substringBefore(","),
+             if (hybrid == ikkeOppgitt) stringResource(R.string.not_specified) else hybrid,
               color = MaterialTheme.colorScheme.onBackground
             )
-            if (hestekrefter != ikkeOppgitt || hestekrefter != "0"){
+            if (hestekrefter == ikkeOppgitt || hestekrefter == "0") {
               Text(
-                "$hestekrefter hk",
-                color = MaterialTheme.colorScheme.onBackground
+                text = stringResource(R.string.not_specified),
+                color = MaterialTheme.colorScheme.onBackground,
               )
             } else {
               Text(
-                ikkeOppgitt,
-                color = MaterialTheme.colorScheme.onBackground
+                text = stringResource(
+                  R.string.hp,
+                  hestekrefter
+                ),
+                color = MaterialTheme.colorScheme.onBackground,
               )
             }
-            if (maksHastighet != ikkeOppgitt) {
+            if (maksHastighet == ikkeOppgitt) {
               Text(
-                "$maksHastighet km/t",
-                color = MaterialTheme.colorScheme.onBackground
+                text = stringResource(R.string.not_specified),
+                color = MaterialTheme.colorScheme.onBackground,
               )
             } else {
               Text(
-                ikkeOppgitt,
-                color = MaterialTheme.colorScheme.onBackground
+                text = stringResource(
+                  R.string.km_h,
+                  maksHastighet
+                ),
+                color = MaterialTheme.colorScheme.onBackground,
               )
             }
             Text(
-              kjoretoy.substringAfter("forstereg=")
-                .substringBefore(","),
+              if (forstereg == ikkeOppgitt) stringResource(R.string.not_specified) else forstereg,
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              kjoretoy.substringAfter("sitteplasser=")
-                .substringBefore(","),
+              if (sitteplasser == ikkeOppgitt) stringResource(R.string.not_specified) else sitteplasser,
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              kjoretoy.substringAfter("antDorer=")
-                .substringBefore(","),
+              if (antDorer == ikkeOppgitt) stringResource(R.string.not_specified) else antDorer,
               color = MaterialTheme.colorScheme.onBackground
             )
-            if (hoyde != ikkeOppgitt) {
+            if (hoyde == ikkeOppgitt) {
+              Text(
+                text = stringResource(R.string.not_specified),
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+            } else {
               Text(
                 text = stringResource(
                   R.string.cm,
@@ -266,44 +295,55 @@ fun FavoritterSkjerm(
                 ),
                 color = MaterialTheme.colorScheme.onBackground,
               )
+            }
+            if (bredde == ikkeOppgitt) {
+              Text(
+                text = stringResource(R.string.not_specified),
+                color = MaterialTheme.colorScheme.onBackground,
+              )
             } else {
               Text(
-                text = hoyde,
+                text = stringResource(
+                  R.string.cm,
+                  bredde
+                ),
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+            }
+            if (lengde == ikkeOppgitt) {
+              Text(
+                text = stringResource(R.string.not_specified),
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+            } else {
+              Text(
+                text = stringResource(
+                  R.string.cm,
+                  lengde
+                ),
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+            }
+            if (vekt == ikkeOppgitt) {
+              Text(
+                text = stringResource(R.string.not_specified),
+                color = MaterialTheme.colorScheme.onBackground,
+              )
+            } else {
+              Text(
+                text = stringResource(
+                  R.string.kg,
+                  vekt
+                ),
                 color = MaterialTheme.colorScheme.onBackground,
               )
             }
             Text(
-              if (bredde != ikkeOppgitt || bredde != "0") {
-                "$bredde cm"
-              } else {
-                ikkeOppgitt
-              },
+              if (sistGodkjent == ikkeOppgitt) stringResource(R.string.not_specified) else sistGodkjent,
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (lengde != ikkeOppgitt || lengde != "0") {
-                "$lengde cm"
-              } else {
-                ikkeOppgitt
-              },
-              color = MaterialTheme.colorScheme.onBackground
-            )
-            Text(
-              if (vekt != ikkeOppgitt || vekt != "0") {
-                "$vekt kg"
-              } else {
-                ikkeOppgitt
-              },
-              color = MaterialTheme.colorScheme.onBackground
-            )
-            Text(
-              kjoretoy.substringAfter("sistgodkjent=")
-                .substringBefore(","),
-              color = MaterialTheme.colorScheme.onBackground
-            )
-            Text(
-              kjoretoy.substringAfter("nesteEU=")
-                .substringBefore(","),
+              if (nesteEU == ikkeOppgitt) stringResource(R.string.not_specified) else nesteEU,
               color = MaterialTheme.colorScheme.onBackground
             )
           }
