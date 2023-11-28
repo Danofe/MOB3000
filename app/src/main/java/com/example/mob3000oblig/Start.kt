@@ -33,6 +33,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -46,8 +47,8 @@ class Start {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
-    val config = LocalConfiguration.current
     val orientation = LocalConfiguration.current.orientation
+    val focusManager = LocalFocusManager.current
 
     Column(modifier = modifier.fillMaxSize()) {
       Box(
@@ -130,7 +131,8 @@ class Start {
           Spacer(modifier = modifier.padding(top = 10.dp))
           //Sammenlign-knapp
           Button(
-            onClick = { navController.navigate(Screen.Sammenlign.ruter) },
+            onClick = { focusManager.clearFocus()
+              navController.navigate(Screen.Sammenlign.ruter) },
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
           ) {
             Icon(

@@ -117,7 +117,7 @@ class Sammenlign {
                     onValueChange = {
                         input1 = it
                     },
-                    placeholder = { Text(text = "skilt 1") },
+                    placeholder = { Text(text = stringResource(R.string.plate_1)) },
                     colors = TextFieldDefaults.textFieldColors(
                         MaterialTheme.colorScheme.onBackground,
                         containerColor = MaterialTheme.colorScheme.tertiary,
@@ -130,7 +130,7 @@ class Sammenlign {
                     onValueChange = {
                         input2 = it
                     },
-                    placeholder = { Text(text = "skilt 2") },
+                    placeholder = { Text(text = stringResource(R.string.plate_2)) },
                     colors = TextFieldDefaults.textFieldColors(
                         MaterialTheme.colorScheme.onBackground,
                         containerColor = MaterialTheme.colorScheme.tertiary,

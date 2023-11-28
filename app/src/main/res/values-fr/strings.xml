@@ -4,6 +4,8 @@
     <string name="login">Se connecter</string>
     <string name="register">Register</string>
     <string name="license_number">Numéro d\'immatriculation</string>
+    <string name="plate_1">Plaque no. 1</string>
+    <string name="plate_2">Plaque no. 2</string>
     <string name="login_to_see_favorites">Vous devez vous connecter pour voir vos favoris</string>
     <string name="height">Hauteur</string>
     <string name="home">Accueil</string>
@@ -64,8 +66,8 @@
     <string name="added_to_favorites">%1$s a été ajouté aux favoris</string>
     <string name="add_to_favorites">Ajouté aux favoris</string>
     <string name="found_no_vehicles">Aucun véhicule avec ce numéro d\'immatriculation n\'a été trouvé</string>
-    <string name="write_licence_number">Écrire le numéro d\'immatriculation :</string>
-    <string name="write_valid_licence_number">Écrire un numéro d\'immatriculation valide !</string>
+    <string name="write_licence_number">Écrire le numéro d\'immatriculation:</string>
+    <string name="write_valid_licence_number">Écrire un numéro d\'immatriculation valide!</string>
     <string name="compare">Comparer</string>
     <string name="camera">Caméra</string>
     <string name="favorites">Favoris</string>

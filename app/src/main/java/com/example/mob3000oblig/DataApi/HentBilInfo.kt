@@ -39,7 +39,7 @@ fun bilInfoVariabler(context: Context, bilInfo: KjoretoyDataListe?): HentBilInfo
     var hk = 0
     motorOgDrivverk?.motor?.forEach { motor ->
         motor?.drivstoff?.forEach { drivstoff ->
-            // Sjekker om "MakesNettoEffekt" er tilgjengelig
+            // Sjekker om "maksNettoEffekt" er tilgjengelig
             val nettoEffekt = drivstoff?.maksNettoEffekt ?: 0.0
 
             // Hvis ikke bruk "maksEffektPrTime"
