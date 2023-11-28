@@ -52,17 +52,16 @@ object AppThemeState {
 
 @Composable
 fun ProvideAppThemeState(
-  darkMode: Boolean = isSystemInDarkTheme() || AppThemeState.isDarkMode,
+  darkMode: Boolean = AppThemeState.isDarkMode,
   content: @Composable (darkMode: Boolean, toggleDarkMode: () -> Unit) -> Unit
 ) {
   val systemInDarkMode = isSystemInDarkTheme()
-  CompositionLocalProvider(LocalAppThemeState provides (darkMode || AppThemeState.isDarkMode)) {
-    content(AppThemeState.isDarkMode) {
+  CompositionLocalProvider(LocalAppThemeState provides (darkMode || systemInDarkMode)) {
+    content(darkMode) {
       AppThemeState.isDarkMode = !AppThemeState.isDarkMode
     }
   }
 }
-
 private val LocalAppThemeState = staticCompositionLocalOf<Boolean> {
   error("No LocalAppThemeState provided")
 }
@@ -96,43 +95,3 @@ fun AppTheme(
     content()
   }
 }
-
-
-//@Composable
-//fun AppTheme(
-//  darkTheme: Boolean,
-//  content: @Composable () -> Unit,
-//) {
-//  MaterialTheme(
-//    colorScheme = if (darkTheme) darkColorScheme else lightColorScheme
-//  ) {
-//    val view = LocalView.current
-//    if (!view.isInEditMode) {
-//      SideEffect {
-//        val window = (view.context as Activity).window
-//        window.statusBarColor = Color.Gray.toArgb()
-//        WindowCompat.getInsetsController(
-//          window,
-//          view
-//        ).isAppearanceLightStatusBars = darkTheme
-//      }
-//    }
-//    content()
-//  }
-
-//  val colorScheme = when {
-//    dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-//      val context = LocalContext.current
-//      if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-//    }
-//
-//    darkTheme -> darkColorScheme
-//    else -> lightColorScheme
-//  }
-//
-//  MaterialTheme(
-//    colorScheme = colorScheme,
-//    typography = Typography,
-//    content = content
-//  )
-//}

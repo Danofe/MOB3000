@@ -51,7 +51,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -239,57 +238,57 @@ class Settings {
     }
   }
 
-  //  @Composable
-//  fun SettingsCard() {
-//    Card(
-//      modifier = Modifier.padding(32.dp),
-//      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
-//    ) {
-//      var utvidet by remember {
-//        mutableStateOf(false)
-//      }
-//      Column(
-//        Modifier
-//          .clickable { utvidet = !utvidet }
-//          .fillMaxWidth()
-//          .padding(16.dp)
-//          .align(Alignment.CenterHorizontally)
-//
-//      ) {
-//        Box(
-//          modifier = Modifier.align(Alignment.CenterHorizontally)
-//
-//        ) {
-//          Text(
-//            text = stringResource(R.string.settings),
-//            fontSize = 20.sp,
-//            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-//                    color = MaterialTheme.colorScheme.onBackground
-//          )
-//        }
-//        AnimatedVisibility(
-//          visible = utvidet,
-//          modifier = Modifier
-//            .fillMaxWidth()
-//            .padding(16.dp)
-//            .align(Alignment.CenterHorizontally)
-//        ) {
-//          Card(
-//            modifier = Modifier
-//              .align(Alignment.CenterHorizontally),
-//            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
-//          ) {
-//            SettingCard()
-//          }
-//        }
-//      }
-//    }
-//  }
+    @Composable
+  fun SettingsCard() {
+    Card(
+      modifier = Modifier.padding(32.dp),
+      colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+    ) {
+      var utvidet by remember {
+        mutableStateOf(false)
+      }
+      Column(
+        Modifier
+          .clickable { utvidet = !utvidet }
+          .fillMaxWidth()
+          .padding(16.dp)
+          .align(Alignment.CenterHorizontally)
+
+      ) {
+        Box(
+          modifier = Modifier.align(Alignment.CenterHorizontally)
+
+        ) {
+          Text(
+            text = stringResource(R.string.settings),
+            fontSize = 20.sp,
+            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onBackground
+          )
+        }
+        AnimatedVisibility(
+          visible = utvidet,
+          modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .align(Alignment.CenterHorizontally)
+        ) {
+          Card(
+            modifier = Modifier
+              .align(Alignment.CenterHorizontally),
+            colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+          ) {
+            SettingsContent()
+          }
+        }
+      }
+    }
+  }
+
   @Composable
-  fun SettingCard(modifier: Modifier = Modifier) {
+  fun SettingsContent(modifier: Modifier = Modifier) {
     ProvideAppThemeState { darkMode, toggleDarkmode ->
       Card(
-        modifier = Modifier.padding(32.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
       ) {
         Column(
@@ -329,7 +328,10 @@ class Settings {
         )
         Spacer(modifier = modifier.height(10.dp))
         Column(modifier = modifier.padding(horizontal = 10.dp)) {
-          Text(text = stringResource(R.string.change_language), color = MaterialTheme.colorScheme.onBackground)
+          Text(
+            text = stringResource(R.string.change_language),
+            color = MaterialTheme.colorScheme.onBackground
+          )
         }
         LanguageToggle()
       }
@@ -506,7 +508,7 @@ class Settings {
         .verticalScroll(rememberScrollState())
     ) {
       Profil(navController)
-      SettingCard()
+      SettingsCard()
       Terms()
       if (Auth().innlogget()) {
         Divider(
