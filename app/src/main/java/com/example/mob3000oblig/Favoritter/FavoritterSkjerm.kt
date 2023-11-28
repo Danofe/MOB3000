@@ -2,6 +2,7 @@ package com.example.mob3000oblig.Favoritter
 
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -82,7 +84,10 @@ fun FavoritterSkjerm(
     Spacer(modifier = modifier.height(80.dp))
 
     if (index != -1) {
-      Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
+      Card(
+        modifier = modifier
+          .horizontalScroll(rememberScrollState()),
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
         Row(
           modifier = modifier
             .padding(20.dp),

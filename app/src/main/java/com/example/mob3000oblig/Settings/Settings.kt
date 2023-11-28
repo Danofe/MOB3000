@@ -429,7 +429,6 @@ class Settings {
     }
   }
 
-
   @Composable
   fun Terms() {
     Card(
