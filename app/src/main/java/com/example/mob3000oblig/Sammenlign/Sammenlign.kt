@@ -1,5 +1,6 @@
 package com.example.mob3000oblig.Sammenlign
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -159,7 +160,10 @@ class Sammenlign {
             }
             if (viserInfo) {
                 visError = false
-                Card(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
+                Card( modifier = modifier
+                    .horizontalScroll(rememberScrollState()),
+                    colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary,
+                    )) {
                     Row(
                         modifier = modifier
                             .padding(10.dp)
