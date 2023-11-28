@@ -4,6 +4,8 @@
     <string name="register">Registrer</string>
     <string name="license_number">Skiltnr</string>
     <string name="compare_error">Skriv inn to gyldige skiltnr</string>
+    <string name="plate_1">Skilt 1</string>
+    <string name="plate_2">Skilt 2</string>
     <string name="login_to_see_favorites">Du må logge inn for å se dine favoritter</string>
     <string name="height">Høyde</string>
     <string name="home">Hjem</string>
