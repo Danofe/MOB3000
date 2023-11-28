@@ -127,6 +127,7 @@ class Start {
               )
             }
           }
+          Spacer(modifier = modifier.padding(top = 10.dp))
           //Sammenlign-knapp
           Button(
             onClick = { navController.navigate(Screen.Sammenlign.ruter) },
@@ -140,7 +141,7 @@ class Start {
             )
             Text(
               text = stringResource(R.string.compare).uppercase(),
-              fontSize = 30.sp,
+              fontSize = 20.sp,
               color = Color.Black,
             )
           }

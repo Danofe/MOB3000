@@ -49,6 +49,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalTextInputService
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -182,6 +183,7 @@ class Settings {
           OutlinedTextField(
             value = passord,
             onValueChange = { passord = it },
+            visualTransformation = PasswordVisualTransformation(),
             label = {
               Text(
                 text = stringResource(R.string.new_password),
@@ -216,7 +218,6 @@ class Settings {
           }
           Button(modifier = Modifier.align(Alignment.CenterHorizontally),
                  onClick = {
-                   Auth().loggUt()
                    navController.navigate(Screen.Start.ruter)
                    Toast.makeText(
                      context,
@@ -226,6 +227,7 @@ class Settings {
                      ),
                      Toast.LENGTH_SHORT
                    ).show()
+                   Auth().loggUt()
                  }) {
             Text(
               text = stringResource(R.string.logout),

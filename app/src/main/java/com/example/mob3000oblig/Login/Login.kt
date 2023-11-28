@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -53,6 +54,7 @@ class Login {
     val loginUiState = loginViewModel?.uiState
     val context = LocalContext.current
     val error = loginUiState?.error != null
+    val focusManager = LocalFocusManager.current
 
     Column(modifier = modifier) {
       Box(
@@ -142,6 +144,7 @@ class Login {
                   context,
                   navController
                 )
+                focusManager.clearFocus()
               }) {
               Text(
                 text = stringResource(R.string.login),

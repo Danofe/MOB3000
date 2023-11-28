@@ -28,8 +28,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -53,8 +55,8 @@ class Register {
 
       val context = LocalContext.current
       val regUiState = registerViewModel?.reguiState
-      var showError by remember { mutableStateOf(false) }
 
+      val focusManager = LocalFocusManager.current
 
       Column(modifier = modifier.padding()) {
         Box(
@@ -91,6 +93,7 @@ class Register {
             )
             TextField(
               value = regUiState?.passordReg ?: "",
+              visualTransformation = PasswordVisualTransformation(),
               onValueChange = { registerViewModel?.onPassordRegChange(it) },
               label = {
                 Text(
@@ -106,6 +109,7 @@ class Register {
             )
             TextField(
               value = regUiState?.passordBekreftReg ?: "",
+              visualTransformation = PasswordVisualTransformation(),
               onValueChange = { registerViewModel?.onPassordBekRegChange(it) },
               label = {
                 Text(
@@ -121,7 +125,8 @@ class Register {
           )
           Row {
             Button(
-              onClick = { navController.navigate(Screen.Start.ruter) },
+              onClick = { navController.navigate(Screen.Start.ruter)
+                focusManager.clearFocus() },
               // TODO: Endre farge i dark og light
               colors = ButtonDefaults.buttonColors(Color.LightGray),
             ) {
@@ -129,11 +134,12 @@ class Register {
                 text = stringResource(R.string.cancel),
                   color = MaterialTheme.colorScheme.onSurface,
                   fontSize = 20.sp,
-                )
+              )
               }
               Spacer(modifier = Modifier.width(8.dp))
               Button(
-                onClick = { registerViewModel?.lagBruker(context) },
+                onClick = { registerViewModel?.lagBruker(context)
+                            focusManager.clearFocus()},
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
 
                 ) {
