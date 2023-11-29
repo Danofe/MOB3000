@@ -51,7 +51,6 @@ import com.example.mob3000oblig.Screen
 
 @Composable
 fun KameraSkjerm(navController: NavController) {
-
   KameraInnhold(navController)
 }
 
@@ -71,7 +70,6 @@ private fun KameraInnhold(navController: NavController) {
   Scaffold(
     modifier = Modifier.fillMaxSize(),
   ) { paddingValues: PaddingValues ->
-
     Box(
       modifier = Modifier.fillMaxSize()
     ) {

@@ -49,6 +49,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalTextInputService
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
@@ -62,19 +63,19 @@ import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
 class Settings {
   @Composable
-  fun Profil(navController: NavController) {
+  fun Profil(navController: NavController, modifier: Modifier = Modifier) {
     if (!Auth().innlogget()) {
       Card(
-        modifier = Modifier.padding(32.dp),
+        modifier = modifier.padding(32.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
       ) {
         Row(
-          Modifier
+          modifier
             .fillMaxWidth(),
           horizontalArrangement = Arrangement.Center
         ) {
           Box(
-            Modifier
+            modifier
               .padding(8.dp)
           ) {
             Button(onClick = { navController.navigate(Screen.Login.ruter) }) {
@@ -85,9 +86,9 @@ class Settings {
               )
             }
           }
-          Spacer(modifier = Modifier.padding(8.dp))
+          Spacer(modifier = modifier.padding(8.dp))
           Box(
-            Modifier
+            modifier
               .padding(8.dp)
           ) {
             Button(onClick = { navController.navigate(Screen.Register.ruter) }) {
@@ -102,38 +103,38 @@ class Settings {
       }
     } else {
       Card(
-        modifier = Modifier.padding(32.dp),
+        modifier = modifier.padding(32.dp),
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
       ) {
         var utvidet by remember {
           mutableStateOf(false)
         }
         Column(
-          Modifier
+          modifier
             .clickable { utvidet = !utvidet }
             .fillMaxWidth()
             .padding(16.dp)
             .align(Alignment.CenterHorizontally)
         ) {
           Box(
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = modifier.align(Alignment.CenterHorizontally)
           ) {
             Text(
               text = stringResource(R.string.profile),
               color = MaterialTheme.colorScheme.onBackground,
               fontSize = 20.sp,
-              fontWeight = androidx.compose.ui.text.font.FontWeight.Bold
+              fontWeight = FontWeight.Bold
             )
           }
           AnimatedVisibility(
             visible = utvidet,
-            modifier = Modifier
+            modifier = modifier
               .fillMaxWidth()
               .padding(16.dp)
               .align(Alignment.CenterHorizontally)
           ) {
             Card(
-              modifier = Modifier
+              modifier = modifier
                 .align(Alignment.CenterHorizontally),
               colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
             ) {
@@ -147,32 +148,33 @@ class Settings {
 
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun ProfilCard(navController: NavController) {
+  fun ProfilCard(navController: NavController, modifier: Modifier = Modifier) {
     val context = LocalContext.current
     Card(
-      modifier = Modifier.padding(16.dp),
+      modifier = modifier.padding(16.dp),
       colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
     ) {
       Column(
-        Modifier
+        modifier
           .fillMaxWidth()
           .align(Alignment.CenterHorizontally)
       ) {
         Box(
-          Modifier
+          modifier
             .fillMaxWidth()
             .padding(8.dp)
             .align(Alignment.CenterHorizontally)
         ) {
           Text(
-            modifier = Modifier.align(Alignment.Center),
+            modifier = modifier.align(Alignment.Center),
             text = Auth().hentBrukerEmail(),
             color = MaterialTheme.colorScheme.onBackground,
+            fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp
           )
         }
         Column(
-          Modifier
+          modifier
             .padding(8.dp)
             .align(Alignment.CenterHorizontally)
         ) {
@@ -194,11 +196,12 @@ class Settings {
               cursorColor = MaterialTheme.colorScheme.onBackground,
               focusedBorderColor = MaterialTheme.colorScheme.onBackground
             ),
-            modifier = Modifier
+            modifier = modifier
               .fillMaxWidth()
               .padding(8.dp)
           )
-          Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+          Spacer(modifier = modifier.height(15.dp))
+          Button(modifier = modifier.align(Alignment.CenterHorizontally),
                  onClick = {
                    Auth().byttPassord(passord)
                    Auth().loggUt()
@@ -213,9 +216,9 @@ class Settings {
               text = stringResource(R.string.change_password),
               color = MaterialTheme.colorScheme.onSurface,
             )
-
           }
-          Button(modifier = Modifier.align(Alignment.CenterHorizontally),
+           Spacer(modifier = modifier.height(15.dp))
+          Button(modifier = modifier.align(Alignment.CenterHorizontally),
                  onClick = {
                    navController.navigate(Screen.Start.ruter)
                    Toast.makeText(
@@ -238,17 +241,17 @@ class Settings {
     }
   }
 
-    @Composable
-  fun SettingsCard() {
+  @Composable
+  fun SettingsCard(modifier: Modifier = Modifier) {
     Card(
-      modifier = Modifier.padding(32.dp),
+      modifier = modifier.padding(32.dp),
       colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
     ) {
       var utvidet by remember {
         mutableStateOf(false)
       }
       Column(
-        Modifier
+        modifier
           .clickable { utvidet = !utvidet }
           .fillMaxWidth()
           .padding(16.dp)
@@ -256,25 +259,25 @@ class Settings {
 
       ) {
         Box(
-          modifier = Modifier.align(Alignment.CenterHorizontally)
+          modifier = modifier.align(Alignment.CenterHorizontally)
 
         ) {
           Text(
             text = stringResource(R.string.settings),
             fontSize = 20.sp,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onBackground
+            color = MaterialTheme.colorScheme.onBackground
           )
         }
         AnimatedVisibility(
           visible = utvidet,
-          modifier = Modifier
+          modifier = modifier
             .fillMaxWidth()
             .padding(16.dp)
             .align(Alignment.CenterHorizontally)
         ) {
           Card(
-            modifier = Modifier
+            modifier = modifier
               .align(Alignment.CenterHorizontally),
             colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
           ) {
@@ -378,7 +381,7 @@ class Settings {
             focusedIndicatorColor = MaterialTheme.colorScheme.onBackground
           ),
           trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = utvidet) },
-          modifier = Modifier
+          modifier = modifier
             .menuAnchor()
             .fillMaxWidth()
         )
