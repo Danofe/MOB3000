@@ -4,6 +4,7 @@ import android.media.Image
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
+import androidx.compose.ui.geometry.Rect
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
@@ -18,7 +19,7 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class TekstGjenkjenner(
-  private val onDetectedTextUpdated: (String) -> Unit
+  private val onDetectedTextUpdated: (String) -> Unit,
 ) : ImageAnalysis.Analyzer {
 
   companion object {

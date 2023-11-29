@@ -39,6 +39,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import compose.icons.FontAwesomeIcons
+import compose.icons.fontawesomeicons.Solid
+import compose.icons.fontawesomeicons.solid.Camera
 import java.util.regex.Pattern
 
 
@@ -160,9 +163,9 @@ class Start {
               colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
             ) {
               Icon(
-                imageVector = Icons.Filled.Search,
+                imageVector = FontAwesomeIcons.Solid.Camera,
                 contentDescription = null,
-                modifier = Modifier.size(36.dp),
+                modifier = Modifier.size(30.dp).padding(end = 8.dp),
                 tint = Color.Black
               )
               Text(
