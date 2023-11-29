@@ -55,9 +55,9 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.mob3000oblig.Auth
+import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Screen
+import com.example.mob3000oblig.Nav.Screen
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
 

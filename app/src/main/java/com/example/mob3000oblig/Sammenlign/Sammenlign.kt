@@ -36,7 +36,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.mob3000oblig.DataApi.APIViewModel
 import com.example.mob3000oblig.DataApi.HentBilInfo
 import com.example.mob3000oblig.DataApi.bilInfoVariabler
-import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
+import com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe
 import com.example.mob3000oblig.R
 import kotlinx.coroutines.launch
 
@@ -54,8 +54,8 @@ class Sammenlign {
         var skilt2 by remember { mutableStateOf("") }
         var url1 by remember { mutableStateOf("") }
         var url2 by remember { mutableStateOf("") }
-        var bilInfo1 by remember { mutableStateOf<KjoretoyDataListe?>(null) }
-        var bilInfo2 by remember { mutableStateOf<KjoretoyDataListe?>(null) }
+        var bilInfo1 by remember { mutableStateOf<com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe?>(null) }
+        var bilInfo2 by remember { mutableStateOf<com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe?>(null) }
         var verdi1 by remember { mutableStateOf<HentBilInfo?>(null) }
         var verdi2 by remember { mutableStateOf<HentBilInfo?>(null) }
         var viserInfo by remember { mutableStateOf(false) }
