@@ -4,11 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Search
-
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Screen
@@ -35,7 +30,7 @@ val listOfBottonNavigationItem: List<BottomNavigationItem> = listOf(
     icon = FontAwesomeIcons.Solid.Camera,
     route = Screen.Kamera.ruter,
 
-  ),
+    ),
   BottomNavigationItem(
     labelStringId = R.string.profile,
     icon = Icons.Filled.Face,

@@ -14,7 +14,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.List
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -73,13 +72,13 @@ class Start {
           } else {
             Image(
               painter = painterResource(id = R.drawable.skiltskern),
-              contentDescription = "skiltskern",
+              contentDescription = stringResource(R.string.logo_name),
               modifier = Modifier.size(200.dp)
             )
           }
           //---- Søke skiltnr
 
-          fun isValidLicenseNumber(licenseNumberStr: String?) = licenseNumberStr?.let {
+          fun erGyldigSkiltNummer(licenseNumberStr: String?) = licenseNumberStr?.let {
             Pattern.compile(
               "^[A-Za-z\\d\\s]{2,7}\$"
             ).matcher(it).find()
@@ -87,22 +86,22 @@ class Start {
 
           // hentet fra https://stackoverflow.com/questions/65641875/jetpack-compose-textfield-inputfilter-to-have-only-currency-regex-inputs
 
-          var licenseNumberQuery by remember { mutableStateOf("") }
-          var showError by remember { mutableStateOf(false) }
+          var skiltInput by remember { mutableStateOf("") }
+          var visError by remember { mutableStateOf(false) }
 
           // Kolonne for Tekstfield og Søkknappen
           Column(
             modifier = Modifier.padding(8.dp),
-            horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
-            verticalArrangement = Arrangement.spacedBy(8.dp) //Spacing mellom textfield og søk-knapp
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(8.dp)
           ) {
             TextField(
-              value = licenseNumberQuery,
+              value = skiltInput,
               onValueChange = {
-                licenseNumberQuery = it
-                showError = !isValidLicenseNumber(it)!!
+                skiltInput = it
+                visError = !erGyldigSkiltNummer(it)!!
               },
-              isError = showError,
+              isError = visError,
               placeholder = { Text(text = stringResource(R.string.write_licence_number)) },
               colors = TextFieldDefaults.textFieldColors(
                 MaterialTheme.colorScheme.onBackground,
@@ -111,7 +110,7 @@ class Start {
                 focusedIndicatorColor = MaterialTheme.colorScheme.onBackground
               ),
             )
-            if (showError) {
+            if (visError) {
               Text(stringResource(R.string.write_valid_licence_number))
             }
             Button(
@@ -119,9 +118,9 @@ class Start {
                 disabledContainerColor = Color.LightGray
               ),
               onClick = {
-                navController.navigate(Screen.Info.withArgs(licenseNumberQuery.uppercase()))
+                navController.navigate(Screen.Info.withArgs(skiltInput.uppercase()))
               },
-              enabled = !licenseNumberQuery.isEmpty() && !showError,
+              enabled = !skiltInput.isEmpty() && !visError,
             )
             {
               Text(
@@ -142,12 +141,12 @@ class Start {
               imageVector = Icons.Filled.List,
               contentDescription = null,
               modifier = Modifier.size(36.dp),
-              tint = Color.Black
+              tint = MaterialTheme.colorScheme.onSurface
             )
             Text(
               text = stringResource(R.string.compare).uppercase(),
               fontSize = 20.sp,
-              color = Color.Black,
+              color = MaterialTheme.colorScheme.onSurface,
             )
           }
           // Rad for Kamera og Favoritter
@@ -165,13 +164,15 @@ class Start {
               Icon(
                 imageVector = FontAwesomeIcons.Solid.Camera,
                 contentDescription = null,
-                modifier = Modifier.size(30.dp).padding(end = 8.dp),
-                tint = Color.Black
+                modifier = Modifier
+                  .size(30.dp)
+                  .padding(end = 8.dp),
+                tint = MaterialTheme.colorScheme.onSurface
               )
               Text(
                 text = stringResource(R.string.camera).uppercase(),
                 fontSize = 16.sp,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
               )
             }
             //Favoritter-knapp
@@ -183,12 +184,12 @@ class Start {
                 imageVector = Icons.Filled.Star,
                 contentDescription = null,
                 modifier = Modifier.size(36.dp),
-                tint = Color.Black
+                tint = MaterialTheme.colorScheme.onSurface
               )
               Text(
                 text = stringResource(R.string.favorites).uppercase(),
                 fontSize = 16.sp,
-                color = Color.Black
+                color = MaterialTheme.colorScheme.onSurface
               )
             }
           }
