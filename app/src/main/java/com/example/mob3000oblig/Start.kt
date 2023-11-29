@@ -183,7 +183,7 @@ class Start {
               Icon(
                 imageVector = Icons.Filled.Star,
                 contentDescription = null,
-                modifier = Modifier.size(36.dp),
+                modifier = Modifier.size(30.dp),
                 tint = MaterialTheme.colorScheme.onSurface
               )
               Text(
