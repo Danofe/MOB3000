@@ -29,16 +29,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.mob3000oblig.Favoritter.FavoritterViewModel
 import com.example.mob3000oblig.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Meny(
+  modifier: Modifier = Modifier,
   viewModel: FavoritterViewModel? = viewModel(),
   onValueChanged: (String) -> Unit = {},
   valgt: String,
-  modifier: Modifier = Modifier
 ) {
   var utvidet by remember { mutableStateOf(false) }
   val favorittliste = viewModel?.favoritterSkilt?.value
@@ -60,7 +59,7 @@ fun Meny(
       fontSize = 30.sp,
       fontWeight = FontWeight.Bold
     ),
-    modifier = Modifier
+    modifier = modifier
       .fillMaxSize()
       .onGloballyPositioned { coordinates ->
         textFieldSize = coordinates.size.width
@@ -72,17 +71,17 @@ fun Meny(
       Icon(
         ikon,
         "",
-        Modifier.clickable { utvidet = !utvidet }
+        modifier.clickable { utvidet = !utvidet }
       )
     },
   )
   DropdownMenu(
     expanded = utvidet,
     onDismissRequest = { utvidet = false },
-    modifier = Modifier
-        .width(with(LocalDensity.current) { textFieldSize.toDp() })
-        .fillMaxWidth()
-        .zIndex(1f)
+    modifier = modifier
+      .width(with(LocalDensity.current) { textFieldSize.toDp() })
+      .fillMaxWidth()
+      .zIndex(1f)
   ) {
     for (i in favorittliste!!) {
       DropdownMenuItem(

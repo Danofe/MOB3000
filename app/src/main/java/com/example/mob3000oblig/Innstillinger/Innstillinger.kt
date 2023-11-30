@@ -1,4 +1,4 @@
-package com.example.mob3000oblig.Settings
+package com.example.mob3000oblig.Innstillinger
 
 import android.app.LocaleManager
 import android.os.LocaleList
@@ -56,8 +56,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
-import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Nav.Skjerm
+import com.example.mob3000oblig.R
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
 
@@ -217,7 +217,7 @@ class Innstillinger {
               color = MaterialTheme.colorScheme.onSurface,
             )
           }
-           Spacer(modifier = modifier.height(15.dp))
+          Spacer(modifier = modifier.height(15.dp))
           Button(modifier = modifier.align(Alignment.CenterHorizontally),
                  onClick = {
                    navController.navigate(Skjerm.Start.ruter)
@@ -242,7 +242,7 @@ class Innstillinger {
   }
 
   @Composable
-  fun innstillingCard(modifier: Modifier = Modifier) {
+  fun InnstillingCard(modifier: Modifier = Modifier) {
     Card(
       modifier = modifier.padding(32.dp),
       colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
@@ -265,7 +265,7 @@ class Innstillinger {
           Text(
             text = stringResource(R.string.settings),
             fontSize = 20.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+            fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground
           )
         }
@@ -281,7 +281,7 @@ class Innstillinger {
               .align(Alignment.CenterHorizontally),
             colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
           ) {
-            innstillingContent()
+            InnstillingContent()
           }
         }
       }
@@ -289,7 +289,7 @@ class Innstillinger {
   }
 
   @Composable
-  fun innstillingContent(modifier: Modifier = Modifier) {
+  fun InnstillingContent(modifier: Modifier = Modifier) {
     ProvideAppThemeState { darkMode, toggleDarkmode ->
       Card(
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
@@ -336,14 +336,14 @@ class Innstillinger {
             color = MaterialTheme.colorScheme.onBackground
           )
         }
-        språkToggle()
+        SpråkToggle()
       }
     }
   }
 
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun språkToggle(modifier: Modifier = Modifier) {
+  fun SpråkToggle(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val språk = arrayOf(
       "English",
@@ -454,7 +454,7 @@ class Innstillinger {
           Text(
             text = stringResource(R.string.terms_and_conditions),
             fontSize = 20.sp,
-            fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
+            fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground
           )
         }
@@ -501,7 +501,7 @@ class Innstillinger {
   }
 
   @Composable
-  fun innstillingPage(navController: NavController, modifier: Modifier) {
+  fun InnstillingPage(navController: NavController, modifier: Modifier) {
     val slettBruker = remember { mutableStateOf(false) }
     val context = LocalContext.current
     Column(
@@ -511,7 +511,7 @@ class Innstillinger {
         .verticalScroll(rememberScrollState())
     ) {
       Profil(navController)
-      innstillingCard()
+      InnstillingCard()
       Terms()
       if (Auth().innlogget()) {
         Divider(

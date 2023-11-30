@@ -38,8 +38,8 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
-import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Nav.Skjerm
+import com.example.mob3000oblig.R
 
 @Composable
 fun KameraSkjerm(navController: NavController) {
@@ -100,13 +100,13 @@ private fun KameraInnhold(navController: NavController) {
       )
       FloatingActionButton(
         onClick = {
-          navController.navigate(Skjerm.Info.withArgs(detectedText))
+          navController.navigate(Skjerm.Info.medArgumenter(detectedText))
         },
         modifier = Modifier
           .size(100.dp)
           .padding(16.dp)
           .align(Alignment.BottomCenter)
-          .offset(y = (-80).dp),
+          .offset(y = (-15).dp),
         containerColor = MaterialTheme.colorScheme.primary,
       ) {
         Icon(

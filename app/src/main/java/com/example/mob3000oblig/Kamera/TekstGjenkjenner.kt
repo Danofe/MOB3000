@@ -4,7 +4,6 @@ import android.media.Image
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
-import androidx.compose.ui.geometry.Rect
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
@@ -27,13 +26,17 @@ class TekstGjenkjenner(
   }
 
   private val scope: CoroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-  private val textRecognizer: TextRecognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+  private val textRecognizer: TextRecognizer =
+    TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
 
   @androidx.annotation.OptIn(ExperimentalGetImage::class)
   override fun analyze(imageProxy: ImageProxy) {
     scope.launch {
       val mediaImage: Image = imageProxy.image ?: run { imageProxy.close(); return@launch }
-      val inputImage: InputImage = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+      val inputImage: InputImage = InputImage.fromMediaImage(
+        mediaImage,
+        imageProxy.imageInfo.rotationDegrees
+      )
 
       suspendCoroutine { continuation ->
         textRecognizer.process(inputImage)

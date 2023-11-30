@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Nav.Skjerm
+import com.example.mob3000oblig.R
 
 class Login {
   @OptIn(ExperimentalMaterial3Api::class)
@@ -160,7 +160,7 @@ class Login {
           Button(
             onClick = { navController.navigate(Skjerm.Start.ruter) },
             // TODO: Endre farge i dark og light
-            colors = ButtonDefaults.buttonColors(Color.LightGray, ),
+            colors = ButtonDefaults.buttonColors(Color.LightGray),
             modifier = modifier.align(Alignment.CenterHorizontally),
           ) {
             Text(

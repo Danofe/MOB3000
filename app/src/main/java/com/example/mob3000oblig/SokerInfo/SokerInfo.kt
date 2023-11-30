@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.sp
 import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.DataApi.APIViewModel
 import com.example.mob3000oblig.DataApi.bilInfoVariabler
-import com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe
 import com.example.mob3000oblig.Database.Firestore
 import com.example.mob3000oblig.R
 
@@ -47,13 +46,13 @@ class SokerInfo {
   @Composable
   fun SkiltInfo(
     viewModel: APIViewModel,
-    name: String?,
+    skiltnummer: String?,
     modifier: Modifier = Modifier,
     Auth: Auth = Auth(),
     Firestore: Firestore = Firestore()
   ) {
     var url by remember { mutableStateOf("") }
-    url = "kjoretoydata?kjennemerke=$name"
+    url = "kjoretoydata?kjennemerke=$skiltnummer"
     var bilInfo by remember { mutableStateOf<com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe?>(null) }
     LaunchedEffect(url) {
       try {
@@ -82,7 +81,10 @@ class SokerInfo {
     )
     {
       val context = LocalContext.current
-      val verdi = bilInfoVariabler(context, bilInfo)
+      val verdi = bilInfoVariabler(
+        context,
+        bilInfo
+      )
       var visMerKnapp by remember { mutableStateOf(false) }
       var visMerKnappText by remember { mutableStateOf(context.getString(R.string.show_more)) }
       val ikkeOppgitt = stringResource(R.string.not_specified)
@@ -90,7 +92,7 @@ class SokerInfo {
 
       if (verdi.merke != ikkeOppgitt) {
         Text(
-          text = "$name",
+          text = "$skiltnummer",
           fontSize = 40.sp,
           color = MaterialTheme.colorScheme.onBackground,
         )
@@ -100,7 +102,7 @@ class SokerInfo {
               .align(Alignment.CenterHorizontally)
               .padding(20.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
-            ) {
+          ) {
             Column(
               modifier = modifier,
               verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -363,7 +365,7 @@ class SokerInfo {
           Button(
             onClick = {
               Firestore.leggInnFavoritt(
-                name,
+                skiltnummer,
                 verdi.merke,
                 verdi.hk,
                 verdi.antSeter,
@@ -386,7 +388,10 @@ class SokerInfo {
               lagtInn = true
               Toast.makeText(
                 context,
-                context.getString(R.string.added_to_favorites, name),
+                context.getString(
+                  R.string.added_to_favorites,
+                  skiltnummer
+                ),
                 Toast.LENGTH_SHORT
               ).show()
             },
@@ -413,7 +418,7 @@ class SokerInfo {
             modifier = Modifier.size(200.dp)
           )
           Text(
-            text = "$name",
+            text = "$skiltnummer",
             fontSize = 40.sp,
             color = MaterialTheme.colorScheme.onBackground,
           )

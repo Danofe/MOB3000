@@ -11,7 +11,7 @@ val TextDark = Color(0xFFE3E3E3)
 val BackgroundDark = Color(0xFF484452)
 
 val CardColorLight = Color(0xFFE7E0EC)
-val LightNav = Color(0xFFFFFAE9)
+val NavColorLight = Color(0xFFFFFAE9)
 
-val CardColor = Color(0xFF141414)
-val DarkNav = Color(0xFF141414)
+val CardColorDark = Color(0xFF141414)
+val NavColorDark = Color(0xFF141414)
