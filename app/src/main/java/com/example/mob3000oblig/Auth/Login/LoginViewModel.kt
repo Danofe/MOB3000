@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
@@ -45,7 +45,7 @@ class LoginViewModel(
                   error("Feil brukernavn eller passord")
               } else {
                   uiStatus = uiStatus.copy(loggetInn = true)
-                  navController.navigate(Screen.Start.ruter)
+                  navController.navigate(Skjerm.Start.ruter)
                   Toast.makeText(context,"Logget inn", Toast.LENGTH_SHORT).show()
               }
 

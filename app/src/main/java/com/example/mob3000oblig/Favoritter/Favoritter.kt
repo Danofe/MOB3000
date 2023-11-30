@@ -26,7 +26,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 
 class Favoritter {
 
@@ -70,7 +70,7 @@ class Favoritter {
             ) {
               Button(
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-                onClick = { navController.navigate(Screen.Register.ruter) }) {
+                onClick = { navController.navigate(Skjerm.Register.ruter) }) {
 
                 Text(
                   text = stringResource(R.string.register),
@@ -81,7 +81,7 @@ class Favoritter {
 
               Button(
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-                onClick = { navController.navigate(Screen.Login.ruter) }
+                onClick = { navController.navigate(Skjerm.Login.ruter) }
               ) {
                 Text(
                   text = stringResource(R.string.login),

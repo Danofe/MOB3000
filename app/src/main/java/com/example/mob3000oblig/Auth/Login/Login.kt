@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 
 class Login {
   @OptIn(ExperimentalMaterial3Api::class)
@@ -141,13 +141,13 @@ class Login {
             }
             LaunchedEffect(key1 = loginViewModel?.loggetInn) {
               if (loginViewModel?.loggetInn == true) {
-                navController.navigate(Screen.Sok.ruter)
+                navController.navigate(Skjerm.Sok.ruter)
               }
             }
             Spacer(modifier = Modifier.padding(8.dp))
             Button(
               colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-              onClick = { navController.navigate(Screen.Register.ruter) },
+              onClick = { navController.navigate(Skjerm.Register.ruter) },
 
               ) {
               Text(
@@ -158,7 +158,7 @@ class Login {
             }
           }
           Button(
-            onClick = { navController.navigate(Screen.Start.ruter) },
+            onClick = { navController.navigate(Skjerm.Start.ruter) },
             // TODO: Endre farge i dark og light
             colors = ButtonDefaults.buttonColors(Color.LightGray, ),
             modifier = modifier.align(Alignment.CenterHorizontally),

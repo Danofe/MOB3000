@@ -34,7 +34,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 
 class Registrer {
   @OptIn(ExperimentalMaterial3Api::class)
@@ -46,7 +46,7 @@ class Registrer {
   ) {
 
     if (Auth().innlogget()) {
-      navController.navigate(Screen.Start.ruter)
+      navController.navigate(Skjerm.Start.ruter)
     } else {
 
       val context = LocalContext.current
@@ -121,7 +121,7 @@ class Registrer {
           )
           Row {
             Button(
-              onClick = { navController.navigate(Screen.Start.ruter)
+              onClick = { navController.navigate(Skjerm.Start.ruter)
                 focusManager.clearFocus() },
               // TODO: Endre farge i dark og light
               colors = ButtonDefaults.buttonColors(Color.LightGray),

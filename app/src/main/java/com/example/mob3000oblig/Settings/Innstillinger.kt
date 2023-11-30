@@ -57,11 +57,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
 
-class innstillinger {
+class Innstillinger {
   @Composable
   fun Profil(navController: NavController, modifier: Modifier = Modifier) {
     if (!Auth().innlogget()) {
@@ -78,7 +78,7 @@ class innstillinger {
             modifier
               .padding(8.dp)
           ) {
-            Button(onClick = { navController.navigate(Screen.Login.ruter) }) {
+            Button(onClick = { navController.navigate(Skjerm.Login.ruter) }) {
               Text(
                 text = stringResource(R.string.login),
                 color = MaterialTheme.colorScheme.onSurface,
@@ -91,7 +91,7 @@ class innstillinger {
             modifier
               .padding(8.dp)
           ) {
-            Button(onClick = { navController.navigate(Screen.Register.ruter) }) {
+            Button(onClick = { navController.navigate(Skjerm.Register.ruter) }) {
               Text(
                 text = stringResource(R.string.register),
                 color = MaterialTheme.colorScheme.onSurface,
@@ -210,7 +210,7 @@ class innstillinger {
                      context.getString(R.string.password_changed),
                      Toast.LENGTH_LONG
                    ).show()
-                   navController.navigate(Screen.Start.ruter)
+                   navController.navigate(Skjerm.Start.ruter)
                  }) {
             Text(
               text = stringResource(R.string.change_password),
@@ -220,7 +220,7 @@ class innstillinger {
            Spacer(modifier = modifier.height(15.dp))
           Button(modifier = modifier.align(Alignment.CenterHorizontally),
                  onClick = {
-                   navController.navigate(Screen.Start.ruter)
+                   navController.navigate(Skjerm.Start.ruter)
                    Toast.makeText(
                      context,
                      context.getString(
@@ -564,7 +564,7 @@ class innstillinger {
                     Toast.LENGTH_LONG
                   ).show()
                   Auth().slettBruker()
-                  navController.navigate(Screen.Start.ruter)
+                  navController.navigate(Skjerm.Start.ruter)
                 },
 
                 ) {
