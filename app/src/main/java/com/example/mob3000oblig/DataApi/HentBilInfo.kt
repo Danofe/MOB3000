@@ -1,6 +1,7 @@
 package com.example.mob3000oblig.DataApi
 
 import android.content.Context
+import com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe
 import com.example.mob3000oblig.R
 import kotlin.math.roundToInt
 
