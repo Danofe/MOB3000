@@ -27,9 +27,8 @@ data class HentBilInfo(
 
 fun bilInfoVariabler(
   context: Context,
-  bilInfo: com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe?
+  bilInfo: KjoretoyDataListe?
 ): HentBilInfo {
-
   // Sjekker om "maksNettoEffekt" er tilgjengelig, hvis ikke brukes "maksEffektPrTime", hvis ikke brukes 0
   // Måtte gjøres slik for å regne ut hestekrefter av både elektriske, fossile og hybride biler
   // Får ut i kw, så må konvertere til hk med å gange med 1.34102209
