@@ -42,7 +42,7 @@ fun bilInfoVariabler(context: Context, bilInfo: com.example.mob3000oblig.DataApi
             // Sjekker om "maksNettoEffekt" er tilgjengelig
             val nettoEffekt = drivstoff?.maksNettoEffekt ?: 0.0
 
-            // Hvis ikke bruk "maksEffektPrTime"
+            // Hvis ikke, bruk "maksEffektPrTime"
             if (nettoEffekt == 0.0) {
                 val effektPrTime = drivstoff?.maksEffektPrTime ?: 0.0
                 hk += (effektPrTime.toInt() * 1.34102209).roundToInt()
