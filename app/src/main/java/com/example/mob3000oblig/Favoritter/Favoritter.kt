@@ -42,7 +42,7 @@ class Favoritter {
           .fillMaxSize()
           .verticalScroll(rememberScrollState())
       ) {
-        if (Auth().currentUser == null) {
+        if (Auth().bruker == null) {
           Column(
             modifier = modifier
               .fillMaxSize(),

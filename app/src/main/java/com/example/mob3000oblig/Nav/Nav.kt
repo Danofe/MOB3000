@@ -31,9 +31,9 @@ import com.example.mob3000oblig.DataApi.APIViewModel
 import com.example.mob3000oblig.Favoritter.Favoritter
 import com.example.mob3000oblig.Kamera.Kamera
 import com.example.mob3000oblig.Auth.Login.Login
-import com.example.mob3000oblig.Auth.Registrer.Register
+import com.example.mob3000oblig.Auth.Registrer.Registrer
 import com.example.mob3000oblig.Sammenlign.Sammenlign
-import com.example.mob3000oblig.Settings.Settings
+import com.example.mob3000oblig.Settings.innstillinger
 import com.example.mob3000oblig.SokerInfo.SokerInfo
 import com.example.mob3000oblig.Start.Start
 
@@ -99,7 +99,7 @@ fun Nav() {
       }
 
       composable(route = Screen.Register.ruter) {
-        Register().RegisterSkjerm(navController = navController)
+        Registrer().RegisterSkjerm(navController = navController)
       }
 
       composable(route = Screen.Start.ruter) {
@@ -107,7 +107,7 @@ fun Nav() {
       }
 
       composable(route = Screen.Settings.ruter) {
-        Settings().SettingsPage(
+        innstillinger().innstillingPage(
           navController = navController,
           modifier = Modifier
         )

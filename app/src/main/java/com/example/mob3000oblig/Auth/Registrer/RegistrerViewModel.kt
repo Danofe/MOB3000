@@ -9,46 +9,46 @@ import androidx.lifecycle.viewModelScope
 import com.example.mob3000oblig.Auth.Auth
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(
+class RegistrerViewModel(
   private val auth: Auth = Auth()
 ) : ViewModel() {
 
-  var reguiState by mutableStateOf(registerUiState())
+  var reguiStatus by mutableStateOf(registrerUiStatus())
     private set
 
   fun onEmailRegChange(emailReg: String) {
-    reguiState = reguiState.copy(emailReg = emailReg)
+    reguiStatus = reguiStatus.copy(emailReg = emailReg)
   }
 
   fun onPassordRegChange(passordReg: String) {
-    reguiState = reguiState.copy(passordReg = passordReg)
+    reguiStatus = reguiStatus.copy(passordReg = passordReg)
   }
 
   fun onPassordBekRegChange(passordBekreftReg: String) {
-    reguiState = reguiState.copy(passordBekreftReg = passordBekreftReg)
+    reguiStatus = reguiStatus.copy(passordBekreftReg = passordBekreftReg)
   }
 
   private fun validerRegister() =
-    reguiState.emailReg.isNotBlank() &&
-            reguiState.passordReg.isNotBlank() &&
-            reguiState.passordBekreftReg.isNotBlank() &&
-            reguiState.passordReg == reguiState.passordBekreftReg
+    reguiStatus.emailReg.isNotBlank() &&
+            reguiStatus.passordReg.isNotBlank() &&
+            reguiStatus.passordBekreftReg.isNotBlank() &&
+            reguiStatus.passordReg == reguiStatus.passordBekreftReg
 
   fun lagBruker(context: Context) = viewModelScope.launch() {
     try {
       if (!validerRegister()) {
-        reguiState = reguiState.copy(error = "Fyll inn alle feltene")
+        reguiStatus = reguiStatus.copy(error = "Fyll inn alle feltene")
       }
 
       auth.lagBruker(
-        reguiState.emailReg,
-        reguiState.passordReg
+        reguiStatus.emailReg,
+        reguiStatus.passordReg
       )
 
-      reguiState = reguiState.copy(registrert = true)
+      reguiStatus = reguiStatus.copy(registrert = true)
 
     } catch (e: Exception) {
-      reguiState = reguiState.copy(error = "Kunne ikke lage bruker")
+      reguiStatus = reguiStatus.copy(error = "Kunne ikke lage bruker")
     }
   }
 
@@ -56,7 +56,7 @@ class RegisterViewModel(
 }
 
 
-data class registerUiState(
+data class registrerUiStatus(
   val brukernavnReg: String = "",
   val emailReg: String = "",
   val passordReg: String = "",

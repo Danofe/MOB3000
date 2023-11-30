@@ -1,5 +1,6 @@
 package com.example.mob3000oblig.Sammenlign
 
+import android.content.res.Configuration
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,14 +20,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontWeight
@@ -62,10 +66,14 @@ class Sammenlign {
         var visError by remember { mutableStateOf(false) }
         val ikkeOppgitt = stringResource(R.string.not_specified)
 
+
         val focusManager = LocalFocusManager.current
         val context = LocalContext.current
+        //val orientation = LocalConfiguration.current.orientation
+        val scope = rememberCoroutineScope()
 
         suspend fun hentInfo(input1: String, input2: String) {
+            try {
             url1 = "kjoretoydata?kjennemerke=$input1"
             url2 = "kjoretoydata?kjennemerke=$input2"
 
@@ -75,15 +83,14 @@ class Sammenlign {
             skilt1 = input1
             skilt2 = input2
 
-            verdi1 = bilInfoVariabler(context, bilInfo1)
-            verdi2 = bilInfoVariabler(context, bilInfo2)
-
-            if (bilInfo1 != null && bilInfo2 != null) {
-                viserInfo = true
-            } else {
-                visError = true;
+            verdi1 = bilInfoVariabler(context, bilInfo1 )
+            verdi2 = bilInfoVariabler(context, bilInfo2 )
+            viserInfo = true
+            } catch (e: Exception) {
+                visError = true
             }
         }
+
         Column(
             modifier = modifier
                 .padding(10.dp)
@@ -137,14 +144,15 @@ class Sammenlign {
                     )
                 )
             }
+
             Button(
                 colors = ButtonDefaults.buttonColors(
                     disabledContainerColor = Color.LightGray
                 ),
                 onClick = {
                     focusManager.clearFocus()
-                    viewModel.viewModelScope.launch {
-                        hentInfo(input1, input2)
+                    scope.launch {
+                           hentInfo(input1, input2)
                     }
                 },
                 enabled = !input1.isEmpty() && !input2.isEmpty(),

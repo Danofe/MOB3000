@@ -16,73 +16,45 @@ class LoginViewModel(
 
   private val auth: Auth = Auth()
 ) : ViewModel() {
-      val currentUser = auth.currentUser
-
       val loggetInn: Boolean
         get() = auth.innlogget()
-
-      var uiState by mutableStateOf(LoginUiState())
+      var uiStatus by mutableStateOf(LoginUiStatus())
         private set
-
-      fun onEmailChange(email: String) {
-        uiState = uiState.copy(email = email)
+      fun vedEmailEndring(email: String) {
+        uiStatus = uiStatus.copy(email = email)
       }
-
-      fun onPassordChange(passord: String) {
-        uiState = uiState.copy(passord = passord)
+      fun vedPassordEndring(passord: String) {
+        uiStatus = uiStatus.copy(passord = passord)
       }
-
-      fun onLoggetInnChange(loggetInn: Boolean) {
-          uiState = uiState.copy(loggetInn = loggetInn)
-      }
-
-      fun onLoaderChange(loader: Boolean) {
-          uiState = uiState.copy(loader = loader)
-      }
-
-      fun onLoggetUtChange(loggetUt: Boolean) {
-          uiState = uiState.copy(loggetInn = loggetUt)
-      }
-
       fun error(error: String) {
-          uiState = uiState.copy(error = error)
+          uiStatus = uiStatus.copy(error = error)
       }
 
       private fun validerLogin() =
-          uiState.email.isNotBlank() &&
-          uiState.passord.isNotBlank()
+          uiStatus.email.isNotBlank() &&
+          uiStatus.passord.isNotBlank()
 
       fun loginBruker(context: Context, navController: NavController) = viewModelScope.launch {
           try {
               if (!validerLogin()) {
                   error("Fyll inn alle feltene")
               }
-              val loginResult = auth.login(uiState.email, uiState.passord)
+              val loginResultat = auth.login(uiStatus.email, uiStatus.passord)
 
-              if (!loginResult) {
+              if (!loginResultat) {
                   error("Feil brukernavn eller passord")
               } else {
-                  uiState = uiState.copy(loggetInn = true)
+                  uiStatus = uiStatus.copy(loggetInn = true)
                   navController.navigate(Screen.Start.ruter)
                   Toast.makeText(context,"Logget inn", Toast.LENGTH_SHORT).show()
               }
 
           } catch (e: Exception) {
-              uiState = uiState.copy(error = "Kunne ikke logge inn")
-          }
-      }
-
-      fun logutBruker(context: Context) = viewModelScope.launch {
-          try {
-              auth.loggUt()
-              uiState = uiState.copy(loggetInn = false)
-          } catch (e: Exception) {
-              uiState = uiState.copy(error = "Kunne ikke logge ut")
-              System.out.println(LoginUiState().error)
+              uiStatus = uiStatus.copy(error = "Kunne ikke logge inn")
           }
       }
 }
-  data class LoginUiState(
+  data class LoginUiStatus(
       var email: String = "",
       var passord: String = "",
       var error: String? = null,

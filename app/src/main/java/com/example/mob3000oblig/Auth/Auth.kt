@@ -6,10 +6,10 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 
 class Auth {
-  val currentUser: FirebaseUser? = Firebase.auth.currentUser
+  val bruker: FirebaseUser? = Firebase.auth.currentUser
 
   fun innlogget(): Boolean {
-    return currentUser != null
+    return bruker != null
   }
 
   fun loggUt() {
@@ -17,15 +17,15 @@ class Auth {
   }
 
   fun slettBruker() {
-    currentUser?.delete()
+    bruker?.delete()
   }
 
   fun hentBrukerEmail(): String {
-    return currentUser?.email.toString()
+    return bruker?.email.toString()
   }
 
   fun byttPassord(passord: String) {
-    currentUser?.updatePassword(passord)
+    bruker?.updatePassword(passord)
   }
 
   suspend fun lagBruker(email: String, passord: String): Boolean {

@@ -61,7 +61,7 @@ import com.example.mob3000oblig.Nav.Screen
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
 
-class Settings {
+class innstillinger {
   @Composable
   fun Profil(navController: NavController, modifier: Modifier = Modifier) {
     if (!Auth().innlogget()) {
@@ -242,7 +242,7 @@ class Settings {
   }
 
   @Composable
-  fun SettingsCard(modifier: Modifier = Modifier) {
+  fun innstillingCard(modifier: Modifier = Modifier) {
     Card(
       modifier = modifier.padding(32.dp),
       colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
@@ -281,7 +281,7 @@ class Settings {
               .align(Alignment.CenterHorizontally),
             colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
           ) {
-            SettingsContent()
+            innstillingContent()
           }
         }
       }
@@ -289,7 +289,7 @@ class Settings {
   }
 
   @Composable
-  fun SettingsContent(modifier: Modifier = Modifier) {
+  fun innstillingContent(modifier: Modifier = Modifier) {
     ProvideAppThemeState { darkMode, toggleDarkmode ->
       Card(
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
@@ -336,14 +336,14 @@ class Settings {
             color = MaterialTheme.colorScheme.onBackground
           )
         }
-        LanguageToggle()
+        språkToggle()
       }
     }
   }
 
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun LanguageToggle(modifier: Modifier = Modifier) {
+  fun språkToggle(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val språk = arrayOf(
       "English",
@@ -501,7 +501,7 @@ class Settings {
   }
 
   @Composable
-  fun SettingsPage(navController: NavController, modifier: Modifier) {
+  fun innstillingPage(navController: NavController, modifier: Modifier) {
     val slettBruker = remember { mutableStateOf(false) }
     val context = LocalContext.current
     Column(
@@ -511,7 +511,7 @@ class Settings {
         .verticalScroll(rememberScrollState())
     ) {
       Profil(navController)
-      SettingsCard()
+      innstillingCard()
       Terms()
       if (Auth().innlogget()) {
         Divider(
