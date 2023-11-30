@@ -1,6 +1,5 @@
 package com.example.mob3000oblig.Auth.Login
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -39,10 +38,9 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 
 class Login {
-  @SuppressLint("SuspiciousIndentation")
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun LoginSkjerm(
@@ -50,9 +48,9 @@ class Login {
     navController: NavController,
     loginViewModel: LoginViewModel? = viewModel()
   ) {
-    val loginUiState = loginViewModel?.uiState
+    val loginUiStatus = loginViewModel?.uiStatus
     val context = LocalContext.current
-    val error = loginUiState?.error != null
+    val error = loginUiStatus?.error != null
     val focusManager = LocalFocusManager.current
 
     Column(modifier = modifier) {
@@ -66,30 +64,21 @@ class Login {
             .fillMaxSize(),
           horizontalAlignment = Alignment.CenterHorizontally, //Sentrere
           verticalArrangement = Arrangement.spacedBy(8.dp),
-
         ) {
           Image(
             painter = painterResource(id = R.drawable.skiltskern),
             contentDescription = stringResource(R.string.logo_name),
             modifier = Modifier.size(200.dp)
           )
-
-//          Text(
-//            text = stringResource(R.string.login_or_registrer_new_user),
-//            textAlign = TextAlign.Center,
-//            color = MaterialTheme.colorScheme.onBackground,
-//          )
-
           if (error) {
             Text(
               text = stringResource(R.string.wrong_credentials),
               color = MaterialTheme.colorScheme.onBackground,
             )
           }
-
           TextField(
-            value = loginUiState?.email ?: "",
-            onValueChange = { loginViewModel?.onEmailChange(it) },
+            value = loginUiStatus?.email ?: "",
+            onValueChange = { loginViewModel?.vedEmailEndring(it) },
             label = {
               Text(
                 "Email",
@@ -102,7 +91,6 @@ class Login {
               MaterialTheme.colorScheme.onBackground,
               cursorColor = MaterialTheme.colorScheme.onBackground
             ),
-
             leadingIcon = {
               Icon(
                 imageVector = Icons.Filled.AccountCircle,
@@ -112,8 +100,8 @@ class Login {
             }
           )
           TextField(
-            value = loginUiState?.passord ?: "",
-            onValueChange = { loginViewModel?.onPassordChange(it) },
+            value = loginUiStatus?.passord ?: "",
+            onValueChange = { loginViewModel?.vedPassordEndring(it) },
             label = {
               Text(
                 stringResource(R.string.password),
@@ -153,15 +141,13 @@ class Login {
             }
             LaunchedEffect(key1 = loginViewModel?.loggetInn) {
               if (loginViewModel?.loggetInn == true) {
-                navController.navigate(Screen.Sok.ruter)
+                navController.navigate(Skjerm.Sok.ruter)
               }
             }
-
             Spacer(modifier = Modifier.padding(8.dp))
-            //Text(text = "eller", modifier = modifier.align(Alignment.CenterHorizontally))
             Button(
               colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
-              onClick = { navController.navigate(Screen.Register.ruter) },
+              onClick = { navController.navigate(Skjerm.Register.ruter) },
 
               ) {
               Text(
@@ -171,9 +157,8 @@ class Login {
               )
             }
           }
-
           Button(
-            onClick = { navController.navigate(Screen.Start.ruter) },
+            onClick = { navController.navigate(Skjerm.Start.ruter) },
             // TODO: Endre farge i dark og light
             colors = ButtonDefaults.buttonColors(Color.LightGray, ),
             modifier = modifier.align(Alignment.CenterHorizontally),

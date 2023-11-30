@@ -39,7 +39,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavController
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 
 @Composable
 fun KameraSkjerm(navController: NavController) {
@@ -100,7 +100,7 @@ private fun KameraInnhold(navController: NavController) {
       )
       FloatingActionButton(
         onClick = {
-          navController.navigate(Screen.Info.withArgs(detectedText))
+          navController.navigate(Skjerm.Info.withArgs(detectedText))
         },
         modifier = Modifier
           .size(100.dp)

@@ -31,9 +31,9 @@ import com.example.mob3000oblig.DataApi.APIViewModel
 import com.example.mob3000oblig.Favoritter.Favoritter
 import com.example.mob3000oblig.Kamera.Kamera
 import com.example.mob3000oblig.Auth.Login.Login
-import com.example.mob3000oblig.Auth.Registrer.Register
+import com.example.mob3000oblig.Auth.Registrer.Registrer
 import com.example.mob3000oblig.Sammenlign.Sammenlign
-import com.example.mob3000oblig.Settings.Settings
+import com.example.mob3000oblig.Settings.Innstillinger
 import com.example.mob3000oblig.SokerInfo.SokerInfo
 import com.example.mob3000oblig.Start.Start
 
@@ -56,11 +56,11 @@ fun Nav() {
         ) {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
         val currentDestination: NavDestination? = navBackStackEntry?.destination
-        listOfBottonNavigationItem.forEach { bottonNavigationItem: BottomNavigationItem ->
+        listeAvNavItems.forEach { bunnNavItem: BunnNavItems ->
           NavigationBarItem(
-            selected = currentDestination?.hierarchy?.any { it.route == bottonNavigationItem.route } == true,
+            selected = currentDestination?.hierarchy?.any { it.route == bunnNavItem.route } == true,
             onClick = {
-              navController.navigate(bottonNavigationItem.route) {
+              navController.navigate(bunnNavItem.route) {
                 popUpTo(navController.graph.findStartDestination().id) {
                   saveState = true
                 }
@@ -69,7 +69,7 @@ fun Nav() {
             },
             icon = {
               Icon(
-                imageVector = bottonNavigationItem.icon,
+                imageVector = bunnNavItem.icon,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp),
                 tint = MaterialTheme.colorScheme.onBackground
@@ -78,7 +78,7 @@ fun Nav() {
 
             label = {
               Text(
-                text = context.getString(bottonNavigationItem.labelStringId),
+                text = context.getString(bunnNavItem.labelStringId),
                 color = MaterialTheme.colorScheme.onBackground
               )
             }
@@ -90,38 +90,38 @@ fun Nav() {
 
     NavHost(
       navController = navController,
-      startDestination = Screen.Start.ruter,
+      startDestination = Skjerm.Start.ruter,
       modifier = Modifier.fillMaxSize()
     ) {
 
-      composable(route = Screen.Login.ruter) {
+      composable(route = Skjerm.Login.ruter) {
         Login().LoginSkjerm(navController = navController)
       }
 
-      composable(route = Screen.Register.ruter) {
-        Register().RegisterSkjerm(navController = navController)
+      composable(route = Skjerm.Register.ruter) {
+        Registrer().RegisterSkjerm(navController = navController)
       }
 
-      composable(route = Screen.Start.ruter) {
+      composable(route = Skjerm.Start.ruter) {
         Start().First(navController = navController)
       }
 
-      composable(route = Screen.Settings.ruter) {
-        Settings().SettingsPage(
+      composable(route = Skjerm.Settings.ruter) {
+        Innstillinger().innstillingPage(
           navController = navController,
           modifier = Modifier
         )
       }
 
-      composable(route = Screen.Kamera.ruter) {
+      composable(route = Skjerm.Kamera.ruter) {
         Kamera().HovedSkjerm(navController = navController)
       }
 
-      composable(route = Screen.Sammenlign.ruter) {
+      composable(route = Skjerm.Sammenlign.ruter) {
         Sammenlign().SammenlignSkjerm(viewModel = viewModel)
       }
 
-      composable(route = Screen.Info.ruter + "/{name}",
+      composable(route = Skjerm.Info.ruter + "/{name}",
                  arguments = listOf(
                    navArgument("name") {
                      type = NavType.StringType
@@ -134,7 +134,7 @@ fun Nav() {
         )
       }
 
-      composable(route = Screen.Favoritter.ruter) {
+      composable(route = Skjerm.Favoritter.ruter) {
         Favoritter().FavoritterSkjerm(navController = navController)
       }
     }

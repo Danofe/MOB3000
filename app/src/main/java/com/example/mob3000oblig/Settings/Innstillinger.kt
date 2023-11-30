@@ -57,11 +57,11 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 import com.example.mob3000oblig.ui.theme.ProvideAppThemeState
 
 
-class Settings {
+class Innstillinger {
   @Composable
   fun Profil(navController: NavController, modifier: Modifier = Modifier) {
     if (!Auth().innlogget()) {
@@ -78,7 +78,7 @@ class Settings {
             modifier
               .padding(8.dp)
           ) {
-            Button(onClick = { navController.navigate(Screen.Login.ruter) }) {
+            Button(onClick = { navController.navigate(Skjerm.Login.ruter) }) {
               Text(
                 text = stringResource(R.string.login),
                 color = MaterialTheme.colorScheme.onSurface,
@@ -91,7 +91,7 @@ class Settings {
             modifier
               .padding(8.dp)
           ) {
-            Button(onClick = { navController.navigate(Screen.Register.ruter) }) {
+            Button(onClick = { navController.navigate(Skjerm.Register.ruter) }) {
               Text(
                 text = stringResource(R.string.register),
                 color = MaterialTheme.colorScheme.onSurface,
@@ -210,7 +210,7 @@ class Settings {
                      context.getString(R.string.password_changed),
                      Toast.LENGTH_LONG
                    ).show()
-                   navController.navigate(Screen.Start.ruter)
+                   navController.navigate(Skjerm.Start.ruter)
                  }) {
             Text(
               text = stringResource(R.string.change_password),
@@ -220,7 +220,7 @@ class Settings {
            Spacer(modifier = modifier.height(15.dp))
           Button(modifier = modifier.align(Alignment.CenterHorizontally),
                  onClick = {
-                   navController.navigate(Screen.Start.ruter)
+                   navController.navigate(Skjerm.Start.ruter)
                    Toast.makeText(
                      context,
                      context.getString(
@@ -242,7 +242,7 @@ class Settings {
   }
 
   @Composable
-  fun SettingsCard(modifier: Modifier = Modifier) {
+  fun innstillingCard(modifier: Modifier = Modifier) {
     Card(
       modifier = modifier.padding(32.dp),
       colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
@@ -281,7 +281,7 @@ class Settings {
               .align(Alignment.CenterHorizontally),
             colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
           ) {
-            SettingsContent()
+            innstillingContent()
           }
         }
       }
@@ -289,7 +289,7 @@ class Settings {
   }
 
   @Composable
-  fun SettingsContent(modifier: Modifier = Modifier) {
+  fun innstillingContent(modifier: Modifier = Modifier) {
     ProvideAppThemeState { darkMode, toggleDarkmode ->
       Card(
         colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
@@ -336,14 +336,14 @@ class Settings {
             color = MaterialTheme.colorScheme.onBackground
           )
         }
-        LanguageToggle()
+        språkToggle()
       }
     }
   }
 
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun LanguageToggle(modifier: Modifier = Modifier) {
+  fun språkToggle(modifier: Modifier = Modifier) {
     val context = LocalContext.current
     val språk = arrayOf(
       "English",
@@ -501,7 +501,7 @@ class Settings {
   }
 
   @Composable
-  fun SettingsPage(navController: NavController, modifier: Modifier) {
+  fun innstillingPage(navController: NavController, modifier: Modifier) {
     val slettBruker = remember { mutableStateOf(false) }
     val context = LocalContext.current
     Column(
@@ -511,7 +511,7 @@ class Settings {
         .verticalScroll(rememberScrollState())
     ) {
       Profil(navController)
-      SettingsCard()
+      innstillingCard()
       Terms()
       if (Auth().innlogget()) {
         Divider(
@@ -564,7 +564,7 @@ class Settings {
                     Toast.LENGTH_LONG
                   ).show()
                   Auth().slettBruker()
-                  navController.navigate(Screen.Start.ruter)
+                  navController.navigate(Skjerm.Start.ruter)
                 },
 
                 ) {

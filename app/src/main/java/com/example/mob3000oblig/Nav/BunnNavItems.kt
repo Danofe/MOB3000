@@ -10,29 +10,29 @@ import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Solid
 import compose.icons.fontawesomeicons.solid.Camera
 
-data class BottomNavigationItem(
+data class BunnNavItems(
   @StringRes
   val labelStringId: Int,
   val icon: ImageVector,
   val route: String,
 )
 
-val listOfBottonNavigationItem: List<BottomNavigationItem> = listOf(
-  BottomNavigationItem(
+val listeAvNavItems: List<BunnNavItems> = listOf(
+  BunnNavItems(
     labelStringId = R.string.home,
     icon = Icons.Filled.Home,
-    route = Screen.Start.ruter,
+    route = Skjerm.Start.ruter,
 
     ),
-  BottomNavigationItem(
+  BunnNavItems(
     labelStringId = R.string.search,
     icon = FontAwesomeIcons.Solid.Camera,
-    route = Screen.Kamera.ruter,
+    route = Skjerm.Kamera.ruter,
 
     ),
-  BottomNavigationItem(
+  BunnNavItems(
     labelStringId = R.string.profile,
     icon = Icons.Filled.Face,
-    route = Screen.Settings.ruter
+    route = Skjerm.Settings.ruter
   )
 )

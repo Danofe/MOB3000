@@ -34,23 +34,23 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 
-class Register {
+class Registrer {
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
   fun RegisterSkjerm(
     modifier: Modifier = Modifier,
     navController: NavController,
-    registerViewModel: RegisterViewModel? = viewModel()
+    registrerViewModel: RegistrerViewModel? = viewModel()
   ) {
 
     if (Auth().innlogget()) {
-      navController.navigate(Screen.Start.ruter)
+      navController.navigate(Skjerm.Start.ruter)
     } else {
 
       val context = LocalContext.current
-      val regUiState = registerViewModel?.reguiState
+      val regUiStatus = registrerViewModel?.reguiStatus
 
       val focusManager = LocalFocusManager.current
 
@@ -73,8 +73,8 @@ class Register {
             )
 
             TextField(
-              value = regUiState?.emailReg ?: "",
-              onValueChange = { registerViewModel?.onEmailRegChange(it) },
+              value = regUiStatus?.emailReg ?: "",
+              onValueChange = { registrerViewModel?.onEmailRegChange(it) },
               label = {
                 Text(
                   text = stringResource(R.string.email),
@@ -88,9 +88,9 @@ class Register {
               )
             )
             TextField(
-              value = regUiState?.passordReg ?: "",
+              value = regUiStatus?.passordReg ?: "",
               visualTransformation = PasswordVisualTransformation(),
-              onValueChange = { registerViewModel?.onPassordRegChange(it) },
+              onValueChange = { registrerViewModel?.onPassordRegChange(it) },
               label = {
                 Text(
                   stringResource(R.string.password),
@@ -104,9 +104,9 @@ class Register {
               )
             )
             TextField(
-              value = regUiState?.passordBekreftReg ?: "",
+              value = regUiStatus?.passordBekreftReg ?: "",
               visualTransformation = PasswordVisualTransformation(),
-              onValueChange = { registerViewModel?.onPassordBekRegChange(it) },
+              onValueChange = { registrerViewModel?.onPassordBekRegChange(it) },
               label = {
                 Text(
                   stringResource(R.string.confirm_password) ,
@@ -121,7 +121,7 @@ class Register {
           )
           Row {
             Button(
-              onClick = { navController.navigate(Screen.Start.ruter)
+              onClick = { navController.navigate(Skjerm.Start.ruter)
                 focusManager.clearFocus() },
               // TODO: Endre farge i dark og light
               colors = ButtonDefaults.buttonColors(Color.LightGray),
@@ -134,7 +134,7 @@ class Register {
               }
               Spacer(modifier = Modifier.width(8.dp))
               Button(
-                onClick = { registerViewModel?.lagBruker(context)
+                onClick = { registrerViewModel?.lagBruker(context)
                             focusManager.clearFocus()},
                 colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
 

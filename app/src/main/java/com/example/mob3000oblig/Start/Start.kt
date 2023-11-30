@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
-import com.example.mob3000oblig.Nav.Screen
+import com.example.mob3000oblig.Nav.Skjerm
 import com.example.mob3000oblig.R
 import compose.icons.FontAwesomeIcons
 import compose.icons.fontawesomeicons.Solid
@@ -121,7 +121,7 @@ class Start {
                 disabledContainerColor = Color.LightGray
               ),
               onClick = {
-                navController.navigate(Screen.Info.withArgs(skiltInput.uppercase()))
+                navController.navigate(Skjerm.Info.withArgs(skiltInput.uppercase()))
               },
               enabled = !skiltInput.isEmpty() && !visError,
             )
@@ -137,7 +137,7 @@ class Start {
           //Sammenlign-knapp
           Button(
             onClick = { focusManager.clearFocus()
-              navController.navigate(Screen.Sammenlign.ruter) },
+              navController.navigate(Skjerm.Sammenlign.ruter) },
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
           ) {
             Icon(
@@ -161,7 +161,7 @@ class Start {
           ) {
             //Kamera-knapp
             Button(
-              onClick = { navController.navigate(Screen.Kamera.ruter) },
+              onClick = { navController.navigate(Skjerm.Kamera.ruter) },
               colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
             ) {
               Icon(
@@ -180,7 +180,7 @@ class Start {
             }
             //Favoritter-knapp
             Button(
-              onClick = { navController.navigate(Screen.Favoritter.ruter) },
+              onClick = { navController.navigate(Skjerm.Favoritter.ruter) },
               colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
               Icon(
