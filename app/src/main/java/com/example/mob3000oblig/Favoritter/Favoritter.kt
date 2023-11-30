@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.mob3000oblig.Auth
+import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.R
-import com.example.mob3000oblig.Screen
+import com.example.mob3000oblig.Nav.Screen
 
 class Favoritter {
 

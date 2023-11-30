@@ -1,6 +1,6 @@
 package com.example.mob3000oblig.DataApi
 
-import com.example.mob3000oblig.DataModeller.KjoretoyDataListe
+import com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -11,5 +11,5 @@ interface DataInterface {
   suspend fun getKjoretoyDataListe(
     @Url
     url: String
-  ): Response<KjoretoyDataListe>
+  ): Response<com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe>
 }
