@@ -93,7 +93,6 @@ class Sammenlign {
                     bottom = 20.dp
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
-            //verticalArrangement = Arrangement.Top,
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Text(
