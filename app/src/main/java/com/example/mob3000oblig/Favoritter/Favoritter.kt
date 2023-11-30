@@ -25,8 +25,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.mob3000oblig.Auth.Auth
-import com.example.mob3000oblig.R
 import com.example.mob3000oblig.Nav.Skjerm
+import com.example.mob3000oblig.R
 
 class Favoritter {
 
@@ -35,7 +35,8 @@ class Favoritter {
     modifier: Modifier = Modifier,
     navController: NavController
   ) {
-    Column(modifier = modifier.fillMaxSize()
+    Column(
+      modifier = modifier.fillMaxSize()
     ) {
       Box(
         modifier

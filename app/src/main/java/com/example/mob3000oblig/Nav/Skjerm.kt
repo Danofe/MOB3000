@@ -11,7 +11,7 @@ sealed class Skjerm(val ruter: String) {
   object Settings : Skjerm("Settings")
   object Kamera : Skjerm("Kamera")
 
-  fun withArgs(vararg args: String): String {
+  fun medArgumenter(vararg args: String): String {
     return buildString {
       append(ruter)
       args.forEach { arg -> append("/$arg") }

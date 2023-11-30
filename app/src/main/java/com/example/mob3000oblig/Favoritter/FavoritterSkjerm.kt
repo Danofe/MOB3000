@@ -1,11 +1,9 @@
 package com.example.mob3000oblig.Favoritter
 
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +18,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,13 +33,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.mob3000oblig.R
-import java.util.Locale
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoritterSkjerm(
+  modifier: Modifier = Modifier,
   viewModel: FavoritterViewModel? = viewModel(),
-  modifier: Modifier = Modifier
 ) {
   var kjoretoy by remember { mutableStateOf("") }
   val slettemelding = remember { mutableStateOf(false) }
@@ -97,13 +92,25 @@ fun FavoritterSkjerm(
     val sistGodkjent = kjoretoy.substringAfter("sistgodkjent=").substringBefore(",")
 
     // Sjekker språket på "Ikke oppgitt" i databasen
-    if (kjoretoy.contains("Ikke oppgitt", ignoreCase = true)) {
+    if (kjoretoy.contains(
+        "Ikke oppgitt",
+        ignoreCase = true
+      )
+    ) {
       ikkeOppgitt = "Ikke oppgitt"
     }
-    if (kjoretoy.contains("Non spécifié", ignoreCase = true)) {
+    if (kjoretoy.contains(
+        "Non spécifié",
+        ignoreCase = true
+      )
+    ) {
       ikkeOppgitt = "Non spécifié"
     }
-    if (kjoretoy.contains("Not specified", ignoreCase = true)) {
+    if (kjoretoy.contains(
+        "Not specified",
+        ignoreCase = true
+      )
+    ) {
       ikkeOppgitt = "Not specified"
     }
 
@@ -113,7 +120,8 @@ fun FavoritterSkjerm(
       Card(
         modifier = modifier
           .horizontalScroll(rememberScrollState()),
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)) {
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.tertiary)
+      ) {
         Row(
           modifier = modifier
             .padding(20.dp),
@@ -219,7 +227,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-              if (serie == ikkeOppgitt) stringResource(R.string.not_specified)else serie.uppercase(),
+              if (serie == ikkeOppgitt) stringResource(R.string.not_specified) else serie.uppercase(),
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
@@ -239,7 +247,7 @@ fun FavoritterSkjerm(
               color = MaterialTheme.colorScheme.onBackground
             )
             Text(
-             if (hybrid == ikkeOppgitt) stringResource(R.string.not_specified) else hybrid,
+              if (hybrid == ikkeOppgitt) stringResource(R.string.not_specified) else hybrid,
               color = MaterialTheme.colorScheme.onBackground
             )
             if (hestekrefter == ikkeOppgitt || hestekrefter == "0") {

@@ -1,8 +1,8 @@
 package com.example.mob3000oblig.Nav
 
-import android.annotation.SuppressLint
 import android.app.Application
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,32 +27,30 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.mob3000oblig.DataApi.APIViewModel
-import com.example.mob3000oblig.Favoritter.Favoritter
-import com.example.mob3000oblig.Kamera.Kamera
 import com.example.mob3000oblig.Auth.Login.Login
 import com.example.mob3000oblig.Auth.Registrer.Registrer
+import com.example.mob3000oblig.DataApi.APIViewModel
+import com.example.mob3000oblig.Favoritter.Favoritter
+import com.example.mob3000oblig.Innstillinger.Innstillinger
+import com.example.mob3000oblig.Kamera.Kamera
 import com.example.mob3000oblig.Sammenlign.Sammenlign
-import com.example.mob3000oblig.Settings.Innstillinger
 import com.example.mob3000oblig.SokerInfo.SokerInfo
 import com.example.mob3000oblig.Start.Start
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Nav() {
+fun Nav(modifier: Modifier = Modifier) {
   val context = LocalContext.current
   val navController = rememberNavController()
   val viewModel: APIViewModel =
     ViewModelProvider.AndroidViewModelFactory.getInstance(Application())
       .create(APIViewModel::class.java)
   Scaffold(
-    modifier = Modifier.fillMaxSize(),
+    modifier = modifier.fillMaxSize(),
     bottomBar = {
       NavigationBar(
         containerColor = MaterialTheme.colorScheme.secondary,
-
         ) {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
         val currentDestination: NavDestination? = navBackStackEntry?.destination
@@ -87,11 +85,12 @@ fun Nav() {
       }
     }
   ) {
-
     NavHost(
       navController = navController,
       startDestination = Skjerm.Start.ruter,
-      modifier = Modifier.fillMaxSize()
+      modifier = modifier
+        .fillMaxSize()
+        .padding(it)
     ) {
 
       composable(route = Skjerm.Login.ruter) {
@@ -107,9 +106,9 @@ fun Nav() {
       }
 
       composable(route = Skjerm.Settings.ruter) {
-        Innstillinger().innstillingPage(
+        Innstillinger().InnstillingPage(
           navController = navController,
-          modifier = Modifier
+          modifier = modifier
         )
       }
 
@@ -121,16 +120,16 @@ fun Nav() {
         Sammenlign().SammenlignSkjerm(viewModel = viewModel)
       }
 
-      composable(route = Skjerm.Info.ruter + "/{name}",
+      composable(route = Skjerm.Info.ruter + "/{skiltnummer}",
                  arguments = listOf(
-                   navArgument("name") {
+                   navArgument("skiltnummer") {
                      type = NavType.StringType
                    }
                  )
       ) { search ->
         SokerInfo().SkiltInfo(
           viewModel = viewModel,
-          name = search.arguments?.getString("name")
+          skiltnummer = search.arguments?.getString("skiltnummer")
         )
       }
 

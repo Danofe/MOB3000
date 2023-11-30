@@ -38,7 +38,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.mob3000oblig.Auth.Auth
 import com.example.mob3000oblig.Nav.Skjerm
 import com.example.mob3000oblig.R
 import compose.icons.FontAwesomeIcons
@@ -48,10 +47,9 @@ import java.util.regex.Pattern
 
 
 class Start {
-
   @OptIn(ExperimentalMaterial3Api::class)
   @Composable
-  fun First(modifier: Modifier = Modifier, navController: NavController, Auth: Auth = Auth()) {
+  fun First(modifier: Modifier = Modifier, navController: NavController) {
     val orientation = LocalConfiguration.current.orientation
     val focusManager = LocalFocusManager.current
 
@@ -121,7 +119,7 @@ class Start {
                 disabledContainerColor = Color.LightGray
               ),
               onClick = {
-                navController.navigate(Skjerm.Info.withArgs(skiltInput.uppercase()))
+                navController.navigate(Skjerm.Info.medArgumenter(skiltInput.uppercase()))
               },
               enabled = !skiltInput.isEmpty() && !visError,
             )
@@ -136,8 +134,10 @@ class Start {
           Spacer(modifier = modifier.padding(top = 10.dp))
           //Sammenlign-knapp
           Button(
-            onClick = { focusManager.clearFocus()
-              navController.navigate(Skjerm.Sammenlign.ruter) },
+            onClick = {
+              focusManager.clearFocus()
+              navController.navigate(Skjerm.Sammenlign.ruter)
+            },
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
           ) {
             Icon(
