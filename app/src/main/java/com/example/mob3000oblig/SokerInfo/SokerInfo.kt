@@ -60,12 +60,12 @@ class SokerInfo {
         val info = viewModel.hentBilInfo(url)
         bilInfo = info
         Log.e(
-          "YoOscar",
+          "API info",
           "Info: $info"
         )
       } catch (e: Exception) {
         Log.e(
-          "Oscar",
+          "API info",
           "Error: ${e.message}"
         )
       }

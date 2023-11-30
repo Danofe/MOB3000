@@ -30,7 +30,7 @@ data class HentBilInfo(
     val handelsbetegnelse: String
 )
 
-fun bilInfoVariabler(context: Context, bilInfo: com.example.mob3000oblig.DataApi.DataModeller.KjoretoyDataListe?): HentBilInfo {
+fun bilInfoVariabler(context: Context, bilInfo: KjoretoyDataListe?): HentBilInfo {
 
     // Sjekker om "maksNettoEffekt" er tilgjengelig, hvis ikke brukes "maksEffektPrTime", hvis ikke brukes 0
     // Måtte gjøres slik for å regne ut hestekrefter av både elektriske, fossile og hybride biler
